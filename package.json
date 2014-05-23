@@ -1,0 +1,22 @@
+{
+    "name": "simple-server",
+    "version": "0.1.0",
+    "description": "Simple Web Server",
+    "homepage": "http://jwu.github.io",
+    "license": "MIT",
+    "licenseUrl": "http://opensource.org/licenses/MIT",
+    "dependencies": {
+        "express": ""
+    },
+    "devDependencies": {
+        "grunt": "",
+        "grunt-contrib-clean": "",
+        "grunt-contrib-concat": "",
+        "grunt-contrib-copy": "",
+        "grunt-contrib-cssmin": "",
+        "grunt-contrib-jshint": "",
+        "grunt-contrib-uglify": "",
+        "grunt-sass": "",
+        "grunt-vulcanize": ""
+    }
+}

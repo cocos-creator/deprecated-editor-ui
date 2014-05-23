@@ -1,0 +1,49 @@
+# mac-osx files
+.DS_store
+profile
+
+# visual-studio files
+*.ncb
+*.sln
+*.suo
+*.vcproj.*.user
+*.pdb
+*.idb
+*.csproj
+*.csproj.user
+obj/*
+
+# xcode files
+PLBlocks.framework/*
+*.pbxuser
+*.mode1v3
+*~.nib/ 
+*.perspective 
+*.perspectivev3
+xcuserdata/
+
+# gcc files
+*.gch
+
+# exvim files 
+_tags
+*.err
+*.exvim
+*.vimentry
+*.vimproject
+.vimfiles.*/
+.exvim.*/
+quick_gen_project_*_autogen.bat
+quick_gen_project_*_autogen.sh
+
+# project files
+vimfiles/bundle/*
+node_modules/
+bower_components/
+bin/
+ext/
+
+# scripts
+Build.bat
+Open.bat
+LaunchServer.bat
