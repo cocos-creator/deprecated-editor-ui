@@ -1,0 +1,56 @@
+user-select(values) {
+    -ms-user-select: values
+    -moz-user-select: values
+    -webkit-user-select: values
+    user-select: values
+}
+
+transition(values) {
+    -webkit-transition: values
+    transition: values
+}
+
+display-flexbox() {
+    display: -webkit-box
+    display: -moz-box
+    display: -webkit-flex
+    display: -ms-flexbox
+    display: flex
+}
+
+flex(values) {
+    -webkit-box-flex: values
+    -moz-box-flex: values
+    -webkit-flex: values
+    -ms-flex: values
+    flex: values
+}
+
+flex-direction(values) {
+    -moz-flex-direction: values
+    -webkit-flex-direction: values
+    -ms-flex-direction: values
+    flex-direction: values
+}
+
+order(values) {
+    -webkit-box-ordinal-group: values  
+    -moz-box-ordinal-group: values     
+    -ms-flex-order: values     
+    -webkit-order: values  
+    order: values
+}
+
+* {
+    font-family: Arial
+    box-sizing: border-box
+
+    /* pointer-events: none */
+    cursor: default     
+    user-select(none)
+
+    &:focus {
+        outline: 0
+    }
+}
+

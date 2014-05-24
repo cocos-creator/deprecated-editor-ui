@@ -11,12 +11,9 @@
     "devDependencies": {
         "grunt": "",
         "grunt-contrib-clean": "",
-        "grunt-contrib-concat": "",
         "grunt-contrib-copy": "",
-        "grunt-contrib-cssmin": "",
         "grunt-contrib-jshint": "",
-        "grunt-contrib-uglify": "",
-        "grunt-sass": "",
+        "grunt-contrib-stylus": "",
         "grunt-vulcanize": ""
     }
 }

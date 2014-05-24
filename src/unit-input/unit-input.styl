@@ -1,0 +1,113 @@
+@import "common"
+
+.unit-input {                         
+    display-flexbox()
+    flex(1 0 60px)
+    flex-direction(row)
+    flex-wrap: nowrap     
+    align-items: baseline
+    position: relative
+
+    height: 21px
+    min-height: 21px
+    min-width: 60px
+    border: 1px solid black
+
+    background: #232323
+    color: #ddd
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px rgba(255,255,255,0.1)
+
+    transition(box-shadow .3s ease)
+
+    &.focused {                         
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px #0c70a6, 0px 0 4px 1px rgba(12,112,166,0.8)
+    }
+
+    .input {                         
+        flex(auto)
+        display: block
+        padding: 3px 4px
+        border: 0
+        margin: 0
+        font-size: 12px
+        height: 100%
+
+        text-shadow: 1px 1px 0 #000
+        background: transparent
+        color: #ddd
+
+        pointer-events: auto
+        user-select(auto)
+        cursor: auto
+
+        /* // Note: A webkit bug that input::selection didn't works                    */
+        /* &::selection {                                                              */
+        /*     background: #f00                                                       */
+        /* }                                                                           */
+        /* &::-webkit-input-placeholder {                                              */
+        /*     font-style: italic                                                     */
+        /* }                                                                           */
+    }
+
+    .unit {                         
+        flex(0 0 auto)
+        margin-right: 4px
+        text-align: center
+        font-size: 9px
+
+        text-transform: uppercase
+        opacity: .7
+    }
+
+    .unit-buttons {                         
+        display-flexbox()
+        flex(0 0 auto)
+        flex-direction(column)
+        align-self: center
+        height: 100%
+        border-left: 1px solid black
+
+        .button {                         
+            flex(auto)
+            display: block
+            border: 0
+            margin: 0
+            padding: 0
+            width: 9px
+            /* height: 9px */
+
+            background-color: #474747
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset
+            cursor: pointer
+
+            &:hover {
+                background-color: #616161
+                i {
+                    opacity: 1.0
+                }
+            }
+
+            &:active {
+                background-color: #373737
+                i {
+                    opacity: 0.3
+                }
+            }
+
+            i {                         
+                font-size: 9px
+
+                color: white
+                opacity: .5
+                cursor: inherit
+            }
+        }
+
+        .sep {                         
+            flex(0 0 1px)
+            display: block
+
+            background-color: black
+        }
+    }
+}
