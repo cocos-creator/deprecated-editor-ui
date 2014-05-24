@@ -9,11 +9,12 @@
         "express": ""
     },
     "devDependencies": {
-        "grunt": "",
-        "grunt-contrib-clean": "",
-        "grunt-contrib-copy": "",
-        "grunt-contrib-jshint": "",
-        "grunt-contrib-stylus": "",
-        "grunt-vulcanize": ""
+        "gulp": "",
+        "gulp-clean": "",
+        "gulp-jshint": "",
+        "jshint-stylish": "",
+        "gulp-uglify": "",
+        "gulp-stylus": "",
+        "gulp-vulcanize": ""
     }
 }
