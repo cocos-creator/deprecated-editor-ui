@@ -8,6 +8,7 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-jshint'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-sass'
+    grunt.loadNpmTasks 'grunt-vulcanize'
 
     # load tasks 
     # grunt.loadTasks 'tasks'
@@ -22,13 +23,6 @@ module.exports = (grunt) ->
                 src: [
                     'src/**/*.js',
                 ]
-                dev: 'bin/editor-ui.dev.js'
-                min: 'bin/editor-ui.min.js'
-            html:
-                src: [
-                    'src/**/*.html',
-                ]
-                dest: 'bin/editor-ui.html'
 
         # task configuration
 
@@ -42,47 +36,54 @@ module.exports = (grunt) ->
             check: 
                 src: '<%= files.js.src %>'
 
-        # concat
-        concat: 
-            js:
-                src: '<%= files.js.src %>'
-                dest: '<%= files.js.dev %>'
-            html:
-                src: '<%= files.html.src %>'
-                dest: '<%= files.html.dev %>'
-
         # uglify
         uglify: 
             build:
-                src: '<%= files.js.dev %>'
-                dest: '<%= files.js.min %>'
+                files: [{
+                    expand: true
+                    cwd: 'src'
+                    src: '**/*.js'
+                    dest: 'bin'
+                }]
+
+        # copy
+        copy:
+            html: 
+                expand: true
+                cwd: 'src/'
+                src: ['**/*.html']
+                dest: 'bin/'
+                filter: 'isFile'
 
         # sass
         sass:
             build:
                 options:
                     includePaths: ['src/']
-                files:
-                    'bin/css/editor-ui.css': 'src/editor-ui.scss'
-            build_min:
-                options:
-                    includePaths: ['src/']
                     outputStyle: 'compressed'
                 files:
-                    'bin/css/editor-ui.min.css': 'src/editor-ui.scss'
+                    'bin/unit-input/unit-input.css': 'src/unit-input/unit-input.scss'
+                    # 'bin/checkbox/checkbox.css': 'src/checkbox/checkbox.scss'
 
-        # cssmin
-        cssmin:
-            minify:
-                expand: true
-                cwd: 'bin/'
-                src: ['**/*.css', '!**/*.min.css']
-                dest: 'bin/'
-                ext: '.min.css'
+        # # cssmin
+        # cssmin:
+        #     minify:
+        #         expand: true
+        #         cwd: 'bin/'
+        #         src: ['**/*.css', '!**/*.min.css']
+        #         dest: 'bin/'
+        #         ext: '.min.css'
+
+        vulcanize:
+            build:
+                options:
+                    inline: true
+                files:
+                    'bin/editor-ui.html': ['bin/**/*.html']
 
     # Default task(s).
     grunt.registerTask 'default', ['min']
 
-    grunt.registerTask 'min', ['jshint', 'concat', 'uglify', 'copy', 'sass', 'cssmin']
-    grunt.registerTask 'dev', ['jshint', 'concat', 'copy', 'sass']
+    grunt.registerTask 'min', ['jshint', 'uglify', 'copy', 'sass', 'vulcanize']
+    grunt.registerTask 'dev', ['jshint', 'copy', 'sass', 'vulcanize']
 

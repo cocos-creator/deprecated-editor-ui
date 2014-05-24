@@ -1,0 +1,54 @@
+@mixin user-select($value) {
+    -ms-user-select: $value;    
+    -moz-user-select: $value;   
+    -webkit-user-select: $value;
+    user-select: $value;        
+}
+@mixin transition($value...) {
+    -webkit-transition: $value;
+    transition: $value;
+}
+
+@mixin display-flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex: $values;
+  -webkit-flex: $values;
+  -ms-flex: $values;
+  flex: $values;
+}
+
+@mixin flex-direction($values) {
+  -moz-flex-direction: $values;
+  -webkit-flex-direction: $values;
+  -ms-flex-direction: $values;
+  flex-direction: $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+* {
+    font-family: Arial;
+    box-sizing: border-box;
+
+    /* pointer-events: none; */
+    cursor: default;     
+    @include user-select(none);
+}
+*:focus {                         
+    outline: 0;
+}
+
