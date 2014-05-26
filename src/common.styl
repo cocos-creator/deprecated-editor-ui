@@ -1,44 +1,34 @@
-user-select(values) {
-    -ms-user-select: values
-    -moz-user-select: values
-    -webkit-user-select: values
-    user-select: values
+user-select() {
+    -webkit-user-select: arguments
+    user-select: arguments
 }
 
-transition(values) {
-    -webkit-transition: values
-    transition: values
+transition() {
+    -webkit-transition: arguments
+    transition: arguments
 }
 
 display-flexbox() {
     display: -webkit-box
-    display: -moz-box
     display: -webkit-flex
-    display: -ms-flexbox
     display: flex
 }
 
-flex(values) {
-    -webkit-box-flex: values
-    -moz-box-flex: values
-    -webkit-flex: values
-    -ms-flex: values
-    flex: values
+flex() {
+    -webkit-box-flex: arguments
+    -webkit-flex: arguments
+    flex: arguments
 }
 
-flex-direction(values) {
-    -moz-flex-direction: values
-    -webkit-flex-direction: values
-    -ms-flex-direction: values
-    flex-direction: values
+flex-direction() {
+    -webkit-flex-direction: arguments
+    flex-direction: arguments
 }
 
-order(values) {
-    -webkit-box-ordinal-group: values  
-    -moz-box-ordinal-group: values     
-    -ms-flex-order: values     
-    -webkit-order: values  
-    order: values
+order() {
+    -webkit-box-ordinal-group: arguments  
+    -webkit-order: arguments  
+    order: arguments
 }
 
 * {

@@ -1,4 +1,4 @@
 (function () {
-    Polymer('unit-input', {
+    Polymer('fire-ui-unit-input', {
     });
 })();

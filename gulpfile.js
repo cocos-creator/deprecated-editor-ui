@@ -62,7 +62,7 @@ gulp.task('build-html', ['js', 'css', 'copy-html'], function() {
 // watch
 gulp.task('watch', function() {
     gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.css, ['css']);
+    gulp.watch(paths.css, ['css', 'build-html']);
     gulp.watch(paths.html, ['copy-html', 'build-html']);
 });
 
