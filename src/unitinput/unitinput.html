@@ -1,7 +1,7 @@
-<polymer-element name="fire-ui-unit-input" on-focus-in="focusIn" on-focus-out="focusOut">
+<polymer-element name="fire-ui-unitinput">
 <template>
-<link rel="stylesheet" href="unit-input.css">
-<div class="fire-ui-unit-input">
+<link rel="stylesheet" href="unitinput.css">
+<div class="fire-ui-unitinput" on-focusin="{{onFocusIn}}" on-focusout="{{onFocusOut}}">
     <input class="input" type="text" tabindex="1" placeholder="-">
     <span class="unit">px</span>
     <div class="unit-buttons">
@@ -11,5 +11,5 @@
     </div>
 </div>
 </template>
-<script type="text/javascript" src="unit-input.js"></script>
+<script type="text/javascript" src="unitinput.js"></script>
 </polymer-element>

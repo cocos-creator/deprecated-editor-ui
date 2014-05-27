@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var gutil = require('gulp-util');
 var clean = require('gulp-clean');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
@@ -61,9 +62,9 @@ gulp.task('build-html', ['js', 'css', 'copy-html'], function() {
 
 // watch
 gulp.task('watch', function() {
-    gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.css, ['css', 'build-html']);
-    gulp.watch(paths.html, ['copy-html', 'build-html']);
+    gulp.watch(paths.js, ['js']).on( 'error', gutil.log );
+    gulp.watch(paths.css, ['css', 'build-html']).on( 'error', gutil.log );
+    gulp.watch(paths.html, ['copy-html', 'build-html']).on( 'error', gutil.log );
 });
 
 // tasks

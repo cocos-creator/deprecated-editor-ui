@@ -1,9 +1,9 @@
 @import "common"
 
-.fire-ui-unit-input {                         
-    display-flexbox ()
-    flex (1 0 60px)
-    flex-direction (row)
+.fire-ui-unitinput {                         
+    display: flex
+    flex: 1 0 60px
+    flex-direction: row
     flex-wrap: nowrap     
     align-items: baseline
     position: relative
@@ -17,14 +17,22 @@
     color: #ddd
     box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px rgba(255,255,255,0.1)
 
-    transition(box-shadow .3s ease)
+    transition: box-shadow .3s ease
 
     &.focused {                         
         box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px #0c70a6, 0px 0 4px 1px rgba(12,112,166,0.8)
     }
 
+    .fa-caret-down:before {
+        content: "\f0d7";
+    }
+
+    .fa-caret-up:before {
+        content: "\f0d8";
+    }
+
     .input {                         
-        flex (auto)
+        flex: auto
         display: block
         padding: 3px 4px
         border: 0
@@ -37,7 +45,7 @@
         color: #ddd
 
         pointer-events: auto
-        user-select (auto)
+        user-select: auto
         cursor: auto
 
         /* // Note: A webkit bug that input::selection didn't works                    */
@@ -50,7 +58,7 @@
     }
 
     .unit {                         
-        flex (0 0 auto)
+        flex: 0 0 auto
         margin-right: 4px
         text-align: center
         font-size: 9px
@@ -60,15 +68,15 @@
     }
 
     .unit-buttons {                         
-        display-flexbox ()
-        flex (0 0 auto)
-        flex-direction (column)
+        display: flex;
+        flex: 0 0 auto
+        flex-direction: column
         align-self: center
         height: 100%
         border-left: 1px solid black
 
         .button {                         
-            flex (auto)
+            flex: auto
             display: block
             border: 0
             margin: 0
@@ -104,7 +112,7 @@
         }
 
         .sep {                         
-            flex (0 0 1px)
+            flex: 0 0 1px
             display: block
 
             background-color: black

@@ -1,46 +1,23 @@
-user-select() {
-    -webkit-user-select: arguments
-    user-select: arguments
-}
-
-transition() {
-    -webkit-transition: arguments
-    transition: arguments
-}
-
-display-flexbox() {
-    display: -webkit-box
-    display: -webkit-flex
-    display: flex
-}
-
-flex() {
-    -webkit-box-flex: arguments
-    -webkit-flex: arguments
-    flex: arguments
-}
-
-flex-direction() {
-    -webkit-flex-direction: arguments
-    flex-direction: arguments
-}
-
-order() {
-    -webkit-box-ordinal-group: arguments  
-    -webkit-order: arguments  
-    order: arguments
-}
-
 * {
     font-family: Arial
     box-sizing: border-box
 
     /* pointer-events: none */
     cursor: default     
-    user-select (none)
+    user-select: none
 
     &:focus {
         outline: 0
     }
+}
+
+.fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 

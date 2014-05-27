@@ -23,10 +23,25 @@ span.space {
 </style>
 </head>
 
-<body>
-<fire-ui-checkbox></fire-ui-checkbox>
-<span class="space"></span>
-<fire-ui-unit-input></fire-ui-unit-input>
+<body is="polymer-body" unresolved>
+<template bind="{{myData}}">
+    isOpen = {{isOpen}}
+
+    <fire-ui-checkbox checked="{{isOpen}}"></fire-ui-checkbox>
+    <span class="space"></span>
+
+    <fire-ui-unitinput></fire-ui-unitinput>
+    <span class="space"></span>
+</template>
+
+<script>
+window.model = {
+    myData: {
+        isOpen: false,
+    },
+};
+</script>
+
 </body>
 
 </html>
