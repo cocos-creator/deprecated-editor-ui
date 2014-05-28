@@ -1,15 +1,32 @@
-<polymer-element name="fire-ui-unitinput">
+<polymer-element name="fire-ui-unitinput" attributes="value">
 <template>
 <link rel="stylesheet" href="unitinput.css">
-<div class="fire-ui-unitinput" on-focusin="{{onFocusIn}}" on-focusout="{{onFocusOut}}">
-    <input class="input" type="text" tabindex="1" placeholder="-">
+
+<div id="unitinput" class="fire-ui-unitinput"
+    on-focusin="{{onFocusIn}}"
+    on-focusout="{{onFocusOut}}"
+    >
+    <input id="input" class="input"
+    value="{{value}}"
+    type="text"
+    tabindex="1"
+    placeholder="-"
+    on-input="{{onInput}}"
+    on-click="{{onInputClick}}"
+    on-keydown="{{onInputKeyDown}}"
+    >
     <span class="unit">px</span>
     <div class="unit-buttons">
-        <button class="button"><i class="fa fa-caret-up"></i></button>
+        <button class="button" on-click="{{onIncrease}}">
+            <i class="fa fa-caret-up"></i>
+        </button>
         <span class="sep"></span>
-        <button class="button"><i class="fa fa-caret-down"></i></button>
+        <button class="button" on-click="{{onDecrease}}">
+            <i class="fa fa-caret-down"></i>
+        </button>
     </div>
 </div>
 </template>
+
 <script type="text/javascript" src="unitinput.js"></script>
 </polymer-element>

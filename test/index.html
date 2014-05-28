@@ -15,6 +15,7 @@ body {
     background-color: #333;
     padding: 0px 100px;
     margin-top: 20px;
+    color: white;
 }
 span.space {
     height: 5px;
@@ -25,19 +26,22 @@ span.space {
 
 <body is="polymer-body" unresolved>
 <template bind="{{myData}}">
-    isOpen = {{isOpen}}
-
-    <fire-ui-checkbox checked="{{isOpen}}"></fire-ui-checkbox>
+    isChecked = {{isChecked}} <br/>
+    pixel = {{pixel}} <br/>
     <span class="space"></span>
 
-    <fire-ui-unitinput></fire-ui-unitinput>
+    <fire-ui-checkbox checked="{{isChecked}}"></fire-ui-checkbox>
+    <span class="space"></span>
+
+    <fire-ui-unitinput value="{{pixel}}"></fire-ui-unitinput>
     <span class="space"></span>
 </template>
 
 <script>
 window.model = {
     myData: {
-        isOpen: false,
+        isChecked: false,
+        pixel: 20,
     },
 };
 </script>

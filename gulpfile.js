@@ -30,6 +30,11 @@ gulp.task('js', function() {
     .pipe(gulp.dest('bin'))
     ;
 });
+gulp.task('js-dev', function() {
+    return gulp.src(paths.js, {base: 'src'})
+    .pipe(gulp.dest('bin'))
+    ;
+});
 
 // css
 gulp.task('css', function() {
@@ -50,7 +55,7 @@ gulp.task('copy-html', function() {
 });
 
 // build html
-gulp.task('build-html', ['js', 'css', 'copy-html'], function() {
+gulp.task('build-html', ['copy-html'], function() {
     return gulp.src('bin/all.html')
     .pipe(vulcanize({
         dest: 'bin',
@@ -62,7 +67,7 @@ gulp.task('build-html', ['js', 'css', 'copy-html'], function() {
 
 // watch
 gulp.task('watch', function() {
-    gulp.watch(paths.js, ['js']).on( 'error', gutil.log );
+    gulp.watch(paths.js, ['js-dev', 'build-html']).on( 'error', gutil.log );
     gulp.watch(paths.css, ['css', 'build-html']).on( 'error', gutil.log );
     gulp.watch(paths.html, ['copy-html', 'build-html']).on( 'error', gutil.log );
 });
