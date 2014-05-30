@@ -1,0 +1,23 @@
+<polymer-element name="fire-ui-select" attributes="value options">
+<template>
+<link rel="stylesheet" href="select.css">
+
+<div class="fire-ui-select" 
+    tabindex="1"
+    on-click="{{onClick}}"
+    on-keydown="{{onKeyDown}}"
+    on-focusout="{{onFocusOut}}">
+    <div class="border">
+        <span>{{valueName}}</span>
+        <i class="fa fa-caret-down"></i>
+    </div>
+    <div class="menu {{showMenu ? '':'hide'}}">
+        <template repeat="{{item, itemIndex in options}}">
+        <div class="item {{ item.value == value ? 'selected':'' }}" on-click="{{onSelect}}" index="{{itemIndex}}">{{item.name}}</div>                                                                 
+        </template>
+    </div>
+</div>
+</template>
+
+<script type="text/javascript" src="select.js"></script>
+</polymer-element>

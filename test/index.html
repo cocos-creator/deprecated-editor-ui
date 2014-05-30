@@ -26,22 +26,36 @@ span.space {
 
 <body is="polymer-body" unresolved>
 <template bind="{{myData}}">
-    isChecked = {{isChecked}} <br/>
-    pixel = {{pixel}} <br/>
+    myChecked = {{myChecked}} <br/>
+    myPixel = {{myPixel}} <br/>
+    mySelect = {{mySelect}} <br/>
+    <span class="space" style="height: 20px"></span>
+
+    <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>
     <span class="space"></span>
 
-    <fire-ui-checkbox checked="{{isChecked}}"></fire-ui-checkbox>
+    <fire-ui-unitinput value="{{myPixel}}"></fire-ui-unitinput>
     <span class="space"></span>
 
-    <fire-ui-unitinput value="{{pixel}}"></fire-ui-unitinput>
+    <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
     <span class="space"></span>
 </template>
 
 <script>
 window.model = {
     myData: {
-        isChecked: false,
-        pixel: 20,
+        myChecked: false,
+        myPixel: 20,
+        mySelect: 3, 
+        mySelectList: [
+        { name: '64',   value: 0 },
+        { name: '128',  value: 1 },
+        { name: '256',  value: 2 },
+        { name: '512',  value: 3 },
+        { name: '1024', value: 4 },
+        { name: '2048', value: 5 },
+        { name: '4096', value: 6 },
+        ]
     },
 };
 </script>

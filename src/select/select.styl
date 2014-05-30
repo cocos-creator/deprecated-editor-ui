@@ -1,0 +1,91 @@
+@import "common"
+
+.fire-ui-select {
+    flex: 1 0 60px
+    box-shadow: 0 0 0 1px #212121
+    font-size: 12px
+    position: relative
+
+    cursor: pointer 
+
+    .fa-caret-down:before {
+        content: "\f0d7";
+    }
+
+    .border {
+        display: flex;
+        flex-direction: row
+        flex-wrap: nowrap     
+        align-items: baseline
+        flex: auto
+        border: 1px solid rgba(255, 255, 255, 0.08)
+        padding: 3px 4px
+
+        color: #bdbdbd
+        background-color: #474747
+        border-top-color: rgba(255, 255, 255, 0.2)
+
+        cursor: inherit 
+
+        transition: background-color .3s ease
+
+        span {
+            text-shadow: 1px 1px 0 #000
+            flex: auto
+            cursor: inherit 
+        }
+
+        i {                         
+            opacity: 0.5
+            cursor: inherit 
+        }
+
+        &:hover {
+            background-color: #545454
+            border-color: rgba(255,255,255,0.13)
+            border-top-color: rgba(255, 255, 255, 0.28)
+
+            i {                         
+                opacity: 1.0
+            }
+        }
+    }
+
+    .menu {
+        menuDuration = .3s
+
+        visibility: visible
+        position: absolute
+        z-index: 11
+        min-width: 100%
+        outline: 1px solid #222
+        margin-top: 1px
+        padding: 4px
+
+        color: #eee
+        background-color: #474747
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1)
+        opacity: 1.0
+
+        transition: opacity menuDuration ease
+
+        &.hide {
+            visibility: hidden
+            opacity: 0.0
+            transition: visibility 0s ease menuDuration, opacity menuDuration ease
+        }
+
+        .item {
+            padding: 3px 7px
+            border: 1px solid rgba(255, 255, 255, 0)
+
+            &.selected {
+                background: #b58900
+            }
+
+            &:hover {
+                background: #3875d7
+            }
+        }
+    }
+}
