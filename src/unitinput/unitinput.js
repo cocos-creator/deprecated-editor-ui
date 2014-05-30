@@ -1,15 +1,16 @@
 (function () {
     Polymer('fire-ui-unitinput', {
         ready: function() {
+            this.focused = false;
         },
 
         onFocusIn: function () {
             this.lastVal = this.value;
-            this.$.unitinput.classList.add('focused');
+            this.focused = true;
         },
 
         onFocusOut: function () {
-            this.$.unitinput.classList.remove('focused');
+            this.focused = false;
         },
 
         onInput: function () {

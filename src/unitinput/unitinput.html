@@ -2,7 +2,7 @@
 <template>
 <link rel="stylesheet" href="unitinput.css">
 
-<div id="unitinput" class="fire-ui-unitinput"
+<div class="fire-ui-unitinput {{ focused ? 'focused':'' }}"
     on-focusin="{{onFocusIn}}"
     on-focusout="{{onFocusOut}}"
     >
