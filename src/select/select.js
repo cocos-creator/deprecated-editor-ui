@@ -1,8 +1,11 @@
 (function () {
     Polymer('fire-ui-select', {
+        observe: {
+            value: 'updateValueName',
+        },
+
         ready: function() {
             this.showMenu = false;
-            this.valueName = this.getValueName();
         },
 
         onClick: function () {
@@ -18,11 +21,20 @@
             }
         },
 
+        updateValueName: function () {
+            for ( var i = 0; i < this.options.length; ++i ) {
+                var entry = this.options[i];
+                if ( entry.value === this.value ) {
+                    this.valueName = entry.name;
+                    break;
+                }
+            }
+        },
+
         onSelect: function (event, detail, sender) {
             var idx = parseInt(sender.getAttribute('index'));
             var entry = this.options[idx];
             this.value = entry.value;
-            this.valueName = entry.name;
             this.showMenu = false;
 
             event.stopPropagation();
@@ -30,15 +42,6 @@
 
         onFocusOut: function () {
             this.showMenu = false;
-        },
-
-        getValueName: function () {
-            for ( var i = 0; i < this.options.length; ++i ) {
-                var entry = this.options[i];
-                if ( entry.value === this.value ) {
-                    return entry.name;
-                }
-            }
         },
     });
 })();
