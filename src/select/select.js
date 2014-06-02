@@ -23,6 +23,9 @@
             var entry = this.options[idx];
             this.value = entry.value;
             this.valueName = entry.name;
+            this.showMenu = false;
+
+            event.stopPropagation();
         },
 
         onFocusOut: function () {
