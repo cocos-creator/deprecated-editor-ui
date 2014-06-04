@@ -10,8 +10,10 @@ var vulcanize = require('gulp-vulcanize');
 
 var paths = {
     js: 'src/**/*.js',
+    ext_js: '../core/bin/**/*.js',
     html: 'src/**/*.html',
     css: 'src/**/*.styl',
+    img: 'src/img/**/*',
 };
 
 // clean
@@ -32,6 +34,18 @@ gulp.task('js', function() {
 });
 gulp.task('js-dev', function() {
     return gulp.src(paths.js, {base: 'src'})
+    .pipe(gulp.dest('bin'))
+    ;
+});
+
+// copy
+gulp.task('cp-ext', function() {
+    return gulp.src(paths.ext_js)
+    .pipe(gulp.dest('bin'))
+    ;
+});
+gulp.task('cp-img', function() {
+    return gulp.src(paths.img)
     .pipe(gulp.dest('bin'))
     ;
 });
@@ -67,10 +81,12 @@ gulp.task('build-html', ['copy-html'], function() {
 
 // watch
 gulp.task('watch', function() {
+    gulp.watch(paths.ext_js, ['cp-ext', 'build-html']).on( 'error', gutil.log );
     gulp.watch(paths.js, ['js-dev', 'build-html']).on( 'error', gutil.log );
     gulp.watch(paths.css, ['css', 'build-html']).on( 'error', gutil.log );
     gulp.watch(paths.html, ['copy-html', 'build-html']).on( 'error', gutil.log );
+    gulp.watch(paths.img, ['cp-img']).on ( 'error', gutil.log );
 });
 
 // tasks
-gulp.task('default', ['js', 'css', 'copy-html', 'build-html'] );
+gulp.task('default', [ 'cp-ext', 'cp-img', 'js', 'css', 'copy-html', 'build-html'] );

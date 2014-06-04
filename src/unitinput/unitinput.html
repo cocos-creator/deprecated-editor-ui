@@ -1,4 +1,4 @@
-<polymer-element name="fire-ui-unitinput" attributes="value unit type">
+<polymer-element name="fire-ui-unitinput" attributes="value unit type min max precision interval">
 <template>
 <link rel="stylesheet" href="unitinput.css">
 
@@ -6,8 +6,7 @@
     on-focusin="{{onFocusIn}}"
     on-focusout="{{onFocusOut}}"
     >
-    <input class="input"
-    value="{{value}}"
+    <input id="input" class="input"
     type="text"
     tabindex="1"
     placeholder="-"

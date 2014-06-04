@@ -3,10 +3,12 @@
 <head>
 <title>Test GUI</title>
 <link rel="stylesheet" href="ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="bin/deep.css">
 
 <link rel="import" href="ext/polymer/polymer.html">
 <link rel="import" href="bin/all.html">
 
+<script type="text/javascript" src="bin/core.dev.js"></script>
 <script type="text/javascript" src="ext/platform/platform.js"></script>
 
 <style>
@@ -26,19 +28,28 @@ span.space {
 
 <body is="polymer-body" unresolved>
 <button on-click="{{myCheckedClick}}">Change</button> myChecked = {{myChecked}} <br/>
+min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"></input>
 <button on-click="{{myPixelClick}}">Change</button> myPixel = {{myPixel}} <br/>
+<button on-click="{{myFloatClick}}">Change</button> myFloat = {{myFloat}} <br/>
 <button on-click="{{mySelectClick}}">Change</button> mySelect = {{mySelect}} <br/>
+<button on-click="{{myColorClick}}">Change</button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
 
 <span class="space" style="height: 20px"></span>
 
 <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>
 <span class="space"></span>
 
-<fire-ui-unitinput value="{{myPixel}}" unit="px" type="int"></fire-ui-unitinput>
+<fire-ui-unitinput value="{{myPixel}}" unit="px" type="int" min="[[myPixelMin]]" max="[[myPixelMax]]"></fire-ui-unitinput>
+<span class="space"></span>
+
+<fire-ui-unitinput value="{{myFloat}}" unit="cm" type="float" precision="2"></fire-ui-unitinput>
 <span class="space"></span>
 
 <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
 <span class="space"></span>
+
+<fire-ui-color color="{{myColor}}"></fire-ui-color>
+<span class="space"></span>                        
 
 <script>
 function rangeRandom (min, max) {
@@ -58,6 +69,13 @@ window.model = {
     myPixelClick: function () {
         this.myPixel = rangeRandomInt(-1000, 1000);
     },
+    myPixelMin: -10,
+    myPixelMax: 30,
+
+    myFloat: 7.28,
+    myFloatClick: function () {
+        this.myFloat = rangeRandom(-10.0, 10.0);
+    },
 
     mySelect: 3, 
     mySelectList: [
@@ -72,6 +90,18 @@ window.model = {
     mySelectClick: function () {
         this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
     },
+
+    myColor: new FIRE.Color( 1.0, 0.0, 0.0, 0.5 ), 
+    myColorClick: function () {
+        this.myColor.r = rangeRandom( 0.0, 1.0 );
+        this.myColor.g = rangeRandom( 0.0, 1.0 );
+        this.myColor.b = rangeRandom( 0.0, 1.0 );
+        this.myColor.a = rangeRandom( 0.0, 1.0 );
+    },
+    toFixed: function ( val, fixed ) {
+        return val.toFixed(fixed);
+    },
+
 };
 </script>
 

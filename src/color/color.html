@@ -1,0 +1,20 @@
+<polymer-element name="fire-ui-color" attributes="color">
+<template>
+<link rel="stylesheet" href="color.css">
+
+<div class="fire-ui-color {{ focused ? 'focused':'' }}" 
+    tabindex="1"
+    on-click="{{onClick}}"
+    on-focusin="{{onFocusIn}}"
+    on-focusout="{{onFocusOut}}"
+    >
+    <div class="preview-rgb-bg">
+        <div id="previewRGB" class="preview-rgb"></div>
+        <i class="fa fa-caret-down"></i>
+    </div>
+    <div id="previewA" class="preview-alpha"></div>
+</div>
+</template>
+
+<script type="text/javascript" src="color.js"></script>
+</polymer-element>

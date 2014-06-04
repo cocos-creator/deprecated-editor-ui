@@ -4,39 +4,74 @@
             this.focused = false;
             this.type = this.type ? this.type : 'int';
             this.unit = this.unit ? this.unit : '';
+            this._precision = this.precision ? parseInt(this.precision) : 2;
+
+            switch ( this.type ) {
+                case 'int': 
+                    this._min = this.min ? parseInt(this.min) : Number.MIN_SAFE_INTEGER;
+                    this._max = this.max ? parseInt(this.max) : Number.MAX_SAFE_INTEGER;
+                    this._interval = this.interval ? parseInt(this.interval) : 1;
+                    break;
+
+                case 'float':
+                    this._min = this.min ? parseFloat(this.min) : -Number.MAX_VALUE;
+                    this._max = this.max ? parseFloat(this.max) : Number.MAX_VALUE;
+                    this._interval = this.interval ? parseFloat(this.interval) : 1/Math.pow(10,this._precision);
+                    break;
+            }
         },
 
         _convert: function ( val ) {
             switch ( this.type ) {
                 case 'int': 
                     val = parseInt(val);
-                if ( isNaN(val) ) 
-                    val = 0;
-                return val;
+                    if ( isNaN(val) ) 
+                        val = 0;
+                    val = Math.min( Math.max( val, this._min ), this._max );
+                    return val;
 
                 case 'float': 
-                    val = parseFloat(val);
-                if ( isNaN(val) ) 
-                    val = 0;
-                return val;
+                    val = parseFloat(parseFloat(val).toFixed(this._precision));
+                    if ( isNaN(val) ) 
+                        val = 0;
+                    val = Math.min( Math.max( val, this._min ), this._max );
+                    return val;
             }
+
             console.log("can't find proper type for " + this.type);
             return val;
         },
 
+        valueChanged: function () {
+            this.$.input.value = this._convert(this.value);
+        },
+
         onFocusIn: function () {
-            this.lastVal = this.value;
+            this.lastVal = this._convert(this.value);
+
             this.focused = true;
         },
 
         onFocusOut: function () {
-            if ( this.value !== this.lastVal ) {
-                this.value = this._convert(this.value);
-            }
+            var val = this._convert(this.$.input.value);
+            this.value = val;
+            this.$.input.value = val;
+
             this.focused = false;
         },
 
         onInput: function (event) {
+            if ( event.target.value === "-" ) {
+                return;
+            }
+            if ( event.target.value === "." ) {
+                event.target.value = "0.";
+                return;
+            }
+            if ( event.target.value === "-." ) {
+                event.target.value = "-0.";
+                return;
+            }
             this.value = this._convert(event.target.value);
         },
 
@@ -53,18 +88,18 @@
 
                 // esc
                 case 27:
-                    this.value = this._convert(this.lastVal);
+                    event.target.value = this.lastVal; 
                     event.target.blur(); 
                 break;
             }
         },
 
         onIncrease: function () {
-            this.value = this._convert(this.value+1);
+            this.value = this._convert(this.value+this._interval);
         },
 
         onDecrease: function () {
-            this.value = this._convert(this.value-1);
+            this.value = this._convert(this.value-this._interval);
         },
     });
 })();

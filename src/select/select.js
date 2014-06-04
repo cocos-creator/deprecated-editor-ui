@@ -16,7 +16,7 @@
             switch ( event.which ) {
                 // esc
                 case 27:
-                    this.showMenu = false;
+                    this.blur();
                 break;
             }
         },
