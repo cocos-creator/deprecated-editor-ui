@@ -51,6 +51,9 @@ min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"><
 <fire-ui-color color="{{myColor}}"></fire-ui-color>
 <span class="space"></span>                        
 
+<fire-ui-color-picker color="{{myColor}}"></fire-ui-color-picker>
+<span class="space"></span>                                      
+
 <script>
 function rangeRandom (min, max) {
     return Math.random() * (max - min) + min;
@@ -69,7 +72,7 @@ window.model = {
     myPixelClick: function () {
         this.myPixel = rangeRandomInt(-1000, 1000);
     },
-    myPixelMin: -10,
+    myPixelMin: 0,
     myPixelMax: 30,
 
     myFloat: 7.28,

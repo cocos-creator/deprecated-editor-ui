@@ -1,0 +1,96 @@
+@import "common"
+
+.fire-ui-color-picker {
+    position: relative
+    min-width: 202px
+    max-width: 202px
+
+    color: #bdbdbd
+
+    span.space {
+        display: block
+        height: 5px
+    }
+
+    .color-group {
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap     
+        position: relative
+
+        .hue {
+            position: relative
+            width: 20px
+            height: 150px
+            border: 1px solid black
+            margin-right: 6px
+
+            cursor: crosshair
+
+            background-image: url('../color-picker.png')
+            background-position: 0px 0px
+
+            .handle {
+                position: absolute
+                color: white
+
+                i {
+                    position: absolute
+                    font-size: 12px
+                    top: -6px
+                    left: -6px
+                }
+            }
+        }
+
+        .color {
+            position: relative
+            width: 150px
+            height: 150px
+            border: 1px solid black
+            margin-right: 6px
+
+            cursor: crosshair
+
+            background-image: url('../color-picker.png')
+            background-position: -40px 0px
+
+            .handle {
+                position: absolute
+                color: black
+
+                i {
+                    position: absolute
+                    font-size: 13px
+                    top: -6px
+                    left: -6px
+                }
+            }
+        }
+
+        .opacity {
+            position: relative
+            width: 20px
+            height: 150px
+            border: 1px solid black
+
+            cursor: crosshair
+
+            background-image: url('../color-picker.png')
+            background-position: -20px 0px
+
+            .handle {
+                position: absolute
+                color: white
+                right: 0
+
+                i {
+                    position: absolute
+                    font-size: 12px
+                    top: -6px
+                    right: -6px
+                }
+            }
+        }
+    }
+}
