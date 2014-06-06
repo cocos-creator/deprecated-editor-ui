@@ -2,21 +2,21 @@
     Polymer('fire-ui-unitinput', {
         ready: function() {
             this.focused = false;
-            this.type = this.type ? this.type : 'int';
-            this.unit = this.unit ? this.unit : '';
-            this._precision = this.precision ? parseInt(this.precision) : 2;
+            this.type = (this.type!==undefined) ? this.type : 'int';
+            this.unit = (this.unit!==undefined) ? this.unit : '';
+            this._precision = (this.precision!==undefined) ? parseInt(this.precision) : 2;
 
             switch ( this.type ) {
                 case 'int': 
-                    this._min = this.min ? parseInt(this.min) : Number.MIN_SAFE_INTEGER;
-                    this._max = this.max ? parseInt(this.max) : Number.MAX_SAFE_INTEGER;
-                    this._interval = this.interval ? parseInt(this.interval) : 1;
+                    this._min = (this.min!==undefined) ? parseInt(this.min) : Number.MIN_SAFE_INTEGER;
+                    this._max = (this.max!==undefined) ? parseInt(this.max) : Number.MAX_SAFE_INTEGER;
+                    this._interval = (this.interval!==undefined) ? parseInt(this.interval) : 1;
                     break;
 
                 case 'float':
-                    this._min = this.min ? parseFloat(this.min) : -Number.MAX_VALUE;
-                    this._max = this.max ? parseFloat(this.max) : Number.MAX_VALUE;
-                    this._interval = this.interval ? parseFloat(this.interval) : 1/Math.pow(10,this._precision);
+                    this._min = (this.min!==undefined) ? parseFloat(this.min) : -Number.MAX_VALUE;
+                    this._max = (this.max!==undefined) ? parseFloat(this.max) : Number.MAX_VALUE;
+                    this._interval = (this.interval!==undefined) ? parseFloat(this.interval) : 1/Math.pow(10,this._precision);
                     break;
             }
         },

@@ -2,7 +2,7 @@
     Polymer('fire-ui-color', {
         ready: function() {
             this.focused = false;
-            this.color = this.color ? this.color : new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
+            this.color = (this.color!==undefined) ? this.color : new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
             this._updateColor();
         },
 
