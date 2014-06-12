@@ -1,11 +1,8 @@
 (function () {
     Polymer('fire-ui-select', {
+        showMenu: false,
         observe: {
             value: 'updateValueName',
-        },
-
-        ready: function() {
-            this.showMenu = false;
         },
 
         onClick: function () {

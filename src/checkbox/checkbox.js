@@ -1,8 +1,7 @@
 (function () {
     Polymer('fire-ui-checkbox', {
-        ready: function() {
-            this.focused = false;
-        },
+        focused: false,
+        checked: false,
 
         onFocusIn: function () {
             this.focused = true;

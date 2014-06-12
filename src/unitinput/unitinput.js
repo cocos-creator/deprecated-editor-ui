@@ -1,10 +1,13 @@
 (function () {
     Polymer('fire-ui-unitinput', {
+        focused: false,
+        type: 'int',
+        unit: '',
+        precision: '2',
+        value: '',
+
         ready: function() {
-            this.focused = false;
-            this.type = (this.type!==null) ? this.type : 'int';
-            this.unit = (this.unit!==null) ? this.unit : '';
-            this._precision = (this.precision!==null) ? parseInt(this.precision) : 2;
+            this._precision = parseInt(this.precision);
 
             switch ( this.type ) {
                 case 'int': 

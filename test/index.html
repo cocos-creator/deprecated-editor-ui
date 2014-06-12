@@ -8,8 +8,8 @@
 <link rel="import" href="ext/polymer/polymer.html">
 <link rel="import" href="bin/all.html">
 
-<script type="text/javascript" src="bin/core.dev.js"></script>
-<script type="text/javascript" src="ext/platform/platform.js"></script>
+<script src="bin/core.dev.js"></script>
+<script src="ext/platform/platform.js"></script>
 
 <style>
 body {
@@ -26,7 +26,9 @@ span.space {
 </style>
 </head>
 
-<body is="polymer-body" unresolved>
+<body>
+
+<template id="my-template" is="auto-binding">
 <button on-click="{{myCheckedClick}}">Change</button> myChecked = {{myChecked}} <br/>
 min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"></input>
 <button on-click="{{myPixelClick}}">Change</button> myPixel = {{myPixel}} <br/>
@@ -53,6 +55,7 @@ min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"><
 
 <fire-ui-color-picker color="{{myColor}}"></fire-ui-color-picker>
 <span class="space"></span>                                      
+</template>
 
 <script>
 function rangeRandom (min, max) {
@@ -62,7 +65,7 @@ function rangeRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-window.model = {
+model = {
     myChecked: false,
     myCheckedClick: function () {
         this.myChecked = !this.myChecked;
@@ -104,8 +107,13 @@ window.model = {
     toFixed: function ( val, fixed ) {
         return val.toFixed(fixed);
     },
-
 };
+var tmpl = document.querySelector('#my-template');
+for ( var m in model ) {
+    if ( model.hasOwnProperty(m) ) {
+        tmpl[m] = model[m];
+    }
+}
 </script>
 
 </body>

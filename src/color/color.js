@@ -1,8 +1,9 @@
 (function () {
     Polymer('fire-ui-color', {
+        focused: false,
+        color: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+
         ready: function() {
-            this.focused = false;
-            this.color = (this.color!==null) ? this.color : new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
             this._updateColor();
         },
 
