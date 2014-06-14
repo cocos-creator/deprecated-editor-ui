@@ -1,126 +1,153 @@
 <html>
 <head>
-<title>debug focus</title>
+<title>Debug Focus</title>
 <link rel="import" href="ext/polymer/polymer.html">
 <script src="ext/platform/platform.js"></script>
-
-<style>
-body {
-    position: relative;
-    background-color: #333;
-    padding: 0px 100px;
-    margin-top: 20px;
-    color: white;
-}
-span.space {
-    height: 5px;
-    display: block;
-}
-.mybox {
-    height: 100px;
-    border: 5px solid #880;
-    background-color: #222;
-}
-.mybox:focus {
-    background-color: #aaa;
-}
-*:focus {
-    outline: 0;
-}
-</style>
 
 </head>
 
 <body>
 
-<debug-focus tabindex="1" id="focus-1">
-    <debug-focus tabindex="1" id="focus-2">
-        <debug-focus tabindex="1" id="focus-3">
-            <div class="mybox" tabindex="1"></div>
+<!-- template debug-focus -->
+<polymer-element name="debug-focus">
+    <template>
+        <style>
+            @-webkit-keyframes flash-in { from { background-color: #aaa; } to { background-color: #222; }  }
+            @-webkit-keyframes flash-out { from { background-color: #a00; } to { background-color: #222; }  }
+            .box {
+                display: inline-block;
+                border: 5px solid #888;
+                background-color: #222;
+                padding: 20px;
+                -webkit-animation: "flash-out" .3s linear;
+            }
+            .box.focused {
+                -webkit-animation: "flash-in" .3s linear;
+            }
+            .box:focus {
+                outline: 0;
+                border: 5px solid #09F;
+            }
+        </style>
+
+        <div id="box" class="box {{ focused ? 'focused':'' }}"
+            tabindex="1"
+            on-focusin="{{onFocusIn}}"
+            on-focusout="{{onFocusOut}}"
+            on-keydown="{{onKeyDown}}"
+            >
+            <content/>
+        </div>
+    </template>
+
+    <script>
+        Polymer('debug-focus', {
+            focused: false,
+            ready: function() {
+            },
+            onFocusIn: function () {
+                this.focused = true;
+                event.stopPropagation();
+                this.async( function () {
+                                this.fire('focusin');
+                            },
+                            null, 
+                            300 );
+            },
+            onFocusOut: function () {
+                this.focused = false;
+                event.stopPropagation();
+                this.async( function () {
+                                this.fire('focusout');
+                            },
+                            null, 
+                            300 );
+            },
+            onKeyDown: function () {
+                switch ( event.which ) {
+                    // esc
+                    case 27:
+                        event.target.blur(); 
+                    break;
+                }
+                event.stopPropagation();
+            },
+        });
+    </script>
+</polymer-element>
+
+<!-- test content -->
+<template id="test-content" is="auto-binding">
+    <style>
+        body {
+            position: relative;
+            background-color: #333;
+            padding: 0px 100px;
+            margin-top: 20px;
+            color: white;
+        }
+        span.space {
+            height: 20px;
+            display: block;
+        }
+        .mybox /deep/ .box {
+            height: 100px;
+            width: 100px;
+        }
+        *:focus {
+            outline: 0;
+        }
+    </style>
+
+    <debug-focus tabindex="1" id="focus-1">
+        <debug-focus tabindex="1" id="focus-2">
+            <debug-focus tabindex="1" id="focus-3">
+                <debug-focus class="mybox" tabindex="1" id="focus-4">
+                </debug-focus>
+            </debug-focus>
         </debug-focus>
     </debug-focus>
-</debug-focus>
 
-<button onclick="focus1()">Focus 1</button>
-<button onclick="focus2()">Focus 2</button>
-<button onclick="focus3()">Focus 3</button>
+    <span class="space"></span>
+    <button on-click="{{doFocus1}}">Focus 1</button>
+    <button on-click="{{doFocus2}}">Focus 2</button>
+    <button on-click="{{doFocus3}}">Focus 3</button>
+    <button on-click="{{doFocus4}}">Focus 4</button>
 
-<polymer-element name="debug-focus">
-<template>
-<style>
-    .box {
-        border: 5px solid #888;
-        background-color: #222;
-        padding: 20px;
-    }
-    .box.focused {
-        border: 5px solid #09F;
-    }
-    .box:focus {
-        outline: 0;
-        background-color: #aaa;
-    }
-</style>
+    <span class="space"></span>
+    <button on-click="{{doBlur1}}">Blur 1</button>
+    <button on-click="{{doBlur2}}">Blur 2</button>
+    <button on-click="{{doBlur3}}">Blur 3</button>
+    <button on-click="{{doBlur4}}">Blur 4</button>
 
-<div class="box {{ focused ? 'focused':'' }}"
-    tabindex="1"
-    on-focusin="{{onFocusIn}}"
-    on-focusout="{{onFocusOut}}"
-    on-keydown="{{onKeyDown}}"
-    >
-    <content/>
-</div>
-</template>
-
-<script>
-function focus1() {
-    var fel = document.querySelector('#focus-1');
-    fel.focus();
-}
-function focus2() {
-    var fel = document.querySelector('#focus-2');
-    fel.focus();
-}
-function focus3() {
-    var fel = document.querySelector('#focus-3');
-    fel.focus();
-}
-
-Polymer('debug-focus', {
-    focused: false,
-    ready: function() {
-    },
-    onFocusIn: function () {
-        this.focused = true;
-        event.stopPropagation();
-        this.async( function () {
-                        this.fire('focusin');
-                    },
-                    null, 
-                    300 );
-    },
-    onFocusOut: function () {
-        this.focused = false;
-        event.stopPropagation();
-        this.async( function () {
-                        this.fire('focusout');
-                    },
-                    null, 
-                    300 );
-    },
-    onKeyDown: function () {
-        switch ( event.which ) {
-            // esc
-            case 27:
-                event.target.blur(); 
-            break;
+    <script>
+        var doFocus = function (id) {
+            var fel = document.querySelector('#focus-' + id);
+            fel.$.box.focus();
         }
-        event.stopPropagation();
-    },
-});
-</script>
+        var doBlur = function (id) {
+            var fel = document.querySelector('#focus-' + id);
+            fel.$.box.blur();
+        }
 
-</polymer-element>
+        var tmpl = document.querySelector('#test-content');
+        tmpl.doFocus1 = function () { doFocus(1); }
+        tmpl.doFocus2 = function () { doFocus(2); }
+        tmpl.doFocus3 = function () { doFocus(3); }
+        tmpl.doFocus4 = function () { doFocus(4); }
+        tmpl.doBlur1 = function () { doBlur(1); }
+        tmpl.doBlur2 = function () { doBlur(2); }
+        tmpl.doBlur3 = function () { doBlur(3); }
+        tmpl.doBlur4 = function () { doBlur(4); }
+
+        document.addEventListener( "focusout", function () {
+            console.log("finish focusout");
+        });
+        document.addEventListener( "focusin", function () {
+            console.log("finish focusin");
+        });
+    </script>
+</template>
 
 </body>
 </html>

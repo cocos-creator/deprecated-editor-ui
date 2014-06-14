@@ -29,91 +29,92 @@ span.space {
 <body>
 
 <template id="my-template" is="auto-binding">
-<button on-click="{{myCheckedClick}}">Change</button> myChecked = {{myChecked}} <br/>
-min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"></input>
-<button on-click="{{myPixelClick}}">Change</button> myPixel = {{myPixel}} <br/>
-<button on-click="{{myFloatClick}}">Change</button> myFloat = {{myFloat}} <br/>
-<button on-click="{{mySelectClick}}">Change</button> mySelect = {{mySelect}} <br/>
-<button on-click="{{myColorClick}}">Change</button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
 
-<span class="space" style="height: 20px"></span>
+    <button on-click="{{myCheckedClick}}">Change</button> myChecked = {{myChecked}} <br/>
+    min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"></input>
+    <button on-click="{{myPixelClick}}">Change</button> myPixel = {{myPixel}} <br/>
+    <button on-click="{{myFloatClick}}">Change</button> myFloat = {{myFloat}} <br/>
+    <button on-click="{{mySelectClick}}">Change</button> mySelect = {{mySelect}} <br/>
+    <button on-click="{{myColorClick}}">Change</button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
 
-<fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>
-<span class="space"></span>
+    <span class="space" style="height: 20px"></span>
 
-<fire-ui-unitinput value="{{myPixel}}" unit="px" type="int" min="[[myPixelMin]]" max="[[myPixelMax]]"></fire-ui-unitinput>
-<span class="space"></span>
+    <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>
+    <span class="space"></span>
 
-<fire-ui-unitinput value="{{myFloat}}" unit="cm" type="float" precision="2"></fire-ui-unitinput>
-<span class="space"></span>
+    <fire-ui-unitinput value="{{myPixel}}" unit="px" type="int" min="[[myPixelMin]]" max="[[myPixelMax]]"></fire-ui-unitinput>
+    <span class="space"></span>
 
-<fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
-<span class="space"></span>
+    <fire-ui-unitinput value="{{myFloat}}" unit="cm" type="float" precision="2"></fire-ui-unitinput>
+    <span class="space"></span>
 
-<fire-ui-color color="{{myColor}}"></fire-ui-color>
-<span class="space"></span>                        
+    <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
+    <span class="space"></span>
 
-<fire-ui-color-picker color="{{myColor}}"></fire-ui-color-picker>
-<span class="space"></span>                                      
+    <fire-ui-color color="{{myColor}}"></fire-ui-color>
+    <span class="space"></span>                        
+
+    <fire-ui-color-picker color="{{myColor}}"></fire-ui-color-picker>
+    <span class="space"></span>                                      
 </template>
 
 <script>
-function rangeRandom (min, max) {
-    return Math.random() * (max - min) + min;
-}
-function rangeRandomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-model = {
-    myChecked: false,
-    myCheckedClick: function () {
-        this.myChecked = !this.myChecked;
-    },
-
-    myPixel: 20,
-    myPixelClick: function () {
-        this.myPixel = rangeRandomInt(-1000, 1000);
-    },
-    myPixelMin: 0,
-    myPixelMax: 30,
-
-    myFloat: 7.28,
-    myFloatClick: function () {
-        this.myFloat = rangeRandom(-10.0, 10.0);
-    },
-
-    mySelect: 3, 
-    mySelectList: [
-    { name: '64',   value: 0 },
-    { name: '128',  value: 1 },
-    { name: '256',  value: 2 },
-    { name: '512',  value: 3 },
-    { name: '1024', value: 4 },
-    { name: '2048', value: 5 },
-    { name: '4096', value: 6 },
-    ],
-    mySelectClick: function () {
-        this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
-    },
-
-    myColor: new FIRE.Color( 1.0, 0.0, 0.0, 0.5 ), 
-    myColorClick: function () {
-        this.myColor.r = rangeRandom( 0.0, 1.0 );
-        this.myColor.g = rangeRandom( 0.0, 1.0 );
-        this.myColor.b = rangeRandom( 0.0, 1.0 );
-        this.myColor.a = rangeRandom( 0.0, 1.0 );
-    },
-    toFixed: function ( val, fixed ) {
-        return val.toFixed(fixed);
-    },
-};
-var tmpl = document.querySelector('#my-template');
-for ( var m in model ) {
-    if ( model.hasOwnProperty(m) ) {
-        tmpl[m] = model[m];
+    function rangeRandom (min, max) {
+        return Math.random() * (max - min) + min;
     }
-}
+    function rangeRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    model = {
+        myChecked: false,
+        myCheckedClick: function () {
+            this.myChecked = !this.myChecked;
+        },
+
+        myPixel: 20,
+        myPixelClick: function () {
+            this.myPixel = rangeRandomInt(-1000, 1000);
+        },
+        myPixelMin: 0,
+        myPixelMax: 30,
+
+        myFloat: 7.28,
+        myFloatClick: function () {
+            this.myFloat = rangeRandom(-10.0, 10.0);
+        },
+
+        mySelect: 3, 
+        mySelectList: [
+        { name: '64',   value: 0 },
+        { name: '128',  value: 1 },
+        { name: '256',  value: 2 },
+        { name: '512',  value: 3 },
+        { name: '1024', value: 4 },
+        { name: '2048', value: 5 },
+        { name: '4096', value: 6 },
+        ],
+        mySelectClick: function () {
+            this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
+        },
+
+        myColor: new FIRE.Color( 1.0, 0.0, 0.0, 0.5 ), 
+        myColorClick: function () {
+            this.myColor.r = rangeRandom( 0.0, 1.0 );
+            this.myColor.g = rangeRandom( 0.0, 1.0 );
+            this.myColor.b = rangeRandom( 0.0, 1.0 );
+            this.myColor.a = rangeRandom( 0.0, 1.0 );
+        },
+        toFixed: function ( val, fixed ) {
+            return val.toFixed(fixed);
+        },
+    };
+    var tmpl = document.querySelector('#my-template');
+    for ( var m in model ) {
+        if ( model.hasOwnProperty(m) ) {
+            tmpl[m] = model[m];
+        }
+    }
 </script>
 
 </body>
