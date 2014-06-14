@@ -9,7 +9,7 @@
 <body>
 
 <!-- template debug-focus -->
-<polymer-element name="debug-focus">
+<polymer-element name="debug-focus" attributes="index">
     <template>
         <style>
             @-webkit-keyframes flash-in { from { background-color: #aaa; } to { background-color: #222; }  }
@@ -18,7 +18,7 @@
                 display: inline-block;
                 border: 5px solid #888;
                 background-color: #222;
-                padding: 20px;
+                padding: 0 20px 20px;
                 -webkit-animation: "flash-out" .3s linear;
             }
             .box.focused {
@@ -28,6 +28,14 @@
                 outline: 0;
                 border: 5px solid #09F;
             }
+            #label {
+                text-align: center;
+                height: 20px;
+                font-size: 13px;
+            }
+            .box:focus #label {
+                color: #09F;
+            }
         </style>
 
         <div id="box" class="box {{ focused ? 'focused':'' }}"
@@ -36,6 +44,7 @@
             on-focusout="{{onFocusOut}}"
             on-keydown="{{onKeyDown}}"
             >
+            <div id="label">{{index}}</div>
             <content/>
         </div>
     </template>
@@ -97,12 +106,23 @@
         *:focus {
             outline: 0;
         }
+        button {
+            border: 1px solid white;
+            background: gray;
+            color: white;
+        }
+        button:hover {
+            background: #aaa;
+        }
+        button:active {
+            background: #333;
+        }
     </style>
 
-    <debug-focus tabindex="1" id="focus-1">
-        <debug-focus tabindex="1" id="focus-2">
-            <debug-focus tabindex="1" id="focus-3">
-                <debug-focus class="mybox" tabindex="1" id="focus-4">
+    <debug-focus tabindex="1" index="1" id="focus-1">
+        <debug-focus tabindex="1" index="2" id="focus-2">
+            <debug-focus tabindex="1" index="3" id="focus-3">
+                <debug-focus class="mybox" tabindex="1" index="4" id="focus-4">
                 </debug-focus>
             </debug-focus>
         </debug-focus>
@@ -110,14 +130,18 @@
 
     <span class="space"></span>
     <button on-click="{{doFocus1}}">Focus 1</button>
-    <button on-click="{{doFocus2}}">Focus 2</button>
-    <button on-click="{{doFocus3}}">Focus 3</button>
-    <button on-click="{{doFocus4}}">Focus 4</button>
+    <button on-click="{{doBlur1}}">Blur 1</button>
 
     <span class="space"></span>
-    <button on-click="{{doBlur1}}">Blur 1</button>
+    <button on-click="{{doFocus2}}">Focus 2</button>
     <button on-click="{{doBlur2}}">Blur 2</button>
+
+    <span class="space"></span>
+    <button on-click="{{doFocus3}}">Focus 3</button>
     <button on-click="{{doBlur3}}">Blur 3</button>
+
+    <span class="space"></span>
+    <button on-click="{{doFocus4}}">Focus 4</button>
     <button on-click="{{doBlur4}}">Blur 4</button>
 
     <script>
