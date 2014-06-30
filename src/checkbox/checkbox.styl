@@ -1,11 +1,12 @@
-@import "common"
-
 :host {
     display: inline-block
-}
 
-.fire-ui-checkbox {                         
+    &(:focus) {
+        outline: none
+    }
+
     .box {
+        box-sizing: border-box
         width: 13px
         height: 13px
         border: 1px solid #888
@@ -33,7 +34,7 @@
         }
     }
 
-    &.focused .box {
+    &(.focused) .box {
         border-color: #0c70a6
     }
 }

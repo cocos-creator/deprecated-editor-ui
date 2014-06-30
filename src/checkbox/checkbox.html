@@ -1,16 +1,16 @@
-<polymer-element name="fire-ui-checkbox" attributes="checked">
+<polymer-element 
+    name="fire-ui-checkbox" 
+    constructor="FireCheckbox"
+    attributes="checked"
+    on-click="{{clickAction}}"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    >
 <template>
 <link rel="stylesheet" href="checkbox.css">
 
-<div id="checkbox"
-    class="fire-ui-checkbox {{ focused ? 'focused':'' }}" 
-    on-click="{{onClick}}"
-    on-focusin="{{onFocusIn}}"
-    on-focusout="{{onFocusOut}}"
-    >
-    <div class="box">
-        <i class="fa fa-check {{checked ? '':'hide'}}"></i>
-    </div>
+<div class="box">
+    <i class="fa fa-check {{checked ? '':'hide'}}"></i>
 </div>
 </template>
 

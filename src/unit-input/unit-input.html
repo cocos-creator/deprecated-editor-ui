@@ -1,28 +1,30 @@
-<polymer-element name="fire-ui-unit-input" attributes="value unit type min max precision interval">
+<polymer-element 
+    name="fire-ui-unit-input" 
+    constructor="FireUnitInput"
+    attributes="value unit type min max precision interval"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-keydown="{{inputKeyDownAction}}"
+    >
 <template>
 <link rel="stylesheet" href="unit-input.css">
 
-<div class="fire-ui-unit-input {{ focused ? 'focused':'' }}"
-    on-focusin="{{onFocusIn}}"
-    on-focusout="{{onFocusOut}}"
-    >
-    <input id="input" class="input"
-    type="text"
-    placeholder="-"
-    on-input="{{onInput}}"
-    on-click="{{onInputClick}}"
-    on-keydown="{{onInputKeyDown}}"
-    >
-    <span class="unit" on-click="{{onUnitClick}}">{{unit}}</span>
-    <div class="unit-buttons">
-        <button class="button" on-click="{{onIncrease}}" tabindex="-1">
-            <i class="fa fa-caret-up"></i>
-        </button>
-        <span class="sep"></span>
-        <button class="button" on-click="{{onDecrease}}" tabindex="-1">
-            <i class="fa fa-caret-down"></i>
-        </button>
-    </div>
+<input id="input" class="input"
+type="text"
+placeholder="-"
+on-input="{{inputAction}}"
+on-click="{{inputClickAction}}"
+on-keydown="{{inputKeyDownAction}}"
+>
+<span class="unit" on-click="{{unitClickAction}}">{{unit}}</span>
+<div class="unit-buttons">
+    <button class="button" on-click="{{increaseAction}}" tabindex="-1">
+        <i class="fa fa-caret-up"></i>
+    </button>
+    <span class="sep"></span>
+    <button class="button" on-click="{{decreaseAction}}" tabindex="-1">
+        <i class="fa fa-caret-down"></i>
+    </button>
 </div>
 </template>
 

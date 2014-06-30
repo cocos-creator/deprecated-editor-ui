@@ -4,23 +4,28 @@
         checked: false,
 
         ready: function () {
-            this.$.checkbox.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.tabIndex = FIRE.getParentTabIndex(this)+1;
         },
 
-        onFocusIn: function () {
+        focusAction: function (event) {
             this.focused = true;
+            this.classList.toggle('focused', this.focused);
         },
 
-        onFocusOut: function () {
+        blurAction: function (event) {
             if ( this.focused ) {
-                if ( FIRE.find( this, event.relatedTarget ) === false ) {
-                    this.focused = false;
-                }
+                this.focused = false;
+                this.classList.toggle('focused', this.focused);
             }
         },
 
-        onClick: function () {
+        clickAction: function (event) {
             this.checked = !this.checked;
+            event.stopPropagation();
+        },
+
+        checkedChanged: function() {
+            this.fire('change');
         },
     });
 })();

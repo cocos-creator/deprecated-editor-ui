@@ -1,14 +1,10 @@
-@import "common"
-
 :host {
     display: inline-block
-    width: 120px
-}
 
-.fire-ui-select {
     box-shadow: 0 0 0 1px #212121
     font-size: 12px
     position: relative
+    width: 120px
     min-width: 60px
 
     cursor: pointer 
@@ -62,6 +58,7 @@
         outline: 1px solid #222
         margin-top: 4px
         padding: 4px
+        box-sizing: border-box
 
         color: #eee
         background-color: #474747
@@ -92,7 +89,7 @@
 
     transition: box-shadow .3s ease
 
-    &.focused {                         
+    &(.focused) {                         
         box-shadow: 
             0px 0 0 1px rgba(20,40,150,1), 
             0px 0 4px 1px rgba(12,112,166,0.8)

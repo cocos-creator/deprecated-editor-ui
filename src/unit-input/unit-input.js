@@ -50,23 +50,24 @@
             this.$.input.value = this._convert(this.value);
         },
 
-        onFocusIn: function () {
+        focusAction: function (event) {
             this.lastVal = this._convert(this.value);
             this.focused = true;
+            this.classList.toggle('focused', this.focused);
         },
 
-        onFocusOut: function () {
+        blurAction: function (event) {
             if ( this.focused ) {
-                if ( FIRE.find( this, event.relatedTarget ) === false ) {
-                    var val = this._convert(this.$.input.value);
-                    this.value = val;
-                    this.$.input.value = val;
-                    this.focused = false;
-                }
+                var val = this._convert(this.$.input.value);
+                this.value = val;
+                this.$.input.value = val;
+
+                this.focused = false;
+                this.classList.toggle('focused', this.focused);
             }
         },
 
-        onInput: function (event) {
+        inputAction: function (event) {
             if ( event.target.value === "-" ) {
                 return;
             }
@@ -83,35 +84,37 @@
             event.stopPropagation();
         },
 
-        onInputClick: function (event) {
+        inputClickAction: function (event) {
             event.stopPropagation();
         },
 
-        onInputKeyDown: function (event) {
+        inputKeyDownAction: function (event) {
             switch ( event.which ) {
                 // enter
                 case 13:
-                    event.target.blur(); 
+                    this.blur();
                 break;
 
                 // esc
                 case 27:
-                    event.target.value = this.lastVal; 
-                    event.target.blur(); 
+                    this.$.input.value = this.lastVal;
+                    this.blur();
                 break;
             }
+            event.stopPropagation();
         },
 
-        onUnitClick: function () {
+        unitClickAction: function (event) {
             this.$.input.focus();
+            event.stopPropagation();
         },
 
-        onIncrease: function () {
+        increaseAction: function (event) {
             this.value = this._convert(this.value+this._interval);
             event.stopPropagation();
         },
 
-        onDecrease: function () {
+        decreaseAction: function (event) {
             this.value = this._convert(this.value-this._interval);
             event.stopPropagation();
         },
