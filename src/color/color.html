@@ -2,8 +2,8 @@
 <template>
 <link rel="stylesheet" href="color.css">
 
-<div class="fire-ui-color {{ focused ? 'focused':'' }}" 
-    tabindex="1"
+<div id="color"
+    class="fire-ui-color {{ focused ? 'focused':'' }}" 
     on-click="{{onClick}}"
     on-focusin="{{onFocusIn}}"
     on-focusout="{{onFocusOut}}"
@@ -13,6 +13,8 @@
         <i class="fa fa-caret-down"></i>
     </div>
     <div id="previewA" class="preview-alpha"></div>
+
+    <div id="border" class="border hide"></div>
 </div>
 </template>
 

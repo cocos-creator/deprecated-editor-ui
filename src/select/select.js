@@ -1,12 +1,31 @@
 (function () {
     Polymer('fire-ui-select', {
+        focused: false,
         showMenu: false,
+
         observe: {
             value: 'updateValueName',
         },
 
+        ready: function () {
+            this.$.select.tabIndex = FIRE.getParentTabIndex(this)+1;
+        },
+
         onClick: function () {
             this.showMenu = !this.showMenu;
+        },
+
+        onFocusIn: function () {
+            this.focused = true;
+        },
+
+        onFocusOut: function () {
+            if ( this.focused ) {
+                if ( FIRE.find( this, event.relatedTarget ) === false ) {
+                    this.focused = false;
+                    this.showMenu = false;
+                }
+            }
         },
 
         onKeyDown: function () {
@@ -35,10 +54,6 @@
             this.showMenu = false;
 
             event.stopPropagation();
-        },
-
-        onFocusOut: function () {
-            this.showMenu = false;
         },
     });
 })();

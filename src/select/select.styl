@@ -1,10 +1,15 @@
 @import "common"
 
+:host {
+    display: inline-block
+    width: 120px
+}
+
 .fire-ui-select {
-    flex: 1 0 60px
     box-shadow: 0 0 0 1px #212121
     font-size: 12px
     position: relative
+    min-width: 60px
 
     cursor: pointer 
 
@@ -48,14 +53,14 @@
     }
 
     .menu {
-        menuDuration = .3s
+        menuDuration = .2s
 
         visibility: visible
         position: absolute
         z-index: 11
         min-width: 100%
         outline: 1px solid #222
-        margin-top: 1px
+        margin-top: 4px
         padding: 4px
 
         color: #eee
@@ -83,5 +88,13 @@
                 background: #3875d7
             }
         }
+    }
+
+    transition: box-shadow .3s ease
+
+    &.focused {                         
+        box-shadow: 
+            0px 0 0 1px rgba(20,40,150,1), 
+            0px 0 4px 1px rgba(12,112,166,0.8)
     }
 }

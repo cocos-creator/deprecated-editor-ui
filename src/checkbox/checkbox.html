@@ -2,13 +2,15 @@
 <template>
 <link rel="stylesheet" href="checkbox.css">
 
-<div class="fire-ui-checkbox {{ focused ? 'focused':'' }}" 
-    tabindex="1"
+<div id="checkbox"
+    class="fire-ui-checkbox {{ focused ? 'focused':'' }}" 
     on-click="{{onClick}}"
     on-focusin="{{onFocusIn}}"
     on-focusout="{{onFocusOut}}"
     >
-    <i class="fa fa-check {{checked ? '':'hide'}}"></i>
+    <div class="box">
+        <i class="fa fa-check {{checked ? '':'hide'}}"></i>
+    </div>
 </div>
 </template>
 

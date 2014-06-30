@@ -2,11 +2,12 @@
 <template>
 <link rel="stylesheet" href="select.css">
 
-<div class="fire-ui-select" 
-    tabindex="1"
+<div id="select" 
+    class="fire-ui-select {{ focused ? 'focused':'' }}" 
     on-click="{{onClick}}"
-    on-keydown="{{onKeyDown}}"
-    on-focusout="{{onFocusOut}}">
+    on-focusin="{{onFocusIn}}"
+    on-focusout="{{onFocusOut}}"
+    on-keydown="{{onKeyDown}}">
     <div class="border">
         <span>{{valueName}}</span>
         <i class="fa fa-caret-down"></i>

@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-unitinput', {
+    Polymer('fire-ui-unit-input', {
         focused: false,
         type: 'int',
         unit: '',
@@ -7,12 +7,13 @@
         value: '',
 
         ready: function() {
+            this.$.input.tabIndex = FIRE.getParentTabIndex(this)+1;
             this._precision = parseInt(this.precision);
 
             switch ( this.type ) {
                 case 'int': 
-                    this._min = (this.min!==null) ? parseInt(this.min) : Number.MIN_SAFE_INTEGER;
-                    this._max = (this.max!==null) ? parseInt(this.max) : Number.MAX_SAFE_INTEGER;
+                    this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
+                    this._max = (this.max!==null) ? parseInt(this.max) : Number.POSITIVE_INFINITY;
                     this._interval = (this.interval!==null) ? parseInt(this.interval) : 1;
                     break;
 
@@ -51,16 +52,18 @@
 
         onFocusIn: function () {
             this.lastVal = this._convert(this.value);
-
             this.focused = true;
         },
 
         onFocusOut: function () {
-            var val = this._convert(this.$.input.value);
-            this.value = val;
-            this.$.input.value = val;
-
-            this.focused = false;
+            if ( this.focused ) {
+                if ( FIRE.find( this, event.relatedTarget ) === false ) {
+                    var val = this._convert(this.$.input.value);
+                    this.value = val;
+                    this.$.input.value = val;
+                    this.focused = false;
+                }
+            }
         },
 
         onInput: function (event) {
@@ -76,10 +79,12 @@
                 return;
             }
             this.value = this._convert(event.target.value);
+
+            event.stopPropagation();
         },
 
         onInputClick: function (event) {
-            event.target.select();
+            event.stopPropagation();
         },
 
         onInputKeyDown: function (event) {
@@ -97,12 +102,18 @@
             }
         },
 
+        onUnitClick: function () {
+            this.$.input.focus();
+        },
+
         onIncrease: function () {
             this.value = this._convert(this.value+this._interval);
+            event.stopPropagation();
         },
 
         onDecrease: function () {
             this.value = this._convert(this.value-this._interval);
+            event.stopPropagation();
         },
     });
 })();

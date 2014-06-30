@@ -1,32 +1,39 @@
 @import "common"
 
+:host {
+    display: inline-block
+}
+
 .fire-ui-checkbox {                         
-    width: 13px
-    height: 13px
-    border: 1px solid #888
+    .box {
+        width: 13px
+        height: 13px
+        border: 1px solid #888
 
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1)
-    background: #232323
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1)
+        background: #232323
 
-    cursor: pointer 
+        cursor: pointer 
 
-    transition: border-color .3s ease, box-shadow .3s ease
+        transition: border-color .3s ease, box-shadow .3s ease
 
-    &.focused {                         
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px #0c70a6, 0px 0 4px 1px rgba(12,112,166,0.8)
+        &:hover {
+            border-color: #bbb
+        }
+
+        i {                         
+            font-size: 11px
+
+            color: #0c90e6
+            cursor: inherit
+
+            &.hide {                         
+                visibility: hidden 
+            }
+        }
     }
 
-    &:hover {
-        border-color: #bbb
-    }
-
-    i {                         
-        font-size: 11px
-
-        color: #0c90e6
-        cursor: inherit
-    }
-    i.hide {                         
-        visibility: hidden 
+    &.focused .box {
+        border-color: #0c70a6
     }
 }

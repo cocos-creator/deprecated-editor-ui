@@ -1,6 +1,8 @@
 (function () {
     Polymer('fire-ui-color-picker', {
         ready: function() {
+            this.$.colorPicker.tabIndex = FIRE.getParentTabIndex(this)+1;
+
             this.color = (this.color!==null) ? this.color : new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
             this.hsv = this.color.toHSV();
             this.rgb = {

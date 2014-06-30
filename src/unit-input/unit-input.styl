@@ -1,8 +1,12 @@
 @import "common"
 
-.fire-ui-unitinput {                         
+:host {
+    display: inline-block
+    width: 120px
+}
+
+.fire-ui-unit-input {                         
     display: flex
-    flex: 1 0 60px
     flex-direction: row
     flex-wrap: nowrap     
     align-items: baseline
@@ -15,12 +19,17 @@
 
     background: #232323
     color: #ddd
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px rgba(255,255,255,0.1)
+    box-shadow: 
+        inset 0 0 0 1px rgba(0,0,0,0.1), 
+        0px 0 0 1px rgba(255,255,255,0.1)
 
     transition: box-shadow .3s ease
 
     &.focused {                         
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px #0c70a6, 0px 0 4px 1px rgba(12,112,166,0.8)
+        box-shadow: 
+            inset 0 0 0 1px rgba(0,0,0,0.1), 
+            0px 0 0 1px #0c70a6, 
+            0px 0 4px 1px rgba(12,112,166,0.8)
     }
 
     .input {                         

@@ -3,12 +3,20 @@
         focused: false,
         checked: false,
 
+        ready: function () {
+            this.$.checkbox.tabIndex = FIRE.getParentTabIndex(this)+1;
+        },
+
         onFocusIn: function () {
             this.focused = true;
         },
 
         onFocusOut: function () {
-            this.focused = false;
+            if ( this.focused ) {
+                if ( FIRE.find( this, event.relatedTarget ) === false ) {
+                    this.focused = false;
+                }
+            }
         },
 
         onClick: function () {

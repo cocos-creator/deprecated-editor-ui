@@ -3,23 +3,54 @@
 .fire-ui-color {
     totalHeight = 21
 
-    flex: 1 0 60px
     position: relative
 
     height: (totalHeight)px
     min-height: 21px
     max-height: 21px
+    width: 120px
     min-width: 60px
     border: 1px solid black
 
+    cursor: pointer 
     background: #232323
     color: #ddd
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px rgba(255,255,255,0.1)
+    box-shadow: 
+        inset 0 0 0 1px rgba(0,0,0,0.1), 
+        0px 0 0 1px rgba(255,255,255,0.1)
 
     transition: box-shadow .3s ease
 
     &.focused {                         
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0px 0 0 1px #0c70a6, 0px 0 4px 1px rgba(12,112,166,0.8)
+        box-shadow: 
+            inset 0 0 0 1px rgba(0,0,0,0.1), 
+            0px 0 0 1px #0c70a6, 
+            0px 0 4px 1px rgba(12,112,166,0.8)
+    }
+
+    .border {
+        duration = .2s
+
+        position: absolute
+        padding: 10px
+        top: 25px
+        right: 0px
+
+        z-index: 11
+        outline: 1px solid #222
+        color: #bdbdbd
+        background-color: #474747
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1)
+
+        transition: opacity duration ease
+
+        &.hide {
+            visibility: hidden
+            opacity: 0.0
+            transition: 
+                visibility 0s ease duration, 
+                opacity duration ease
+        }
     }
 
     .preview-rgb-bg {
@@ -43,6 +74,7 @@
             position: absolute
             right: 2px
             bottom: 2px
+            cursor: pointer 
         }
     }
 

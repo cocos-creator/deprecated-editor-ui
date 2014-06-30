@@ -17,8 +17,7 @@
         "tests"
     ],
     "dependencies": {
-        "polymer": "Polymer/polymer#~0.3.2",
-        "jquery": "",
+        "polymer": "Polymer/polymer#~0.3.3",
         "fontawesome": ""
     }
 }
