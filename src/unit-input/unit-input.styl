@@ -5,18 +5,15 @@
     align-items: baseline
     position: relative
 
+    box-sizing: border-box
     height: 21px
     min-height: 21px
     width: 120px
     min-width: 60px
     border: 1px solid black
-    box-sizing: border-box
 
     cursor: default
-    *:focus {
-        outline: none
-    }
-
+    font-family: Arial
     background: #232323
     color: #ddd
     box-shadow: 
@@ -25,6 +22,9 @@
 
     transition: box-shadow .3s ease
 
+    &(:focus) {
+        outline: none
+    }
     &(.focused) {                         
         box-shadow: 
             inset 0 0 0 1px rgba(0,0,0,0.1), 
@@ -56,6 +56,10 @@
         /* &::-webkit-input-placeholder {                                              */
         /*     font-style: italic                                                     */
         /* }                                                                           */
+
+        &:focus {
+            outline: none
+        }
     }
 
     .unit {                         
@@ -66,7 +70,6 @@
 
         text-transform: uppercase
         opacity: .7
-        font-family: Arial
     }
 
     .unit-buttons {                         
@@ -86,6 +89,7 @@
             width: 9px
             /* height: 9px */
 
+            text-align: center
             background-color: #474747
             box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset
             cursor: pointer
@@ -102,6 +106,10 @@
                 i {
                     opacity: 0.3
                 }
+            }
+
+            &:focus {
+                outline: none
             }
 
             i {                         

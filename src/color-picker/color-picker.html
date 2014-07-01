@@ -1,49 +1,51 @@
-<polymer-element name="fire-ui-color-picker" attributes="color">
+<polymer-element 
+    name="fire-ui-color-picker" 
+    constructor="FireColorPicker"
+    attributes="color"
+    >
 <template>
 <link rel="stylesheet" href="color-picker.css">
 
-<div id="colorPicker" class="fire-ui-color-picker">
-    <div class="color-group flex-row">
-        <div id="hueCtrl" class="hue" on-mousedown="{{onHueCtrlMouseDown}}">
-            <div id="hueHandle" class="handle">
-                <i class="fa fa-caret-right"></i>
-            </div>
-        </div>
-
-        <div id="colorCtrl" class="color" on-mousedown="{{onColorCtrlMouseDown}}">
-            <div id="colorHandle" class="handle">
-                <i style="color: white;" class="fa fa-circle-o"></i>
-                <i style="color: black;" class="fa fa-circle-thin"></i>
-            </div>
-        </div>
-
-        <div id="opacityCtrl" class="opacity" on-mousedown="{{onOpacityCtrlMouseDown}}">
-            <div id="opacityHandle" class="handle">
-                <i class="fa fa-caret-left"></i>
-            </div>
+<div class="color-group flex-row">
+    <div id="hueCtrl" class="hue" on-mousedown="{{hueCtrlMouseDownAction}}">
+        <div id="hueHandle" class="handle">
+            <i class="fa fa-caret-right"></i>
         </div>
     </div>
 
-    <div class="flex-column">                                                                                              
-        <span class="space"></span>
-        <div class="flex-row">                                                                                              
-            <fire-ui-unit-input class="flex-1" value="{{rgb.r}}" type="int" unit="r" min="0" max="255"></fire-ui-unitinput>
+    <div id="colorCtrl" class="color" on-mousedown="{{colorCtrlMouseDownAction}}">
+        <div id="colorHandle" class="handle">
+            <i style="color: white;" class="fa fa-circle-o"></i>
+            <i style="color: black;" class="fa fa-circle-thin"></i>
         </div>
+    </div>
 
-        <span class="space"></span>
-        <div class="flex-row">                                                                                              
-            <fire-ui-unit-input class="flex-1" value="{{rgb.g}}" type="int" unit="g" min="0" max="255"></fire-ui-unitinput>
+    <div id="opacityCtrl" class="opacity" on-mousedown="{{opacityCtrlMouseDownAction}}">
+        <div id="opacityHandle" class="handle">
+            <i class="fa fa-caret-left"></i>
         </div>
+    </div>
+</div>
 
-        <span class="space"></span>
-        <div class="flex-row">                                                                                              
-            <fire-ui-unit-input class="flex-1" value="{{rgb.b}}" type="int" unit="b" min="0" max="255"></fire-ui-unitinput>
-        </div>
+<div class="flex-col" style="align-items: stretch">                                                                                              
+    <span class="space"></span>
+    <div class="flex-row">                                                                                              
+        <fire-ui-unit-input class="flex-1" value="{{color.r|toInt}}" type="int" unit="r" min="0" max="255"></fire-ui-unitinput>
+    </div>
 
-        <span class="space"></span>
-        <div class="flex-row">                                                                                              
-            <fire-ui-unit-input class="flex-1" value="{{color.a}}" type="float" precision="2" unit="alpha" min="0" max="1"></fire-ui-unitinput>
-        </div>
+    <span class="space"></span>
+    <div class="flex-row">                                                                                              
+        <fire-ui-unit-input class="flex-1" value="{{color.g|toInt}}" type="int" unit="g" min="0" max="255"></fire-ui-unitinput>
+    </div>
+
+    <span class="space"></span>
+    <div class="flex-row">                                                                                              
+        <fire-ui-unit-input class="flex-1" value="{{color.b|toInt}}" type="int" unit="b" min="0" max="255"></fire-ui-unitinput>
+    </div>
+
+    <span class="space"></span>
+    <div class="flex-row">                                                                                              
+        <fire-ui-unit-input class="flex-1" value="{{color.a}}" type="float" precision="2" unit="alpha" min="0" max="1"></fire-ui-unitinput>
     </div>
 </div>
 </template>

@@ -7,6 +7,7 @@
         value: '',
 
         ready: function() {
+            // this.tabIndex = FIRE.getParentTabIndex(this)+1;
             this.$.input.tabIndex = FIRE.getParentTabIndex(this)+1;
             this._precision = parseInt(this.precision);
 
@@ -111,11 +112,13 @@
 
         increaseAction: function (event) {
             this.value = this._convert(this.value+this._interval);
+            this.$.input.focus();
             event.stopPropagation();
         },
 
         decreaseAction: function (event) {
             this.value = this._convert(this.value-this._interval);
+            this.$.input.focus();
             event.stopPropagation();
         },
     });

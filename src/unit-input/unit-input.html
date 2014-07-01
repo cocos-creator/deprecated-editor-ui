@@ -9,22 +9,29 @@
 <template>
 <link rel="stylesheet" href="unit-input.css">
 
-<input id="input" class="input"
-type="text"
-placeholder="-"
-on-input="{{inputAction}}"
-on-click="{{inputClickAction}}"
-on-keydown="{{inputKeyDownAction}}"
->
-<span class="unit" on-click="{{unitClickAction}}">{{unit}}</span>
+<input id="input"
+    class="input"
+    type="text"
+    placeholder="-"
+    on-input="{{inputAction}}"
+    on-click="{{inputClickAction}}"
+    on-keydown="{{inputKeyDownAction}}"
+    ></input>
+<span class="unit"
+    on-click="{{unitClickAction}}"
+    >{{unit}}</span>
 <div class="unit-buttons">
-    <button class="button" on-click="{{increaseAction}}" tabindex="-1">
+    <div class="button"
+        on-click="{{increaseAction}}" 
+        >
         <i class="fa fa-caret-up"></i>
-    </button>
+    </div>
     <span class="sep"></span>
-    <button class="button" on-click="{{decreaseAction}}" tabindex="-1">
+    <div class="button"
+        on-click="{{decreaseAction}}" 
+        >
         <i class="fa fa-caret-down"></i>
-    </button>
+    </div>
 </div>
 </template>
 

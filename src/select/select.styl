@@ -1,6 +1,7 @@
 :host {
     display: inline-block
 
+    box-sizing: border-box
     box-shadow: 0 0 0 1px #212121
     font-size: 12px
     position: relative
@@ -8,6 +9,18 @@
     min-width: 60px
 
     cursor: pointer 
+    font-family: Arial
+
+    transition: box-shadow .3s ease
+
+    #focus:focus {
+        outline: none
+    }
+    &(.focused) {                         
+        box-shadow: 
+            0px 0 0 1px rgba(20,40,150,1), 
+            0px 0 4px 1px rgba(12,112,166,0.8)
+    }
 
     .border {
         display: flex;
@@ -85,13 +98,5 @@
                 background: #3875d7
             }
         }
-    }
-
-    transition: box-shadow .3s ease
-
-    &(.focused) {                         
-        box-shadow: 
-            0px 0 0 1px rgba(20,40,150,1), 
-            0px 0 4px 1px rgba(12,112,166,0.8)
     }
 }

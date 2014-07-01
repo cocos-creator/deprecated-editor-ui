@@ -4,7 +4,7 @@
         checked: false,
 
         ready: function () {
-            this.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
         },
 
         focusAction: function (event) {

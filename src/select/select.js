@@ -8,7 +8,7 @@
         },
 
         ready: function () {
-            this.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
         },
 
         clickAction: function (event) {
@@ -17,18 +17,18 @@
             event.stopPropagation();
         },
 
-        // focusInAction: function () {
-        //     this.focused = true;
-        // },
+        focusAction: function (event) {
+            this.focused = true;
+            this.classList.toggle('focused', this.focused);
+        },
 
-        // focusOutAction: function () {
-        //     if ( this.focused ) {
-        //         if ( FIRE.find( this, event.relatedTarget ) === false ) {
-        //             this.focused = false;
-        //             this.showMenu = false;
-        //         }
-        //     }
-        // },
+        blurAction: function (event) {
+            if ( this.focused ) {
+                this.showMenu = false;
+                this.focused = false;
+                this.classList.toggle('focused', this.focused);
+            }
+        },
 
         keyDownAction: function (event) {
             switch ( event.which ) {

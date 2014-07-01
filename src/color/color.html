@@ -1,20 +1,23 @@
-<polymer-element name="fire-ui-color" attributes="color">
+<polymer-element 
+    name="fire-ui-color" 
+    constructor="FireColor"
+    attributes="color"
+    on-click="{{clickAction}}"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-keydown="{{keyDownAction}}"
+    >
 <template>
 <link rel="stylesheet" href="color.css">
 
-<div id="color"
-    class="fire-ui-color {{ focused ? 'focused':'' }}" 
-    on-click="{{onClick}}"
-    on-focusin="{{onFocusIn}}"
-    on-focusout="{{onFocusOut}}"
-    >
+<div id="focus">
     <div class="preview-rgb-bg">
         <div id="previewRGB" class="preview-rgb"></div>
-        <i class="fa fa-caret-down"></i>
+        <i id="iconDown" class="fa fa-caret-down"></i>
     </div>
     <div id="previewA" class="preview-alpha"></div>
 
-    <div id="border" class="border hide"></div>
+    <div id="border" class="border {{showPicker ? '':'hide'}}"></div>
 </div>
 </template>
 
