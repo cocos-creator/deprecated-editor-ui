@@ -21,6 +21,7 @@ body {
 }
 span.space {
     height: 5px;
+    width: 5px;
     display: block;
 }
 </style>
@@ -30,20 +31,34 @@ span.space {
 
 <template id="my-template" is="auto-binding">
 
-    <button on-click="{{myCheckedClick}}">Change</button> myChecked = {{myChecked}} <br/>                                                                                              
-    min: <input value="{{myPixelMin}}"></input> max: <input value="{{myPixelMax}}"></input>                                                                                            
-    <button on-click="{{myPixelClick}}">Change</button> myPixel = {{myPixel}} <br/>                                                                                                    
-    <button on-click="{{myFloatClick}}">Change</button> myFloat = {{myFloat}} <br/>                                                                                                    
-    <button on-click="{{mySelectClick}}">Change</button> mySelect = {{mySelect}} <br/>                                                                                                 
-    <button on-click="{{myColorClick}}">Change</button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
+    <div class="flex-row">
+        <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>                                              
+        <span class="space"></span>                                                                            
+        <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button> 
+        <span class="space"></span>                                                                            
+        <fire-ui-label>myChecked = {{myChecked}}</fire-ui-label>
+    </div>
+    <span class="space"></span>                                                                            
+
+    <div class="flex-row">
+        <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>                   
+        <span class="space"></span>                                                                            
+        <fire-ui-button on-click="{{myPixelClick}}">Change</fire-ui-button>
+        <span class="space"></span>                                                                            
+        <fire-ui-label>myPixel = {{myPixel}}</fire-ui-label>
+    </div>
+    <span class="space"></span>                                                                            
+
+    <fire-ui-button on-click="{{myFloatClick}}">Change</fire-ui-button> myFloat = {{myFloat}} <br/>                                                                                                    
+    <span class="space"></span>                                                                                                                                                        
+
+    <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button> mySelect = {{mySelect}} <br/>                                                                                                 
+    <span class="space"></span>                                                                                                                                                        
+
+    <fire-ui-button on-click="{{myColorClick}}">Change</fire-ui-button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
+    <span class="space"></span>                                                                                                                                                        
 
     <span class="space" style="height: 20px"></span>                                                                                                                                   
-
-    <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>                                                                                                                      
-    <span class="space"></span>                                                                                                                                                        
-
-    <fire-ui-unit-input value="{{myPixel}}" unit="px" type="int" min="[[myPixelMin]]" max="[[myPixelMax]]"></fire-ui-unit-input>                                                       
-    <span class="space"></span>                                                                                                                                                        
 
     <fire-ui-unit-input value="{{myFloat}}" unit="cm" type="float" precision="2"></fire-ui-unit-input>                                                                                 
     <span class="space"></span>                                                                                                                                                        
@@ -53,6 +68,9 @@ span.space {
 
     <fire-ui-color color="{{myColor}}"></fire-ui-color>                                                                                                                                
     <span class="space"></span>                                                                                                                                                        
+
+    <fire-ui-field value="{{myChecked}}"></fire-ui-field>                                                                                                                                
+    <fire-ui-field value="{{myPixel}}" type="int"></fire-ui-field>                                                                                                                                
 </template>
 
 <script>

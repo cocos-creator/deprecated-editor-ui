@@ -1,0 +1,18 @@
+<polymer-element 
+    name="fire-ui-button" 
+    constructor="FireButton"
+    >
+<template>
+<link rel="stylesheet" href="button.css">
+
+<button id="focus"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-click="{{clickAction}}"
+    >
+    <content/>
+</button>
+</template>
+
+<script type="text/javascript" src="button.js"></script>
+</polymer-element>
