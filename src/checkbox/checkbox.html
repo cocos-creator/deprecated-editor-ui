@@ -2,7 +2,6 @@
     name="fire-ui-checkbox" 
     constructor="FireCheckbox"
     attributes="checked"
-    on-click="{{clickAction}}"
     >
 <template>
 <link rel="stylesheet" href="checkbox.css">
@@ -10,6 +9,7 @@
 <div id="focus"
     on-focus="{{focusAction}}"
     on-blur="{{blurAction}}"
+    on-click="{{clickAction}}"
     >
     <div class="box">
         <i class="fa fa-check {{checked ? '':'hide'}}"></i>

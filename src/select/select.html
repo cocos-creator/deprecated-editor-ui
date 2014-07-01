@@ -2,8 +2,6 @@
     name="fire-ui-select" 
     constructor="FireSelect"
     attributes="value options"
-    on-click="{{clickAction}}"
-    on-keydown="{{keyDownAction}}"
     >
 <template>
 <link rel="stylesheet" href="select.css">
@@ -11,6 +9,8 @@
 <div id="focus"
     on-focus="{{focusAction}}"
     on-blur="{{blurAction}}"
+    on-click="{{clickAction}}"
+    on-keydown="{{keyDownAction}}"
     >
     <div class="border">
         <span>{{valueName}}</span>

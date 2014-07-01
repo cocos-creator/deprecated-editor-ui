@@ -2,8 +2,6 @@
     name="fire-ui-color" 
     constructor="FireColor"
     attributes="color"
-    on-click="{{clickAction}}"
-    on-keydown="{{keyDownAction}}"
     >
 <template>
 <link rel="stylesheet" href="color.css">
@@ -11,6 +9,8 @@
 <div id="focus"
     on-focus="{{focusAction}}"
     on-focusout="{{focusoutAction}}"
+    on-click="{{clickAction}}"
+    on-keydown="{{keyDownAction}}"
     >
     <div class="preview-rgb-bg">
         <div id="previewRGB" class="preview-rgb"></div>
