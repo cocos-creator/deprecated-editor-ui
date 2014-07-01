@@ -68,10 +68,9 @@
                 // esc
                 case 27:
                     this.blur(); 
+                    event.stopPropagation();
                 break;
             }
-
-            event.stopPropagation();
         },
 
         _timeoutID: null,
