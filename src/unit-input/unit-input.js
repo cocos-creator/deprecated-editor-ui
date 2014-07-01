@@ -57,15 +57,19 @@
             this.classList.toggle('focused', this.focused);
         },
 
-        blurAction: function (event) {
-            if ( this.focused ) {
-                var val = this._convert(this.$.input.value);
-                this.value = val;
-                this.$.input.value = val;
+        blurAction: function (event, detail, sender) {
+            if ( this.focused === false )
+                return;
 
-                this.focused = false;
-                this.classList.toggle('focused', this.focused);
-            }
+            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+                return;
+
+            var val = this._convert(this.$.input.value);
+            this.value = val;
+            this.$.input.value = val;
+
+            this.focused = false;
+            this.classList.toggle('focused', this.focused);
         },
 
         inputAction: function (event) {

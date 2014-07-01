@@ -3,14 +3,15 @@
     constructor="FireSelect"
     attributes="value options"
     on-click="{{clickAction}}"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
     on-keydown="{{keyDownAction}}"
     >
 <template>
 <link rel="stylesheet" href="select.css">
 
-<div id="focus">
+<div id="focus"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    >
     <div class="border">
         <span>{{valueName}}</span>
         <i class="fa fa-caret-down"></i>

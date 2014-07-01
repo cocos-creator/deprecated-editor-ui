@@ -2,8 +2,6 @@
     name="fire-ui-unit-input" 
     constructor="FireUnitInput"
     attributes="value unit type min max precision interval"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
     on-keydown="{{inputKeyDownAction}}"
     >
 <template>
@@ -13,21 +11,26 @@
     class="input"
     type="text"
     placeholder="-"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
     on-input="{{inputAction}}"
     on-click="{{inputClickAction}}"
     on-keydown="{{inputKeyDownAction}}"
     ></input>
 <span class="unit"
+    tabindex="-1"
     on-click="{{unitClickAction}}"
     >{{unit}}</span>
 <div class="unit-buttons">
     <div class="button"
+        tabindex="-1"
         on-click="{{increaseAction}}" 
         >
         <i class="fa fa-caret-up"></i>
     </div>
     <span class="sep"></span>
     <div class="button"
+        tabindex="-1"
         on-click="{{decreaseAction}}" 
         >
         <i class="fa fa-caret-down"></i>

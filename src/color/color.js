@@ -43,12 +43,24 @@
             this.classList.toggle('focused', this.focused);
         },
 
-        blurAction: function (event) {
-            if ( this.focused ) {
-                this.focused = false;
-                this.classList.toggle('focused', this.focused);
-                this._hideColorPicker();
+        focusoutAction: function (event) {
+            if ( this.focused === false )
+                return;
+
+            if ( event.relatedTarget === null &&
+                 event.target.tagName === "FIRE-UI-COLOR-PICKER" ) 
+            {
+                this.$.focus.focus();
+                return;
             }
+
+            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) ) {
+                return;
+            }
+
+            this.focused = false;
+            this.classList.toggle('focused', this.focused);
+            this._hideColorPicker();
         },
 
         keyDownAction: function (event) {

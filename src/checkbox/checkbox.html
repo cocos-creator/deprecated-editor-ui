@@ -3,13 +3,14 @@
     constructor="FireCheckbox"
     attributes="checked"
     on-click="{{clickAction}}"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
     >
 <template>
 <link rel="stylesheet" href="checkbox.css">
 
-<div id="focus">
+<div id="focus"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    >
     <div class="box">
         <i class="fa fa-check {{checked ? '':'hide'}}"></i>
     </div>

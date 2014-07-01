@@ -23,11 +23,15 @@
         },
 
         blurAction: function (event) {
-            if ( this.focused ) {
-                this.showMenu = false;
-                this.focused = false;
-                this.classList.toggle('focused', this.focused);
-            }
+            if ( this.focused === false )
+                return;
+
+            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+                return;
+
+            this.showMenu = false;
+            this.focused = false;
+            this.classList.toggle('focused', this.focused);
         },
 
         keyDownAction: function (event) {

@@ -3,14 +3,15 @@
     constructor="FireColor"
     attributes="color"
     on-click="{{clickAction}}"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
     on-keydown="{{keyDownAction}}"
     >
 <template>
 <link rel="stylesheet" href="color.css">
 
-<div id="focus">
+<div id="focus"
+    on-focus="{{focusAction}}"
+    on-focusout="{{focusoutAction}}"
+    >
     <div class="preview-rgb-bg">
         <div id="previewRGB" class="preview-rgb"></div>
         <i id="iconDown" class="fa fa-caret-down"></i>
