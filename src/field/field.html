@@ -2,9 +2,13 @@
     name="fire-ui-field" 
     constructor="FireField"
     attributes="value name type enumType enumList textMode"
+    on-focus="{{focusinAction}}"
+    on-focusout="{{focusoutAction}}"
+    on-mousedown="{{mousedownAction}}"
     >
 <template>
 <link rel="stylesheet" href="field.css">
+
 <fire-ui-label 
     id="label" 
     class="flex-1"

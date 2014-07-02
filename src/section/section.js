@@ -1,10 +1,14 @@
 (function () {
-    Polymer('fire-ui-checkbox', {
-        focused: false,
-        value: false,
+    Polymer('fire-ui-section', {
+        title: '',
+        folded: false,
 
-        ready: function () {
-            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
+        ready: function() {
+            this.$.title.tabIndex = FIRE.getParentTabIndex(this)+1;
+        },
+
+        clickAction: function () {
+            this.folded = !this.folded;
         },
 
         focusAction: function (event) {
@@ -21,15 +25,6 @@
 
             this.focused = false;
             this.classList.toggle('focused', this.focused);
-        },
-
-        clickAction: function (event) {
-            this.value = !this.value;
-            event.stopPropagation();
-        },
-
-        checkedChanged: function() {
-            this.fire('change');
         },
     });
 })();

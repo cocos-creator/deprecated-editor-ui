@@ -30,47 +30,65 @@ span.space {
 <body>
 
 <template id="my-template" is="auto-binding">
+    <span class="space" style="height: 20px"></span>                                                       
 
-    <div class="flex-row">
-        <fire-ui-checkbox checked="{{myChecked}}"></fire-ui-checkbox>                                              
+    <fire-ui-section title="Change Section">
+        <div class="flex-row">
+            <fire-ui-checkbox value="{{myChecked}}"></fire-ui-checkbox>                                              
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button> 
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myChecked = {{myChecked}}</fire-ui-label>
+        </div>
         <span class="space"></span>                                                                            
-        <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button> 
+
+        <div class="flex-row">
+            <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>                   
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myPixelClick}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myPixel = {{myPixel}}</fire-ui-label>
+        </div>
         <span class="space"></span>                                                                            
-        <fire-ui-label>myChecked = {{myChecked}}</fire-ui-label>
-    </div>
-    <span class="space"></span>                                                                            
 
-    <div class="flex-row">
-        <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>                   
+        <div class="flex-row">
+            <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myTextClick}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myText = {{myText}}</fire-ui-label>
+        </div>
         <span class="space"></span>                                                                            
-        <fire-ui-button on-click="{{myPixelClick}}">Change</fire-ui-button>
+
+        <div class="flex-row">
+            <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>                         
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>mySelect = {{mySelect}}</fire-ui-label>
+        </div>
         <span class="space"></span>                                                                            
-        <fire-ui-label>myPixel = {{myPixel}}</fire-ui-label>
-    </div>
-    <span class="space"></span>                                                                            
 
-    <fire-ui-button on-click="{{myFloatClick}}">Change</fire-ui-button> myFloat = {{myFloat}} <br/>                                                                                                    
-    <span class="space"></span>                                                                                                                                                        
+        <div class="flex-row">
+            <fire-ui-color value="{{myColor}}"></fire-ui-color>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myColorClick}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myColor = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}})</fire-ui-label>
+        </div>
+        <span class="space"></span>
 
-    <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button> mySelect = {{mySelect}} <br/>                                                                                                 
-    <span class="space"></span>                                                                                                                                                        
+    </fire-ui-section>
 
-    <fire-ui-button on-click="{{myColorClick}}">Change</fire-ui-button> mySelect = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}} ) <br/>
-    <span class="space"></span>                                                                                                                                                        
+    <span class="space" style="height: 20px"></span>                                                       
 
-    <span class="space" style="height: 20px"></span>                                                                                                                                   
-
-    <fire-ui-unit-input value="{{myFloat}}" unit="cm" type="float" precision="2"></fire-ui-unit-input>                                                                                 
-    <span class="space"></span>                                                                                                                                                        
-
-    <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>                                                                                                  
-    <span class="space"></span>                                                                                                                                                        
-
-    <fire-ui-color color="{{myColor}}"></fire-ui-color>                                                                                                                                
-    <span class="space"></span>                                                                                                                                                        
-
-    <fire-ui-field value="{{myChecked}}"></fire-ui-field>                                                                                                                                
-    <fire-ui-field value="{{myPixel}}" type="int"></fire-ui-field>                                                                                                                                
+    <fire-ui-section title="Field Section">
+        <fire-ui-field value="{{myChecked}}"></fire-ui-field>                                                                                                                                
+        <fire-ui-field value="{{myPixel}}" type="int"></fire-ui-field>                                                                                                                                
+        <fire-ui-field value="{{myText}}"></fire-ui-field>                                                             
+        <fire-ui-field value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-field>                                                             
+        <fire-ui-field value="{{myColor}}"></fire-ui-field>                                                                                                                                
+    </fire-ui-section>
 </template>
 
 <script>
@@ -82,11 +100,13 @@ span.space {
     }
 
     model = {
+        // myChecked
         myChecked: false,
         myCheckedClick: function () {
             this.myChecked = !this.myChecked;
         },
 
+        // myPixel
         myPixel: 20,
         myPixelClick: function () {
             this.myPixel = rangeRandomInt(-1000, 1000);
@@ -94,34 +114,41 @@ span.space {
         myPixelMin: 0,
         myPixelMax: 30,
 
-        myFloat: 7.28,
-        myFloatClick: function () {
-            this.myFloat = rangeRandom(-10.0, 10.0);
+        // myText
+        myText: "Hello World",
+        myTextClick: function () {
+            var textList = [
+                "Hello World",
+                "FooBar",
+                "I'm Johnny Wu!",
+                "Who are you?"
+            ];
+            this.myText = textList[rangeRandomInt(0, textList.length-1)];
         },
 
         mySelect: 3, 
         mySelectList: [
-        { name: '64',   value: 0 },
-        { name: '128',  value: 1 },
-        { name: '256',  value: 2 },
-        { name: '512',  value: 3 },
-        { name: '1024', value: 4 },
-        { name: '2048', value: 5 },
-        { name: '4096', value: 6 },
-        ],
+            { name: 'Hello',   value: 0 },
+            { name: 'Foo',  value: 1 },
+            { name: 'Bar',  value: 2 },
+            { name: 'Johnny',  value: 3 },
+            { name: 'Test Math', value: 4 },
+            { name: 'Foo Bar', value: 5 },
+            { name: 'This is the world', value: 6 },
+            ],
         mySelectClick: function () {
             this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
         },
 
-        myColor: new FIRE.Color( 1.0, 0.0, 0.0, 0.5 ), 
+        myColor: new FIRE.Color( 1.0, 0.0, 0.0, 1.0 ), 
         myColorClick: function () {
             this.myColor.r = rangeRandom( 0.0, 1.0 );
             this.myColor.g = rangeRandom( 0.0, 1.0 );
             this.myColor.b = rangeRandom( 0.0, 1.0 );
             this.myColor.a = rangeRandom( 0.0, 1.0 );
         },
-        toFixed: function ( val, fixed ) {
-            return val.toFixed(fixed);
+        toFixed: function ( val ) {
+            return val.toFixed(2);
         },
     };
     var tmpl = document.querySelector('#my-template');

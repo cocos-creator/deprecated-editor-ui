@@ -1,0 +1,23 @@
+<polymer-element 
+    name="fire-ui-section" 
+    constructor="FireSection"
+    attributes="title"
+    >
+<template>
+<link rel="stylesheet" href="section.css">
+
+<div id="title" 
+    class="title"
+    on-click="{{clickAction}}"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    >
+    <i id="icon" class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>
+    {{title}}
+</div>
+<div id="body" class="body {{folded ? 'hide':''}}"><content/></div>
+
+</template>
+
+<script type="text/javascript" src="section.js"></script>
+</polymer-element>

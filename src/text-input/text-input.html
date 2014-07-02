@@ -1,0 +1,24 @@
+<polymer-element 
+    name="fire-ui-text-input" 
+    constructor="FireTextInput"
+    attributes="value"
+    >
+<template>
+<link rel="stylesheet" href="text-input.css">
+
+<input id="input" 
+    class="input" 
+    type="text" 
+    placeholder=""
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-input="{{inputAction}}"
+    on-click="{{inputClickAction}}"
+    on-keydown="{{inputKeyDownAction}}"
+    >
+</input>
+
+</template>
+
+<script type="text/javascript" src="text-input.js"></script>
+</polymer-element>

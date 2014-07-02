@@ -1,7 +1,7 @@
 <polymer-element 
     name="fire-ui-checkbox" 
     constructor="FireCheckbox"
-    attributes="checked"
+    attributes="value"
     >
 <template>
 <link rel="stylesheet" href="checkbox.css">
@@ -11,7 +11,7 @@
     on-click="{{clickAction}}"
     >
     <div class="box">
-        <i class="fa fa-check {{checked ? '':'hide'}}"></i>
+        <i class="fa fa-check {{value ? '':'hide'}}"></i>
     </div>
 </div>
 </template>

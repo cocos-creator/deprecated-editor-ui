@@ -2,7 +2,7 @@
     Polymer('fire-ui-color', {
         showPicker: false,
         focused: false,
-        color: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+        value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
 
         ready: function() {
             this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
@@ -10,18 +10,18 @@
         },
 
         observe: {
-            'color.r': '_updateColor',
-            'color.g': '_updateColor',
-            'color.b': '_updateColor',
-            'color.a': '_updateAlpha',
+            'value.r': '_updateColor',
+            'value.g': '_updateColor',
+            'value.b': '_updateColor',
+            'value.a': '_updateAlpha',
         },
 
         _updateColor: function () {
-            this.$.previewRGB.style.backgroundColor = this.color.toCSS('rgb');
+            this.$.previewRGB.style.backgroundColor = this.value.toCSS('rgb');
         },
 
         _updateAlpha: function () {
-            this.$.previewA.style.width = Math.floor(this.color.a * 100)+'%';
+            this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
         },
 
         clickAction: function () {
@@ -88,7 +88,7 @@
 
             if ( this._colorPicker === null ) {
                 this._colorPicker = new FireColorPicker();
-                this._colorPicker.color = this.color;
+                this._colorPicker.value = this.value;
                 this.$.border.appendChild(this._colorPicker);
             }
         },

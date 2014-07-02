@@ -1,0 +1,50 @@
+:host {
+    .title {
+        font-family: Arial
+        padding: 8px
+        font-size: 10px
+        font-weight: 700
+        border-top: 1px solid #3a3a3a
+        border-left: 1px solid #1f1f1f
+        border-right: 1px solid #1f1f1f
+
+        text-transform: uppercase
+        text-shadow: 0 -1px 0 #000
+        background: #242424
+        color: #b1b1b1
+        cursor: pointer 
+
+        i {
+            width: 10px
+        }
+
+        &:focus {
+            outline: none
+        }
+    }
+
+    &(.focused) .title {
+        color: #00a6ff
+    }
+
+    .body {
+        duration = .2s
+
+        display: block
+        position: relative
+        background-color: #333
+        padding: 8px
+        min-height: 50px
+        border: 1px solid #1f1f1f
+
+        opacity: 1.0
+
+        transition: opacity duration ease
+
+        &.hide {
+            display: none
+            opacity: 0.0
+            transition: display 0s ease duration, opacity duration ease
+        }
+    }
+}
