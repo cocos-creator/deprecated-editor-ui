@@ -1,0 +1,23 @@
+<polymer-element 
+    name="fire-ui-text-area" 
+    constructor="FireTextArea"
+    attributes="value"
+    >
+<template>
+<link rel="stylesheet" href="text-area.css">
+
+<textarea id="inputArea"
+    class="area input-area"
+    placeholder=""
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-input="{{inputAction}}"
+    on-click="{{inputClickAction}}"
+    on-keydown="{{inputKeyDownAction}}"
+    >
+</textarea>
+
+</template>
+
+<script type="text/javascript" src="text-area.js"></script>
+</polymer-element>

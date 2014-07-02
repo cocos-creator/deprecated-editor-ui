@@ -30,35 +30,30 @@
                             this.finalEnumList = this.enumList.slice(0);
                         }
                         fieldEL = new FireSelect(); 
-                        fieldEL.bind( 'value',  new PathObserver(this,'value') );
                         fieldEL.options = this.finalEnumList;
                     }
                     else if ( this.type === 'int' ) {
                         fieldEL = new FireUnitInput();
-                        fieldEL.bind( 'value',  new PathObserver(this,'value') );
                         fieldEL.type = 'int';
                     }
                     else if ( this.type === 'float' ) {
                         fieldEL = new FireUnitInput();
-                        fieldEL.bind( 'value',  new PathObserver(this,'value') );
                         fieldEL.type = 'float';
                     }
                     break;
 
                 case "boolean":
                     fieldEL = new FireCheckbox();
-                    fieldEL.bind( 'value',  new PathObserver(this,'value') );
                     break;
 
                 case "string":
                     if ( this.textMode === 'single' ) {
                         fieldEL = new FireTextInput();
-                        fieldEL.bind( 'value', new PathObserver(this,'value') );
                     }
-                    // else if ( this.textMode === 'multi' ) {
-                    //     labelEL = compileLabelEL(this,'flex-1 flex-align-self-start');
-                    //     fieldEL = $compile( "<fire-ui-text-area class='flex-2' fi-bind='bind'></fire-ui-text-area>" )( this );
-                    // }
+                    else if ( this.textMode === 'multi' ) {
+                        this.$.label.classList.add('flex-align-self-start');
+                        fieldEL = new FireTextArea();
+                    }
                     break;
 
                 case "object":
@@ -70,21 +65,26 @@
                         switch ( className ) {
                             case "FIRE.Color":
                                 fieldEL = new FireColor();
-                                fieldEL.bind( 'value', new PathObserver(this,'value') );
                                 break;
 
-                            // case "FIRE.Vec2":
-                            //     labelEL = compileLabelEL(this,'flex-1');
-                            //     fieldEL = $compile( "<fire-ui-vec2 class='flex-2' fi-bind='bind'></fire-ui-vec2>" )( this );
-                            //     break;
+                            case "FIRE.Vec2":
+                                fieldEL = new FireVec2();
+                                break;
                         }
                     }
                     break;
             }
 
+            if ( fieldEL === null ) {
+                console.Error("Failed to create field " + this.name );
+                return;
+            }
+
             fieldEL.classList.add('flex-2');
+            fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.id = "field";
-            this.shadowRoot.appendChild(fieldEL);
+            // this.shadowRoot.appendChild(fieldEL);
+            this.$.focus.appendChild(fieldEL);
             this.$.field = fieldEL;
         },
 
@@ -109,12 +109,10 @@
         },
 
         mousedownAction: function ( event ) {
-            if ( this !== event.target &&
-                 this.$.label !== event.target &&
-                 FIRE.find( this.$.label.shadowRoot, event.target ) === false )
-            {
+            if ( this.$.focus !== event.target &&
+                 this.$.label !== event.target && 
+                 FIRE.find(this.$.label, event.target) === false )
                 return;
-            }
 
             var focusableEL = FIRE.getFirstFocusableChild(this.$.field.shadowRoot);
             if ( focusableEL ) {

@@ -1,8 +1,7 @@
 (function () {
-    Polymer('fire-ui-text-input', {
+    Polymer('fire-ui-text-area', {
         focused: false,
         value: '',
-        // multiline: false,
 
         ready: function() {
             this.$.inputArea.tabIndex = FIRE.getParentTabIndex(this)+1;
@@ -10,9 +9,7 @@
 
         valueChanged: function () {
             this.$.inputArea.value = this.value;
-            // if ( this.multiline ) {
-            //     this._adjust();
-            // }
+            this._adjust();
         },
 
         _adjust: function () {
@@ -58,30 +55,14 @@
         },
 
         inputKeyDownAction: function (event) {
-            // if ( this.multiline ) {
-            //     switch ( event.which ) {
-            //         // NOTE: enter will be used as new-line, ESC here will be confirm behavior
-            //         // NOTE: textarea already have ctrl-z undo behavior
-            //         // esc
-            //         case 27:
-            //             this.blur(); 
-            //         return false;
-            //     }
-            // }
-            // else {
-                switch ( event.which ) {
-                    // enter
-                    case 13:
-                        this.blur();
-                    break;
-
-                    // esc
-                    case 27:
-                        this.value = this.lastVal;
-                        this.blur();
-                    break;
-                }
-            // }
+            switch ( event.which ) {
+                // NOTE: enter will be used as new-line, ESC here will be confirm behavior
+                // NOTE: textarea already have ctrl-z undo behavior
+                // esc
+                case 27:
+                    this.blur(); 
+                return false;
+            }
             event.stopPropagation();
         },
     });

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Test GUI</title>
+<title>Fire UI - Polymer</title>
 <link rel="stylesheet" href="ext/fontawesome/css/font-awesome.css">
 <link rel="stylesheet" href="bin/common.css">
 <link rel="stylesheet" href="bin/deep.css">
@@ -30,7 +30,7 @@ span.space {
 <body>
 
 <template id="my-template" is="auto-binding">
-    <span class="space" style="height: 20px"></span>                                                       
+    <h2 style="text-align: center; color: #ccc; font-family: Arial">Fire UI - Polymer</h2>
 
     <fire-ui-section title="Change Section">
         <div class="flex-row">
@@ -52,7 +52,7 @@ span.space {
         <span class="space"></span>                                                                            
 
         <div class="flex-row">
-            <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>                                                      
+            <fire-ui-text-input id="aaa" value="{{myText}}"></fire-ui-text-input>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myTextClick}}">Change</fire-ui-button>
             <span class="space"></span>                                                                            
@@ -78,6 +78,29 @@ span.space {
         </div>
         <span class="space"></span>
 
+        <div class="flex-row">
+            <fire-ui-vec2 value="{{myVec2}}"></fire-ui-vec2>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myVec2Click}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myVec2 = ( {{myVec2.x|toFixed(2)}}, {{myVec2.y|toFixed(2)}} )</fire-ui-label>
+        </div>
+        <span class="space"></span>                                                                            
+
+        <div class="flex-row">                                                                                                                 
+            <fire-ui-text-area class="flex-3" value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
+            <span class="space"></span>                                                                                                        
+            <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>                                                                 
+            <span class="space"></span>                                                                                                        
+            <div class="flex-1">
+                <fire-ui-label>myMultiText = </fire-ui-label>                                                                                 
+                <pre style="font-size: 10px; white-space: pre-line; font-family: Arial;">
+                    {{myMultiText}}
+                </pre>
+            </div>
+        </div>                                                                                                                                 
+        <span class="space"></span>                                                                                                            
+
     </fire-ui-section>
 
     <span class="space" style="height: 20px"></span>                                                       
@@ -88,6 +111,8 @@ span.space {
         <fire-ui-field value="{{myText}}"></fire-ui-field>                                                             
         <fire-ui-field value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-field>                                                             
         <fire-ui-field value="{{myColor}}"></fire-ui-field>                                                                                                                                
+        <fire-ui-field value="{{myVec2}}"></fire-ui-field>                                                                                                                                
+        <fire-ui-field value="{{myMultiText}}" textMode="multi"></fire-ui-field>                                                             
     </fire-ui-section>
 </template>
 
@@ -124,8 +149,22 @@ span.space {
                 "Who are you?"
             ];
             this.myText = textList[rangeRandomInt(0, textList.length-1)];
+            this.$.aaa.multiline = !this.$.aaa.multiline;
         },
 
+        // myMultiText
+        myMultiText: "Hello World\nHello World FooBar\nHello World I'm Johnny Wu\nCool!",
+        myMultiTextClick: function () {
+            var textList = [
+                "Hello World\nHello World\nHello World",
+                "FooBar\nFooBar",
+                "I'm Johnny Wu!\nI'm Johnny Wu\nI'm Johnny Wu\nI'm Johnny Wu",
+                "Who are you?\nWho are you"
+            ];
+            this.myMultiText = textList[rangeRandomInt(0, textList.length-1)];
+        },
+
+        // mySelect
         mySelect: 3, 
         mySelectList: [
             { name: 'Hello',   value: 0 },
@@ -140,6 +179,7 @@ span.space {
             this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
         },
 
+        // myColor
         myColor: new FIRE.Color( 1.0, 0.0, 0.0, 1.0 ), 
         myColorClick: function () {
             this.myColor.r = rangeRandom( 0.0, 1.0 );
@@ -147,8 +187,15 @@ span.space {
             this.myColor.b = rangeRandom( 0.0, 1.0 );
             this.myColor.a = rangeRandom( 0.0, 1.0 );
         },
-        toFixed: function ( val ) {
-            return val.toFixed(2);
+        toFixed: function ( val, precision ) {
+            return val.toFixed(precision);
+        },
+
+        // myVec2
+        myVec2: new FIRE.Vec2( 1.0, 1.0 ),
+        myVec2Click: function () {
+            this.myVec2.x = rangeRandom( 0.0, 1.0 );
+            this.myVec2.y = rangeRandom( 0.0, 1.0 );
         },
     };
     var tmpl = document.querySelector('#my-template');

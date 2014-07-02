@@ -1,0 +1,18 @@
+<polymer-element 
+    name="fire-ui-vec2" 
+    constructor="FireVec2"
+    attributes="value"
+    >
+<template>
+<link rel="stylesheet" href="vec2.css">
+
+<div class="flex-1 flex-row">
+    <fire-ui-unit-input class="flex-1" value="{{value.x}}" type="float" unit="x"></fire-ui-unit-input>
+    <span class="space"></span>                                     
+    <fire-ui-unit-input class="flex-1" value="{{value.y}}" type="float" unit="y"></fire-ui-unit-input>
+</div>
+
+</template>
+
+<script type="text/javascript" src="vec2.js"></script>
+</polymer-element>

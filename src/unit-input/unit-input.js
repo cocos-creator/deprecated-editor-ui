@@ -66,6 +66,7 @@
 
             var val = this._convert(this.$.input.value);
             this.value = val;
+            // NOTE: we set the input.value because this.value may not changed after invalid inputs
             this.$.input.value = val;
 
             this.focused = false;
@@ -102,7 +103,9 @@
 
                 // esc
                 case 27:
+                    // NOTE: we set the input.value because value depends on _convert(input.value)
                     this.$.input.value = this.lastVal;
+                    this.value = this.lastVal;
                     this.blur();
                 break;
             }
