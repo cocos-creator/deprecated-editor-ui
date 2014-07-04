@@ -7,8 +7,9 @@
             this.$.title.tabIndex = FIRE.getParentTabIndex(this)+1;
         },
 
-        clickAction: function () {
+        clickAction: function (event) {
             this.folded = !this.folded;
+            event.stopPropagation();
         },
 
         focusAction: function (event) {
