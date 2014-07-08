@@ -22,7 +22,7 @@
             switch ( typename ) {
                 case "number":
                     if ( this.type === 'enum' ) {
-                        if ( this.enumType !== '' ) {
+                        if ( this.enumType !== null ) {
                             var enumTypeDef = FIRE.getVarFrom(window,this.enumType);
                             this.finalEnumList = FIRE.getEnumList(enumTypeDef);
                         }

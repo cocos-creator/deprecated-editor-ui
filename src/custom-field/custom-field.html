@@ -1,0 +1,29 @@
+<polymer-element 
+    name="fire-ui-custom-field" 
+    constructor="FireField"
+    attributes="name"
+    >
+<template>
+<link rel="stylesheet" href="custom-field.css">
+
+<div id="focus"
+    on-focusin="{{focusinAction}}"
+    on-focusout="{{focusoutAction}}"
+    on-mousedown="{{mousedownAction}}"
+    >
+    <fire-ui-label 
+        id="label" 
+        class="flex-1"
+        >
+    {{name}}
+    </fire-ui-label>
+    <span class="space"></span>
+    <div id="field" class="flex-row flex-2">
+        <content/>
+    </div>
+</div>
+
+</template>
+
+<script type="text/javascript" src="custom-field.js"></script>
+</polymer-element>
