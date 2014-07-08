@@ -18,12 +18,13 @@
             // do dom transform
             var typename = typeof this.value;
             var fieldEL = null;
+            var enumTypeDef = null;
 
             switch ( typename ) {
                 case "number":
                     if ( this.type === 'enum' ) {
                         if ( this.enumType !== null ) {
-                            var enumTypeDef = FIRE.getVarFrom(window,this.enumType);
+                            enumTypeDef = FIRE.getVarFrom(window,this.enumType);
                             this.finalEnumList = FIRE.getEnumList(enumTypeDef);
                         }
                         else {
@@ -42,18 +43,29 @@
                     }
                     break;
 
-                case "boolean":
-                    fieldEL = new FireCheckbox();
-                    break;
-
                 case "string":
-                    if ( this.textMode === 'single' ) {
+                    if ( this.type === 'enum' ) {
+                        if ( this.enumType !== null ) {
+                            enumTypeDef = FIRE.getVarFrom(window,this.enumType);
+                            this.finalEnumList = FIRE.getEnumList(enumTypeDef);
+                        }
+                        else {
+                            this.finalEnumList = this.enumList.slice(0);
+                        }
+                        fieldEL = new FireSelect(); 
+                        fieldEL.options = this.finalEnumList;
+                    }
+                    else if ( this.textMode === 'single' ) {
                         fieldEL = new FireTextInput();
                     }
                     else if ( this.textMode === 'multi' ) {
                         this.$.label.classList.add('flex-align-self-start');
                         fieldEL = new FireTextArea();
                     }
+                    break;
+
+                case "boolean":
+                    fieldEL = new FireCheckbox();
                     break;
 
                 case "object":
