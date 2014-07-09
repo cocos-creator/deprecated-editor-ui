@@ -28,10 +28,14 @@
                             this.finalEnumList = FIRE.getEnumList(enumTypeDef);
                         }
                         else {
-                            this.finalEnumList = this.enumList.slice(0);
+                            if ( this.enumList !== null ) {
+                                this.finalEnumList = this.enumList.slice(0);
+                            }
                         }
-                        fieldEL = new FireSelect(); 
-                        fieldEL.options = this.finalEnumList;
+                        if ( this.finalEnumList ) {
+                            fieldEL = new FireSelect(); 
+                            fieldEL.options = this.finalEnumList;
+                        }
                     }
                     else if ( this.type === 'int' ) {
                         fieldEL = new FireUnitInput();
@@ -50,10 +54,14 @@
                             this.finalEnumList = FIRE.getEnumList(enumTypeDef);
                         }
                         else {
-                            this.finalEnumList = this.enumList.slice(0);
+                            if ( this.enumList !== null ) {
+                                this.finalEnumList = this.enumList.slice(0);
+                            }
                         }
-                        fieldEL = new FireSelect(); 
-                        fieldEL.options = this.finalEnumList;
+                        if ( this.finalEnumList ) {
+                            fieldEL = new FireSelect(); 
+                            fieldEL.options = this.finalEnumList;
+                        }
                     }
                     else if ( this.textMode === 'single' ) {
                         fieldEL = new FireTextInput();
