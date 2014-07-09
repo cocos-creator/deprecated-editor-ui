@@ -18,7 +18,7 @@ var paths = {
 
 // clean
 gulp.task('clean', function() {
-    return gulp.src('bin/**/*', {read: false})
+    return gulp.src('bin/', {read: false})
     .pipe(clean())
     ;
 });
@@ -49,7 +49,7 @@ gulp.task('js', function() {
     .pipe(gulp.dest('bin'))
     ;
 });
-gulp.task('js-dev', function() {
+gulp.task('js-no-uglify', function() {
     return gulp.src(paths.js, {base: 'src'})
     .pipe(gulp.dest('bin'))
     ;
@@ -67,11 +67,22 @@ gulp.task('css', function() {
 });
 
 // html
-gulp.task('build-html', ['cp-html'], function() {
+gulp.task('build-html', ['cp-html', 'css', 'js-no-uglify'], function() {
     return gulp.src('bin/all.html')
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
+        strip: true,
+    }))
+    .pipe(gulp.dest('bin'))
+    ;
+});
+gulp.task('build-html-dev', ['cp-html', 'css', 'js-no-uglify'], function() {
+    return gulp.src('bin/all.html')
+    .pipe(vulcanize({
+        dest: 'bin',
+        inline: true,
+        strip: false,
     }))
     .pipe(gulp.dest('bin'))
     ;
@@ -81,10 +92,11 @@ gulp.task('build-html', ['cp-html'], function() {
 gulp.task('watch', function() {
     gulp.watch(paths.ext_core, ['cp-core']).on( 'error', gutil.log );
     gulp.watch(paths.img, ['cp-img']).on ( 'error', gutil.log );
-    gulp.watch(paths.js, ['js-dev', 'build-html']).on( 'error', gutil.log );
-    gulp.watch(paths.css, ['css', 'build-html']).on( 'error', gutil.log );
-    gulp.watch(paths.html, ['build-html']).on( 'error', gutil.log );
+    gulp.watch(paths.js, ['js-dev', 'build-html-dev']).on( 'error', gutil.log );
+    gulp.watch(paths.css, ['css', 'build-html-dev']).on( 'error', gutil.log );
+    gulp.watch(paths.html, ['build-html-dev']).on( 'error', gutil.log );
 });
 
 // tasks
-gulp.task('default', [ 'cp-core', 'cp-img', 'js', 'css', 'build-html'] );
+gulp.task('default', [ 'cp-core', 'cp-img', 'build-html'] );
+gulp.task('dev', [ 'cp-core', 'cp-img', 'build-html-dev'] );
