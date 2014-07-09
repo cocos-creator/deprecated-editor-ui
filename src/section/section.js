@@ -1,7 +1,6 @@
 (function () {
     Polymer('fire-ui-section', {
         created: function () {
-            this.title = '';
             this.folded = false;
         },
 
