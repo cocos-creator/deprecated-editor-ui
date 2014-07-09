@@ -1,8 +1,10 @@
 (function () {
     Polymer('fire-ui-text-input', {
-        focused: false,
-        value: '',
-        // multiline: false,
+        created: function () {
+            this.focused = false;
+            this.value = '';
+            // this.multiline = false;
+        },
 
         ready: function() {
             this.$.inputArea.tabIndex = FIRE.getParentTabIndex(this)+1;

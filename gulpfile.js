@@ -92,7 +92,7 @@ gulp.task('build-html-dev', ['cp-html', 'css', 'js-no-uglify'], function() {
 gulp.task('watch', function() {
     gulp.watch(paths.ext_core, ['cp-core']).on( 'error', gutil.log );
     gulp.watch(paths.img, ['cp-img']).on ( 'error', gutil.log );
-    gulp.watch(paths.js, ['js-dev', 'build-html-dev']).on( 'error', gutil.log );
+    gulp.watch(paths.js, ['js-no-uglify', 'build-html-dev']).on( 'error', gutil.log );
     gulp.watch(paths.css, ['css', 'build-html-dev']).on( 'error', gutil.log );
     gulp.watch(paths.html, ['build-html-dev']).on( 'error', gutil.log );
 });

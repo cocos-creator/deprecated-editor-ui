@@ -1,7 +1,9 @@
 (function () {
     Polymer('fire-ui-custom-field', {
-        focused: false,
-        name: '',
+        created: function () {
+            this.focused = false;
+            this.name = '';
+        },
 
         ready: function () {
             if ( this.name === '' ) {

@@ -1,6 +1,8 @@
 (function () {
     Polymer('fire-ui-button', {
-        focused: false,
+        created: function () {
+            this.focused = false;
+        },
 
         ready: function () {
             this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;

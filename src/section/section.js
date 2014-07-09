@@ -1,7 +1,9 @@
 (function () {
     Polymer('fire-ui-section', {
-        title: '',
-        folded: false,
+        created: function () {
+            this.title = '';
+            this.folded = false;
+        },
 
         ready: function() {
             this.$.title.tabIndex = FIRE.getParentTabIndex(this)+1;

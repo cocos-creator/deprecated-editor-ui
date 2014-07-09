@@ -1,10 +1,12 @@
 (function () {
     Polymer('fire-ui-select', {
-        focused: false,
-        showMenu: false,
-
         observe: {
             value: 'updateValueName',
+        },
+
+        created: function () {
+            this.focused = false;
+            this.showMenu = false;
         },
 
         ready: function () {

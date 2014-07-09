@@ -1,8 +1,10 @@
 (function () {
     Polymer('fire-ui-color', {
-        showPicker: false,
-        focused: false,
-        value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+        created: function () {
+            this.showPicker = false;
+            this.focused = false;
+            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
+        },
 
         ready: function() {
             this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;

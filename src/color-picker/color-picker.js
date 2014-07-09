@@ -1,6 +1,8 @@
 (function () {
     Polymer('fire-ui-color-picker', {
-        value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+        created: function () {
+            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
+        },
 
         ready: function() {
             this.hsv = this.value.toHSV();

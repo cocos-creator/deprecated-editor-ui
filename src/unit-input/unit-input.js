@@ -1,10 +1,12 @@
 (function () {
     Polymer('fire-ui-unit-input', {
-        focused: false,
-        type: 'int',
-        unit: '',
-        precision: '2',
-        value: '',
+        created: function () {
+            this.focused = false;
+            this.type = 'int';
+            this.unit = '';
+            this.precision = '2';
+            this.value = '';
+        },
 
         ready: function() {
             // this.tabIndex = FIRE.getParentTabIndex(this)+1;

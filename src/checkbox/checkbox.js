@@ -1,7 +1,9 @@
 (function () {
     Polymer('fire-ui-checkbox', {
-        focused: false,
-        value: false,
+        created: function () {
+            this.focused = false;
+            this.value = false;
+        },
 
         ready: function () {
             this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
