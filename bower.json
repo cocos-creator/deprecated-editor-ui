@@ -1,11 +1,11 @@
 {
-    "name": "atlas-editor",
+    "name": "fire-ui-polymer",
     "version": "0.0.1",
-    "homepage": "https://github.com/fireball-x/atlas-editor",
+    "homepage": "https://github.com/fireball-x/editor-ui-polymer",
     "authors": [
         "Johnny Wu <KarasAya@gmail.com>"
     ],
-    "description": "Atlas Editor",
+    "description": "Fire UI - Polymer",
     "license": "MIT",
     "private": true,
     "ignore": [
