@@ -52,7 +52,7 @@ span.space {
         <span class="space"></span>                                                                            
 
         <div class="flex-row">
-            <fire-ui-text-input id="aaa" value="{{myText}}"></fire-ui-text-input>                                                      
+            <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myTextClick}}">Change</fire-ui-button>
             <span class="space"></span>                                                                            
@@ -149,7 +149,6 @@ span.space {
                 "Who are you?"
             ];
             this.myText = textList[rangeRandomInt(0, textList.length-1)];
-            this.$.aaa.multiline = !this.$.aaa.multiline;
         },
 
         // myMultiText
