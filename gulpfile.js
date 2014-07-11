@@ -31,7 +31,7 @@ gulp.task('cp-core', function() {
 });
 gulp.task('cp-img', function() {
     return gulp.src(paths.img)
-    .pipe(gulp.dest('bin'))
+    .pipe(gulp.dest('bin/img'))
     ;
 });
 gulp.task('cp-html', function() {
