@@ -1,9 +1,17 @@
 (function () {
     Polymer('fire-ui-color', {
+        publish: {
+            value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+        },
+
+        observe: {
+            'value.r value.g value.b': '_updateColor',
+            'value.a': '_updateAlpha',
+        },
+
         created: function () {
             this.showPicker = false;
             this.focused = false;
-            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
         },
 
         ready: function() {
@@ -11,19 +19,14 @@
             this._updateColor();
         },
 
-        observe: {
-            'value.r': '_updateColor',
-            'value.g': '_updateColor',
-            'value.b': '_updateColor',
-            'value.a': '_updateAlpha',
-        },
-
         _updateColor: function () {
-            this.$.previewRGB.style.backgroundColor = this.value.toCSS('rgb');
+            if ( this.value !== null )
+                this.$.previewRGB.style.backgroundColor = this.value.toCSS('rgb');
         },
 
         _updateAlpha: function () {
-            this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
+            if ( this.value !== null )
+                this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
         },
 
         clickAction: function () {

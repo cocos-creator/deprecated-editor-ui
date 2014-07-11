@@ -1,5 +1,14 @@
 (function () {
     Polymer('fire-ui-color-picker', {
+        publish: {
+            value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+        },
+
+        observe: {
+            'value.r value.g value.b': 'colorChanged', 
+            'value.a': '_updateColor', 
+        },
+
         created: function () {
             this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
         },
@@ -8,13 +17,6 @@
             this.hsv = this.value.toHSV();
             this._editingHSV = false;
             this._updateColor();
-        },
-
-        observe: {
-            'value.r': 'colorChanged', 
-            'value.g': 'colorChanged', 
-            'value.b': 'colorChanged', 
-            'value.a': '_updateColor', 
         },
 
         colorChanged: function ( oldValue, newValue ) {

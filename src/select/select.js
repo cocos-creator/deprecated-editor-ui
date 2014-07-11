@@ -1,5 +1,10 @@
 (function () {
     Polymer('fire-ui-select', {
+        publish: {
+            value: -1,
+            options: null, 
+        },
+
         observe: {
             value: 'updateValueName',
         },
@@ -56,6 +61,9 @@
         },
 
         updateValueName: function () {
+            if ( this.value == -1 )
+                return;
+
             for ( var i = 0; i < this.options.length; ++i ) {
                 var entry = this.options[i];
                 if ( entry.value === this.value ) {

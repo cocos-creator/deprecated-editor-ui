@@ -1,13 +1,16 @@
 (function () {
     Polymer('fire-ui-field', {
+        publish: {
+            name: '',
+            value: null,
+            type: '',
+            enumType: null,
+            enumList: null,
+            textMode: 'single',
+        },
+
         created: function () {
             this.focused = false;
-            this.name = '';
-            this.textMode = 'single';
-            this.type = '';
-            this.value = null;
-            this.enumType = null;
-            this.enumList = null;
         },
 
         attached: function () {

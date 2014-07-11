@@ -1,8 +1,11 @@
 (function () {
     Polymer('fire-ui-text-area', {
+        publish: {
+            value: '',
+        },
+
         created: function () {
             this.focused = false;
-            this.value = '';
         },
 
         ready: function() {

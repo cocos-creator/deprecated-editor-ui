@@ -1,5 +1,9 @@
 (function () {
     Polymer('fire-ui-section', {
+        publish: {
+            title: '',
+        },
+
         created: function () {
             this.folded = false;
         },

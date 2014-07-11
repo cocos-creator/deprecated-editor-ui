@@ -1,8 +1,11 @@
 (function () {
     Polymer('fire-ui-custom-field', {
+        publish: {
+            name: '',
+        },
+
         created: function () {
             this.focused = false;
-            this.name = '';
         },
 
         attached: function () {

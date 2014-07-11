@@ -1,8 +1,11 @@
 (function () {
     Polymer('fire-ui-checkbox', {
+        publish: {
+            value: false,
+        },
+
         created: function () {
             this.focused = false;
-            this.value = false;
         },
 
         ready: function () {

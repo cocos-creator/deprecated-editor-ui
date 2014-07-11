@@ -1,29 +1,34 @@
 (function () {
     Polymer('fire-ui-unit-input', {
+        publish: {
+            value: 0,
+            unit: '',
+            type: 'int', // int, float
+            precision: 2,
+            interval: null,
+            min: null,
+            max: null,
+        },
+
         created: function () {
             this.focused = false;
-            this.type = 'int';
-            this.unit = '';
-            this.precision = '2';
-            this.value = '';
         },
 
         ready: function() {
             // this.tabIndex = FIRE.getParentTabIndex(this)+1;
             this.$.input.tabIndex = FIRE.getParentTabIndex(this)+1;
-            this._precision = parseInt(this.precision);
 
             switch ( this.type ) {
                 case 'int': 
                     this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
                     this._max = (this.max!==null) ? parseInt(this.max) : Number.POSITIVE_INFINITY;
-                    this._interval = (this.interval!==null) ? parseInt(this.interval) : 1;
+                    this._interval = (this.interval!==null) ? this.interval : 1;
                     break;
 
                 case 'float':
                     this._min = (this.min!==null) ? parseFloat(this.min) : -Number.MAX_VALUE;
                     this._max = (this.max!==null) ? parseFloat(this.max) : Number.MAX_VALUE;
-                    this._interval = (this.interval!==null) ? parseFloat(this.interval) : 1/Math.pow(10,this._precision);
+                    this._interval = (this.interval!==null) ? this.interval : 1/Math.pow(10,this.precision);
                     break;
             }
         },
@@ -38,7 +43,7 @@
                     return val;
 
                 case 'float': 
-                    val = parseFloat(parseFloat(val).toFixed(this._precision));
+                    val = parseFloat(parseFloat(val).toFixed(this.precision));
                     if ( isNaN(val) ) 
                         val = 0;
                     val = Math.min( Math.max( val, this._min ), this._max );

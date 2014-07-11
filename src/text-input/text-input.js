@@ -1,9 +1,12 @@
 (function () {
     Polymer('fire-ui-text-input', {
+        publish: {
+            value: '',
+            multiline: false,
+        },
+
         created: function () {
             this.focused = false;
-            this.value = '';
-            // this.multiline = false;
         },
 
         ready: function() {
