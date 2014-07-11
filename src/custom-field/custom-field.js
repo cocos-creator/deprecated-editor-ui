@@ -5,7 +5,7 @@
             this.name = '';
         },
 
-        ready: function () {
+        attached: function () {
             if ( this.name === '' ) {
                 var varName = this.attributes.value.value;
                 varName = varName.replace( /{{(.*)}}/, "$1" );

@@ -27,10 +27,10 @@
         },
 
         clickAction: function () {
-            if ( event.target === this.$.previewRGB || 
-                 event.target === this.$.previewA ||
-                 event.target === this.$.iconDown ||
-                 event.target === this ) {
+            if ( event.target === PolymerUtils.getDOM(this.$.previewRGB) || 
+                 event.target === PolymerUtils.getDOM(this.$.previewA) ||
+                 event.target === PolymerUtils.getDOM(this.$.iconDown) ||
+                 event.target === PolymerUtils.getDOM(this) ) {
                 if ( this.showPicker ) {
                     this._hideColorPicker();
                 }
@@ -69,7 +69,7 @@
             switch ( event.which ) {
                 // esc
                 case 27:
-                    this.blur(); 
+                    this.$.focus.blur(); 
                     event.stopPropagation();
                 break;
             }
