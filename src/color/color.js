@@ -29,11 +29,11 @@
                 this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
         },
 
-        clickAction: function () {
-            if ( event.target === unwrap(this.$.previewRGB) || 
-                 event.target === unwrap(this.$.previewA) ||
-                 event.target === unwrap(this.$.iconDown) ||
-                 event.target === unwrap(this) ) {
+        clickAction: function (event) {
+            if ( event.target === this.$.previewRGB || 
+                 event.target === this.$.previewA ||
+                 event.target === this.$.iconDown ||
+                 event.target === this ) {
                 if ( this.showPicker ) {
                     this._hideColorPicker();
                 }
