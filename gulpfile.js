@@ -12,7 +12,7 @@ var paths = {
     js: 'src/**/*.js',
     ext_core: '../core/bin/**/*.js',
     html: 'src/**/*.html',
-    css: 'src/**/*.styl',
+    css: ['src/**/*.styl', '!src/common.styl', '!src/deep.styl'],
     img: 'src/img/**/*',
 };
 
@@ -68,7 +68,7 @@ gulp.task('css', function() {
 
 // html
 gulp.task('build-html', ['cp-html', 'css', 'js-no-uglify'], function() {
-    return gulp.src('bin/all.html')
+    return gulp.src('bin/editor-ui.html')
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
@@ -78,7 +78,7 @@ gulp.task('build-html', ['cp-html', 'css', 'js-no-uglify'], function() {
     ;
 });
 gulp.task('build-html-dev', ['cp-html', 'css', 'js-no-uglify'], function() {
-    return gulp.src('bin/all.html')
+    return gulp.src('bin/editor-ui.html')
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
