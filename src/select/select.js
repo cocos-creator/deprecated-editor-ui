@@ -45,7 +45,7 @@
             switch ( event.which ) {
                 // esc
                 case 27:
-                    this.blur();
+                    this.$.focus.blur();
                     event.stopPropagation();
                 break;
             }

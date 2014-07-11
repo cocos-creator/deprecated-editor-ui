@@ -1,7 +1,7 @@
 (function () {
     Polymer('fire-ui-unit-input', {
         publish: {
-            value: 0,
+            value: null,
             unit: '',
             type: 'int', // int, float
             precision: 2,
@@ -105,7 +105,7 @@
             switch ( event.which ) {
                 // enter
                 case 13:
-                    this.blur();
+                    this.$.input.blur();
                 break;
 
                 // esc
@@ -113,7 +113,7 @@
                     // NOTE: we set the input.value because value depends on _convert(input.value)
                     this.$.input.value = this.lastVal;
                     this.value = this.lastVal;
-                    this.blur();
+                    this.$.input.blur();
                 break;
             }
             event.stopPropagation();

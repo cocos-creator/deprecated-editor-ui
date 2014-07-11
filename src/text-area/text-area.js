@@ -65,7 +65,7 @@
                 // NOTE: textarea already have ctrl-z undo behavior
                 // esc
                 case 27:
-                    this.blur(); 
+                    this.$.inputArea.blur(); 
                 return false;
             }
             event.stopPropagation();

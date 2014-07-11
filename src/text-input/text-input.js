@@ -77,13 +77,13 @@
                 switch ( event.which ) {
                     // enter
                     case 13:
-                        this.blur();
+                        this.$.inputArea.blur();
                     break;
 
                     // esc
                     case 27:
                         this.value = this.lastVal;
-                        this.blur();
+                        this.$.inputArea.blur();
                     break;
                 }
             // }

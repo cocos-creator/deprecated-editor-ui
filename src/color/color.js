@@ -30,10 +30,10 @@
         },
 
         clickAction: function () {
-            if ( event.target === PolymerUtils.getDOM(this.$.previewRGB) || 
-                 event.target === PolymerUtils.getDOM(this.$.previewA) ||
-                 event.target === PolymerUtils.getDOM(this.$.iconDown) ||
-                 event.target === PolymerUtils.getDOM(this) ) {
+            if ( event.target === unwrap(this.$.previewRGB) || 
+                 event.target === unwrap(this.$.previewA) ||
+                 event.target === unwrap(this.$.iconDown) ||
+                 event.target === unwrap(this) ) {
                 if ( this.showPicker ) {
                     this._hideColorPicker();
                 }
@@ -53,9 +53,11 @@
                 return;
 
             if ( event.relatedTarget === null &&
-                 event.target.tagName === "FIRE-UI-COLOR-PICKER" ) 
+                 event.target === this._colorPicker ) 
             {
                 this.$.focus.focus();
+
+                event.stopPropagation();
                 return;
             }
 
