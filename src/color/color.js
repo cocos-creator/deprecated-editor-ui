@@ -34,6 +34,7 @@
                  event.target === this.$.previewA ||
                  event.target === this.$.iconDown ||
                  event.target === this ) {
+                this.$.focus.focus();
                 if ( this.showPicker ) {
                     this._hideColorPicker();
                 }

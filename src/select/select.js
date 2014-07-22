@@ -21,6 +21,7 @@
         clickAction: function (event) {
             this.showMenu = !this.showMenu;
 
+            this.$.focus.focus();
             event.stopPropagation();
         },
 
