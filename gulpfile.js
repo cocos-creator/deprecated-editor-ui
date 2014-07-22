@@ -88,6 +88,18 @@ gulp.task('build-html-dev', ['cp-html', 'css', 'js-no-uglify'], function() {
     ;
 });
 
+// NOTE: low-level version webkit don't support vulcanize's css strip option. such as background:transparent -> background:0 0  
+gulp.task('build-html-polyfill', ['cp-html', 'css', 'js'], function() {
+    return gulp.src('bin/editor-ui.html')
+    .pipe(vulcanize({
+        dest: 'bin',
+        inline: true,
+        strip: false,
+    }))
+    .pipe(gulp.dest('bin'))
+    ;
+});
+
 // watch
 gulp.task('watch', function() {
     gulp.watch(paths.ext_core, ['cp-core']).on( 'error', gutil.log );
@@ -100,3 +112,4 @@ gulp.task('watch', function() {
 // tasks
 gulp.task('default', [ 'cp-core', 'cp-img', 'build-html'] );
 gulp.task('dev', [ 'cp-core', 'cp-img', 'build-html-dev'] );
+gulp.task('polyfill', [ 'cp-core', 'cp-img', 'build-html-polyfill'] );
