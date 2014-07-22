@@ -87,6 +87,15 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
+        <div class="flex-row">
+            <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{mySliderClick}}">Change</fire-ui-button>
+            <span class="space"></span>                                                                            
+            <fire-ui-label>mySlider = {{mySlider|toFixed(2)}}</fire-ui-label>
+        </div>
+        <span class="space"></span>
+
         <div class="flex-row">                                                                                                                 
             <fire-ui-text-area class="flex-3" value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
             <span class="space"></span>                                                                                                        
@@ -195,6 +204,12 @@ span.space {
         myVec2Click: function () {
             this.myVec2.x = rangeRandom( 0.0, 1.0 );
             this.myVec2.y = rangeRandom( 0.0, 1.0 );
+        },
+
+        // mySlider
+        mySlider: 0.0,
+        mySliderClick: function () {
+            this.mySlider = rangeRandom( 0.0, 1.0 );
         },
     };
     var tmpl = document.querySelector('#my-template');

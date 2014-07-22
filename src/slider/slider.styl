@@ -1,0 +1,46 @@
+:host {
+    display: inline-block
+
+    box-sizing: border-box
+    min-height: 21px
+    padding-left: 5px
+    padding-right: 5px
+    min-width: 120px
+
+    #focus {
+        position: relative
+        padding-top: 10px
+        cursor: pointer
+    }
+
+    #focus:focus {
+        outline: none
+    }
+
+    .track {
+        height: 2px
+
+        background: #000
+    }
+
+    .nubbin {
+        display: inline-block
+        position: relative
+        width: 10px
+        height: 10px
+        margin-top: -6px
+        margin-left: -5px
+
+        box-shadow: 
+            0 1px 3px -1px #fff inset,
+            0 1px 1px 0 rgba(0,0,0,0.9)
+        border-radius: 100%
+        background: #949494
+
+        transition: background .3s ease
+    }
+
+    &(.focused) .nubbin {
+        background: #0c70a6
+    }
+}

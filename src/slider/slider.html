@@ -1,0 +1,18 @@
+<polymer-element 
+    name="fire-ui-slider" 
+    constructor="FireSlider"
+    >
+<template>
+<link rel="stylesheet" href="slider.css">
+<div id="focus"
+    on-focus="{{focusAction}}"
+    on-blur="{{blurAction}}"
+    on-mousedown="{{mousedownAction}}"
+    >
+    <div id="track" class="track"></div>
+    <div id="nubbin" class="nubbin"></div>
+</div>
+</template>
+
+<script type="text/javascript" src="slider.js"></script>
+</polymer-element>
