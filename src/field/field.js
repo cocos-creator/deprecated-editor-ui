@@ -101,7 +101,7 @@
             }
 
             if ( fieldEL === null ) {
-                console.Error("Failed to create field " + this.name );
+                console.error("Failed to create field " + this.name );
                 return;
             }
 
