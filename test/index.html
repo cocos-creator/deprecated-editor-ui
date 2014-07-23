@@ -110,6 +110,15 @@ span.space {
         </div>                                                                                                                                 
         <span class="space"></span>                                                                                                            
 
+        <div class="flex-row">
+            <fire-ui-list value="{{myList}}"></fire-ui-list>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>                                   
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myList = {{myList}}</fire-ui-label>                                      
+        </div>
+        <span class="space"></span>
+
     </fire-ui-section>
 
     <span class="space" style="height: 20px"></span>                                                       
@@ -210,6 +219,17 @@ span.space {
         mySlider: 0.0,
         mySliderClick: function () {
             this.mySlider = rangeRandom( 0.0, 1.0 );
+        },
+
+        // myList
+        myList: [],
+        myListClick: function () {
+            this.myList = [
+                "hello",
+                "foo bar",
+                "i'm johnny",
+                "good morning",
+            ];
         },
     };
     var tmpl = document.querySelector('#my-template');
