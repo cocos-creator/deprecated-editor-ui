@@ -3,7 +3,7 @@
         _editing: false,
 
         publish: {
-            value: false,
+            value: 0.0,
             min: 0.0,
             max: 1.0,
         },
