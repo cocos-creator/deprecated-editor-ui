@@ -26,6 +26,7 @@
 
         clickAction: function (event) {
             this.fire('click', event );
+            this.$.focus.focus();
             event.stopPropagation();
         },
     });
