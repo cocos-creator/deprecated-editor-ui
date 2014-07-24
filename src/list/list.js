@@ -9,7 +9,6 @@
         },
 
         focusAction: function (event) {
-            console.log("yes");
             this.focused = true;
             this.classList.toggle('focused', this.focused);
         },
