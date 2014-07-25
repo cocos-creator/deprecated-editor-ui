@@ -33,18 +33,39 @@
 
         clickAction: function (event) {
             if ( event.target instanceof FireListItem ) {
-                this.clearSelect();
-                this.select( [event.target] );
+                if ( event.metaKey || event.ctrlKey ) {
+                    this.toggle( [event.target] );
+                }
+                else {
+                    this.clearSelect();
+                    this.select( [event.target] );
+                } 
             }
             event.stopPropagation();
+        },
+
+        toggle: function ( items ) {
+            for ( var i = 0; i < items.length; ++i ) {
+                var item = items[i];
+                if ( item.selected === false ) {
+                    item.select();
+                    this.selection.push(item);
+                }
+                else {
+                    item.unselect();
+
+                    var idx = this.selection.indexOf(item); 
+                    this.selection.splice(idx,1);
+                }
+            }
         },
 
         select: function ( items ) {
             for ( var i = 0; i < items.length; ++i ) {
                 var item = items[i];
                 if ( item.selected === false ) {
-                    this.selection.push(item);
                     item.select();
+                    this.selection.push(item);
                 }
             }
         },
@@ -54,13 +75,17 @@
                 var item = items[i];
                 if ( item.selected ) {
                     item.unselect();
-                    this.selection.splice(i,1);
+
+                    var idx = this.selection.indexOf(item); 
+                    this.selection.splice(idx,1);
                 }
             }
         },
 
         clearSelect: function () {
-            this.unselect(this.selection);
+            for ( var i = 0; i < this.selection.length; ++i ) {
+                this.selection[i].unselect();
+            }
             this.selection = [];
         },
     });
