@@ -6,14 +6,15 @@
 <link rel="stylesheet" href="list.css">
 
 <div id="focus"
-    class="area flex-col flex-stretch"
+    class="area"
     on-focus="{{focusAction}}"
     on-blur="{{blurAction}}"
+    on-click="{{clickAction}}"
     >
 
-    <fire-ui-item>Hello Foobar</fire-ui-item>                                                      
-    <fire-ui-item>Hello Foobar</fire-ui-item>                                                      
-    <fire-ui-item>Hello Foobar</fire-ui-item>                                                      
+    <fire-ui-li on-delete="{{deleteAction}}">Hello Foobar</fire-ui-li>                                                      
+    <fire-ui-li>Hello Foobar</fire-ui-li>                                                      
+    <fire-ui-li>Hello Foobar</fire-ui-li>                                                      
 </div>
 </template>
 
