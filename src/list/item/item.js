@@ -10,8 +10,7 @@
         },
 
         domReady: function () {
-            var fieldEL = new FireTextInput();
-            fieldEL.type = 'int';
+            var fieldEL = new FireField();
             fieldEL.classList.add('flex-2');
             fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.id = "field";
