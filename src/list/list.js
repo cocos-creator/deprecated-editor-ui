@@ -1,12 +1,61 @@
 (function () {
     Polymer('fire-ui-list', {
+        publish: {
+            value: null,
+        },
+
+        observe: {
+            'value': 'rebuild',
+        },
+
         created: function () {
             this.focused = false;
             this.selection = [];
+            this.editing = false;
+        },
+
+        domReady: function () {
+            if ( this.value === null ) {
+                this.value = [];
+            }
+
+            this.rebuild();
         },
 
         ready: function () {
             this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
+        },
+
+        rebuild: function () {
+            if ( this.editing ) {
+                this.editing = false;
+                return;
+            }
+
+            var listRoot = this.$.list;
+            while (listRoot.firstChild) {
+                listRoot.removeChild(listRoot.firstChild);
+            }
+
+            //
+            if ( Array.isArray (this.value) ) {
+                var changedAction = function ( event ) {
+                    this.editing = true;
+                    var item = event.target;
+                    this.value[item.index] = item.value;
+                }.bind(this);
+                for ( var i = 0; i < this.value.length; ++i ) {
+                    var item = this.value[i];
+                    var liEL = new FireListItem();
+                    liEL.value = item;
+                    liEL.index = i;
+                    liEL.addEventListener("changed", changedAction);
+                    listRoot.appendChild(liEL);
+                }
+            }
+            else {
+                console.warn("The value is not an array.");
+            }
         },
 
         focusAction: function (event) {

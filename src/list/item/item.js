@@ -1,7 +1,24 @@
 (function () {
     Polymer('fire-ui-li', {
+        publish: {
+            value: null,
+            index: -1,
+        },
+
         created: function () {
             this.selected = false;
+        },
+
+        domReady: function () {
+            var fieldEL = new FireTextInput();
+            fieldEL.type = 'int';
+            fieldEL.classList.add('flex-2');
+            fieldEL.bind( 'value', new PathObserver(this,'value') );
+            fieldEL.id = "field";
+            this.$.field = fieldEL;
+
+            var delBtnEL = this.$['btn-del']; 
+            this.$.focus.insertBefore( fieldEL, delBtnEL );
         },
 
         delClickAction: function ( event ) {

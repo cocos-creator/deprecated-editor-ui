@@ -6,15 +6,20 @@
 <link rel="stylesheet" href="list.css">
 
 <div id="focus"
-    class="area"
     on-focus="{{focusAction}}"
     on-blur="{{blurAction}}"
     on-click="{{clickAction}}"
     >
-
-    <fire-ui-li on-delete="{{deleteAction}}">Hello Foobar</fire-ui-li>                                                      
-    <fire-ui-li>Hello Foobar</fire-ui-li>                                                      
-    <fire-ui-li>Hello Foobar</fire-ui-li>                                                      
+    <div class="area">
+        <div id="list" class="inner">
+        </div>
+    </div>
+    <div class="area-add">
+        <div class="spacer"></div>
+        <div class="btn-add">
+            <i class="fa fa-plus"></i>
+        </div>
+    </div>
 </div>
 </template>
 

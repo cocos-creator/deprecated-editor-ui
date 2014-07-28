@@ -53,7 +53,10 @@
         },
 
         inputAction: function (event) {
-            this.value = event.target.value;
+            if ( this.value != event.target.value ) {
+                this.value = event.target.value;
+                this.fire('changed');
+            }
 
             event.stopPropagation();
         },
@@ -82,7 +85,10 @@
 
                     // esc
                     case 27:
-                        this.value = this.lastVal;
+                        if ( this.value != this.lastVal ) {
+                            this.value = this.lastVal;
+                            this.fire('changed');
+                        }
                         this.$.inputArea.blur();
                     break;
                 }

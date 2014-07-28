@@ -117,7 +117,7 @@ span.space {
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>                                   
             <span class="space"></span>                                                                            
-            <fire-ui-label>myList = {{myList}}</fire-ui-label>                                      
+            <fire-ui-label>myList = {{myList|toText()}}</fire-ui-label>                                      
         </div>
         <span class="space"></span>
 
@@ -142,7 +142,6 @@ span.space {
         <fire-ui-name-field value="{{myColor}}"></fire-ui-name-field>                                                                                                                                
         <fire-ui-name-field value="{{myVec2}}"></fire-ui-name-field>                                                                                                                                
         <fire-ui-name-field value="{{myMultiText}}" textMode="multi"></fire-ui-name-field>                                                             
-        <fire-ui-field value="{{myPixel}}" type="int"></fire-ui-field>                                                             
     </fire-ui-section>
 </template>
 
@@ -155,6 +154,23 @@ span.space {
     }
 
     model = {
+        toFixed: function ( val, precision ) {
+            return val.toFixed(precision);
+        },
+
+        toText: function ( val ) {
+            if ( Array.isArray(val) ) {
+                var result = "[";
+                for ( var i = 0; i < val.length; ++i ) {
+                    result = result + val[i].toString() + ", ";
+                }
+                result = result + "]";
+                return result;
+            }
+
+            return val.toString();
+        },
+
         // myChecked
         myChecked: false,
         myCheckedClick: function () {
@@ -216,9 +232,6 @@ span.space {
             this.myColor.b = rangeRandom( 0.0, 1.0 );
             this.myColor.a = rangeRandom( 0.0, 1.0 );
         },
-        toFixed: function ( val, precision ) {
-            return val.toFixed(precision);
-        },
 
         // myVec2
         myVec2: new FIRE.Vec2( 1.0, 1.0 ),
@@ -234,7 +247,7 @@ span.space {
         },
 
         // myList
-        myList: [],
+        myList: [ "foobar 1", "foobar 2", "foobar 3", "foobar 4" ],
         myListClick: function () {
             this.myList = [
                 "hello",
