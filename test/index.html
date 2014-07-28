@@ -117,16 +117,11 @@ span.space {
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>                                   
             <span class="space"></span>                                                                            
-            <fire-ui-label>myList = {{myList|toText()}}</fire-ui-label>                                      
-        </div>
-        <span class="space"></span>
-
-        <div class="flex-col flex-stretch" style="width: 240px;">
-            <fire-ui-li>Hello Foobar 1</fire-ui-li>                                                      
-            <fire-ui-li>Hello Foobar 2</fire-ui-li>                                                      
-            <fire-ui-li>Hello Foobar 3</fire-ui-li>                                                      
-            <fire-ui-li>Hello Foobar 4</fire-ui-li>                                                      
-            <fire-ui-li>Hello Foobar 5</fire-ui-li>                                                      
+            <fire-ui-label>
+                myList = [ 
+                    <template repeat="{{item in myList}}">{{item}}, </template>
+                ]
+            </fire-ui-label>                                      
         </div>
         <span class="space"></span>
 
@@ -134,14 +129,14 @@ span.space {
 
     <span class="space" style="height: 20px"></span>                                                       
 
-    <fire-ui-section title="Field Section">
-        <fire-ui-name-field value="{{myChecked}}"></fire-ui-name-field>                                                                                                                                
-        <fire-ui-name-field value="{{myPixel}}" type="int"></fire-ui-name-field>                                                                                                                                
-        <fire-ui-name-field value="{{myText}}"></fire-ui-name-field>                                                             
-        <fire-ui-name-field value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-name-field>                                                             
-        <fire-ui-name-field value="{{myColor}}"></fire-ui-name-field>                                                                                                                                
-        <fire-ui-name-field value="{{myVec2}}"></fire-ui-name-field>                                                                                                                                
-        <fire-ui-name-field value="{{myMultiText}}" textMode="multi"></fire-ui-name-field>                                                             
+    <fire-ui-section title="Property Section">
+        <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
+        <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
+        <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
+        <fire-ui-prop value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-prop>                                                             
+        <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
+        <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
+        <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
     </fire-ui-section>
 </template>
 
@@ -247,7 +242,7 @@ span.space {
         },
 
         // myList
-        myList: [ "foobar 1", "foobar 2", "foobar 3", "foobar 4" ],
+        myList: [ "foobar 1", "foobar 2", "foobar 3" ],
         myListClick: function () {
             this.myList = [
                 "hello",

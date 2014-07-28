@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-name-field', {
+    Polymer('fire-ui-custom-prop', {
         publish: {
             name: '',
         },
@@ -14,18 +14,6 @@
                 varName = varName.replace( /{{(.*)}}/, "$1" );
                 this.name = FIRE.camelCaseToHuman(varName); 
             }
-
-            var fieldEL = this.createFieldElement();
-            if ( fieldEL === null ) {
-                console.error("Failed to create field " + this.name );
-                return;
-            }
-
-            fieldEL.classList.add('flex-2');
-            fieldEL.bind( 'value', new PathObserver(this,'value') );
-            fieldEL.id = "field";
-            this.$.focus.appendChild(fieldEL);
-            this.$.field = fieldEL;
         },
 
         focusinAction: function ( event ) {
@@ -54,7 +42,7 @@
                  FIRE.find(this.$.label, event.target) === false )
                 return;
 
-            var focusableEL = FIRE.getFirstFocusableChild(this.$.field.shadowRoot);
+            var focusableEL = FIRE.getFirstFocusableChild(this);
             if ( focusableEL ) {
                 focusableEL.focus();
             }

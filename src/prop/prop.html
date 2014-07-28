@@ -1,10 +1,10 @@
 <polymer-element 
-    name="fire-ui-name-field" 
+    name="fire-ui-prop" 
     extends="fire-ui-field"
-    constructor="FireNameField"
+    constructor="FireNameProp"
     >
 <template>
-<link rel="stylesheet" href="name-field.css">
+<link rel="stylesheet" href="prop.css">
 
 <div id="focus"
     on-focusin="{{focusinAction}}"
@@ -18,10 +18,10 @@
     {{name}}
     </fire-ui-label>
     <span class="space"></span>
-    <!-- field will added here by field.js -->
+    <!-- field will added here -->
 </div>
 
 </template>
 
-<script type="text/javascript" src="name-field.js"></script>
+<script type="text/javascript" src="prop.js"></script>
 </polymer-element>

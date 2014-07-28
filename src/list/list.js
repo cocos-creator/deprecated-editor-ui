@@ -58,12 +58,12 @@
             }
         },
 
-        focusAction: function (event) {
+        focusinAction: function (event) {
             this.focused = true;
             this.classList.toggle('focused', this.focused);
         },
 
-        blurAction: function (event) {
+        focusoutAction: function (event) {
             if ( this.focused === false )
                 return;
 
