@@ -153,16 +153,7 @@ span.space {
             return val.toFixed(precision);
         },
 
-        toText: function ( val ) {
-            if ( Array.isArray(val) ) {
-                var result = "[";
-                for ( var i = 0; i < val.length; ++i ) {
-                    result = result + val[i].toString() + ", ";
-                }
-                result = result + "]";
-                return result;
-            }
-
+        toString: function ( val ) {
             return val.toString();
         },
 
@@ -242,7 +233,9 @@ span.space {
         },
 
         // myList
-        myList: [ "foobar 1", "foobar 2", "foobar 3" ],
+        // myList: [ "foobar 1", "foobar 2", "foobar 3" ],
+        // myList: [ 1, 2 ],
+        myList: [ new FIRE.Vec2(1,1), new FIRE.Vec2(2,1) ],
         myListClick: function () {
             this.myList = [
                 "hello",

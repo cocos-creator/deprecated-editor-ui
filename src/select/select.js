@@ -55,7 +55,10 @@
         selectAction: function (event, detail, sender) {
             var idx = parseInt(sender.getAttribute('index'));
             var entry = this.options[idx];
-            this.value = entry.value;
+            if ( this.value !== entry.value ) {
+                this.value = entry.value;
+                this.fire('changed');
+            }
             this.showMenu = false;
 
             event.stopPropagation();

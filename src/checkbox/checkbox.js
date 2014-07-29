@@ -30,11 +30,8 @@
 
         clickAction: function (event) {
             this.value = !this.value;
+            this.fire('changed');
             event.stopPropagation();
-        },
-
-        checkedChanged: function() {
-            this.fire('change');
         },
     });
 })();

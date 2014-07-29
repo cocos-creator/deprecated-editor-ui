@@ -22,11 +22,13 @@
         _updateColor: function () {
             if ( this.value !== null )
                 this.$.previewRGB.style.backgroundColor = this.value.toCSS('rgb');
+            this.fire('changed');
         },
 
         _updateAlpha: function () {
             if ( this.value !== null )
                 this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
+            this.fire('changed');
         },
 
         clickAction: function (event) {

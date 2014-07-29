@@ -44,6 +44,7 @@
                     var item = event.target;
                     this.value[item.index] = item.value;
                 }.bind(this);
+
                 for ( var i = 0; i < this.value.length; ++i ) {
                     var item = this.value[i];
                     var liEL = new FireListItem();

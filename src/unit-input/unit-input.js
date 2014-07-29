@@ -72,7 +72,11 @@
                 return;
 
             var val = this._convert(this.$.input.value);
-            this.value = val;
+            if ( this.value !== val ) {
+                this.value = val;
+                this.fire('changed');
+            }
+
             // NOTE: we set the input.value because this.value may not changed after invalid inputs
             this.$.input.value = val;
 
@@ -92,7 +96,12 @@
                 event.target.value = "-0.";
                 return;
             }
-            this.value = this._convert(event.target.value);
+
+            var val = this._convert(event.target.value);
+            if ( this.value !== val ) {
+                this.value = val;
+                this.fire('changed');
+            }
 
             event.stopPropagation();
         },
@@ -112,7 +121,10 @@
                 case 27:
                     // NOTE: we set the input.value because value depends on _convert(input.value)
                     this.$.input.value = this.lastVal;
-                    this.value = this.lastVal;
+                    if ( this.value !== this.lastVal ) {
+                        this.value = this.lastVal;
+                        this.fire('changed');
+                    }
                     this.$.input.blur();
                 break;
             }
@@ -125,13 +137,21 @@
         },
 
         increaseAction: function (event) {
-            this.value = this._convert(this.value+this._interval);
+            var val = this._convert(this.value+this._interval);
+            if ( this.value != val ) {
+                this.value = val;
+                this.fire('changed');
+            }
             this.$.input.focus();
             event.stopPropagation();
         },
 
         decreaseAction: function (event) {
-            this.value = this._convert(this.value-this._interval);
+            var val = this._convert(this.value-this._interval);
+            if ( this.value != val ) {
+                this.value = val;
+                this.fire('changed');
+            }
             this.$.input.focus();
             event.stopPropagation();
         },
