@@ -233,16 +233,16 @@ span.space {
         },
 
         // myList
-        // myList: [ "foobar 1", "foobar 2", "foobar 3" ],
-        // myList: [ 1, 2 ],
+        cnt: 0,
+        listList: [
+                [ new FIRE.Vec2(1,1), new FIRE.Vec2(2,1) ],
+                [ "foobar 1", "foobar 2", "foobar 3" ],
+                [ 1, 2, 3, 4 ],
+        ],
         myList: [ new FIRE.Vec2(1,1), new FIRE.Vec2(2,1) ],
         myListClick: function () {
-            this.myList = [
-                "hello",
-                "foo bar",
-                "i'm johnny",
-                "good morning",
-            ];
+            this.cnt = (this.cnt + 1)%this.listList.length;
+            this.myList = this.listList[this.cnt]; 
         },
     };
     var tmpl = document.querySelector('#my-template');
