@@ -1,8 +1,8 @@
 {
-    "name": "simple-server",
+    "name": "Fireball-x Editor UI",
     "version": "0.1.0",
-    "description": "Simple Web Server",
-    "homepage": "http://jwu.github.io",
+    "description": "Fireball-x Editor UI",
+    "homepage": "http://github.com/fireball-x/editor-ui",
     "license": "MIT",
     "licenseUrl": "http://opensource.org/licenses/MIT",
     "dependencies": {
