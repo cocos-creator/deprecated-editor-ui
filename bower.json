@@ -1,11 +1,11 @@
 {
-    "name": "fire-ui-polymer",
+    "name": "fireball-x editor-ui",
     "version": "0.0.1",
-    "homepage": "https://github.com/fireball-x/editor-ui-polymer",
+    "homepage": "https://github.com/fireball-x/editor-ui",
     "authors": [
         "Johnny Wu <KarasAya@gmail.com>"
     ],
-    "description": "Fire UI - Polymer",
+    "description": "Fireball-x Editor UI",
     "license": "MIT",
     "private": true,
     "ignore": [
