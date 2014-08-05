@@ -8,7 +8,7 @@
 
 ## Changes
 
- - TODO
+ - Use flex attributes instead of flex classes in css layout
 
 ## Bug Fixes
 
