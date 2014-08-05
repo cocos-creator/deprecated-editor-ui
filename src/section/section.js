@@ -1,7 +1,7 @@
 (function () {
     Polymer('fire-ui-section', {
         publish: {
-            title: '',
+            text: '',
         },
 
         created: function () {
