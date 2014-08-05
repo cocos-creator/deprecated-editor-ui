@@ -34,7 +34,7 @@ span.space {
     <h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI</h2>
 
     <fire-ui-section text="Change Section">
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-checkbox value="{{myChecked}}"></fire-ui-checkbox>                                              
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button> 
@@ -43,7 +43,7 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>                   
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myPixelClick}}">Change</fire-ui-button>
@@ -52,7 +52,7 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myTextClick}}">Change</fire-ui-button>
@@ -61,7 +61,7 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>                         
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button>
@@ -70,7 +70,7 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-color value="{{myColor}}"></fire-ui-color>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myColorClick}}">Change</fire-ui-button>
@@ -79,7 +79,7 @@ span.space {
         </div>
         <span class="space"></span>
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-vec2 value="{{myVec2}}"></fire-ui-vec2>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myVec2Click}}">Change</fire-ui-button>
@@ -88,7 +88,7 @@ span.space {
         </div>
         <span class="space"></span>                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{mySliderClick}}">Change</fire-ui-button>
@@ -97,14 +97,14 @@ span.space {
         </div>
         <span class="space"></span>
 
-        <div class="flex-row">                                                                                                                 
-            <fire-ui-text-area class="flex-3" value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
+        <div flex-row>                                                                                                                 
+            <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
             <span class="space"></span>                                                                                                        
             <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>                                                                 
             <span class="space"></span>                                                                                                        
             <fire-ui-label>myMultiText = </fire-ui-label>                                                                                 
             <span class="space"></span>                                                                                                        
-            <div class="flex-1">
+            <div flex-1>
                 <pre style="font-size: 10px; white-space: pre-line;">
                     {{myMultiText}}
                 </pre>
@@ -112,7 +112,7 @@ span.space {
         </div>                                                                                                                                 
         <span class="space"></span>                                                                                                            
 
-        <div class="flex-row">
+        <div flex-row>
             <fire-ui-list value="{{myList}}"></fire-ui-list>                                                      
             <span class="space"></span>                                                                            
             <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>                                   

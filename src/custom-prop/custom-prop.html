@@ -10,14 +10,13 @@
     on-focusout="{{focusoutAction}}"
     on-mousedown="{{mousedownAction}}"
     >
-    <fire-ui-label 
+    <fire-ui-label flex-1
         id="label" 
-        class="flex-1"
         >
     {{name}}
     </fire-ui-label>
     <span class="space"></span>
-    <div id="field" class="flex-row flex-2">
+    <div id="field" flex-row flex-2>
         <content/>
     </div>
 </div>

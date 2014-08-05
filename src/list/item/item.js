@@ -11,7 +11,7 @@
 
         domReady: function () {
             var fieldEL = new FireField();
-            fieldEL.classList.add('flex-2');
+            fieldEL.setAttribute('flex-2','');
             fieldEL.type = 'int';
             fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.id = "field";

@@ -16,7 +16,7 @@
                 return;
             }
 
-            fieldEL.classList.add('flex-2');
+            fieldEL.setAttribute('flex-2','');
             fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.id = "field";
             this.shadowRoot.appendChild(fieldEL);
@@ -76,7 +76,7 @@
                         fieldEL = new FireTextInput();
                     }
                     else if ( this.textMode === 'multi' ) {
-                        this.$.label.classList.add('flex-self-start');
+                        this.$.label.setAttribute('flex-self-start','');
                         fieldEL = new FireTextArea();
                     }
                     break;

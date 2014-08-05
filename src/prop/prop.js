@@ -21,7 +21,7 @@
                 return;
             }
 
-            fieldEL.classList.add('flex-2');
+            fieldEL.setAttribute('flex-2','');
             fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.id = "field";
             this.$.focus.appendChild(fieldEL);
