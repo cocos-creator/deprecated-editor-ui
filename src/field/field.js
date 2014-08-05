@@ -76,7 +76,7 @@
                         fieldEL = new FireTextInput();
                     }
                     else if ( this.textMode === 'multi' ) {
-                        this.$.label.classList.add('flex-align-self-start');
+                        this.$.label.classList.add('flex-self-start');
                         fieldEL = new FireTextArea();
                     }
                     break;
