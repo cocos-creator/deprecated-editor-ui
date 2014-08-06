@@ -1,0 +1,18 @@
+<polymer-element 
+    name="fire-ui-panel" 
+    constructor="FirePanel"
+    >
+<template>
+<link rel="stylesheet" href="panel.css">
+
+<fire-ui-tabs></fire-ui-tabs>
+<div flex-1 flex-col flex-stretch class="content">
+    <div flex-1 class="border">
+        <content/>
+    </div>
+</div>
+
+</template>
+
+<script type="text/javascript" src="panel.js"></script>
+</polymer-element>

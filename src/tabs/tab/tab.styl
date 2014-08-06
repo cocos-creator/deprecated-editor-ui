@@ -1,0 +1,38 @@
+:host {
+    display: inline-block
+    box-sizing: border-box
+    font-size: 12px
+
+    border-right: 1px solid #212121;
+    border-left: 0px solid #212121;
+    border-top: 1px solid #212121;
+    height: 20px;
+
+    color: #aaa;
+    background-color: #333;
+
+    .border {
+        display: inline-block;
+        box-sizing: border-box
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        height: 19px;
+
+        padding: 3px 8px;
+    }
+
+    &(.active) {
+        border-left: 1px solid #212121;
+        border-right: 0px solid #212121;
+        border-top: 1px solid #212121;
+        height: 22px;
+
+        background-color: #444;
+
+        .border {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            height: 21px;
+        }
+    }
+}
