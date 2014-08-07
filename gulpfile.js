@@ -12,7 +12,7 @@ var paths = {
     js: 'src/**/*.js',
     ext_core: '../core/bin/**/*.js',
     html: 'src/**/*.html',
-    css: ['src/**/*.styl', '!src/common.styl', '!src/deep.styl'],
+    css: 'src/**/*.styl',
     img: 'src/img/**/*',
 };
 

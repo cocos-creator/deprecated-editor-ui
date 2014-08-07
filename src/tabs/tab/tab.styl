@@ -1,9 +1,13 @@
 :host {
-    display: inline-block
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap     
+    align-items: stretch
+
     box-sizing: border-box
     font-size: 12px
 
-    border-right: 1px solid #212121;
+    border-right: 0px solid #212121;
     border-left: 0px solid #212121;
     border-top: 1px solid #212121;
     height: 20px;
@@ -23,8 +27,8 @@
     }
 
     &(.active) {
-        border-left: 1px solid #212121;
-        border-right: 0px solid #212121;
+        border-left: 0px;
+        border-right: 0px;
         border-top: 1px solid #212121;
         height: 22px;
 
@@ -34,5 +38,40 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             height: 21px;
         }
+
+        span.left-tab-border {
+            display: none;
+        }
+        span.right-tab-border {
+            display: none;
+        }
+    }
+
+    span.left-tab-border {
+        display: inline-block
+        border-left: 1px solid #212121
+        height: 20px
+    }
+    span.right-tab-border {
+        display: none;
+    }
+
+    // TODO:
+    // .active~span.right-tab-border {
+    //     display: inline-block
+    //     border-left: 1px solid #212121
+    //     height: 20px
+    // }
+
+    &(:first-child) span.left-tab-border {
+        display: inline-block
+        border-left: 1px solid #212121
+        height: 22px
+    }
+
+    &(:last-child) span.right-tab-border {
+        display: inline-block
+        border-left: 1px solid #212121
+        height: 20px
     }
 }
