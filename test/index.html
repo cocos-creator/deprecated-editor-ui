@@ -125,31 +125,40 @@ span.space {
         </div>
         <span class="space"></span>
 
+        <fire-ui-tabs>
+            <fire-ui-tab>Project 1</fire-ui-tab>
+            <fire-ui-tab>Project 2</fire-ui-tab>
+        </fire-ui-tabs>
+
+        <span class="space"></span>
+
     </fire-ui-section>
 
     <span class="space" style="height: 20px"></span>                                                       
 
-    <fire-ui-section text="Property Section">
-        <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
-        <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
-        <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
-        <fire-ui-prop value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-prop>                                                             
-        <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
-        <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
-        <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
-    </fire-ui-section>
+    <fire-ui-dock-panel>
+        <fire-ui-section name="Property" text="Property Section">
+            <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
+            <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
+            <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
+            <fire-ui-prop value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-prop>                                                             
+            <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
+            <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
+            <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
+        </fire-ui-section>
 
-    <span class="space" style="height: 20px"></span>                                                       
+        <div name="Project 2" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
+            <h1>Project 2</h1>
+        </div>
 
-    <fire-ui-tabs>
-        <fire-ui-tab class="active">Project 1</fire-ui-tab>
-        <fire-ui-tab>Project 2</fire-ui-tab>
-    </fire-ui-tabs>
+        <div name="Project 3" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
+            <h1>Project 3</h1>
+        </div>
 
-    <span class="space" style="height: 20px"></span>                                                       
-
-    <fire-ui-panel>
-    </fire-ui-panel>
+        <div name="Project 4" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
+            <h1>Project 4</h1>
+        </div>
+    </fire-ui-dock-panel>
 </template>
 
 <script>

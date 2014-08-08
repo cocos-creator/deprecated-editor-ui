@@ -53,7 +53,7 @@
 
             // 
             var updateMouseMove = function (event) {
-                var offsetX = (event.pageX - mouseDownX)/this.$.track.clientWidth;
+                var offsetX = (event.clientX - mouseDownX)/this.$.track.clientWidth;
 
                 offsetX = Math.max( Math.min( offsetX, 1.0 ), 0.0 );
                 this.$.nubbin.style.left = offsetX * 100 + "%";

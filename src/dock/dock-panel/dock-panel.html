@@ -1,0 +1,21 @@
+<polymer-element 
+    name="fire-ui-dock-panel" 
+    constructor="FireDockPanel"
+    >
+<template>
+<link rel="stylesheet" href="dock-panel.css">
+
+<fire-ui-tabs id="tabs"
+    on-changed="{{tabsChangedAction}}"
+>
+</fire-ui-tabs>
+<div flex-1 flex-col flex-stretch class="content">
+    <div flex-1 flex-col flex-stretch class="border">
+        <content/>
+    </div>
+</div>
+
+</template>
+
+<script type="text/javascript" src="dock-panel.js"></script>
+</polymer-element>

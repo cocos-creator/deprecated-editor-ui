@@ -15,6 +15,9 @@ function error(status, msg) {
 app.get('/', function(req, res){
     res.sendfile('test/index.html');
 });
+app.get('/dock', function(req, res){
+    res.sendfile('test/dock.html');
+});
 app.get('/debug-focus', function(req, res){
     res.sendfile('test/debug-focus.html');
 });

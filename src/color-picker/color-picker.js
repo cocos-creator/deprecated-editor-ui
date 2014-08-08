@@ -56,7 +56,7 @@
             var mouseDownY = rect.top;
 
             var updateMouseMove = function (event) {
-                var offsetY = (event.pageY - mouseDownY)/this.$.hueCtrl.clientHeight;
+                var offsetY = (event.clientY - mouseDownY)/this.$.hueCtrl.clientHeight;
                 offsetY = Math.max( Math.min( offsetY, 1.0 ), 0.001 );
 
                 this.hsv.h = 1.0-offsetY;
@@ -94,8 +94,8 @@
             var mouseDownY = rect.top;
 
             var updateMouseMove = function (event) {
-                var offsetX = (event.pageX - mouseDownX)/this.$.colorCtrl.clientWidth;
-                var offsetY = (event.pageY - mouseDownY)/this.$.colorCtrl.clientHeight;
+                var offsetX = (event.clientX - mouseDownX)/this.$.colorCtrl.clientWidth;
+                var offsetY = (event.clientY - mouseDownY)/this.$.colorCtrl.clientHeight;
 
                 offsetX = Math.max( Math.min( offsetX, 1.0 ), 0.0 );
                 offsetY = Math.max( Math.min( offsetY, 1.0 ), 0.0 );
@@ -133,7 +133,7 @@
             var mouseDownY = rect.top;
 
             var updateMouseMove = function (event) {
-                var offsetY = (event.pageY - mouseDownY)/this.$.opacityCtrl.clientHeight;
+                var offsetY = (event.clientY - mouseDownY)/this.$.opacityCtrl.clientHeight;
                 offsetY = Math.max( Math.min( offsetY, 1.0 ), 0.0 );
                 this.value.a = 1.0-offsetY;
                 this._updateColor();

@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<title>Test Dock</title>
+<link rel="stylesheet" href="ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="bin/editor-ui.css">
+
+<script src="ext/platform/platform.js"></script>
+<script src="ext/fire-core/core.dev.js"></script>
+
+<link rel="import" href="ext/polymer/polymer.html">
+<link rel="import" href="bin/editor-ui.html">
+
+<style>
+body {
+    margin: 0px;
+    color: #ddd;
+    background-color: #333;
+    border: 0px solid black;
+    padding: 3px;
+}
+span.space {
+    height: 5px;
+    width: 5px;
+    display: block;
+}
+</style>
+</head>
+
+<body flex-col flex-stretch>
+
+<template id="my-template" is="auto-binding">
+    <fire-ui-dock flex-1 flex-row flex-stretch>
+        <fire-ui-dock-panel>
+            <!-- <div name="Project 1" flex-1 style="padding: 5px; margin-top: 4px; box-shadow: inset 0 0 8px 2px rgba(0,0,0,0.2); border: 1px solid #171717; background: #333;"> -->
+            <!-- </div>                                                                                                                                                           -->
+
+            <div name="Project 1" flex-1 >
+            </div>                                                                                                                                                          
+        </fire-ui-dock-panel>
+
+        <fire-ui-dock-panel>
+            <div name="Inspector" flex-1 style="padding: 5px;">
+                <fire-ui-custom-prop name="Position">
+                    <fire-ui-vec2></fire-ui-vec2>
+                </fire-ui-custom-prop>
+
+                <fire-ui-custom-prop name="Speed">
+                    <fire-ui-unit-input flex-1></fire-ui-unit-input>
+                </fire-ui-custom-prop>
+
+                <fire-ui-custom-prop name="Color">
+                    <fire-ui-color flex-1></fire-ui-color>
+                </fire-ui-custom-prop>
+            </div>
+        </fire-ui-dock-panel>
+    </fire-ui-dock>
+</template>
+
+<script>
+</script>
+
+</body>
+
+</html>
