@@ -31,29 +31,90 @@ span.space {
 
 <template id="my-template" is="auto-binding">
     <fire-ui-dock flex-1 flex-row flex-stretch>
-        <fire-ui-dock-panel>
-            <!-- <div name="Project 1" flex-1 style="padding: 5px; margin-top: 4px; box-shadow: inset 0 0 8px 2px rgba(0,0,0,0.2); border: 1px solid #171717; background: #333;"> -->
-            <!-- </div>                                                                                                                                                           -->
-
-            <div name="Project 1" flex-1 >
+        <fire-ui-dock-panel style="width: 300px;">
+            <div name="Project 1" flex-1 style="padding: 5px; margin-top: 2px; box-shadow: inset 0 0 8px 2px rgba(0,0,0,0.2); border: 1px solid #171717; background: #333;">
+            </div>                                                                                                                                                          
+            <div name="Project 2" flex-1 >
             </div>                                                                                                                                                          
         </fire-ui-dock-panel>
 
-        <fire-ui-dock-panel>
-            <div name="Inspector" flex-1 style="padding: 5px;">
-                <fire-ui-custom-prop name="Position">
-                    <fire-ui-vec2></fire-ui-vec2>
-                </fire-ui-custom-prop>
+        <span class="space"></span>
 
-                <fire-ui-custom-prop name="Speed">
-                    <fire-ui-unit-input flex-1></fire-ui-unit-input>
-                </fire-ui-custom-prop>
+        <fire-ui-dock-panel style="width: 300px;">
+            <div name="Inspector 1" flex-1 style="padding: 0px;">
+                <fire-ui-section text="Transform">
+                    <fire-ui-custom-prop name="Position">
+                        <fire-ui-vec2 flex-2></fire-ui-vec2>
+                    </fire-ui-custom-prop>
 
-                <fire-ui-custom-prop name="Color">
-                    <fire-ui-color flex-1></fire-ui-color>
-                </fire-ui-custom-prop>
+                    <fire-ui-custom-prop name="Rotation">
+                        <fire-ui-vec2 flex-2></fire-ui-vec2>
+                    </fire-ui-custom-prop>
+
+                    <fire-ui-custom-prop name="Scale">
+                        <fire-ui-vec2 flex-2></fire-ui-vec2>
+                    </fire-ui-custom-prop>
+                </fire-ui-section>
+
+                <span class="space"></span>
+
+                <fire-ui-section text="Actor">
+                    <fire-ui-custom-prop name="HP">
+                        <fire-ui-unit-input flex-2></fire-ui-unit-input>
+                    </fire-ui-custom-prop>
+
+                    <fire-ui-custom-prop name="MP">
+                        <fire-ui-unit-input flex-2></fire-ui-unit-input>
+                    </fire-ui-custom-prop>
+
+                    <fire-ui-custom-prop name="Hover Color">
+                        <fire-ui-color flex-2></fire-ui-color>
+                    </fire-ui-custom-prop>
+                </fire-ui-section>
+            </div>
+            <div name="Inspector 2" flex-1 style="padding: 5px 10px;">
             </div>
         </fire-ui-dock-panel>
+
+        <span class="space"></span>
+
+        <fire-ui-dock flex-1 flex-col flex-stretch>
+            <fire-ui-dock-panel flex-1 style="">
+                <div name="Scene" flex-1>
+                </div>
+                <div name="Game" flex-1>
+                </div>
+            </fire-ui-dock-panel>
+
+            <span class="space"></span>
+
+            <fire-ui-dock-panel style="height: 400px;">
+                <div name="Console">
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                    <div style="background: #222; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
+                </div>
+            </fire-ui-dock-panel>
+        </fire-ui-dock>
     </fire-ui-dock>
 </template>
 
