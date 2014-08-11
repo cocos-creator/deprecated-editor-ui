@@ -39,7 +39,7 @@
                     }
                     else {
                         offset = event.clientY - mouseDownY;
-                        this.target.style.height = (targetRect.height + offset) + "px";
+                        this.target.style.height = (targetRect.height - offset) + "px";
                     }
 
                     event.stopPropagation();

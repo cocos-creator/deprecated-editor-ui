@@ -9,13 +9,24 @@
             for ( var i = 0; i < this.children.length; ++i ) {
                 if ( i != this.children.length-1 ) {
                     var dockEL = this.children[i];
-                    var resizer = new FireResizer();
-                    resizer.vertical = isrow;
-                    resizer.target = dockEL;
-                    resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+                    if ( dockEL instanceof FireDock ) {
+                        var resizer = new FireResizer();
+                        resizer.vertical = isrow;
 
-                    this.insertBefore( resizer, dockEL.nextSibling );
-                    i += 1;
+                        // NOTE: it is possible resize target is null (dockEL and dockEL.nextElementSibling are all flex)
+                        if ( EditorUI.isFlex(dockEL) === false ) {
+                            resizer.target = dockEL;
+                        }
+                        else {
+                            if ( EditorUI.isFlex(dockEL.nextElementSibling) === false ) {
+                                resizer.target = dockEL.nextElementSibling;
+                            }
+                        }
+                        resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+
+                        this.insertBefore( resizer, dockEL.nextElementSibling );
+                        i += 1;
+                    }
                 }
             }
         },
