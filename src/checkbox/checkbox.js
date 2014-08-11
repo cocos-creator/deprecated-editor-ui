@@ -2,10 +2,10 @@
     Polymer('fire-ui-checkbox', {
         publish: {
             value: false,
-        },
-
-        created: function () {
-            this.focused = false;
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
@@ -14,7 +14,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event) {
@@ -25,7 +24,6 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         clickAction: function (event) {

@@ -20,9 +20,30 @@ body {
     padding: 3px;
 }
 span.space {
+    height: 3px;
+    width: 3px;
+    display: block;
+}
+html /deep/ *::-webkit-scrollbar {
     height: 5px;
     width: 5px;
-    display: block;
+}
+html /deep/ *::-webkit-scrollbar-thumb {
+    border-top: 2px solid rgba(12,112,200,1.0);
+    border-bottom: 2px solid rgba(12,112,200,1.0);
+
+    background: #171717;
+}
+html /deep/ *::-webkit-scrollbar-track {
+    background-color: #444;
+    border-left: 1px solid #171717;
+}
+html /deep/ *::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+html /deep/ *::-webkit-scrollbar-corner {
+    background-color: #171717;
 }
 </style>
 </head>
@@ -31,16 +52,18 @@ span.space {
 
 <template id="my-template" is="auto-binding">
     <fire-ui-dock flex-1 flex-row flex-stretch>
-        <fire-ui-dock-panel style="width: 300px;">
+        <fire-ui-dock-panel style="width: 200px;">
             <div name="Project 1" flex-1 style="padding: 5px; margin-top: 2px; box-shadow: inset 0 0 8px 2px rgba(0,0,0,0.2); border: 1px solid #171717; background: #333;">
             </div>                                                                                                                                                          
             <div name="Project 2" flex-1 >
             </div>                                                                                                                                                          
         </fire-ui-dock-panel>
 
-        <span class="space"></span>
+        <!-- <span class="space" style="height: 100%"></span> -->
+        <div style="width: 3px; height: 100%;">
+        </div>
 
-        <fire-ui-dock-panel style="width: 300px;">
+        <fire-ui-dock-panel style="width: 200px;">
             <div name="Inspector 1" flex-1 style="padding: 0px;">
                 <fire-ui-section text="Transform">
                     <fire-ui-custom-prop name="Position">
@@ -76,7 +99,7 @@ span.space {
             </div>
         </fire-ui-dock-panel>
 
-        <span class="space"></span>
+        <span class="space" style="height: 100%"></span>
 
         <fire-ui-dock flex-1 flex-col flex-stretch>
             <fire-ui-dock-panel flex-1 style="">
@@ -86,10 +109,10 @@ span.space {
                 </div>
             </fire-ui-dock-panel>
 
-            <span class="space"></span>
+            <span class="space" style="width: 100%;"></span>
 
-            <fire-ui-dock-panel style="height: 400px;">
-                <div name="Console">
+            <fire-ui-dock-panel style="min-height: 200px;">
+                <div name="Console" style="margin: 5px; margin-right: 0px; overflow: auto;">
                     <div style="background: #333; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
                     <div style="background: #333; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>
                     <div style="background: #333; margin-top: 2px; padding: 5px 10px; font-size: 12px;">Hello World</div>

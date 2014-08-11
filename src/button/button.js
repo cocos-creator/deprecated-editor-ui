@@ -1,7 +1,10 @@
 (function () {
     Polymer('fire-ui-button', {
-        created: function () {
-            this.focused = false;
+        publish: {
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
@@ -10,7 +13,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event) {
@@ -21,7 +23,6 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         clickAction: function (event) {

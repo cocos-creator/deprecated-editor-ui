@@ -1,5 +1,6 @@
 <polymer-element 
     name="fire-ui-dock-panel" 
+    extends="fire-ui-dock"
     constructor="FireDockPanel"
     >
 <template>
@@ -11,7 +12,7 @@
 </fire-ui-tabs>
 <div flex-1 flex-col flex-stretch class="content">
     <div flex-1 flex-col flex-stretch class="border">
-        <content/>
+        <shadow></shadow>
     </div>
 </div>
 

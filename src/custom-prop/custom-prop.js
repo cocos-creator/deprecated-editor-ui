@@ -2,10 +2,10 @@
     Polymer('fire-ui-custom-prop', {
         publish: {
             name: '',
-        },
-
-        created: function () {
-            this.focused = false;
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         attached: function () {
@@ -18,9 +18,7 @@
 
         focusinAction: function ( event ) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
-            this.$.label.classList.toggle('focused', this.focused);
-            this.$.field.classList.toggle('focused', this.focused);
+            this.$.label.focused = true;
         },
 
         focusoutAction: function ( event ) {
@@ -31,9 +29,7 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
-            this.$.label.classList.toggle('focused', this.focused);
-            this.$.field.classList.toggle('focused', this.focused);
+            this.$.label.focused = false;
         },
 
         mousedownAction: function ( event ) {

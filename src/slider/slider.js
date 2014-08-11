@@ -6,14 +6,14 @@
             value: 0.0,
             min: 0.0,
             max: 1.0,
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         observe: {
             'value': 'update', 
-        },
-
-        created: function () {
-            this.focused = false;
         },
 
         ready: function () {
@@ -30,7 +30,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event) {
@@ -41,7 +40,6 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         mousedownAction: function (event) {

@@ -8,10 +8,10 @@
             interval: null,
             min: null,
             max: null,
-        },
-
-        created: function () {
-            this.focused = false;
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function() {
@@ -61,7 +61,6 @@
         focusAction: function (event) {
             this.lastVal = this._convert(this.value);
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event, detail, sender) {
@@ -81,7 +80,6 @@
             this.$.input.value = val;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         inputAction: function (event) {

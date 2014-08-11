@@ -2,6 +2,10 @@
     Polymer('fire-ui-section', {
         publish: {
             text: '',
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         created: function () {
@@ -19,7 +23,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event) {
@@ -30,7 +33,6 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
     });
 })();

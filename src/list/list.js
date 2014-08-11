@@ -2,6 +2,10 @@
     Polymer('fire-ui-list', {
         publish: {
             value: null,
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         observe: {
@@ -61,7 +65,6 @@
 
         focusinAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         focusoutAction: function (event) {
@@ -73,7 +76,6 @@
 
             this.clearSelect();
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         deleteAction: function (event, detail, sender) {

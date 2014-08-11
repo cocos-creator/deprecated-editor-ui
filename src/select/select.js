@@ -3,6 +3,10 @@
         publish: {
             value: -1,
             options: null, 
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         observe: {
@@ -10,7 +14,6 @@
         },
 
         created: function () {
-            this.focused = false;
             this.showMenu = false;
         },
 
@@ -27,7 +30,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event) {
@@ -39,7 +41,6 @@
 
             this.showMenu = false;
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         keyDownAction: function (event) {

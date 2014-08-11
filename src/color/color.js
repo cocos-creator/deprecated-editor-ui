@@ -2,6 +2,10 @@
     Polymer('fire-ui-color', {
         publish: {
             value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         observe: {
@@ -48,7 +52,6 @@
 
         focusAction: function (event) {
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         focusoutAction: function (event) {
@@ -69,7 +72,6 @@
             }
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
             this._hideColorPicker();
         },
 

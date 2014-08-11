@@ -2,10 +2,10 @@
     Polymer('fire-ui-text-area', {
         publish: {
             value: '',
-        },
-
-        created: function () {
-            this.focused = false;
+            focused: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function() {
@@ -35,7 +35,6 @@
         focusAction: function (event) {
             this.lastVal = this.value;
             this.focused = true;
-            this.classList.toggle('focused', this.focused);
         },
 
         blurAction: function (event, detail, sender) {
@@ -46,7 +45,6 @@
                 return;
 
             this.focused = false;
-            this.classList.toggle('focused', this.focused);
         },
 
         inputAction: function (event) {
