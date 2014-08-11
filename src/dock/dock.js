@@ -7,9 +7,16 @@
             var isrow = this.isRow();
 
             for ( var i = 0; i < this.children.length; ++i ) {
-                var dockEL = this.children[i];
-                // contentEL.style.display = "none";
-                // this.children.splice(i, 0, resizer);
+                if ( i != this.children.length-1 ) {
+                    var dockEL = this.children[i];
+                    var resizer = new FireResizer();
+                    resizer.vertical = isrow;
+                    resizer.target = dockEL;
+                    resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+
+                    this.insertBefore( resizer, dockEL.nextSibling );
+                    i += 1;
+                }
             }
         },
 

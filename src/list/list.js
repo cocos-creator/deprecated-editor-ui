@@ -18,16 +18,16 @@
             this.editing = false;
         },
 
+        ready: function () {
+            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
+        },
+
         domReady: function () {
             if ( this.value === null ) {
                 this.value = [];
             }
 
             this.rebuild();
-        },
-
-        ready: function () {
-            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
         },
 
         rebuild: function () {

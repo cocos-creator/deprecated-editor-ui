@@ -1,7 +1,7 @@
 (function () {
     Polymer('fire-ui-color', {
         publish: {
-            value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+            value: null,
             focused: {
                 value: false,
                 reflect: true
@@ -14,6 +14,7 @@
         },
 
         created: function () {
+            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
             this.showPicker = false;
             this.focused = false;
         },

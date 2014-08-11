@@ -9,7 +9,7 @@
             this.selected = false;
         },
 
-        domReady: function () {
+        ready: function () {
             var fieldEL = new FireField();
             fieldEL.setAttribute('flex-2','');
             fieldEL.type = 'int';
