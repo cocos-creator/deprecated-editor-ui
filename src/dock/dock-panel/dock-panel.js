@@ -4,11 +4,18 @@
         },
 
         ready: function () {
+            var dragstartAction = function ( event ) {
+                event.dataTransfer.setData( 'element', this );
+                event.stopPropagation();
+            };
+
             var tabs = this.$.tabs;
             for ( var i = 0; i < this.children.length; ++i ) {
                 var contentEL = this.children[i];
                 var name = contentEL.getAttribute("name");
                 var tabEL = tabs.add(name);
+                tabEL.setAttribute("draggable", "true");
+                tabEL.addEventListener ( "dragstart", dragstartAction );
 
                 contentEL.style.display = "none";
                 tabEL.content = contentEL;
