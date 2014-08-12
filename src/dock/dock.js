@@ -12,20 +12,27 @@
                     if ( dockEL instanceof FireDock ) {
                         var resizer = new FireResizer();
                         resizer.vertical = isrow;
-
-                        // NOTE: it is possible resize target is null (dockEL and dockEL.nextElementSibling are all flex)
-                        if ( EditorUI.isFlex(dockEL) === false ) {
-                            resizer.target = dockEL;
-                        }
-                        else {
-                            if ( EditorUI.isFlex(dockEL.nextElementSibling) === false ) {
-                                resizer.target = dockEL.nextElementSibling;
-                            }
-                        }
                         resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
 
                         this.insertBefore( resizer, dockEL.nextElementSibling );
                         i += 1;
+                    }
+                }
+            }
+        },
+
+        domReady: function () {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                var resizer = this.children[i];
+                if ( resizer instanceof FireResizer ) {
+                    // NOTE: it is possible resize target is null (resizer.previousElementSibling and resizer.nextElementSibling are all flex)
+                    if ( EditorUI.isFlex(resizer.previousElementSibling) === false ) {
+                        resizer.target = resizer.previousElementSibling;
+                    }
+                    else {
+                        if ( EditorUI.isFlex(resizer.nextElementSibling) === false ) {
+                            resizer.target = resizer.nextElementSibling;
+                        }
                     }
                 }
             }

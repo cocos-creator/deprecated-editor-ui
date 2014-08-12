@@ -42,6 +42,7 @@
                         this.target.style.height = (targetRect.height - offset) + "px";
                     }
 
+                    //
                     event.stopPropagation();
                 };
                 updateMouseMove.call(this,event);
