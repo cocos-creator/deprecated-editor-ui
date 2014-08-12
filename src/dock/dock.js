@@ -27,10 +27,12 @@
                 if ( resizer instanceof FireResizer ) {
                     // NOTE: it is possible resize target is null (resizer.previousElementSibling and resizer.nextElementSibling are all flex)
                     if ( EditorUI.isFlex(resizer.previousElementSibling) === false ) {
+                        resizer.inverse = false;
                         resizer.target = resizer.previousElementSibling;
                     }
                     else {
                         if ( EditorUI.isFlex(resizer.nextElementSibling) === false ) {
+                            resizer.inverse = true;
                             resizer.target = resizer.nextElementSibling;
                         }
                     }

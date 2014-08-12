@@ -3,10 +3,10 @@
         publish: {
             value: null,
             index: -1,
-        },
-
-        created: function () {
-            this.selected = false;
+            selected: {
+                value: false,
+                reflect: true,
+            },
         },
 
         ready: function () {
@@ -40,7 +40,6 @@
                 return;
 
             this.selected = true;
-            this.classList.toggle('selected', this.selected);
         },
 
         unselect: function () {
@@ -48,7 +47,6 @@
                 return;
 
             this.selected = false;
-            this.classList.toggle('selected', this.selected);
         },
     });
 })();

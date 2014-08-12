@@ -23,7 +23,7 @@
                 detail.old.content.style.display = "none";
             }
             if ( detail.new !== null ) {
-                detail.new.content.style.display = "block";
+                detail.new.content.style.display = "";
             }
 
             event.stopPropagation();

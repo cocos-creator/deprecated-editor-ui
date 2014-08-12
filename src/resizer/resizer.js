@@ -1,6 +1,10 @@
 (function () {
     Polymer('fire-ui-resizer', {
         publish: {
+            inverse: {
+                value: false,
+                reflect: true
+            },
             vertical: {
                 value: false,
                 reflect: true
@@ -35,12 +39,16 @@
                     var offset = -1; 
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
+                        offset = this.inverse ? -offset : offset;
                         this.target.style.width = (targetRect.width + offset) + "px";
                     }
                     else {
                         offset = event.clientY - mouseDownY;
-                        this.target.style.height = (targetRect.height - offset) + "px";
+                        offset = this.inverse ? -offset : offset;
+                        this.target.style.height = (targetRect.height + offset) + "px";
                     }
+
+                    this.fire( "resized", { target: this.target } );
 
                     //
                     event.stopPropagation();
