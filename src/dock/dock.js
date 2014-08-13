@@ -46,5 +46,20 @@
                 return false;
             return true;
         },
+
+        dragEnterAction: function ( event ) {
+            this.style.outline = "1px solid white";
+        },
+
+        dragOverAction: function ( event ) {
+            this.style.outline = "1px solid white";
+        },
+
+        dragLeaveAction: function ( event ) {
+            this.style.outline = "";
+        },
+
+        dropAction: function ( event ) {
+        },
     });
 })();

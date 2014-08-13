@@ -1,6 +1,10 @@
 <polymer-element 
     name="fire-ui-dock" 
     constructor="FireDock"
+    on-dragenter="{{dragEnterAction}}"
+    on-dragover="{{dragOverAction}}"
+    on-dragleave="{{dragLeaveAction}}"
+    on-drop="{{dropAction}}"
     >
 <template>
 <link rel="stylesheet" href="dock.css">

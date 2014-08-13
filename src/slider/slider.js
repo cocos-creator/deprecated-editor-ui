@@ -17,7 +17,7 @@
         },
 
         ready: function () {
-            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
         update: function () {
@@ -36,14 +36,14 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             this.focused = false;
         },
 
         mousedownAction: function (event) {
-            FIRE.addDragGhost("pointer");
+            EditorUI.addDragGhost("pointer");
             this._editing = true;
 
             var rect = this.$.track.getBoundingClientRect();
@@ -67,7 +67,7 @@
                 document.removeEventListener('mousemove', mouseMoveHandle);
                 document.removeEventListener('mouseup', mouseUpHandle);
 
-                FIRE.removeDragGhost();
+                EditorUI.removeDragGhost();
                 this._editing = false;
                 event.stopPropagation();
             }).bind(this);

@@ -49,7 +49,7 @@
         // hue
         hueCtrlMouseDownAction: function ( event ) {
             // add drag-ghost
-            FIRE.addDragGhost("crosshair");
+            EditorUI.addDragGhost("crosshair");
             this._editingHSV = true;
 
             var rect = this.$.hueCtrl.getBoundingClientRect();
@@ -73,7 +73,7 @@
                 document.removeEventListener('mousemove', mouseMoveHandle);
                 document.removeEventListener('mouseup', mouseUpHandle);
 
-                FIRE.removeDragGhost();
+                EditorUI.removeDragGhost();
                 this._editingHSV = false;
                 event.stopPropagation();
             }).bind(this);
@@ -86,7 +86,7 @@
         // color 
         colorCtrlMouseDownAction: function ( event ) {
             // add drag-ghost
-            FIRE.addDragGhost("crosshair");
+            EditorUI.addDragGhost("crosshair");
             this._editingHSV = true;
 
             var rect = this.$.colorCtrl.getBoundingClientRect();
@@ -114,7 +114,7 @@
                 document.removeEventListener('mousemove', mouseMoveHandle);
                 document.removeEventListener('mouseup', mouseUpHandle);
 
-                FIRE.removeDragGhost();
+                EditorUI.removeDragGhost();
                 this._editingHSV = false;
                 event.stopPropagation();
             }).bind(this);
@@ -127,7 +127,7 @@
         // alpha
         opacityCtrlMouseDownAction: function ( event ) {
             // add drag-ghost
-            FIRE.addDragGhost("crosshair");
+            EditorUI.addDragGhost("crosshair");
 
             var rect = this.$.opacityCtrl.getBoundingClientRect();
             var mouseDownY = rect.top;
@@ -147,7 +147,7 @@
                 document.removeEventListener('mousemove', mouseMoveHandle);
                 document.removeEventListener('mouseup', mouseUpHandle);
 
-                FIRE.removeDragGhost();
+                EditorUI.removeDragGhost();
                 event.stopPropagation();
             }).bind(this);
             document.addEventListener ( 'mousemove', mouseMoveHandle );

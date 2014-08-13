@@ -19,7 +19,7 @@
         },
 
         ready: function () {
-            this.$.focus.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
         domReady: function () {
@@ -71,7 +71,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             this.clearSelect();

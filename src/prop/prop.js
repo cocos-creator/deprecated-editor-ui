@@ -37,7 +37,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             this.focused = false;
@@ -47,10 +47,10 @@
         mousedownAction: function ( event ) {
             if ( this.$.focus !== event.target &&
                  this.$.label !== event.target && 
-                 FIRE.find(this.$.label, event.target) === false )
+                 EditorUI.find(this.$.label, event.target) === false )
                 return;
 
-            var focusableEL = FIRE.getFirstFocusableChild(this.$.field.shadowRoot);
+            var focusableEL = EditorUI.getFirstFocusableChild(this.$.field.shadowRoot);
             if ( focusableEL ) {
                 focusableEL.focus();
             }

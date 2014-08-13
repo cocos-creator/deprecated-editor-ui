@@ -29,7 +29,7 @@
         mousedownAction: function ( event ) {
             if ( this.target ) {
                 // add drag-ghost
-                FIRE.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
+                EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
 
                 var targetRect = this.target.getBoundingClientRect();
                 var mouseDownX = event.clientX;
@@ -60,7 +60,7 @@
                     document.removeEventListener('mousemove', mouseMoveHandle);
                     document.removeEventListener('mouseup', mouseUpHandle);
 
-                    FIRE.removeDragGhost();
+                    EditorUI.removeDragGhost();
                     event.stopPropagation();
                 }).bind(this);
                 document.addEventListener ( 'mousemove', mouseMoveHandle );

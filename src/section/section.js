@@ -13,7 +13,7 @@
         },
 
         ready: function() {
-            this.$.title.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.title.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
         clickAction: function (event) {
@@ -29,7 +29,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             this.focused = false;

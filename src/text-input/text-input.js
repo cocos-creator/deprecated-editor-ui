@@ -10,7 +10,7 @@
         },
 
         ready: function() {
-            this.$.inputArea.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.inputArea.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
         valueChanged: function () {
@@ -44,7 +44,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             this.focused = false;

@@ -15,8 +15,7 @@
         },
 
         ready: function() {
-            // this.tabIndex = FIRE.getParentTabIndex(this)+1;
-            this.$.input.tabIndex = FIRE.getParentTabIndex(this)+1;
+            this.$.input.tabIndex = EditorUI.getParentTabIndex(this)+1;
 
             switch ( this.type ) {
                 case 'int': 
@@ -67,7 +66,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( FIRE.find( this.shadowRoot, event.relatedTarget ) )
+            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
             var val = this._convert(this.$.input.value);
