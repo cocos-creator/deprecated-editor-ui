@@ -128,4 +128,45 @@ var EditorUI;
         }
     };
 
+    //
+    EditorUI.addDockMask = function ( x, y, w, h ) {
+        // add dock mask
+        var mask = document.createElement('div');
+        mask.classList.add('dock-mask');
+        mask.style.position = 'fixed';
+        mask.style.zIndex = '999';
+        mask.style.opacity = '0.5';
+        mask.style.background = 'rgba(0,128,255,0.2)';
+        mask.style.left = x + 'px';
+        mask.style.top = y + 'px';
+        mask.style.width = w + 'px';
+        mask.style.height = h + 'px';
+        mask.style.pointerEvents = 'none';
+        mask.oncontextmenu = function() { return false; };
+
+        document.body.appendChild(mask);
+
+        return mask;
+    };
+    EditorUI.updateDockMask = function ( mask, x, y, w, h ) {
+        if ( mask !== null ) {
+            mask.style.left = x + 'px';
+            mask.style.top = y + 'px';
+            mask.style.width = w + 'px';
+            mask.style.height = h + 'px';
+        }
+    };
+    EditorUI.removeDockMask = function ( mask ) {
+        if ( mask === null || mask === undefined )
+            return;
+
+        if ( mask.parentNode !== null ) {
+            mask.parentNode.removeChild(mask);
+        }
+    };
+
+    document.addEventListener("dragover", function ( event ) {
+        // TODO:
+    });
+
 })(EditorUI || (EditorUI = {}));

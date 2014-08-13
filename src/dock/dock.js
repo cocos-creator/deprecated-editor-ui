@@ -48,15 +48,40 @@
         },
 
         dragEnterAction: function ( event ) {
-            this.style.outline = "1px solid white";
+            // this.style.outline = "1px solid white";
+            // if ( !this._dockMask ) {
+            //     var rect = event.currentTarget.getBoundingClientRect();
+            //     this._dockMask = EditorUI.addDockMask ( rect.left, 
+            //                                            rect.top, 
+            //                                            rect.width, 
+            //                                            rect.height/2 );
+            // }
         },
 
         dragOverAction: function ( event ) {
             this.style.outline = "1px solid white";
+
+            var rect = event.currentTarget.getBoundingClientRect();
+            if ( this._dockMask ) {
+                EditorUI.updateDockMask ( this._dockMask, 
+                                         rect.left, 
+                                         rect.top, 
+                                         rect.width, 
+                                         rect.height/2 );
+            }
+            else {
+                this._dockMask = EditorUI.addDockMask ( rect.left, 
+                                                       rect.top, 
+                                                       rect.width, 
+                                                       rect.height/2 );
+            }
         },
 
         dragLeaveAction: function ( event ) {
             this.style.outline = "";
+
+            EditorUI.removeDockMask (this._dockMask);
+            this._dockMask = null;
         },
 
         dropAction: function ( event ) {
