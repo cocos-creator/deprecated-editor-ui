@@ -5,7 +5,7 @@
 
         ready: function () {
             var dragstartAction = function ( event ) {
-                event.dataTransfer.setData( 'element', this );
+                EditorUI.setDockSource(this);
                 event.stopPropagation();
             };
 
@@ -15,7 +15,7 @@
                 var name = contentEL.getAttribute("name");
                 var tabEL = tabs.add(name);
                 tabEL.setAttribute("draggable", "true");
-                tabEL.addEventListener ( "dragstart", dragstartAction );
+                tabEL.addEventListener ( "dragstart", dragstartAction.bind(this) );
 
                 contentEL.style.display = "none";
                 tabEL.content = contentEL;

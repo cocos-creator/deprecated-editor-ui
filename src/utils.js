@@ -168,7 +168,11 @@ var EditorUI;
     var _dockHints = [];
     var _curHint = null;
     var _dockMask = null;
+    var _dockSource = null;
 
+    EditorUI.setDockSource = function ( source ) {
+        _dockSource = source;
+    };
     EditorUI.dockHint = function ( dockTarget ) {
         _dockHints.push(dockTarget);
     };
@@ -278,13 +282,43 @@ var EditorUI;
     });
     document.addEventListener("dragend", function ( event ) {
         _removeDockMask(_dockMask);
+        _curHint = null;
         _dockMask = null;
-    });
-    document.addEventListener("drop", function ( event ) {
-        console.log("drop!!!");
+        _dockSource = null;
     });
     // document.addEventListener("dragleave", function ( event ) {
     //     console.log(event.target);
     // });
+    document.addEventListener("drop", function ( event ) {
+        if ( _curHint ) {
+            var needNewDock = false;
+
+            if ( _curHint.target.tag === "fire-ui-dock" ) {
+                if ( _curHint.position === "left" ||
+                     _curHint.position === "right" )
+                {
+                    if ( _curHint.target.getAttribute("flex-col") ) {
+                        needNewDock = true;
+                    }
+                }
+                else {
+                    if ( _curHint.target.getAttribute("flex-row") ) {
+                        needNewDock = true;
+                    }
+                }
+            }
+            else {
+                // _curHint.target.parentNode
+            }
+
+            //
+            if ( needNewDock ) {
+            }
+            else {
+                _curHint.target.appendChild(_dockSource);
+                _dockSource = null;
+            }
+        }
+    });
 
 })(EditorUI || (EditorUI = {}));
