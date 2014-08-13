@@ -190,32 +190,36 @@ var EditorUI;
             var rightDist = Math.abs(event.x - targetRect.right);
             var topDist = Math.abs(event.y - targetRect.top);
             var bottomDist = Math.abs(event.y - targetRect.bottom);
-            var distance = 100;
             var minEdge = 100;
+            var distanceToEdgeCenter = -1;
 
-            if ( leftDist < distance ) {
-                distance = leftDist;
+            if ( leftDist < minEdge ) {
+                minEdge = leftDist;
+                distanceToEdgeCenter = Math.abs(event.y - center_y);
                 pos = 'left';
             }
 
-            if ( rightDist < distance ) {
-                distance = rightDist;
+            if ( rightDist < minEdge ) {
+                minEdge = rightDist;
+                distanceToEdgeCenter = Math.abs(event.y - center_y);
                 pos = 'right';
             }
 
-            if ( topDist < distance ) {
-                distance = topDist;
+            if ( topDist < minEdge ) {
+                minEdge = topDist;
+                distanceToEdgeCenter = Math.abs(event.x - center_x);
                 pos = 'top';
             }
 
-            if ( bottomDist < distance ) {
-                distance = bottomDist;
+            if ( bottomDist < minEdge ) {
+                minEdge = bottomDist;
+                distanceToEdgeCenter = Math.abs(event.x - center_x);
                 pos = 'bottom';
             }
 
             //
-            if ( pos !== null && (minDistance === null || distance < minDistance) ) {
-                minDistance = distance;
+            if ( pos !== null && (minDistance === null || distanceToEdgeCenter < minDistance) ) {
+                minDistance = distanceToEdgeCenter;
                 _curHint = { target: hintTarget, position: pos };
             }
         }
