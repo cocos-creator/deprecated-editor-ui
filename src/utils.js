@@ -164,9 +164,6 @@ var EditorUI;
             mask.parentNode.removeChild(mask);
         }
     };
-    var _slope = function ( x1, y1, x2, y2 ) {
-        return (y2 - y1) / (x2 - x1);
-    };
 
     var _dockHints = [];
     var _curHint = null;
@@ -282,6 +279,9 @@ var EditorUI;
     document.addEventListener("dragend", function ( event ) {
         _removeDockMask(_dockMask);
         _dockMask = null;
+    });
+    document.addEventListener("drop", function ( event ) {
+        console.log("drop!!!");
     });
     // document.addEventListener("dragleave", function ( event ) {
     //     console.log(event.target);

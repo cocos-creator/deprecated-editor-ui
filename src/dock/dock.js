@@ -47,20 +47,23 @@
             return true;
         },
 
+        // TODO
+        dockAt: function ( position ) {
+        },
+
         dragEnterAction: function ( event ) {
             // this.style.outline = "1px solid white";
         },
 
         dragOverAction: function ( event ) {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'move';
             EditorUI.dockHint( event.currentTarget );
             // this.style.outline = "1px solid white";
         },
 
         dragLeaveAction: function ( event ) {
             // this.style.outline = "";
-        },
-
-        dropAction: function ( event ) {
         },
     });
 })();
