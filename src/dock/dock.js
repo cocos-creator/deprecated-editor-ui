@@ -49,39 +49,15 @@
 
         dragEnterAction: function ( event ) {
             // this.style.outline = "1px solid white";
-            // if ( !this._dockMask ) {
-            //     var rect = event.currentTarget.getBoundingClientRect();
-            //     this._dockMask = EditorUI.addDockMask ( rect.left, 
-            //                                            rect.top, 
-            //                                            rect.width, 
-            //                                            rect.height/2 );
-            // }
         },
 
         dragOverAction: function ( event ) {
-            this.style.outline = "1px solid white";
-
-            var rect = event.currentTarget.getBoundingClientRect();
-            if ( this._dockMask ) {
-                EditorUI.updateDockMask ( this._dockMask, 
-                                         rect.left, 
-                                         rect.top, 
-                                         rect.width, 
-                                         rect.height/2 );
-            }
-            else {
-                this._dockMask = EditorUI.addDockMask ( rect.left, 
-                                                       rect.top, 
-                                                       rect.width, 
-                                                       rect.height/2 );
-            }
+            EditorUI.dockHint( event.currentTarget );
+            // this.style.outline = "1px solid white";
         },
 
         dragLeaveAction: function ( event ) {
-            this.style.outline = "";
-
-            EditorUI.removeDockMask (this._dockMask);
-            this._dockMask = null;
+            // this.style.outline = "";
         },
 
         dropAction: function ( event ) {

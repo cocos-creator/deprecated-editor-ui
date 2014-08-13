@@ -129,14 +129,14 @@ var EditorUI;
     };
 
     //
-    EditorUI.addDockMask = function ( x, y, w, h ) {
+    var _addDockMask = function ( x, y, w, h ) {
         // add dock mask
         var mask = document.createElement('div');
         mask.classList.add('dock-mask');
         mask.style.position = 'fixed';
         mask.style.zIndex = '999';
         mask.style.opacity = '0.5';
-        mask.style.background = 'rgba(0,128,255,0.2)';
+        mask.style.background = 'rgba(0,128,255,0.5)';
         mask.style.left = x + 'px';
         mask.style.top = y + 'px';
         mask.style.width = w + 'px';
@@ -148,7 +148,7 @@ var EditorUI;
 
         return mask;
     };
-    EditorUI.updateDockMask = function ( mask, x, y, w, h ) {
+    var _updateDockMask = function ( mask, x, y, w, h ) {
         if ( mask !== null ) {
             mask.style.left = x + 'px';
             mask.style.top = y + 'px';
@@ -156,7 +156,7 @@ var EditorUI;
             mask.style.height = h + 'px';
         }
     };
-    EditorUI.removeDockMask = function ( mask ) {
+    var _removeDockMask = function ( mask ) {
         if ( mask === null || mask === undefined )
             return;
 
@@ -164,9 +164,123 @@ var EditorUI;
             mask.parentNode.removeChild(mask);
         }
     };
+    var _slope = function ( x1, y1, x2, y2 ) {
+        return (y2 - y1) / (x2 - x1);
+    };
 
+    var _dockHints = [];
+    var _curHint = null;
+    var _dockMask = null;
+
+    EditorUI.dockHint = function ( dockTarget ) {
+        _dockHints.push(dockTarget);
+    };
     document.addEventListener("dragover", function ( event ) {
-        // TODO:
+        var minDistance = null;
+        _curHint = null;
+
+        for ( var i = 0; i < _dockHints.length; ++i ) {
+            var hintTarget = _dockHints[i];
+            var targetRect = hintTarget.getBoundingClientRect();
+            var center_x = targetRect.left + targetRect.width/2;
+            var center_y = targetRect.top + targetRect.height/2;
+            var pos = null;
+
+            var leftDist = Math.abs(event.x - targetRect.left);
+            var rightDist = Math.abs(event.x - targetRect.right);
+            var topDist = Math.abs(event.y - targetRect.top);
+            var bottomDist = Math.abs(event.y - targetRect.bottom);
+            var distance = 100;
+            var minEdge = 100;
+
+            if ( leftDist < distance ) {
+                distance = leftDist;
+                pos = 'left';
+            }
+
+            if ( rightDist < distance ) {
+                distance = rightDist;
+                pos = 'right';
+            }
+
+            if ( topDist < distance ) {
+                distance = topDist;
+                pos = 'top';
+            }
+
+            if ( bottomDist < distance ) {
+                distance = bottomDist;
+                pos = 'bottom';
+            }
+
+            //
+            if ( pos !== null && (minDistance === null || distance < minDistance) ) {
+                minDistance = distance;
+                _curHint = { target: hintTarget, position: pos };
+            }
+        }
+
+        if ( _curHint ) {
+            var rect = _curHint.target.getBoundingClientRect();
+            var maskRect = null;
+
+            if ( _curHint.position === 'top' ) {
+                maskRect = { 
+                    left: rect.left, 
+                    top: rect.top, 
+                    width: rect.width, 
+                    height: rect.height/4 
+                };
+            }
+            else if ( _curHint.position === 'bottom' ) {
+                maskRect = { 
+                    left: rect.left, 
+                    top: rect.bottom-rect.height/4, 
+                    width: rect.width, 
+                    height: rect.height/4 
+                };
+            }
+            else if ( _curHint.position === 'left' ) {
+                maskRect = { 
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width/4, 
+                    height: rect.height 
+                };
+            }
+            else if ( _curHint.position === 'right' ) {
+                maskRect = { 
+                    left: rect.right-rect.width/4, 
+                    top: rect.top,
+                    width: rect.width/4, 
+                    height: rect.height 
+                };
+            }
+
+            //
+            if ( _dockMask ) {
+                _updateDockMask ( _dockMask, 
+                                  maskRect.left, 
+                                  maskRect.top, 
+                                  maskRect.width, 
+                                  maskRect.height );
+            }
+            else {
+                _dockMask = _addDockMask ( maskRect.left, 
+                                           maskRect.top, 
+                                           maskRect.width, 
+                                           maskRect.height );
+            }
+        }
+
+        _dockHints = [];
     });
+    document.addEventListener("dragend", function ( event ) {
+        _removeDockMask(_dockMask);
+        _dockMask = null;
+    });
+    // document.addEventListener("dragleave", function ( event ) {
+    //     console.log(event.target);
+    // });
 
 })(EditorUI || (EditorUI = {}));
