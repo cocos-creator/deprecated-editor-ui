@@ -47,8 +47,8 @@
             return true;
         },
 
-        // TODO
-        dockAt: function ( position ) {
+        dockAt: function ( position, contentEL ) {
+            // TODO
         },
 
         dragEnterAction: function ( event ) {
@@ -58,7 +58,7 @@
         dragOverAction: function ( event ) {
             event.preventDefault();
             event.dataTransfer.dropEffect = 'move';
-            EditorUI.dockHint( event.currentTarget );
+            DockUtils.dockHint( event.currentTarget );
             // this.style.outline = "1px solid white";
         },
 

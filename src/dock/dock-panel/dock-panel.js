@@ -5,7 +5,7 @@
 
         ready: function () {
             var dragstartAction = function ( event ) {
-                EditorUI.setDockSource(this);
+                DockUtils.setDockSource(this);
                 event.stopPropagation();
             };
 
@@ -34,6 +34,25 @@
             }
 
             event.stopPropagation();
+        },
+
+        removeTab: function ( tab ) {
+            var tabs = this.$.tabs;
+
+            //
+            tabs.remove(tab);
+            if ( tab.content ) {
+                tab.content.parentNode.removeChild(tab.content);
+            }
+
+            //
+            if ( tabs.tabCount > 0 ) {
+                tabs.select(0);
+            }
+            else {
+                // TODO: dock.remove(this);
+                // this.parentNode.removeChild(this);
+            }
         },
     });
 })();

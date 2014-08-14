@@ -16,17 +16,44 @@
         },
 
         add: function ( name ) {
-            var tab = new FireTab();
-            tab.innerHTML = name;
+            var tabEL = new FireTab();
+            tabEL.innerHTML = name;
 
-            this.appendChild(tab);
+            this.appendChild(tabEL);
 
-            return tab;
+            return tabEL;
         },
 
-        // TODO:
-        // remove: function ( name ) {
-        // },
+        remove: function ( tab ) {
+            var tabEL = null;
+            if ( typeof tab === "number" ) {
+                if ( tab < this.children.length ) {
+                    tabEL = this.children[tab];
+                }
+            }
+            else if ( tab instanceof FireTab ) {
+                tabEL = tab;
+            }
+
+            //
+            if ( tabEL !== null ) {
+                if ( this.activeTab === tabEL ) {
+                    this.activeTab = null;
+
+                    if ( tabEL.nextElementSibling ) {
+                        this.activeTab = tabEL.nextElementSibling;
+                    }
+                    else if ( tabEL.previousElementSibling ) {
+                        this.activeTab = tabEL.previousElementSibling;
+                    }
+
+                    if ( this.activeTab )
+                        this.activeTab.classList.add('active');
+                }
+
+                this.removeChild(tabEL);
+            }
+        },
 
         select: function ( tab ) {
             var tabEL = null;
@@ -52,6 +79,13 @@
                     this.activeTab.classList.add('active');
                 }
             }
-        }
+        },
+
+        get tabCount () {
+            return this.children.length;
+        },
+        // tabCount: function () {
+        //     return this.children.length;
+        // },
     });
 })();
