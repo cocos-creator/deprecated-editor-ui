@@ -5,7 +5,7 @@
 
         ready: function () {
             var dragstartAction = function ( event ) {
-                DockUtils.setDockSource(this);
+                DockUtils.setDraggingTab(this);
                 event.stopPropagation();
             };
 
@@ -15,10 +15,11 @@
                 var name = contentEL.getAttribute("name");
                 var tabEL = tabs.add(name);
                 tabEL.setAttribute("draggable", "true");
-                tabEL.addEventListener ( "dragstart", dragstartAction.bind(this) );
+                tabEL.addEventListener ( "dragstart", dragstartAction.bind(tabEL) );
 
                 contentEL.style.display = "none";
                 tabEL.content = contentEL;
+                tabEL.panel = this;
             }
 
             tabs.select(0);
@@ -44,6 +45,7 @@
             if ( tab.content ) {
                 tab.content.parentNode.removeChild(tab.content);
             }
+            tab.panel = null;
 
             //
             if ( tabs.tabCount > 0 ) {

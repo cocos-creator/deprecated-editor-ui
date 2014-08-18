@@ -42,14 +42,47 @@ var DockUtils;
     var _dockHints = [];
     var _curHint = null;
     var _dockMask = null;
-    var _dockSource = null;
+    var _draggingTabEL = null;
 
-    DockUtils.setDockSource = function ( source ) {
-        _dockSource = source;
+    DockUtils.setDraggingTab = function ( tabEL ) {
+        _draggingTabEL = tabEL;
     };
 
     DockUtils.dockHint = function ( dockTarget ) {
         _dockHints.push(dockTarget);
+    };
+
+    DockUtils.dockAt = function ( dockTarget, tabEL, position ) {
+        var needNewDock = false;
+
+        if ( dockTarget.tag === "fire-ui-dock" ) {
+            if ( position === "left" ||
+                 position === "right" )
+            {
+                if ( dockTarget.getAttribute("flex-col") ) {
+                    needNewDock = true;
+                }
+            }
+            else {
+                if ( dockTarget.getAttribute("flex-row") ) {
+                    needNewDock = true;
+                }
+            }
+        }
+        else {
+            needNewDock = true;
+        }
+
+        //
+        tabEL.panel.removeTab(tabEL);
+        if ( needNewDock ) {
+            // TODO: new FireDock
+            var newDock = new FireDock();
+        }
+        else {
+            // TODO: new FireDockPanel
+            // dockTarget.appendChild(tabEL);
+        }
     };
 
     document.addEventListener("dragover", function ( event ) {
@@ -160,41 +193,16 @@ var DockUtils;
         _removeDockMask(_dockMask);
         _curHint = null;
         _dockMask = null;
-        _dockSource = null;
+        _draggingTabEL = null;
     });
     // document.addEventListener("dragleave", function ( event ) {
     //     console.log(event.target);
     // });
     document.addEventListener("drop", function ( event ) {
         if ( _curHint ) {
-            var needNewDock = false;
-
-            if ( _curHint.target.tag === "fire-ui-dock" ) {
-                if ( _curHint.position === "left" ||
-                     _curHint.position === "right" )
-                {
-                    if ( _curHint.target.getAttribute("flex-col") ) {
-                        needNewDock = true;
-                    }
-                }
-                else {
-                    if ( _curHint.target.getAttribute("flex-row") ) {
-                        needNewDock = true;
-                    }
-                }
-            }
-            else {
-                needNewDock = true;
-                // _curHint.target.parentNode
-            }
-
-            //
-            if ( needNewDock ) {
-            }
-            else {
-                _curHint.target.appendChild(_dockSource);
-                _dockSource = null;
-            }
+            DockUtils.dockAt( _curHint.target,
+                             _draggingTabEL,
+                             _curHint.position );
         }
     });
 })(DockUtils || (DockUtils = {}));

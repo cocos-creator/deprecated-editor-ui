@@ -47,10 +47,6 @@
             return true;
         },
 
-        dockAt: function ( position, contentEL ) {
-            // TODO
-        },
-
         dragEnterAction: function ( event ) {
             // this.style.outline = "1px solid white";
         },
