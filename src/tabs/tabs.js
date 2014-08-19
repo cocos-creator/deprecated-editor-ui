@@ -84,8 +84,5 @@
         get tabCount () {
             return this.children.length;
         },
-        // tabCount: function () {
-        //     return this.children.length;
-        // },
     });
 })();

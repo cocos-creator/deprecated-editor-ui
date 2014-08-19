@@ -34,15 +34,44 @@ var DockUtils;
         if ( mask === null || mask === undefined )
             return;
 
-        if ( mask.parentNode !== null ) {
-            mask.parentNode.removeChild(mask);
+        if ( mask.parentElement !== null ) {
+            mask.parentElement.removeChild(mask);
         }
+    };
+
+    var _reset = function () {
+        _removeDockMask(_dockMask);
+        _curHint = null;
+        _dockMask = null;
+        _draggingTabEL = null;
     };
 
     var _dockHints = [];
     var _curHint = null;
     var _dockMask = null;
     var _draggingTabEL = null;
+
+    DockUtils.copyAttributes = function ( src, dest ) {
+        dest.style.width = src.style.width;
+        dest.style.minWidth = src.style.minWidth;
+        dest.style.maxWidth = src.style.maxWidth;
+        dest.style.height = src.style.height;
+        dest.style.minHeight = src.style.minHeight;
+        dest.style.maxHeight = src.style.maxHeight;
+
+        if ( src.getAttribute('flex-1')  !== null ) dest.setAttribute('flex-1','');
+        if ( src.getAttribute('flex-2')  !== null ) dest.setAttribute('flex-2','');
+        if ( src.getAttribute('flex-3')  !== null ) dest.setAttribute('flex-3','');
+        if ( src.getAttribute('flex-4')  !== null ) dest.setAttribute('flex-4','');
+        if ( src.getAttribute('flex-5')  !== null ) dest.setAttribute('flex-5','');
+        if ( src.getAttribute('flex-6')  !== null ) dest.setAttribute('flex-6','');
+        if ( src.getAttribute('flex-7')  !== null ) dest.setAttribute('flex-7','');
+        if ( src.getAttribute('flex-8')  !== null ) dest.setAttribute('flex-8','');
+        if ( src.getAttribute('flex-9')  !== null ) dest.setAttribute('flex-9','');
+        if ( src.getAttribute('flex-10') !== null ) dest.setAttribute('flex-10','');
+        if ( src.getAttribute('flex-11') !== null ) dest.setAttribute('flex-11','');
+        if ( src.getAttribute('flex-12') !== null ) dest.setAttribute('flex-12','');
+    };
 
     DockUtils.setDraggingTab = function ( tabEL ) {
         _draggingTabEL = tabEL;
@@ -52,40 +81,10 @@ var DockUtils;
         _dockHints.push(dockTarget);
     };
 
-    DockUtils.dockAt = function ( dockTarget, tabEL, position ) {
-        var needNewDock = false;
-
-        if ( dockTarget.tag === "fire-ui-dock" ) {
-            if ( position === "left" ||
-                 position === "right" )
-            {
-                if ( dockTarget.getAttribute("flex-col") ) {
-                    needNewDock = true;
-                }
-            }
-            else {
-                if ( dockTarget.getAttribute("flex-row") ) {
-                    needNewDock = true;
-                }
-            }
-        }
-        else {
-            needNewDock = true;
-        }
-
-        //
-        tabEL.panel.removeTab(tabEL);
-        if ( needNewDock ) {
-            // TODO: new FireDock
-            var newDock = new FireDock();
-        }
-        else {
-            // TODO: new FireDockPanel
-            // dockTarget.appendChild(tabEL);
-        }
-    };
-
     document.addEventListener("dragover", function ( event ) {
+        if ( _draggingTabEL === null )
+            return;
+
         var minDistance = null;
         _curHint = null;
 
@@ -190,19 +189,31 @@ var DockUtils;
         _dockHints = [];
     });
     document.addEventListener("dragend", function ( event ) {
-        _removeDockMask(_dockMask);
-        _curHint = null;
-        _dockMask = null;
-        _draggingTabEL = null;
+        // reset internal states
+        _reset();
     });
     // document.addEventListener("dragleave", function ( event ) {
     //     console.log(event.target);
     // });
     document.addEventListener("drop", function ( event ) {
-        if ( _curHint ) {
-            DockUtils.dockAt( _curHint.target,
-                             _draggingTabEL,
-                             _curHint.position );
+        var curHint = _curHint;
+        var draggingTabEL = _draggingTabEL;
+
+        if ( curHint ) {
+            var srcDock = null;
+            if ( draggingTabEL.panel.elementCount > 1 ) {
+                draggingTabEL.panel.close(draggingTabEL);
+                srcDock = new FireDockPanel();
+                srcDock.add(draggingTabEL.content);
+                srcDock.select(0);
+            }
+            else {
+                srcDock = draggingTabEL.panel;
+            }
+            curHint.target.addDock( curHint.position, srcDock );
+
+            // reset internal states
+            _reset();
         }
     });
 })(DockUtils || (DockUtils = {}));

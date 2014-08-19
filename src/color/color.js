@@ -115,8 +115,8 @@
             if ( this._colorPicker !== null ) {
                 // TODO: we need to add border.disable(); which will prevent event during fadeout 
                 var timeoutHandle = (function () {
-                    if ( this._colorPicker.parentNode ) {
-                        this._colorPicker.parentNode.removeChild(this._colorPicker);
+                    if ( this._colorPicker.parentElement ) {
+                        this._colorPicker.parentElement.removeChild(this._colorPicker);
                         this._colorPicker = null;
                         this._timeoutID = null;
                     }

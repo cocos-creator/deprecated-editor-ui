@@ -26,6 +26,20 @@
             }
         },
 
+        update: function () {
+            // NOTE: it is possible resize target is null (this.previousElementSibling and this.nextElementSibling are all flex)
+            if ( EditorUI.isFlex(this.previousElementSibling) === false ) {
+                this.inverse = false;
+                this.target = this.previousElementSibling;
+            }
+            else {
+                if ( EditorUI.isFlex(this.nextElementSibling) === false ) {
+                    this.inverse = true;
+                    this.target = this.nextElementSibling;
+                }
+            }
+        },
+
         mousedownAction: function ( event ) {
             if ( this.target ) {
                 // add drag-ghost

@@ -122,8 +122,8 @@ var EditorUI;
     EditorUI.removeDragGhost = function () {
         if ( _dragGhost !== null ) {
             _dragGhost.style.cursor = 'auto';
-            if ( _dragGhost.parentNode !== null ) {
-                _dragGhost.parentNode.removeChild(_dragGhost);
+            if ( _dragGhost.parentElement !== null ) {
+                _dragGhost.parentElement.removeChild(_dragGhost);
             }
         }
     };
