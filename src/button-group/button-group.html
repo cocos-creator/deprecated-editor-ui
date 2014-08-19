@@ -1,11 +1,14 @@
 <polymer-element 
     name="fire-ui-button-group" 
     constructor="FireButtonGroup"
+    on-click="{{clickAction}}"
     >
 <template>
 <link rel="stylesheet" href="button-group.css">
 
-<content/>
+<div flex-row id="border">
+    <content/>
+</div>
 
 </template>
 

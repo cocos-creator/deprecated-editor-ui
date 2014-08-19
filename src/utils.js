@@ -77,6 +77,18 @@ var EditorUI;
     };
 
     //
+    EditorUI.getSelfOrAncient = function ( element, parentType ) {
+        var parent = element;
+        while ( parent ) {
+            if ( parent instanceof parentType )
+                return parent;
+
+            parent = parent.parentElement;
+        }
+        return 0;
+    };
+
+    //
     EditorUI.getFirstFocusableChild = function ( element ) {
         if ( element.tabIndex !== null && 
              element.tabIndex !== undefined &&
