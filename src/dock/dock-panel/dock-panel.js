@@ -25,9 +25,11 @@
             var detail = event.detail;
             if ( detail.old !== null ) {
                 detail.old.content.style.display = "none";
+                detail.new.content.dispatchEvent( new CustomEvent('hide') );
             }
             if ( detail.new !== null ) {
                 detail.new.content.style.display = "";
+                detail.new.content.dispatchEvent( new CustomEvent('show') );
             }
 
             event.stopPropagation();

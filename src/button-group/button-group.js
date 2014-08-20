@@ -1,7 +1,7 @@
 (function () {
     Polymer('fire-ui-button-group', {
         publish: {
-            toggable: {
+            multiple: {
                 value: false,
                 reflect: true
             },
@@ -9,12 +9,6 @@
 
         created: function () {
             this.activeItem = null;
-        },
-
-        ready: function () {
-            if ( this.toggable === false && this.children.length > 0 ) {
-                this.select(this.children[0]);
-            }
         },
 
         clickAction: function ( event ) {
@@ -79,19 +73,19 @@
 
             //
             if ( biEL !== null ) {
-                if ( biEL !== this.activeItem ) {
-                    this.fire( 'changed', { old: this.activeItem, new: biEL  } );
-
-                    if ( this.activeItem !== null ) {
-                        this.activeItem.classList.remove('active');
-                    }
-                    this.activeItem = biEL;
-                    this.activeItem.classList.add('active');
+                if ( this.multiple ) {
+                    this.fire( 'changed', { old: biEL, new: biEL  } );
+                    biEL.active = !biEL.active;
                 }
                 else {
-                    if ( this.toggable ) {
-                        this.activeItem.classList.remove('active');
-                        this.activeItem = null;
+                    if ( biEL !== this.activeItem ) {
+                        this.fire( 'changed', { old: this.activeItem, new: biEL  } );
+
+                        if ( this.activeItem !== null ) {
+                            this.activeItem.active = false;
+                        }
+                        this.activeItem = biEL;
+                        this.activeItem.active = true;
                     }
                 }
             }
