@@ -12,7 +12,7 @@
             if ( this.name === '' ) {
                 var varName = this.attributes.value.value;
                 varName = varName.replace( /{{(.*)}}/, "$1" );
-                this.name = FIRE.camelCaseToHuman(varName); 
+                this.name = EditorUI.camelCaseToHuman(varName); 
             }
         },
 
