@@ -123,11 +123,11 @@ var EditorUI;
             _dragGhost.style.zIndex = '999';
             _dragGhost.style.left = '0';
             _dragGhost.style.top = '0';
-            _dragGhost.style.width = window.innerWidth + 'px';
-            _dragGhost.style.height = window.innerHeight + 'px';
             _dragGhost.oncontextmenu = function() { return false; };
         }
         _dragGhost.style.cursor = cursor;
+        _dragGhost.style.width = window.innerWidth + 'px';
+        _dragGhost.style.height = window.innerHeight + 'px';
         document.body.appendChild(_dragGhost);
     };
 
