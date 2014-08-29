@@ -35,6 +35,14 @@
             }
         },
 
+        focus: function () {
+            this.$.inputArea.focus();
+        },
+
+        blur: function () {
+            this.$.inputArea.blur();
+        },
+
         focusAction: function (event) {
             this.lastVal = this.value;
             this.focused = true;
@@ -48,6 +56,7 @@
                 return;
 
             this.focused = false;
+            this.fire('confirm');
         },
 
         inputAction: function (event) {
