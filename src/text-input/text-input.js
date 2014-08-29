@@ -43,6 +43,10 @@
             this.$.inputArea.blur();
         },
 
+        select: function () {
+            this.$.inputArea.select();
+        },
+
         focusAction: function (event) {
             this.lastVal = this.value;
             this.focused = true;
