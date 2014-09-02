@@ -1,12 +1,22 @@
-editor-ui
-=========
+# Intro
 
-Editor UI Components
+Fireball-x Editor UI components
 
+## Install
 
 ```bash
-bower update
-npm update
+npm install
+bower install
+```
+## Build
+
+```bash
+gulp cp-core
 gulp
+```
+## Test
+
+```bash
+gulp test
 ```
 

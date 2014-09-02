@@ -110,6 +110,6 @@ gulp.task('watch', function() {
 });
 
 // tasks
-gulp.task('default', [ 'cp-core', 'cp-img', 'build-html'] );
-gulp.task('dev', [ 'cp-core', 'cp-img', 'build-html-dev'] );
-gulp.task('polyfill', [ 'cp-core', 'cp-img', 'build-html-polyfill'] );
+gulp.task('dev', [ 'cp-img', 'build-html-dev'] );
+gulp.task('polyfill', [ 'cp-img', 'build-html-polyfill'] );
+gulp.task('default', [ 'cp-img', 'build-html'] );
