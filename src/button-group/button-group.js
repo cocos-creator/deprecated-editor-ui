@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-button-group', {
+    Polymer({
         publish: {
             multiple: {
                 value: false,

@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-unit-input', {
+    Polymer({
         publish: {
             value: null,
             unit: '',

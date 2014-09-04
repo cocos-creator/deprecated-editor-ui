@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-tabs', {
+    Polymer({
         created: function () {
             this.activeTab = null;
         },

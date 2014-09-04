@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-li', {
+    Polymer({
         publish: {
             value: null,
             index: -1,

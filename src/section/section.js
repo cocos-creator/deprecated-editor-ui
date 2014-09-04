@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-section', {
+    Polymer({
         publish: {
             text: '',
             focused: {

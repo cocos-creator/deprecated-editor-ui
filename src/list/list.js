@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-list', {
+    Polymer({
         publish: {
             value: null,
             focused: {

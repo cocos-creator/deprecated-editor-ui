@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-color-picker', {
+    Polymer({
         publish: {
             value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
         },

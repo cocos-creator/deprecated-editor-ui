@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-slider', {
+    Polymer({
         _editing: false,
 
         publish: {

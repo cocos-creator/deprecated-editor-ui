@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-text-input', {
+    Polymer({
         publish: {
             value: '',
             multiline: false,

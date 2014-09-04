@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-dock-panel', {
+    Polymer({
         created: function () {
         },
 

@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-color', {
+    Polymer({
         publish: {
             value: null,
             focused: {

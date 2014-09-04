@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-checkbox', {
+    Polymer({
         publish: {
             value: false,
             focused: {

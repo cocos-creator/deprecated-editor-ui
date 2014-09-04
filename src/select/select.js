@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-select', {
+    Polymer({
         publish: {
             value: -1,
             options: null, 

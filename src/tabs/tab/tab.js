@@ -1,4 +1,4 @@
 (function () {
-    Polymer('fire-ui-tab', {
+    Polymer({
     });
 })();

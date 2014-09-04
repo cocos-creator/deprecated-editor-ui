@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-bi', {
+    Polymer({
         publish: {
             active: {
                 value: false,

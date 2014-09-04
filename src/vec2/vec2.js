@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-vec2', {
+    Polymer({
         publish: {
             value: null,
         },

@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-resizer', {
+    Polymer({
         publish: {
             inverse: {
                 value: false,

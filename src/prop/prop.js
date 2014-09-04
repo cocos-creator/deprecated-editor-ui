@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-prop', {
+    Polymer({
         publish: {
             name: '',
             focused: {

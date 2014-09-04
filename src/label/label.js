@@ -1,5 +1,5 @@
 (function () {
-    Polymer('fire-ui-label', {
+    Polymer({
         publish: {
             focused: {
                 value: false,
