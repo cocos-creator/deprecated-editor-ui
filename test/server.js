@@ -33,6 +33,9 @@ app.get('/dock', function(req, res){
 app.get('/debug-focus', function(req, res){
     res.sendFile( cwd + '/test/debug-focus.html');
 });
+app.get('/dnd', function(req, res){
+    res.sendFile( cwd + '/test/dnd.html');
+});
 
 // serves all the static files
 app.get(/^(.+)$/, function(req, res){ 

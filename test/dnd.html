@@ -1,0 +1,245 @@
+<html>
+<head>
+
+<title>Drag and Drop</title>
+
+<script src="ext/platform/platform.js"></script>
+
+<link rel="import" href="ext/polymer/polymer.html">
+
+</head>
+
+<body>
+
+<!-- template dnd-top -->
+<polymer-element name="dnd-top">
+    <template>
+        <style>
+            .box {
+                display: inline-block;
+                border: 5px solid #888;
+                background-color: #222;
+                padding: 0 20px 20px;
+            }
+            .box:focus {
+                outline: 0;
+                border: 5px solid #09F;
+            }
+        </style>
+
+        <div class="box"
+            on-dragstart="{{dragstartAction}}"
+            on-drag="{{dragAction}}"
+            on-dragenter="{{dragenterAction}}"
+            on-dragleave="{{dragleaveAction}}"
+            on-dragover="{{dragoverAction}}"
+            on-drop="{{dropAction}}"
+            on-dragend="{{dragendAction}}"
+            >
+            <h2>Top</h2>
+            <content/>
+        </div>
+    </template>
+
+    <script>
+        Polymer('dnd-top', {
+
+            // TODO:
+            ready: function() {
+            },
+
+            // dnd
+            dragstartAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drag start");
+            },
+
+            dragAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drag");
+            },
+
+            dragenterAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                this.fire('test-info', 'dnd-top drag enter');
+                console.log("dnd-top drag enter");
+            },
+
+            dragleaveAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drag leave");
+            },
+
+            dragoverAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drag over");
+            },
+
+            dropAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drop");
+            },
+
+            dragendAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-top drag end");
+            },
+
+        });
+    </script>
+</polymer-element>
+
+<!-- template dnd-bottom -->
+<polymer-element name="dnd-bottom">
+    <template>
+        <style>
+            .box {
+                display: inline-block;
+                border: 5px solid #888;
+                background-color: #222;
+                padding: 0 20px 20px;
+            }
+            .box:focus {
+                outline: 0;
+                border: 5px solid #09F;
+            }
+        </style>
+
+        <div class="box"
+            on-dragstart="{{dragstartAction}}"
+            on-drag="{{dragAction}}"
+            on-dragenter="{{dragenterAction}}"
+            on-dragleave="{{dragleaveAction}}"
+            on-dragover="{{dragoverAction}}"
+            on-drop="{{dropAction}}"
+            on-dragend="{{dragendAction}}"
+            >
+            <h2>Bottom</h2>
+            <content/>
+        </div>
+    </template>
+
+    <script>
+        Polymer('dnd-bottom', {
+
+            // TODO:
+            ready: function() {
+            },
+
+
+            // dnd
+            dragstartAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag start");
+            },
+
+            dragAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag");
+            },
+
+            dragenterAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag enter");
+            },
+
+            dragleaveAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag leave");
+            },
+
+            dragoverAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag over");
+            },
+
+            dropAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drop");
+            },
+
+            dragendAction: function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                console.log("dnd-bottom drag end");
+            },
+        });
+    </script>
+</polymer-element>
+
+<!-- test content -->
+<template id="test-content" is="auto-binding">
+    <style>
+        body {
+            position: relative;
+            background-color: #333;
+            padding: 0px 100px;
+            margin-top: 20px;
+            color: white;
+        }
+
+        #test-info {
+            margin-top: 30px;
+        }
+
+        #test-info p {
+            font-size: 0.5em;
+        }
+
+        dnd-top {
+            margin-left: 100px;
+        }
+
+    </style>
+    <h2>Drag and Drop Test</h2>
+    <dnd-bottom>
+        drop here test
+        <dnd-top>
+            drop here test
+        </dnd-top>
+    </dnd-bottom>
+
+    <div id="test-info">
+        test-info
+    </div>
+
+    <script>
+        var testInfo = document.querySelector('#test-info');
+
+        document.addEventListener( "test-info", function (event) {
+            var p = document.createElement('p');
+            p.textContent = event.detail;
+            testInfo.appendChild(p);
+        });
+    </script>
+</template>
+
+</body>
+</html>
