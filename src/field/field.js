@@ -2,7 +2,7 @@
     Polymer({
         publish: {
             value: null,
-            type: '',
+            type: null,
             enumType: null,
             enumList: null,
             textMode: 'single',
@@ -25,12 +25,18 @@
 
         createFieldElement: function () {
             // do dom transform
-            var typename = typeof this.value;
             var fieldEL = null;
             var enumTypeDef = null;
+            var typename = this.type;
+            if ( !typename ) {
+                typename = typeof this.value;
+                if ( typename === 'number' ) {
+                    typename = 'float';
+                }
+            }
 
             switch ( typename ) {
-                case "number":
+                case "enum":
                     if ( this.type === 'enum' ) {
                         if ( this.enumType !== null ) {
                             enumTypeDef = FIRE.getVarFrom(window,this.enumType);
@@ -45,34 +51,21 @@
                             fieldEL = new FireSelect(); 
                             fieldEL.options = this.finalEnumList;
                         }
-                    }
-                    else if ( this.type === 'int' ) {
-                        fieldEL = new FireUnitInput();
-                        fieldEL.type = 'int';
-                    }
-                    else if ( this.type === 'float' ) {
-                        fieldEL = new FireUnitInput();
-                        fieldEL.type = 'float';
                     }
                     break;
 
+                case "int":
+                    fieldEL = new FireUnitInput();
+                    fieldEL.type = 'int';
+                    break;
+
+                case "float":
+                    fieldEL = new FireUnitInput();
+                    fieldEL.type = 'float';
+                    break;
+
                 case "string":
-                    if ( this.type === 'enum' ) {
-                        if ( this.enumType !== null ) {
-                            enumTypeDef = FIRE.getVarFrom(window,this.enumType);
-                            this.finalEnumList = FIRE.getEnumList(enumTypeDef);
-                        }
-                        else {
-                            if ( this.enumList !== null ) {
-                                this.finalEnumList = this.enumList.slice(0);
-                            }
-                        }
-                        if ( this.finalEnumList ) {
-                            fieldEL = new FireSelect(); 
-                            fieldEL.options = this.finalEnumList;
-                        }
-                    }
-                    else if ( this.textMode === 'single' ) {
+                    if ( this.textMode === 'single' ) {
                         fieldEL = new FireTextInput();
                     }
                     else if ( this.textMode === 'multi' ) {
