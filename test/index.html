@@ -34,7 +34,7 @@ span.space {
 <template id="my-template" is="auto-binding">
     <h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI</h2>
 
-    <fire-ui-section text="Change Section">
+    <fire-ui-section name="Change Section">
         <div flex-row>
             <fire-ui-checkbox value="{{myChecked}}"></fire-ui-checkbox>                                              
             <span class="space"></span>                                                                            
@@ -153,7 +153,8 @@ span.space {
     <span class="space" style="height: 20px"></span>                                                       
 
     <fire-ui-dock-panel style="min-height: 500px;">
-        <fire-ui-section name="Property" text="Property Section">
+        <div name="Property">
+            <fire-ui-section name="Property Section">
             <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
@@ -161,7 +162,8 @@ span.space {
             <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
-        </fire-ui-section>
+            </fire-ui-section>
+        </div>
 
         <div name="Project 2" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
             <h1>Project 2</h1>

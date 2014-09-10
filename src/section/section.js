@@ -1,7 +1,7 @@
 (function () {
     Polymer({
         publish: {
-            text: '',
+            name: '',
             focused: {
                 value: false,
                 reflect: true
