@@ -192,9 +192,6 @@ var DockUtils;
         // reset internal states
         _reset();
     });
-    // document.addEventListener("dragleave", function ( event ) {
-    //     console.log(event.target);
-    // });
     document.addEventListener("drop", function ( event ) {
         var curHint = _curHint;
         var draggingTabEL = _draggingTabEL;
