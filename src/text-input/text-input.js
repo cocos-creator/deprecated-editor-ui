@@ -64,10 +64,11 @@
         },
 
         inputAction: function (event) {
-            if ( this.value != event.target.value ) {
-                this.value = event.target.value;
-                this.fire('changed');
-            }
+            // NOTE: this will prevent Chinese input
+            // if ( this.value != event.target.value ) {
+            //     this.value = event.target.value;
+            //     this.fire('changed');
+            // }
 
             event.stopPropagation();
         },
@@ -91,6 +92,10 @@
                 switch ( event.which ) {
                     // enter
                     case 13:
+                        if ( this.value != event.target.value ) {
+                            this.value = event.target.value;
+                            this.fire('changed');
+                        }
                         this.$.inputArea.blur();
                     break;
 
