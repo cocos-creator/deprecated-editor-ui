@@ -7,21 +7,21 @@
     "licenseUrl": "http://opensource.org/licenses/MIT",
     "main": "index.html",
     "window": {
-        "toolbar": false,
-        "width": 1280,
-        "height": 900
+      "toolbar": false,
+      "width": 1280,
+      "height": 900
     },
     "dependencies": {
     },
     "devDependencies": {
-        "gulp": "",
-        "gulp-clean": "",
-        "gulp-util": "",
-        "gulp-jshint": "",
-        "jshint-stylish": "",
-        "gulp-uglify": "",
-        "gulp-stylus": "",
-        "gulp-vulcanize": "",
-        "express": ""
+      "gulp": "",
+      "gulp-clean": "",
+      "gulp-util": "",
+      "gulp-jshint": "",
+      "jshint-stylish": "",
+      "gulp-uglify": "",
+      "gulp-stylus": "",
+      "gulp-vulcanize": "",
+      "express": ""
     }
 }
