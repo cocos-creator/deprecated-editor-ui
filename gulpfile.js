@@ -9,8 +9,9 @@ var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
 
 var paths = {
-    js: 'src/**/*.js',
     ext_core: '../core/bin/**/*.js',
+
+    js: 'src/**/*.js',
     html: 'src/**/*.html',
     css: 'src/**/*.styl',
     img: 'src/img/**/*',
