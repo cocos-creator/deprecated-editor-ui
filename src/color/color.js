@@ -14,7 +14,7 @@
         },
 
         created: function () {
-            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
+            this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
             this.showPicker = false;
             this.focused = false;
         },

@@ -5,11 +5,11 @@
         },
 
         created: function () {
-            this.value = new FIRE.Vec2(0,0);
+            this.value = new Fire.Vec2(0,0);
         },
 
         changedAction: function ( event ) {
-            // this.value = new FIRE.Vec2(this.$.x.value, this.$.y.value);
+            // this.value = new Fire.Vec2(this.$.x.value, this.$.y.value);
             event.stopPropagation();
 
             this.fire("changed");

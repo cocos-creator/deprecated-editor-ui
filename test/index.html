@@ -158,7 +158,7 @@ span.space {
             <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
-            <fire-ui-prop value="{{mySelect}}" type="enum" enumType="FIRE.Atlas.SortBy"></fire-ui-prop>                                                             
+            <fire-ui-prop value="{{mySelect}}" type="enum" enumType="Fire.Atlas.SortBy"></fire-ui-prop>                                                             
             <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
@@ -250,7 +250,7 @@ span.space {
         },
 
         // myColor
-        myColor: new FIRE.Color( 1.0, 0.0, 0.0, 1.0 ), 
+        myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ), 
         myColorClick: function () {
             this.myColor.r = rangeRandom( 0.0, 1.0 );
             this.myColor.g = rangeRandom( 0.0, 1.0 );
@@ -259,7 +259,7 @@ span.space {
         },
 
         // myVec2
-        myVec2: new FIRE.Vec2( 1.0, 1.0 ),
+        myVec2: new Fire.Vec2( 1.0, 1.0 ),
         myVec2Click: function () {
             this.myVec2.x = rangeRandom( 0.0, 1.0 );
             this.myVec2.y = rangeRandom( 0.0, 1.0 );
@@ -274,11 +274,11 @@ span.space {
         // myList
         cnt: 0,
         listList: [
-                [ new FIRE.Vec2(1,1), new FIRE.Vec2(2,1) ],
+                [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
                 [ "foobar 1", "foobar 2", "foobar 3" ],
                 [ 1, 2, 3, 4 ],
         ],
-        myList: [ new FIRE.Vec2(1,1), new FIRE.Vec2(2,1) ],
+        myList: [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
         myListClick: function () {
             this.cnt = (this.cnt + 1)%this.listList.length;
             this.myList = this.listList[this.cnt]; 

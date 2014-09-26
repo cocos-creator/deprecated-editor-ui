@@ -39,8 +39,8 @@
                 case "enum":
                     if ( this.type === 'enum' ) {
                         if ( this.enumType !== null ) {
-                            enumTypeDef = FIRE.getVarFrom(window,this.enumType);
-                            this.finalEnumList = FIRE.getEnumList(enumTypeDef);
+                            enumTypeDef = Fire.getVarFrom(window,this.enumType);
+                            this.finalEnumList = Fire.getEnumList(enumTypeDef);
                         }
                         else {
                             if ( this.enumList !== null ) {
@@ -83,13 +83,13 @@
                         // TODO
                     }
                     else {
-                        var className = FIRE.getClassName(this.value);
+                        var className = Fire.getClassName(this.value);
                         switch ( className ) {
-                            case "FIRE.Color":
+                            case "Fire.Color":
                                 fieldEL = new FireColor();
                                 break;
 
-                            case "FIRE.Vec2":
+                            case "Fire.Vec2":
                                 fieldEL = new FireVec2();
                                 break;
                         }

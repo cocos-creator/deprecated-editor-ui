@@ -1,7 +1,7 @@
 (function () {
     Polymer({
         publish: {
-            value: new FIRE.Color( 1.0, 1.0, 1.0, 1.0 ),
+            value: new Fire.Color( 1.0, 1.0, 1.0, 1.0 ),
         },
 
         observe: {
@@ -10,7 +10,7 @@
         },
 
         created: function () {
-            this.value = new FIRE.Color( 1.0, 1.0, 1.0, 1.0 );
+            this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
         },
 
         ready: function() {
@@ -21,7 +21,7 @@
 
         colorChanged: function ( oldValue, newValue ) {
             if ( this._editingHSV === false ) {
-                this.hsv = FIRE.rgb2hsv(this.value.r, this.value.g, this.value.b);
+                this.hsv = Fire.rgb2hsv(this.value.r, this.value.g, this.value.b);
                 this._updateColor();
             }
         },
@@ -36,7 +36,7 @@
         },
 
         _updateColor: function () {
-            var cssRGB = FIRE.hsv2rgb( this.hsv.h, 1, 1 );
+            var cssRGB = Fire.hsv2rgb( this.hsv.h, 1, 1 );
             cssRGB = "rgb("+ (cssRGB.r*255|0) + "," + (cssRGB.g*255|0) + "," + (cssRGB.b*255|0) + ")";
             this.$.colorCtrl.style.backgroundColor = cssRGB;
             this.$.opacityCtrl.style.backgroundColor = cssRGB;
