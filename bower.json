@@ -17,7 +17,7 @@
         "tests"
     ],
     "dependencies": {
-        "polymer": "Polymer/polymer#~0.4.1",
+        "polymer": "Polymer/polymer#~0.4.2",
         "fontawesome": ""
     }
 }
