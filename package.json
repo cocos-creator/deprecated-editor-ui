@@ -9,13 +9,13 @@
     },
     "devDependencies": {
       "gulp": "",
-      "gulp-clean": "",
       "gulp-util": "",
       "gulp-jshint": "",
       "jshint-stylish": "",
       "gulp-uglify": "",
       "gulp-stylus": "",
       "gulp-vulcanize": "",
-      "express": ""
+      "express": "",
+      "del": ""
     }
 }

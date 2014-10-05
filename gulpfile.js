@@ -1,12 +1,12 @@
 var gulp = require('gulp');
 
 var gutil = require('gulp-util');
-var clean = require('gulp-clean');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
+var del = require('del');
 
 var paths = {
     ext_core: '../core/bin/**/*.js',
@@ -19,9 +19,7 @@ var paths = {
 
 // clean
 gulp.task('clean', function() {
-    return gulp.src('bin/', {read: false})
-    .pipe(clean())
-    ;
+    del('bin/');
 });
 
 // copy
