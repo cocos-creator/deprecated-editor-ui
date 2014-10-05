@@ -27,14 +27,8 @@ function error(status, msg) {
 app.get('/', function(req, res){
     res.sendFile( cwd + '/test/index.html' );
 });
-app.get('/dock', function(req, res){
-    res.sendFile( cwd + '/test/dock.html');
-});
-app.get('/debug-focus', function(req, res){
-    res.sendFile( cwd + '/test/debug-focus.html');
-});
-app.get('/dnd', function(req, res){
-    res.sendFile( cwd + '/test/dnd.html');
+app.get('/test/*', function(req, res){
+    res.sendFile( cwd + '/test/' + req.params[0] + '.html');
 });
 
 // serves all the static files

@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Debug Focus</title>
+
+<style>
+body {
+    position: relative;
+    background-color: #333;
+    padding: 0px 100px;
+    margin-top: 20px;
+    color: white;
+}
+canvas {
+    border: 5px solid #555;
+    background-color: #222;
+}
+</style>
+
+</head>
+
+<body>
+<canvas id="canvas1" width="200" height="200" style=""></canvas>
+<canvas id="canvas2" width="200" height="200" style=""></canvas>
+<canvas id="canvas3" width="200" height="200" style=""></canvas>
+
+<div style="margin: 30px"></div>
+
+<canvas id="canvas4" width="200" height="200" style="position: absolute;"></canvas>
+<canvas id="canvas5" width="200" height="200" style="position: absolute; background: transparent;"></canvas>
+
+<script>
+    var can1 = document.getElementById('canvas1');
+    var ctx1 = can1.getContext('2d');
+    ctx1.fillStyle = 'rgba(255,0,0,0.4)';
+    ctx1.fillRect(20,20,20,80);
+    ctx1.fillStyle = 'rgba(205,255,23,0.4)';
+    ctx1.fillRect(30,30,40,50);
+    ctx1.fillStyle = 'rgba(5,255,0,0.4)';
+    ctx1.fillRect(40,50,80,20);
+
+    var can2 = document.getElementById('canvas2');
+    var ctx2 = can2.getContext('2d');
+    ctx2.beginPath();
+    ctx2.fillStyle = 'rgba(255,0,0,0.7)';
+    ctx2.arc(50, 50, 50, 0, Math.PI * 2, 1);
+    ctx2.fill();
+    ctx2.beginPath();
+    ctx2.clearRect(20, 40, 60, 20);
+
+    var can3 = document.getElementById('canvas3');
+    var ctx3 = can3.getContext('2d');
+    ctx3.drawImage(can1, 0, 0);
+    ctx3.drawImage(can2, 0, 0);
+
+    var can4 = document.getElementById('canvas4');
+    var ctx4 = can4.getContext('2d');
+    ctx4.fillStyle = 'rgba(255,0,0,0.4)';
+    ctx4.fillRect(20,20,20,80);
+    ctx4.fillStyle = 'rgba(205,255,23,0.4)';
+    ctx4.fillRect(30,30,40,50);
+    ctx4.fillStyle = 'rgba(5,255,0,0.4)';
+    ctx4.fillRect(40,50,80,20);
+
+    var can5 = document.getElementById('canvas5');
+    var ctx5 = can5.getContext('2d');
+    ctx5.beginPath();
+    ctx5.fillStyle = 'rgba(255,0,0,0.7)';
+    ctx5.arc(50, 50, 50, 0, Math.PI * 2, 1);
+    ctx5.fill();
+    ctx5.beginPath();
+    ctx5.clearRect(20, 40, 60, 20);
+</script>
+
+</body>
+</html>
