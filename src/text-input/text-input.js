@@ -15,6 +15,8 @@
 
         valueChanged: function () {
             this.$.inputArea.value = this.value;
+            this.fire('changed');
+
             // if ( this.multiline ) {
             //     this._adjust();
             // }
@@ -59,6 +61,10 @@
             if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
+            //
+            if ( this.value !== this.$.inputArea.value ) {
+                this.value = this.$.inputArea.value;
+            }
             this.focused = false;
             this.fire('confirm');
         },
@@ -67,7 +73,6 @@
             // NOTE: this will prevent Chinese input
             // if ( this.value != event.target.value ) {
             //     this.value = event.target.value;
-            //     this.fire('changed');
             // }
 
             event.stopPropagation();
@@ -94,16 +99,15 @@
                     case 13:
                         if ( this.value != event.target.value ) {
                             this.value = event.target.value;
-                            this.fire('changed');
                         }
                         this.$.inputArea.blur();
                     break;
 
                     // esc
                     case 27:
+                        this.$.inputArea.value = this.lastVal;
                         if ( this.value != this.lastVal ) {
                             this.value = this.lastVal;
-                            this.fire('changed');
                         }
                         this.$.inputArea.blur();
                     break;
