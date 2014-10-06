@@ -18,6 +18,7 @@
     ],
     "dependencies": {
         "polymer": "Polymer/polymer#~0.4.2",
-        "fontawesome": ""
+        "fontawesome": "",
+        "d3": ""
     }
 }

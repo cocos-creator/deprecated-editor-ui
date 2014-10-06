@@ -1,5 +1,6 @@
 // init express
 var express = require('express');
+var path = require('path');
 var app = express();
 var cwd = process.cwd();
 var port = 8082;
@@ -28,7 +29,14 @@ app.get('/', function(req, res){
     res.sendFile( cwd + '/test/index.html' );
 });
 app.get('/test/*', function(req, res){
-    res.sendFile( cwd + '/test/' + req.params[0] + '.html');
+    // console.log('static file request : ' + req.params[0]);
+
+    if ( path.extname(req.params[0]) !== '' ) {
+        res.sendFile( cwd + '/test/' + req.params[0]);
+    }
+    else {
+        res.sendFile( cwd + '/test/' + req.params[0] + '.html');
+    }
 });
 
 // serves all the static files

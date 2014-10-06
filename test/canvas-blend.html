@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Debug Focus</title>
+<title>Canvas Blend</title>
 
 <style>
 body {
@@ -14,19 +14,23 @@ canvas {
     border: 5px solid #555;
     background-color: #222;
 }
+.border {
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 30px;
+    border: 2px solid black;
+}
 </style>
 
 </head>
 
 <body>
-<canvas id="canvas1" width="200" height="200" style=""></canvas>
-<canvas id="canvas2" width="200" height="200" style=""></canvas>
-<canvas id="canvas3" width="200" height="200" style=""></canvas>
-
-<div style="margin: 30px"></div>
-
-<canvas id="canvas4" width="200" height="200" style="position: absolute;"></canvas>
-<canvas id="canvas5" width="200" height="200" style="position: absolute; background: transparent;"></canvas>
+<h3>DrawImage: canvas1 + canvas2</h3>
+<div class="border">
+    <canvas id="canvas1" width="200" height="200" style="position: relative;"></canvas> 
+    <canvas id="canvas2" width="200" height="200" style="position: relative;"></canvas>
+    <canvas id="canvas3" width="200" height="200" style="position: relative;"></canvas>
+</div>
 
 <script>
     var can1 = document.getElementById('canvas1');
@@ -51,7 +55,15 @@ canvas {
     var ctx3 = can3.getContext('2d');
     ctx3.drawImage(can1, 0, 0);
     ctx3.drawImage(can2, 0, 0);
+</script>
 
+<h3>Position: canvas1 + canvas2</h3>
+<div class="border">
+    <canvas id="canvas4" width="200" height="200" style="position: absolute; top: 0px;"></canvas> 
+    <canvas id="canvas5" width="200" height="200" style="position: relative; top: 0px; background: transparent;"></canvas>
+</div>
+
+<script>
     var can4 = document.getElementById('canvas4');
     var ctx4 = can4.getContext('2d');
     ctx4.fillStyle = 'rgba(255,0,0,0.4)';
@@ -69,6 +81,50 @@ canvas {
     ctx5.fill();
     ctx5.beginPath();
     ctx5.clearRect(20, 40, 60, 20);
+</script>
+
+<h3>Position: canvas1 + canvas2(webGL)</h3>
+<div class="border">
+    <canvas id="canvas6" width="200" height="200" style="position: absolute; top: 0px; left: 0px"></canvas> 
+    <canvas id="canvas7" width="200" height="200" style="position: relative; top: 0px; left: 0px; background: transparent;"></canvas>
+</div>
+
+<script>
+    var can6 = document.getElementById('canvas6');
+    var ctx6 = can6.getContext('2d');
+    ctx6.fillStyle = 'rgba(255,0,0,0.4)';
+    ctx6.fillRect(20,20,20,80);
+    ctx6.fillStyle = 'rgba(205,255,23,0.4)';
+    ctx6.fillRect(30,30,40,50);
+    ctx6.fillStyle = 'rgba(5,255,0,0.4)';
+    ctx6.fillRect(40,50,80,20);
+
+    // Get A WebGL context
+    var can7 = document.getElementById("canvas7");
+    var gl = can7.getContext("experimental-webgl", { premultipliedAlpha: false });
+
+    gl.clearColor(1.0, 1.0, 0.0, 0.5);
+    gl.clear(this.gl.COLOR_BUFFER_BIT);
+</script>
+
+<h3>Position: svg + canvas2(webGL) + svg</h3>
+<div class="border">
+    <svg width="200" height="200" style="position: absolute; top: 0px; left: 0px;">
+        <circle cx="50" cy="50" r="40" stroke="white" stroke-width="4" fill="blue" />
+    </svg>
+    <canvas id="canvas8" width="200" height="200" style="position: relative; top: 0px; left: 0px; background: transparent;"></canvas>
+    <svg width="200" height="200" style="position: absolute; top: 0px; left: 0px;">
+        <circle cx="100" cy="100" r="10" stroke="white" stroke-width="2" fill="blue" />
+    </svg>
+</div>
+
+<script>
+    // Get A WebGL context
+    var can8 = document.getElementById("canvas8");
+    var gl = can8.getContext("experimental-webgl", { premultipliedAlpha: false });
+
+    gl.clearColor(1.0, 0.0, 0.0, 0.5);
+    gl.clear(this.gl.COLOR_BUFFER_BIT);
 </script>
 
 </body>
