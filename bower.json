@@ -20,6 +20,7 @@
         "polymer": "Polymer/polymer#~0.4.2",
         "fontawesome": "",
         "d3": "",
-        "snap.svg": ""
+        "snap.svg": "",
+        "svg.js": ""
     }
 }

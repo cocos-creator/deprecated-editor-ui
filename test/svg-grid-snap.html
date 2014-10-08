@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>SVG Grid snap.svg</title>
+
+<script src="/ext/snap.svg/dist/snap.svg.js"></script>
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        margin: 20px 100px;
+        color: white;
+    }
+    .svg-border {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 2px solid black;
+    }
+    svg {
+        box-sizing: border-box;
+    }
+    svg line {
+        fill: none;
+        stroke-width: 1;
+    }
+</style>
+
+<script>
+    var snap, xaxis, yaxis, label;
+    var camera = {
+        position: { x:0, y:0 },
+        scale: 1.0,
+    };
+    var x_lines = [];
+    var y_lines = [];
+
+    function updateGrid ( width, height ) {
+        var idx = 0;
+        var line = null; 
+
+        for ( var x = 0; x < width; x += 10 * camera.scale ) {
+            if ( idx < x_lines.length ) {
+                line = x_lines[idx];
+            }
+            else {
+                line = snap.line( 0, 0, 0, height );
+                x_lines.push(line);
+                xaxis.add(line);
+            }
+            ++idx;
+
+            var trans_x = x + camera.position.x;
+            line.attr({
+                stroke: "#555",
+                transform: "translate(" + trans_x + ",0)",
+            });
+        }
+
+        idx = 0;
+        for ( var y = 0; y < height; y += 10 * camera.scale ) {
+            if ( idx < y_lines.length ) {
+                line = y_lines[idx];
+            }
+            else {
+                line = snap.line( 0, 0, width, 0 );
+                y_lines.push(line);
+                yaxis.add(line);
+            }
+            ++idx;
+
+            var trans_y = y + camera.position.y;
+            line.attr({
+                stroke: "#555",
+                transform: "translate(0," + trans_y + ")",
+            });
+        }
+    }
+
+    document.addEventListener( "DOMContentLoaded", function(){
+        document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+        var svg = document.getElementById("svg");
+        var rect = svg.getBoundingClientRect();
+        var width = rect.width;
+        var height = rect.height;
+        var lastClientX, lastClientY;
+
+        //
+        snap = Snap("#svg");
+        var txtPos = snap.text( 10, 20, "camera position: 0.0, 0.0");
+        txtPos.attr({ fill: "white" });
+        var txtScale = snap.text( 10, 40, "camera scale: 1.0");
+        txtScale.attr({ fill: "white" });
+
+        var updateMouseMove = function (event) {
+            var dx = event.clientX - lastClientX;
+            var dy = event.clientY - lastClientY;
+
+            lastClientX = event.clientX;
+            lastClientY = event.clientY;
+
+            camera.position.x = camera.position.x + dx;
+            camera.position.y = camera.position.y + dy;
+
+            txtPos.attr({ 
+                text: "camera position: " + camera.position.x + ", " + camera.position.y 
+            });
+
+            updateGrid( width, height );
+            event.stopPropagation();
+        };
+        var mouseMoveHandle = updateMouseMove.bind(this);
+        var mouseUpHandle = (function(event) {
+            document.removeEventListener('mousemove', mouseMoveHandle);
+            document.removeEventListener('mouseup', mouseUpHandle);
+            event.stopPropagation();
+        }).bind(this);
+        svg.addEventListener( "mousedown", function ( event ) {
+            if ( event.which === 1 ) {
+                lastClientX = event.clientX;
+                lastClientY = event.clientY;
+
+                document.addEventListener ( 'mousemove', mouseMoveHandle );
+                document.addEventListener ( 'mouseup', mouseUpHandle );
+
+                event.stopPropagation();
+            }
+        });
+        svg.addEventListener( "mousewheel", function ( event ) {
+            var scale = Math.pow( 2, event.wheelDelta * 0.002) * camera.scale;
+            scale = Math.max( 0.1, Math.min( scale, 100 ) );
+            camera.scale = scale;
+
+            txtScale.attr({ 
+                text: "camera scale: " + parseFloat(camera.scale).toFixed(3.0),
+            });
+
+            updateGrid( width, height );
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        //
+        xaxis = snap.group();
+        xaxis.addClass("x-axis");
+        yaxis = snap.group();
+        yaxis.addClass("y-axis");
+
+        updateGrid( width, height );
+
+        //
+        label = snap.group();
+        label.addClass("label");
+        label.add( txtPos );
+        label.add( txtScale );
+
+    }, false );
+</script>
+</head>
+
+<body>
+<div class="svg-border">
+    <svg id="svg" width="100%" height="100%" shape-rendering="crispEdges"></svg>
+</div>
+</body>
+</html>

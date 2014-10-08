@@ -1,0 +1,249 @@
+<html>
+<head>
+<title>SVG Grid svg.js</title>
+
+<script src="/ext/svg.js/dist/svg.js"></script>
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        margin: 20px 100px;
+        color: white;
+    }
+    .svg-border {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 2px solid black;
+    }
+    svg {
+        box-sizing: border-box;
+    }
+    svg line {
+        fill: none;
+        stroke-width: 1;
+    }
+</style>
+
+<script>
+    var svgjs, xaxis, yaxis, label;
+    var txtPos, txtScale, txtTick, origin;
+    var camera = {
+        position: { x:0, y:0 },
+        scale: 1.0,
+    };
+    var view = {
+        width: 0,
+        height: 0,
+    }
+    var x_lines = [];
+    var y_lines = [];
+
+    function worldToViewport ( x, y ) {
+        return {
+            x: camera.position.x + view.width * 0.5 + x * camera.scale,
+            y: camera.position.y + view.height * 0.5 + y * camera.scale,
+        }
+    }
+    function viewportToWorld ( x, y ) {
+        return {
+            x: (x - camera.position.x - view.width * 0.5) / camera.scale,
+            y: (y - camera.position.y - view.height * 0.5) / camera.scale,
+        }
+    }
+
+    function lerp ( min, max, ratio ) {
+        return min + (max - min) * ratio
+    }
+
+    function updateGrid () {
+        var cur_idx = 0;
+        var line = null; 
+        var i = 0;
+
+        var center = worldToViewport( 0.0, 0.0 );
+        origin.center( center.x, center.y ); 
+
+        var tickSize = 100;
+        var tickUnit = 10;
+        var times = 1;
+        var tick = tickSize;
+
+        if ( camera.scale >= 1.0 ) {
+            while ( tickSize*times < tickSize*camera.scale ) {
+                times = times * tickUnit;
+            }
+            tick = tickSize/times;
+        }
+        else if ( camera.scale < 1.0 ) {
+            while ( tickSize/times > tickSize*camera.scale ) {
+                times = times * tickUnit;
+            }
+            tick = tickSize*times/tickUnit;
+        }
+
+        var start = viewportToWorld ( 0, 0 );
+        var start_x = Math.ceil(start.x/tick) * tick;
+        var end_x = start.x + view.width / camera.scale;
+        var start_y = Math.ceil(start.y/tick) * tick;
+        var end_y = start.y + view.height / camera.scale;
+
+        var ratio = camera.scale/times;
+        if ( camera.scale < 1.0 ) {
+            ratio = times * camera.scale / 10.0;
+        }
+
+        // draw x lines
+        var tickCount = Math.round(start_x/tick);
+        for ( var x = start_x; x < end_x; x += tick ) {
+            if ( cur_idx < x_lines.length ) {
+                line = x_lines[cur_idx];
+            }
+            else {
+                line = svgjs.line( 0, 0, 0, view.height );
+                x_lines.push(line);
+                xaxis.add(line);
+            }
+            ++cur_idx;
+
+            if ( tickCount % tickUnit === 0 ) {
+                line.opacity(lerp( 0.5, 1.0, ratio));
+            }
+            else {
+                line.opacity(lerp( 0.0, 0.5, ratio));
+            }
+            ++tickCount;
+
+            var translate = worldToViewport( x, 0.0 );
+            translate.y = 0.0;
+            line.stroke("#666").transform(translate);
+        }
+        // remove unused x lines
+        for ( i = cur_idx; i < x_lines.length; ++i ) {
+            x_lines[i].remove();
+        }
+        x_lines.splice(cur_idx);
+
+        // draw y lines
+        cur_idx = 0;
+        tickCount = Math.round(start_y/tick);
+        for ( var y = start_y; y < end_y; y += tick ) {
+            if ( cur_idx < y_lines.length ) {
+                line = y_lines[cur_idx];
+            }
+            else {
+                line = svgjs.line( 0, 0, view.width, 0 );
+                y_lines.push(line);
+                yaxis.add(line);
+            }
+            ++cur_idx;
+
+            if ( tickCount % tickUnit === 0 ) {
+                line.opacity(lerp( 0.5, 1.0, ratio));
+            }
+            else {
+                line.opacity(lerp( 0.0, 0.5, ratio));
+            }
+            ++tickCount;
+
+            var translate = worldToViewport( 0.0, y );
+            translate.x = 0.0;
+            line.stroke("#666").transform(translate);
+        }
+        // remove unused y lines
+        for ( i = cur_idx; i < y_lines.length; ++i ) {
+            y_lines[i].remove();
+        }
+        y_lines.splice(cur_idx);
+
+        // update text
+        txtPos.plain("camera position: " + camera.position.x + ", " + camera.position.y);
+        txtScale.plain("camera scale: " + parseFloat(camera.scale).toFixed(3.0));
+        txtTick.plain("tick: " + tick + " ratio: " + ratio);
+    }
+
+    document.addEventListener( "DOMContentLoaded", function() {
+        document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+
+        var svg = document.getElementById("svg");
+        var rect = svg.getBoundingClientRect();
+        view.width = rect.width;
+        view.height = rect.height;
+        var lastClientX, lastClientY;
+
+        //
+        svgjs = SVG("svg");
+        txtPos = svgjs.text("camera position: 0.0, 0.0").move(10,20).fill("white");
+        txtScale = svgjs.text("camera scale: 1.0").move(10,40).fill("white");
+        txtTick = svgjs.text("tick: 10.0").move(10,60).fill("white");
+
+        origin = svgjs.circle(10).fill('#f00');
+
+        var mouseMoveHandle = function (event) {
+            var dx = event.clientX - lastClientX;
+            var dy = event.clientY - lastClientY;
+
+            lastClientX = event.clientX;
+            lastClientY = event.clientY;
+
+            camera.position.x = camera.position.x + dx;
+            camera.position.y = camera.position.y + dy;
+
+            updateGrid();
+            event.stopPropagation();
+        };
+        var mouseUpHandle = function(event) {
+            document.removeEventListener('mousemove', mouseMoveHandle);
+            document.removeEventListener('mouseup', mouseUpHandle);
+            event.stopPropagation();
+        };
+        svg.addEventListener( "mousedown", function ( event ) {
+            if ( event.which === 1 ) {
+                lastClientX = event.clientX;
+                lastClientY = event.clientY;
+
+                document.addEventListener ( 'mousemove', mouseMoveHandle );
+                document.addEventListener ( 'mouseup', mouseUpHandle );
+
+                event.stopPropagation();
+            }
+        });
+        svg.addEventListener( "mousewheel", function ( event ) {
+            var scale = Math.pow( 2, event.wheelDelta * 0.002) * camera.scale;
+            scale = Math.max( 0.01, Math.min( scale, 1000 ) );
+            camera.scale = scale;
+
+            updateGrid();
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        //
+        xaxis = svgjs.group();
+        xaxis.addClass("x-axis");
+        yaxis = svgjs.group();
+        yaxis.addClass("y-axis");
+
+        updateGrid();
+
+        //
+        label = svgjs.group();
+        label.addClass("label");
+        label.add( txtPos );
+        label.add( txtScale );
+        label.add( txtTick );
+        label.after(origin);
+
+    }, false );
+</script>
+</head>
+
+<body>
+<div class="svg-border">
+    <svg id="svg" width="100%" height="100%" shape-rendering="crispEdges"></svg>
+</div>
+</body>
+</html>
