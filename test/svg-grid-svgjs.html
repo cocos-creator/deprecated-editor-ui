@@ -44,19 +44,25 @@
 
     function worldToViewport ( x, y ) {
         return {
-            x: camera.position.x + view.width * 0.5 + x * camera.scale,
-            y: camera.position.y + view.height * 0.5 + y * camera.scale,
+            x: (camera.position.x + x) * camera.scale + view.width * 0.5,
+            y: (camera.position.y + y) * camera.scale + view.height * 0.5,
         }
     }
     function viewportToWorld ( x, y ) {
         return {
-            x: (x - camera.position.x - view.width * 0.5) / camera.scale,
-            y: (y - camera.position.y - view.height * 0.5) / camera.scale,
+            x: (x - view.width * 0.5) / camera.scale - camera.position.x,
+            y: (y - view.height * 0.5) / camera.scale - camera.position.y,
         }
     }
 
     function lerp ( min, max, ratio ) {
         return min + (max - min) * ratio
+    }
+
+    function smooth (t) {
+        return ( t === 1.0 ) ? 1.0 : 1.001 * ( 1.0 - Math.pow( 2, -10 * t ) );
+        // return -t * (t - 2);
+        // t = t - 1; return Math.sqrt(1 - t*t);
     }
 
     function updateGrid () {
@@ -67,38 +73,40 @@
         var center = worldToViewport( 0.0, 0.0 );
         origin.center( center.x, center.y ); 
 
-        var tickSize = 100;
-        var tickUnit = 10;
-        var times = 1;
-        var tick = tickSize;
+        var tickUnit = 100;
+        var tickCount = 10;
+        var tickDistance = 50;
+
+        var nextTickCount = 1;
+        var curTickUnit = tickUnit;
+        var ratio = 1.0;
 
         if ( camera.scale >= 1.0 ) {
-            while ( tickSize*times < tickSize*camera.scale ) {
-                times = times * tickUnit;
+            while ( tickDistance*nextTickCount < tickUnit*camera.scale ) {
+                nextTickCount = nextTickCount * tickCount;
             }
-            tick = tickSize/times;
+            curTickUnit = tickUnit/nextTickCount * tickCount;
+            ratio = (tickUnit*camera.scale) / (tickDistance*nextTickCount);
         }
         else if ( camera.scale < 1.0 ) {
-            while ( tickSize/times > tickSize*camera.scale ) {
-                times = times * tickUnit;
+            while ( tickDistance/nextTickCount > tickUnit*camera.scale ) {
+                nextTickCount = nextTickCount * tickCount;
             }
-            tick = tickSize*times/tickUnit;
+            curTickUnit = tickUnit*nextTickCount;
+            ratio = (tickUnit*camera.scale) / (tickDistance/nextTickCount);
+            ratio /= 10.0;
         }
+        ratio = (ratio - 1.0/tickCount) / (1.0 - 1.0/tickCount);
 
         var start = viewportToWorld ( 0, 0 );
-        var start_x = Math.ceil(start.x/tick) * tick;
+        var start_x = Math.ceil(start.x/curTickUnit) * curTickUnit;
         var end_x = start.x + view.width / camera.scale;
-        var start_y = Math.ceil(start.y/tick) * tick;
+        var start_y = Math.ceil(start.y/curTickUnit) * curTickUnit;
         var end_y = start.y + view.height / camera.scale;
 
-        var ratio = camera.scale/times;
-        if ( camera.scale < 1.0 ) {
-            ratio = times * camera.scale / 10.0;
-        }
-
         // draw x lines
-        var tickCount = Math.round(start_x/tick);
-        for ( var x = start_x; x < end_x; x += tick ) {
+        var tickIndex = Math.round(start_x/curTickUnit);
+        for ( var x = start_x; x < end_x; x += curTickUnit ) {
             if ( cur_idx < x_lines.length ) {
                 line = x_lines[cur_idx];
             }
@@ -109,17 +117,17 @@
             }
             ++cur_idx;
 
-            if ( tickCount % tickUnit === 0 ) {
-                line.opacity(lerp( 0.5, 1.0, ratio));
+            if ( tickIndex % tickCount === 0 ) {
+                line.opacity(1.0);
             }
             else {
-                line.opacity(lerp( 0.0, 0.5, ratio));
+                line.opacity(smooth(ratio));
             }
-            ++tickCount;
+            ++tickIndex;
 
             var translate = worldToViewport( x, 0.0 );
             translate.y = 0.0;
-            line.stroke("#666").transform(translate);
+            line.stroke("#555").transform(translate);
         }
         // remove unused x lines
         for ( i = cur_idx; i < x_lines.length; ++i ) {
@@ -129,8 +137,8 @@
 
         // draw y lines
         cur_idx = 0;
-        tickCount = Math.round(start_y/tick);
-        for ( var y = start_y; y < end_y; y += tick ) {
+        tickIndex = Math.round(start_y/curTickUnit);
+        for ( var y = start_y; y < end_y; y += curTickUnit ) {
             if ( cur_idx < y_lines.length ) {
                 line = y_lines[cur_idx];
             }
@@ -141,17 +149,17 @@
             }
             ++cur_idx;
 
-            if ( tickCount % tickUnit === 0 ) {
-                line.opacity(lerp( 0.5, 1.0, ratio));
+            if ( tickIndex % tickCount === 0 ) {
+                line.opacity(1.0);
             }
             else {
-                line.opacity(lerp( 0.0, 0.5, ratio));
+                line.opacity(smooth(ratio));
             }
-            ++tickCount;
+            ++tickIndex;
 
             var translate = worldToViewport( 0.0, y );
             translate.x = 0.0;
-            line.stroke("#666").transform(translate);
+            line.stroke("#555").transform(translate);
         }
         // remove unused y lines
         for ( i = cur_idx; i < y_lines.length; ++i ) {
@@ -160,9 +168,11 @@
         y_lines.splice(cur_idx);
 
         // update text
-        txtPos.plain("camera position: " + camera.position.x + ", " + camera.position.y);
+        txtPos.plain( "camera position: " + 
+                      parseFloat(camera.position.x).toFixed(3.0) + ", " + 
+                      parseFloat(camera.position.y).toFixed(3.0)  );
         txtScale.plain("camera scale: " + parseFloat(camera.scale).toFixed(3.0));
-        txtTick.plain("tick: " + tick + " ratio: " + ratio);
+        txtTick.plain("curTickUnit: " + curTickUnit + " ratio: " + parseFloat(ratio).toFixed(3.0));
     }
 
     document.addEventListener( "DOMContentLoaded", function() {
@@ -178,7 +188,7 @@
         svgjs = SVG("svg");
         txtPos = svgjs.text("camera position: 0.0, 0.0").move(10,20).fill("white");
         txtScale = svgjs.text("camera scale: 1.0").move(10,40).fill("white");
-        txtTick = svgjs.text("tick: 10.0").move(10,60).fill("white");
+        txtTick = svgjs.text("curTickUnit: 10.0").move(10,60).fill("white");
 
         origin = svgjs.circle(10).fill('#f00');
 
@@ -189,8 +199,8 @@
             lastClientX = event.clientX;
             lastClientY = event.clientY;
 
-            camera.position.x = camera.position.x + dx;
-            camera.position.y = camera.position.y + dy;
+            camera.position.x = camera.position.x + dx/camera.scale;
+            camera.position.y = camera.position.y + dy/camera.scale;
 
             updateGrid();
             event.stopPropagation();
