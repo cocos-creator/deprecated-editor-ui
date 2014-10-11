@@ -5,22 +5,36 @@
 <script src="/ext/d3/d3.js"></script>
 
 <style>
-body {
-    position: relative;
-    background-color: #333;
-    padding: 0px 100px;
-    margin-top: 20px;
-    color: white;
-}
-canvas {
-    background-color: transparent;
-}
-.border {
-    box-sizing: border-box;
-    position: relative;
-    margin-bottom: 30px;
-    border: 2px solid black;
-}
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+    }
+    canvas {
+        background-color: transparent;
+    }
+    .border {
+        box-sizing: border-box;
+        position: relative;
+        margin-bottom: 30px;
+        border: 2px solid black;
+    }
+    button {
+        border: 1px solid white;
+        background: gray;
+        color: white;
+    }
+    button:focus {
+        outline: 0;
+    }
+    button:hover {
+        background: #aaa;
+    }
+    button:active {
+        background: #333;
+    }
 </style>
 
 </head>
@@ -28,7 +42,7 @@ canvas {
 <body>
 
 <h3>SVG Grids: Using Pattern</h3>
-<svg width="601" height="201">
+<svg width="601" height="201" shape-rendering="crispEdges">
     <defs>
         <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
             <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#555" stroke-width="1"/>
@@ -40,46 +54,59 @@ canvas {
     </defs>
     <rect width="1000" height="1000" fill="url(#grid)"/>
 </svg>
+<br/>
+<button onclick="changeScale()">Random Scale</button>
+<script>
+    function changeScale () {
+        function rangeRandom (min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        var smallGrid = document.getElementById("smallGrid");
+        var size = rangeRandom( 5, 10 );
+        smallGrid.setAttribute("width",size);
+        smallGrid.setAttribute("height",size);
+    }
+</script>
 
 <h3>Canvas Grids: Need to move 0.5 to make it draw pixel perfect.</h3> 
 <canvas id="canvas" width="601" height="201"></canvas>
 
 <script>
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-var gridSize = 10;
-var i;
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var gridSize = 10;
+    var i;
 
-ctx.lineWidth = 1;
-ctx.strokeStyle = "#555";
-ctx.beginPath();
-for ( i=0; i < 1000; i += gridSize ) {
-    if ( i%100 !== 0 ) {
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#555";
+    ctx.beginPath();
+    for ( i=0; i < 1000; i += gridSize ) {
+        if ( i%100 !== 0 ) {
+            ctx.moveTo(0,            i+0.5);
+            ctx.lineTo(canvas.width, i+0.5);
+        }
+    }
+    for ( i=0; i < 1000; i += gridSize ) {
+        if ( i%100 !== 0 ) {
+            ctx.moveTo(i+0.5, 0);
+            ctx.lineTo(i+0.5, canvas.height);
+        }
+    }
+    ctx.stroke();
+
+    gridSize = 100;
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#888";
+    ctx.beginPath();
+    for ( i=0; i < canvas.height; i += gridSize ) {
         ctx.moveTo(0,            i+0.5);
         ctx.lineTo(canvas.width, i+0.5);
     }
-}
-for ( i=0; i < 1000; i += gridSize ) {
-    if ( i%100 !== 0 ) {
+    for ( i=0; i < canvas.width; i += gridSize ) {
         ctx.moveTo(i+0.5, 0);
         ctx.lineTo(i+0.5, canvas.height);
     }
-}
-ctx.stroke();
-
-gridSize = 100;
-ctx.lineWidth = 1;
-ctx.strokeStyle = "#888";
-ctx.beginPath();
-for ( i=0; i < canvas.height; i += gridSize ) {
-    ctx.moveTo(0,            i+0.5);
-    ctx.lineTo(canvas.width, i+0.5);
-}
-for ( i=0; i < canvas.width; i += gridSize ) {
-    ctx.moveTo(i+0.5, 0);
-    ctx.lineTo(i+0.5, canvas.height);
-}
-ctx.stroke();
+    ctx.stroke();
 </script>
 
 <h3>SVG Grid: Using D3</h3> 
@@ -99,6 +126,7 @@ ctx.stroke();
 #d3-svg .axis path, .axis line {
     fill: none;
     stroke: #888;
+    stroke-width: 1;
 }
 
 #d3-svg text {
@@ -108,7 +136,7 @@ ctx.stroke();
 </style>
 
 <script>
-    var margin = {top: 2, right: 2, bottom: 20, left: 20},
+    var margin = {top: 20, right: 30, bottom: 20, left: 30},
         width = 600 - margin.left - margin.right,
         height = 200 - margin.top - margin.bottom;
 
