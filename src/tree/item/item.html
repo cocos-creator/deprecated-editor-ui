@@ -1,0 +1,44 @@
+<polymer-element 
+    name="fire-ui-ti" 
+    constructor="FireTreeItem"
+    on-mousedown="{{mousedownAction}}"
+    on-mouseup="{{mouseupAction}}"
+    on-dblclick="{{dblclickAction}}"
+    >
+    <template>
+    <link rel="stylesheet" href="item.css">
+
+        <div class="wrapper">
+            <div class="bar"></div>
+            <div class="input-wrapper">
+                <div class="item">
+                    <div class="item-wrapper">
+                        <i id="foldIcon" 
+                           class="fold-icon fa {{folded ? 'fa-caret-right' : 'fa-caret-down'}}"
+                           on-mousedown="{{foldMousedownAction}}"
+                           >
+                        </i>
+                        <i id="typeIcon"
+                           class="type-icon"
+                           style="display: none"
+                           >
+                        </i>
+                        <span id="name" class="name">{{name}}</span>
+                    </div>
+                </div>
+                <fire-ui-text-input id="rename"
+                    style="display: none"
+                    on-confirm="{{renameConfirmAction}}"
+                >
+                </fire-ui-text-input>
+            </div>
+        </div>
+        <div id="content"
+             style="display: {{ folded ? 'none' : '' }}"
+             >
+            <content />
+        </div>
+
+    </template>
+    <script type="text/javascript" src="item.js"></script>
+</polymer-element>

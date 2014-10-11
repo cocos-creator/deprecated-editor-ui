@@ -1,0 +1,19 @@
+<polymer-element 
+    name="fire-ui-tree" 
+    constructor="FireTree"
+    on-focusin="{{focusinAction}}"
+    on-focusout="{{focusoutAction}}"
+    on-scroll="{{scrollAction}}"
+    on-keydown="{{keydownAction}}"
+    >
+    <template>
+        <link rel="stylesheet" href="tree.css">
+
+        <div id="content" class="content">
+            <content></content>
+            <div id="highlightMask" class="highlight"></div>
+        </div>
+
+    </template>
+    <script type="text/javascript" src="tree.js"></script>
+</polymer-element>
