@@ -9,7 +9,7 @@
         },
 
         changedAction: function ( event ) {
-            // this.value = new Fire.Vec2(this.$.x.value, this.$.y.value);
+            this.value = new Fire.Vec2(this.$.x.value, this.$.y.value);
             event.stopPropagation();
 
             this.fire("changed");

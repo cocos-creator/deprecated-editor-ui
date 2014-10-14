@@ -23,6 +23,7 @@
 
             fieldEL.setAttribute('flex-2','');
             fieldEL.bind( 'value', new PathObserver(this,'value') );
+            fieldEL.setAttribute( 'value', '{{value}}' );
             fieldEL.id = "field";
             this.$.focus.appendChild(fieldEL);
             this.$.field = fieldEL;

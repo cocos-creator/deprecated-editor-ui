@@ -18,6 +18,7 @@
 
             fieldEL.setAttribute('flex-2','');
             fieldEL.bind( 'value', new PathObserver(this,'value') );
+            fieldEL.setAttribute( 'value', '{{value}}' );
             fieldEL.id = "field";
             this.shadowRoot.appendChild(fieldEL);
             this.$.field = fieldEL;
