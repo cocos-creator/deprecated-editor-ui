@@ -4,7 +4,7 @@
             value: null,
             unit: '',
             type: 'int', // int, float
-            precision: 2,
+            precision: 1,
             interval: null,
             min: null,
             max: null,
