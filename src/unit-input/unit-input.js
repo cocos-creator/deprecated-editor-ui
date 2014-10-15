@@ -49,7 +49,7 @@
                     return val;
             }
 
-            console.log("can't find proper type for " + this.type);
+            Fire.log("can't find proper type for " + this.type);
             return val;
         },
 

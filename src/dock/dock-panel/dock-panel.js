@@ -82,7 +82,7 @@
 
         addDock: function ( position, element ) {
             if ( element instanceof FireDock === false ) {
-                console.warn('Dock element must be instanceof FireDock');
+                Fire.warn('Dock element must be instanceof FireDock');
                 return;
             }
 

@@ -98,6 +98,15 @@ span.space {
         </div>
         <span class="space"></span>
 
+        <div flex-row>
+            <fire-ui-fobject value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-fobject>                                                      
+            <span class="space"></span>                                                                            
+            <fire-ui-button on-click="{{myAtlasClick}}">Change</fire-ui-button>                                    
+            <span class="space"></span>                                                                            
+            <fire-ui-label>myAtlas = {{myAtlas|toFObjectName()}}</fire-ui-label>                                   
+        </div>
+        <span class="space"></span>
+
         <div flex-row>                                                                                                                 
             <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
             <span class="space"></span>                                                                                                        
@@ -162,6 +171,7 @@ span.space {
             <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
             <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
+            <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>                                                             
             </fire-ui-section>
         </div>
 
@@ -187,6 +197,9 @@ span.space {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    var tmpAtlas = new Fire.Atlas();
+    tmpAtlas.name = "Atlas Foobar";
+
     model = {
         toFixed: function ( val, precision ) {
             return val.toFixed(precision);
@@ -194,6 +207,10 @@ span.space {
 
         toString: function ( val ) {
             return val.toString();
+        },
+
+        toFObjectName: function ( val ) {
+            return val.name;
         },
 
         // myChecked
@@ -282,6 +299,13 @@ span.space {
         myListClick: function () {
             this.cnt = (this.cnt + 1)%this.listList.length;
             this.myList = this.listList[this.cnt]; 
+        },
+
+        // myAtlas
+        myAtlas: tmpAtlas,
+        myAtlasClick: function () {
+            this.myAtlas = new Fire.Atlas();
+            this.myAtlas.name = "Atlas 002";
         },
     };
     var tmpl = document.querySelector('#my-template');

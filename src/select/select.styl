@@ -8,8 +8,6 @@
     width: 120px
     min-width: 60px
 
-    cursor: pointer 
-
     transition: box-shadow .3s ease
 
     #focus:focus {
@@ -35,19 +33,19 @@
         background-color: #474747
         border-top-color: rgba(255, 255, 255, 0.2)
 
-        cursor: inherit 
-
         transition: background-color .3s ease
+
+        & * {
+            cursor: pointer 
+        }
 
         span {
             text-shadow: 1px 1px 0 #000
             flex: auto
-            cursor: inherit 
         }
 
         i {                         
             opacity: 0.5
-            cursor: inherit 
         }
 
         &:hover {

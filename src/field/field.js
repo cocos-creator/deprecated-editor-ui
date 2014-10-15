@@ -12,7 +12,7 @@
             var fieldEL = this.createFieldElement();
 
             if ( fieldEL === null ) {
-                console.error("Failed to create field" );
+                Fire.error("Failed to create field");
                 return;
             }
 
@@ -28,30 +28,56 @@
             // do dom transform
             var fieldEL = null;
             var enumTypeDef = null;
+
+            // get typename
             var typename = this.type;
-            if ( !typename ) {
-                typename = typeof this.value;
-                if ( typename === 'number' ) {
+            switch ( typeof this.value ) {
+            case "number":
+                if ( !typename ) {
                     typename = 'float';
                 }
+                break;
+
+            case "boolean":
+                typename = 'boolean';
+                break;
+
+            case "string":
+                typename = 'string';
+                break;
+
+            case "object":
+                if ( Array.isArray(this.value) ) {
+                    typename = 'array';
+                }
+                else if ( this.value instanceof Fire.FObject ) {
+                    typename = 'fobject';
+                }
+                else {
+                    typename = Fire.getClassName(this.value);
+                }
+                break;
+
+            default:
+                typename = 'unknown';
+                break;
             }
 
+            // process typename
             switch ( typename ) {
                 case "enum":
-                    if ( this.type === 'enum' ) {
-                        if ( this.enumType !== null ) {
-                            enumTypeDef = Fire.getVarFrom(window,this.enumType);
-                            this.finalEnumList = Fire.getEnumList(enumTypeDef);
+                    if ( this.enumType !== null ) {
+                        enumTypeDef = Fire.getVarFrom(window,this.enumType);
+                        this.finalEnumList = Fire.getEnumList(enumTypeDef);
+                    }
+                    else {
+                        if ( this.enumList !== null ) {
+                            this.finalEnumList = this.enumList.slice(0);
                         }
-                        else {
-                            if ( this.enumList !== null ) {
-                                this.finalEnumList = this.enumList.slice(0);
-                            }
-                        }
-                        if ( this.finalEnumList ) {
-                            fieldEL = new FireSelect(); 
-                            fieldEL.options = this.finalEnumList;
-                        }
+                    }
+                    if ( this.finalEnumList ) {
+                        fieldEL = new FireSelect(); 
+                        fieldEL.options = this.finalEnumList;
                     }
                     break;
 
@@ -79,22 +105,21 @@
                     fieldEL = new FireCheckbox();
                     break;
 
-                case "object":
-                    if ( Array.isArray(this.bind) ) {
-                        // TODO
-                    }
-                    else {
-                        var className = Fire.getClassName(this.value);
-                        switch ( className ) {
-                            case "Fire.Color":
-                                fieldEL = new FireColor();
-                                break;
+                case "fobject":
+                    fieldEL = new FireFObject();
+                    fieldEL.type = this.type ? this.type : "Fire.FObject";
+                    break;
 
-                            case "Fire.Vec2":
-                                fieldEL = new FireVec2();
-                                break;
-                        }
-                    }
+                case "array":
+                    // TODO
+                    break;
+
+                case "Fire.Color":
+                    fieldEL = new FireColor();
+                    break;
+
+                case "Fire.Vec2":
+                    fieldEL = new FireVec2();
                     break;
             }
 

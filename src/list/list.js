@@ -59,7 +59,7 @@
                 }
             }
             else {
-                console.warn("The value is not an array.");
+                Fire.warn("The value is not an array.");
             }
         },
 
@@ -79,7 +79,7 @@
         },
 
         deleteAction: function (event, detail, sender) {
-            console.log("deleteAction");
+            Fire.log("deleteAction");
             event.stopPropagation();
         },
 

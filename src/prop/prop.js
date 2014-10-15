@@ -17,7 +17,7 @@
 
             var fieldEL = this.createFieldElement();
             if ( fieldEL === null ) {
-                console.error("Failed to create field " + this.name );
+                Fire.error("Failed to create field " + this.name );
                 return;
             }
 
