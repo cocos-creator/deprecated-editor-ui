@@ -24,7 +24,7 @@
             }
 
             var self = this;
-            function onDeleteItemRecursively (item) {
+            function deleteRecursively (item) {
                 self.onDeleteItem(item);
                 // children
                 var children = item.children;
@@ -32,7 +32,7 @@
                     deleteRecursively(children[i]);
                 }
             }
-            onDeleteItemRecursively(item);
+            deleteRecursively(item);
         },
 
         onDeleteItem: function (item) {
