@@ -61,6 +61,10 @@
             }
         },
 
+        mouseenterAction: function ( event ) {
+            event.stopPropagation();
+        },
+
         dblclickAction: function ( event ) {
             this.fire('open');
             event.stopPropagation();
