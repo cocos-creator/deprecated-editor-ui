@@ -55,7 +55,6 @@
 
         valueChanged: function () {
             this.$.input.value = this._convert(this.value);
-            this.fire('changed');
         },
 
         focusAction: function (event) {
@@ -73,6 +72,7 @@
             var val = this._convert(this.$.input.value);
             if ( this.value !== val ) {
                 this.value = val;
+                this.fire('changed');
             }
             // NOTE: we set the input.value because this.value may not changed after invalid inputs
             this.$.input.value = val;
@@ -97,6 +97,7 @@
             var val = this._convert(event.target.value);
             if ( this.value !== val ) {
                 this.value = val;
+                this.fire('changed');
             }
 
             event.stopPropagation();
@@ -119,6 +120,7 @@
                     this.$.input.value = this.lastVal;
                     if ( this.value !== this.lastVal ) {
                         this.value = this.lastVal;
+                        this.fire('changed');
                     }
                     this.$.input.blur();
                 break;
@@ -135,6 +137,7 @@
             var val = this._convert(this.value+this._interval);
             if ( this.value != val ) {
                 this.value = val;
+                this.fire('changed');
             }
             this.$.input.focus();
             event.stopPropagation();
@@ -144,6 +147,7 @@
             var val = this._convert(this.value-this._interval);
             if ( this.value != val ) {
                 this.value = val;
+                this.fire('changed');
             }
             this.$.input.focus();
             event.stopPropagation();

@@ -56,6 +56,7 @@
                 offsetX = Math.max( Math.min( offsetX, 1.0 ), 0.0 );
                 this.$.nubbin.style.left = offsetX * 100 + "%";
                 this.value = this.min + offsetX * (this.max-this.min);
+                this.fire('changed');
 
                 event.stopPropagation();
             };
