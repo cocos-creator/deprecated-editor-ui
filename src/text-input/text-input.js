@@ -3,6 +3,7 @@
         publish: {
             value: '',
             multiline: false,
+            placeholder: '',
             focused: {
                 value: false,
                 reflect: true
