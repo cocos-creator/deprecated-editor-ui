@@ -88,5 +88,11 @@
             }
             event.stopPropagation();
         },
+
+        // overridable for children
+        addChild: function (child) {
+            this.appendChild(child);
+            this.foldable = true;
+        }
     });
 })();

@@ -9,11 +9,22 @@
 
         created: function () {
             this.focused = false;
-            this.lastActive = null;
+            this.idToItem = {};
         },
 
         ready: function () {
             this.tabIndex = EditorUI.getParentTabIndex(this) + 1;
+        },
+
+        initItem: function ( item, name, id, parent ) {
+            if (id) {
+                this.idToItem[id] = item;
+                item.id = id;
+            }
+            item.name = name;
+            item.foldable = false;
+            parent = parent || this;
+            parent.addChild(item);
         },
 
         deleteItem: function (item) {
@@ -26,6 +37,7 @@
             var self = this;
             function deleteRecursively (item) {
                 self.onDeleteItem(item);
+                delete this.idToItem[item.id];
                 // children
                 var children = item.children;
                 for ( var i = 0; i < children.length; ++i ) {
@@ -35,18 +47,55 @@
             deleteRecursively(item);
         },
 
+        deleteItemById: function (id) {
+            var item = this.idToItem[id];
+            if ( item ) {
+                this.deleteItem(item);
+            }
+        },
+
+        // overridable for children
+        addChild: function (child) {
+            this.appendChild(child);
+        },
+
+        // overridable for children
         onDeleteItem: function (item) {
         },
 
         setItemParent: function (item, parent) {
             var oldParent = item.parentElement;
-            parent.appendChild(item);
-            if (parent !== this) {
-                parent.foldable = true;
-            }
+            parent.addChild(item);
             if (oldParent !== this) {
                 oldParent.foldable = oldParent.hasChildNodes();
             }
+        },
+
+        setItemParentById: function (id, parentId) {
+            var item = this.idToItem[id];
+            if ( !item ) {
+                return;
+            }
+            var parent = parentId ? this.idToItem[parentId] : this;
+            if ( !parent ) {
+                return;
+            }
+            this.setItemParent(item, parent);
+        },
+
+        renameItemById: function (id, newName) {
+            var item = this.idToItem[id];
+            if ( !item ) {
+                return;
+            }
+            item.name = newName;
+        },
+
+        clear: function () {
+            while (this.firstChild) {
+                this.removeChild(this.firstChild);
+            }
+            this.idToItem = {};
         },
 
         nextItem: function ( curItem, skipChildren ) {
@@ -117,24 +166,24 @@
             this.scrollLeft = 0;
         },
         
-        keydownAction: function (event) {
+        keydownAction: function (event, activeElement) {
             switch ( event.which ) {
                 // Enter
                 case 13:
-                    if (Fire.isDarwin) {
-                        if ( this.lastActive ) {
-                            this.lastActive.rename();
+                    if ( activeElement instanceof FireTreeItem ) {
+                        if ( Fire.isDarwin ) {
+                            activeElement.rename();
+                            event.stopPropagation();
                         }
-                        event.stopPropagation();
                     }
                 break;
 
                 // F2
                 case 113:
-                    if ( this.lastActive ) {
-                        this.lastActive.rename();
+                    if ( activeElement instanceof FireTreeItem ) {
+                        activeElement.rename();
+                        event.stopPropagation();
                     }
-                    event.stopPropagation();
                 break;
             }
         },
