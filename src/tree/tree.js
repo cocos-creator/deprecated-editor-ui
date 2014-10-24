@@ -37,7 +37,7 @@
             var self = this;
             function deleteRecursively (item) {
                 self.onDeleteItem(item);
-                delete this.idToItem[item.id];
+                delete self.idToItem[item.id];
                 // children
                 var children = item.children;
                 for ( var i = 0; i < children.length; ++i ) {
