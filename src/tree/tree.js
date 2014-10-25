@@ -19,7 +19,7 @@
         initItem: function ( item, name, id, parent ) {
             if (id) {
                 this.idToItem[id] = item;
-                item.id = id;
+                item.userId = id;
             }
             item.name = name;
             item.foldable = false;
@@ -37,7 +37,7 @@
             var self = this;
             function deleteRecursively (item) {
                 self.onDeleteItem(item);
-                delete self.idToItem[item.id];
+                delete self.idToItem[item.userId];
                 // children
                 var children = item.children;
                 for ( var i = 0; i < children.length; ++i ) {

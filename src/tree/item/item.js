@@ -10,7 +10,7 @@
 
         created: function () {
             this.name = '';
-            this.id = '';
+            this.userId = '';
 
             this.renaming = false;
         },
