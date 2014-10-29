@@ -1,8 +1,6 @@
 <polymer-element 
     name="fire-ui-ti" 
     constructor="FireTreeItem"
-    on-mousedown="{{mousedownAction}}"
-    on-mouseup="{{mouseupAction}}"
     on-dblclick="{{dblclickAction}}"
     >
     <template>
@@ -11,6 +9,8 @@
         <div class="wrapper"
             on-mouseenter="{{mouseenterAction}}"
             on-mouseleave="{{mouseleaveAction}}"
+            on-mousedown="{{mousedownAction}}"
+            on-mouseup="{{mouseupAction}}"
             >
             <div class="bar"></div>
             <div class="input-wrapper">

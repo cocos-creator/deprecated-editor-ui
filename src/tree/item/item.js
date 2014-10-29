@@ -31,7 +31,7 @@
                     this.$.typeIcon.appendChild(icon);
                 }
                 else {
-                    this.$.typeIcon.className = "type-icon fa " + icon;
+                    this.$.typeIcon.className = "type-icon " + icon;
                 }
                 this.$.typeIcon.style.display = '';
             }
