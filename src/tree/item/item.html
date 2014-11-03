@@ -26,7 +26,7 @@
                            style="display: none"
                            >
                         </i>
-                        <span id="name" class="name">{{name}}</span>
+                        <span id="name" class="name {{name === '' ? 'no-name' : ''}}">{{name === '' ? 'No Name' : name}}</span>
                     </div>
                 </div>
                 <fire-ui-text-input id="rename"

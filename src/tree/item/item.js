@@ -2,6 +2,7 @@
     Polymer({
         publish: {
             folded: false,
+            noName: false,
             foldable: {
                 value: false,
                 reflect: true
