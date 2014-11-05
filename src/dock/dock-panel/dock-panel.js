@@ -16,6 +16,8 @@
                 contentEL.style.display = "none";
                 tabEL.content = contentEL;
                 tabEL.panel = this;
+
+                tabEL.setIcon( contentEL.icon ); // TEMP HACK
             }
 
             tabs.select(0);
