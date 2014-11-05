@@ -34,10 +34,12 @@
                 else {
                     this.$.typeIcon.className = "type-icon " + icon;
                 }
-                this.$.typeIcon.style.display = '';
+                this.$.typeIcon.removeAttribute('hidden');
+                this.$.rename.setAttribute('icon','');
             }
             else {
-                this.$.typeIcon.style.display = 'none';
+                this.$.typeIcon.setAttribute('hidden', '');
+                this.$.rename.removeAttribute('icon');
             }
         },
 

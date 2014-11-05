@@ -51,6 +51,10 @@
                         width: 16px
                         height: 16px
                         margin-right: 2px
+
+                        &[hidden] {
+                            display: none
+                        }
                     }
 
                     img {
@@ -66,10 +70,15 @@
 
             fire-ui-text-input {                         
                 position: absolute
-                left: 18px
+                left: 0px
+                width: 100%
                 height: 16px
                 min-height: 16px
-                width: calc(100% - 14px)
+
+                &[icon] {
+                    left: 18px
+                    width: calc(100% - 14px)
+                }
 
                 & /deep/ .input-area {                         
                     padding: 0px 2px
