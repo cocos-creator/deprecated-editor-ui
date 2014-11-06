@@ -29,6 +29,7 @@
         setIcon: function ( icon ) {
             if (icon) {
                 if ( icon instanceof Image ) {
+                    icon.setAttribute('draggable','false'); // this will prevent item dragging
                     this.$.typeIcon.appendChild(icon);
                 }
                 else {
