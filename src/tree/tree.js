@@ -185,6 +185,26 @@
                         event.stopPropagation();
                     }
                 break;
+
+                // left-arrow
+                case 37:
+                    if ( activeElement instanceof FireTreeItem ) {
+                        if ( activeElement.foldable && !activeElement.folded ) {
+                            activeElement.folded = true;
+                        }
+                        event.stopPropagation();
+                    }
+                    break;
+
+                // right-arrow
+                case 39:
+                    if ( activeElement instanceof FireTreeItem ) {
+                        if ( activeElement.foldable && activeElement.folded ) {
+                            activeElement.folded = false;
+                        }
+                        event.stopPropagation();
+                    }
+                    break;
             }
         },
 
