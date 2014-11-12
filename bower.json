@@ -22,7 +22,7 @@
         "svg.js": ""
     },
     "devDependencies": {
-        "polymer": "Polymer/webcomponentsjs#~0.5.0",
+        "webcomponentsjs": "Polymer/webcomponentsjs#~0.5.0",
         "d3": "",
         "snap.svg": ""
     }
