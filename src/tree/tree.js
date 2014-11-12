@@ -1,4 +1,12 @@
 (function () {
+
+    function _getLastChildRecursively ( curItem ) {
+        if ( curItem.expanded ) {
+            return _getLastChildRecursively (curItem.lastElementChild);
+        }
+        return curItem;
+    }
+
     Polymer({
         publish: {
             focused: {
@@ -118,13 +126,7 @@
             var prevSb = curItem.previousElementSibling;
             if ( prevSb ) {
                 if ( prevSb.expanded ) {
-                    function getLastChildRecursively ( curItem ) {
-                        if ( curItem.expanded ) {
-                            return getLastChildRecursively (curItem.lastElementChild);
-                        }
-                        return curItem;
-                    }
-                    return getLastChildRecursively (prevSb);
+                    return _getLastChildRecursively (prevSb);
                 }
                 else {
                     return prevSb;
@@ -137,6 +139,14 @@
             }
 
             return parentItem;
+        },
+        
+        lastItem: function () {
+            var lastChild = this.lastElementChild;
+            if ( lastChild && lastChild.expanded ) {
+                return _getLastChildRecursively (lastChild);
+            }
+            return lastChild;
         },
 
         focusinAction: function (event) {
