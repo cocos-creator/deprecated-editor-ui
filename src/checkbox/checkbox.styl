@@ -14,7 +14,7 @@
         box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1)
         background: #232323
 
-        cursor: pointer 
+        cursor: pointer
 
         transition: border-color .3s ease, box-shadow .3s ease
 
@@ -22,19 +22,29 @@
             border-color: #bbb
         }
 
-        i {                         
+        i {
             font-size: 11px
 
             color: #0c90e6
             cursor: inherit
 
-            &.hide {                         
-                visibility: hidden 
+            &.hide {
+                visibility: hidden
             }
         }
     }
 
     &([focused]) .box {
         border-color: #0c70a6
+    }
+}
+
+:host-context([disabled]),:host([disabled]) {
+    .box {
+        border: 1px solid #181818
+        cursor: auto
+        i {
+            color: #525252
+        }
     }
 }
