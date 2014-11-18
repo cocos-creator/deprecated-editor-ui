@@ -6,6 +6,14 @@
                 value: false,
                 reflect: true
             },
+            disabled: {
+                value: false,
+                reflect: true
+            }
+        },
+
+        observe:{
+            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
@@ -15,6 +23,14 @@
         valueChanged: function () {
             this.$.inputArea.value = this.value;
             this._adjust();
+        },
+
+        disabledChanged: function () {
+            if (this.isDisabled()) {
+                this.$.inputArea.setAttribute('disabled','');
+            }else{
+                this.$.inputArea.removeAttribute('disabled');
+            }
         },
 
         _adjust: function () {
@@ -64,10 +80,22 @@
                 // NOTE: textarea already have ctrl-z undo behavior
                 // esc
                 case 27:
-                    this.$.inputArea.blur(); 
+                    this.$.inputArea.blur();
                 return false;
             }
             event.stopPropagation();
+        },
+        isDisabled: function(){
+            if (this.disabled) {
+                return true;
+            }
+            var parent = this.parentElement;
+            while(parent) {
+                if(parent.disabled)
+                    return true;
+                parent = parent.parentElement;
+            }
+            return false;
         },
     });
 })();
