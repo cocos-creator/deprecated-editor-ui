@@ -12,13 +12,20 @@
                 value: false,
                 reflect: true
             },
+            disabled: {
+                value: false,
+                reflect: true
+            },
+        },
+
+        observe:{
+            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
             this.$.input.tabIndex = EditorUI.getParentTabIndex(this)+1;
-
             switch ( this.type ) {
-                case 'int': 
+                case 'int':
                     this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
                     this._max = (this.max!==null) ? parseInt(this.max) : Number.POSITIVE_INFINITY;
                     this._interval = (this.interval!==null) ? this.interval : 1;
@@ -32,18 +39,25 @@
             }
         },
 
+        disabledChanged: function () {
+            if (this.isDisabled()) {
+                this.$.input.setAttribute('disabled','');
+            }else{
+                this.$.input.removeAttribute('disabled');
+            }
+        },
         _convert: function ( val ) {
             switch ( this.type ) {
-                case 'int': 
+                case 'int':
                     val = parseInt(val);
-                    if ( isNaN(val) ) 
+                    if ( isNaN(val) )
                         val = 0;
                     val = Math.min( Math.max( val, this._min ), this._max );
                     return val;
 
-                case 'float': 
+                case 'float':
                     val = parseFloat(parseFloat(val).toFixed(this.precision));
-                    if ( isNaN(val) ) 
+                    if ( isNaN(val) )
                         val = 0;
                     val = Math.min( Math.max( val, this._min ), this._max );
                     return val;
@@ -58,6 +72,9 @@
         },
 
         focusAction: function (event) {
+            if (this.isDisabled()){
+                return;
+            }
             this.lastVal = this._convert(this.value);
             this.focused = true;
         },
@@ -134,6 +151,8 @@
         },
 
         increaseAction: function (event) {
+            if (this.isDisabled())
+                return;
             var val = this._convert(this.value+this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -144,6 +163,8 @@
         },
 
         decreaseAction: function (event) {
+            if (this.isDisabled())
+                return;
             var val = this._convert(this.value-this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -151,6 +172,19 @@
             }
             this.$.input.focus();
             event.stopPropagation();
+        },
+
+        isDisabled: function(){
+            if (this.disabled) {
+                return true;
+            }
+            var parent = this.parentElement;
+            while(parent) {
+                if(parent.disabled)
+                    return true;
+                parent = parent.parentElement;
+            }
+            return false;
         },
     });
 })();
