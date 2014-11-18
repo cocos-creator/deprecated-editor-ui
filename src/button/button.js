@@ -5,6 +5,11 @@
                 value: false,
                 reflect: true
             },
+
+            disabled: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
@@ -12,6 +17,9 @@
         },
 
         focusAction: function (event) {
+            if (this.isDisabled())
+                return;
+
             this.focused = true;
         },
 
@@ -22,13 +30,32 @@
             if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
+
             this.focused = false;
         },
 
         clickAction: function (event) {
+            if (this.isDisabled()) {
+                event.stopPropagation();
+                return;
+            }
+
             this.fire('click', event );
             this.$.focus.focus();
             event.stopPropagation();
+
+        },
+        isDisabled: function(){
+            if (this.disabled) {
+                return true;
+            }
+            var parent = this.parentElement;
+            while(parent) {
+                if(parent.disabled)
+                    return true;
+                parent = parent.parentElement;
+            }
+            return false;
         },
     });
 })();
