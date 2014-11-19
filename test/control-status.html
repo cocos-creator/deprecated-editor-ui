@@ -1,0 +1,330 @@
+<html>
+
+<head>
+<title>Fireball-x Editor UI</title>
+<link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="/bin/editor-ui.css">
+
+<script src="/ext/webcomponentsjs/webcomponents.js"></script>
+<script src="/ext/fire-core/core.dev.js"></script>
+
+<link rel="import" href="/ext/polymer/polymer.html">
+<link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="control-status/control-status.html">
+<style>
+body {
+    position: relative;
+    background-color: #333;
+    padding: 0px 100px;
+    margin-top: 20px;
+    color: white;
+    font-family: Helvetica,Arial,sans-serif;
+}
+span.space {
+    height: 5px;
+    width: 5px;
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+<template id="my-template" is="auto-binding">
+    <h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI 控件状态测试页面</h2>
+    <span class="space" style="height: 20px"></span>
+    <fire-ui-section name="Control List">
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label >FireButton：</fire-ui-label>
+            <control-status>
+                <fire-ui-button>Button</fire-ui-button>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>FireColor：</fire-ui-label>
+            <control-status>
+                <fire-ui-color>Button</fire-ui-color>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>FireCheckbox：</fire-ui-label>
+            <control-status>
+                <fire-ui-checkbox></fire-ui-checkbox>
+            </control-status>
+
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>FireUnit-input：</fire-ui-label>
+            <control-status>
+                <fire-ui-unit-input></fire-ui-unit-input>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>FireText-input：</fire-ui-label>
+            <control-status>
+                <fire-ui-text-input></fire-ui-text-input>
+            </control-status>
+
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>FireVec2：</fire-ui-label>
+            <control-status>
+                <fire-ui-vec2></fire-ui-vec2>
+            </control-status>
+
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>Fire text Area：</fire-ui-label>
+            <control-status>
+                <fire-ui-text-area value="{{myMultiText}}"></fire-ui-text-area>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>Fire button-group：</fire-ui-label>
+            <control-status>
+                <fire-ui-button-group>
+                     <fire-ui-bi>Button 1</fire-ui-bi>
+                        <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>
+                        <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>
+                        <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>
+                        <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
+                    <fire-ui-bi>Button 2</fire-ui-bi>
+                </fire-ui-button-group>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>Fire tabs：</fire-ui-label>
+            <control-status>
+                <fire-ui-tabs>
+                    <fire-ui-tab class="">Project 1</fire-ui-tab>
+                    <fire-ui-tab class="active">Project 2</fire-ui-tab>
+                </fire-ui-tabs>
+            </control-status>
+        </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>Fire Slider：</fire-ui-label>
+            <control-status>
+                <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>
+            </control-status>
+        </div>
+    </fire-ui-section>
+</template>
+<script>
+    function rangeRandom (min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    function rangeRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var tmpAtlas = new Fire.Atlas();
+    tmpAtlas.name = "Atlas Foobar";
+
+    model = {
+        toFixed: function ( val, precision ) {
+            return val.toFixed(precision);
+        },
+
+        toString: function ( val ) {
+            return val.toString();
+        },
+
+        toFObjectName: function ( val ) {
+            return val.name;
+        },
+        //status test
+        btnDisabledStatus:false,
+        btnDisabledChanged: function ()　{
+            this.btnDisabledStatus = !this.btnDisabledStatus;
+            if (this.btnDisabledStatus) {
+                this.$.fireBtn.setAttribute('disabled','');
+            } else {
+                this.$.fireBtn.removeAttribute('disabled');
+            }
+        },
+        btnFocusStatus:false,
+        btnFocusChanged: function () {
+            this.btnFocusStatus = !this.btnFocusStatus;
+            if (this.btnFocusStatus) {
+                this.$.fireBtn.setAttribute('focused','');
+            } else {
+                this.$.fireBtn.removeAttribute('focused');
+            }
+        },
+        //end status test
+        // myChecked
+        myChecked: false,
+        myCheckedClick: function () {
+            this.myChecked = !this.myChecked;
+        },
+
+        // myPixel
+        myPixel: 20,
+        myPixelClick: function () {
+            this.myPixel = rangeRandomInt(-1000, 1000);
+        },
+        myPixelMin: 0,
+        myPixelMax: 30,
+
+        // myText
+        myText: "Hello World",
+        myTextClick: function () {
+            var textList = [
+                "Hello World",
+                "FooBar",
+                "I'm Johnny Wu!",
+                "Who are you?"
+            ];
+            this.myText = textList[rangeRandomInt(0, textList.length-1)];
+        },
+
+
+
+        // myMultiText
+        myMultiText: "Hello World\nHello World FooBar\nHello World I'm Johnny Wu\nCool!",
+        myMultiTextClick: function () {
+            var textList = [
+                "Hello World\nHello World\nHello World",
+                "FooBar\nFooBar",
+                "I'm Johnny Wu!\nI'm Johnny Wu\nI'm Johnny Wu\nI'm Johnny Wu",
+                "Who are you?\nWho are you"
+            ];
+            this.myMultiText = textList[rangeRandomInt(0, textList.length-1)];
+        },
+
+        // mySelect
+        mySelect: 0,
+        mySelectName:"FireButton",
+        mySelectList: [
+            { name: 'FireButton',   value: 0 },
+            { name: 'FireCheckbox',  value: 1 },
+            { name: 'FireSelect',  value: 2 },
+            { name: 'FireTextInput',  value: 3 },
+            { name: 'FireUnitInput', value: 4 },
+            { name: 'FireVec2', value: 5 },
+            { name: 'fire-ui-vec2', value: 6 },
+            ],
+        mySelectClick: function () {
+
+            this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
+            this.mySelectName = this.mySelectList[rangeRandomInt(0,6)].name;
+        },
+
+        select: function(event, detail, sender){
+            this.mySelectName = this.mySelectList[this.mySelect].name;
+            eval('var control =new '+this.mySelectName +'();');
+            var teml= document.getElementById('controls');
+            control.innerHTML=this.mySelectName;
+            //control.setAttribute("disabled","");
+            teml.innerHTML="";
+            teml.appendChild(control);
+        },
+
+        //controls Status
+        ControlStatus:0,
+        ControlStatusName:"",
+        ControlStatusList: [
+            {name: 'Normal' , value :0},
+            {name: 'disable' , value :1},
+            {name: 'focus' , value :2},
+            {name: 'active' , value :3},
+            {name: 'hover' , value :4}
+        ],
+
+        selectStatus: function(event, detail, sender){
+            this.ControlStatusName=this.ControlStatusList[this.ControlStatus].name;
+        },
+
+        // myColor
+        myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ),
+        myColorClick: function () {
+            this.myColor.r = rangeRandom( 0.0, 1.0 );
+            this.myColor.g = rangeRandom( 0.0, 1.0 );
+            this.myColor.b = rangeRandom( 0.0, 1.0 );
+            this.myColor.a = rangeRandom( 0.0, 1.0 );
+        },
+
+        // myVec2
+        myVec2: new Fire.Vec2( 1.0, 1.0 ),
+        myVec2Click: function () {
+            this.myVec2.x = rangeRandom( 0.0, 1.0 );
+            this.myVec2.y = rangeRandom( 0.0, 1.0 );
+        },
+
+        // mySlider
+        mySlider: 0.0,
+        mySliderClick: function () {
+            this.mySlider = rangeRandom( 0.0, 1.0 );
+        },
+
+        //动态创建控件 eval
+        init: function(){
+            for(var i=0;i<this.mySelectList.length;i++){
+                var element=document.createElement('div');
+                element.setAttribute("flex-row","");
+                eval('var control =new '+this.mySelectList[i].name +'();');
+                var teml= document.getElementById('controls');
+                control.innerHTML=this.mySelectName;
+                element.appendChild(control);
+                teml.innerHTML=teml.innerHTML+'<fire-ui-label>———————————————</fire-ui-label><span class="space"></span><fire-ui-label>'+
+                this.mySelectList[i].name+
+                '</fire-ui-label><span class="space"></span>'+
+                '';
+                teml.appendChild(element);
+            }
+        },
+
+        // myList
+        cnt: 0,
+        listList: [
+                [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
+                [ "foobar 1", "foobar 2", "foobar 3" ],
+                [ 1, 2, 3, 4 ],
+        ],
+        myList: [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
+        myListClick: function () {
+            this.cnt = (this.cnt + 1)%this.listList.length;
+            this.myList = this.listList[this.cnt];
+        },
+
+        // myAtlas
+        myAtlas: tmpAtlas,
+        myAtlasClick: function () {
+            this.myAtlas = new Fire.Atlas();
+            this.myAtlas.name = "Atlas 002";
+        },
+    };
+    var tmpl = document.querySelector('#my-template');
+    for ( var m in model ) {
+        if ( model.hasOwnProperty(m) ) {
+            tmpl[m] = model[m];
+        }
+    }
+
+
+
+</script>
+
+</body>
+
+</html>
