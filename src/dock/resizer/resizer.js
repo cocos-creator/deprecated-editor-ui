@@ -50,7 +50,7 @@
                 var mouseDownY = event.clientY;
 
                 var updateMouseMove = function (event) {
-                    var offset = -1; 
+                    var offset = -1;
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
                         offset = this.inverse ? -offset : offset;
