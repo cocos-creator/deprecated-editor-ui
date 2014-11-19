@@ -35,7 +35,7 @@
         },
 
         clickAction: function (event) {
-            if (this.isDisabled()) {
+            if ( this.isDisabled() ) {
                 event.stopPropagation();
                 return;
             }
@@ -43,16 +43,18 @@
             this.fire('click', event );
             this.$.focus.focus();
             event.stopPropagation();
-
         },
+        
         isDisabled: function(){
-            if (this.disabled) {
+            if ( this.disabled ) {
                 return true;
             }
+
             var parent = this.parentElement;
-            while(parent) {
-                if(parent.disabled)
+            while ( parent ) {
+                if ( parent.disabled )
                     return true;
+
                 parent = parent.parentElement;
             }
             return false;
