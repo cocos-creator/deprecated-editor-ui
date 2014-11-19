@@ -31,9 +31,10 @@
         },
 
         disabledChanged: function () {
-            if (this.isDisabled()) {
+            if ( this.isDisabled() ) {
                 this.$.inputArea.setAttribute('disabled','');
-            }else{
+            }
+            else{
                 this.$.inputArea.removeAttribute('disabled');
             }
         },
@@ -139,14 +140,17 @@
             // }
             event.stopPropagation();
         },
+        
         isDisabled: function(){
-            if (this.disabled) {
+            if ( this.disabled )
                 return true;
-            }
+
             var parent = this.parentElement;
-            while(parent) {
-                if(parent.disabled)
+            while ( parent ) {
+
+                if( parent.disabled )
                     return true;
+
                 parent = parent.parentElement;
             }
             return false;
