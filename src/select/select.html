@@ -1,6 +1,7 @@
-<polymer-element 
-    name="fire-ui-select" 
+<polymer-element
+    name="fire-ui-select"
     constructor="FireSelect"
+    id="select"
     >
 <template>
 <link rel="stylesheet" href="select.css">
@@ -15,14 +16,14 @@
         <span>{{valueName}}</span>
         <i class="fa fa-caret-down"></i>
     </div>
-    <div class="menu {{showMenu ? '':'hide'}}">
+    <div class="menu {{showMenu ? '':'hide'}}" id="menu">
         <template repeat="{{item, itemIndex in options}}">
         <div class="item {{ item.value == value ? 'selected':'' }}"
             index="{{itemIndex}}"
             on-click="{{selectAction}}"
             >
             {{item.name}}
-        </div>                                                                 
+        </div>
         </template>
     </div>
 </div>

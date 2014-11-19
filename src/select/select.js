@@ -2,7 +2,9 @@
     Polymer({
         publish: {
             value: -1,
-            options: null, 
+            bodytop: 0,
+            bodyHeight: 0,
+            options: null,
             focused: {
                 value: false,
                 reflect: true
@@ -21,7 +23,19 @@
             this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
+        domReady: function () {
+
+            this.clientWidth =  document.body.clientWidth;
+
+        },
+
         clickAction: function (event) {
+            this.bodyHeight = document.body.scrollHeight;
+            this.bodytop = this.getBoundingClientRect().top;
+            if ( this.bodyHeight - this.bodytop<=200) {
+                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight+26);
+            }
+            
             this.showMenu = !this.showMenu;
 
             this.$.focus.focus();
@@ -79,4 +93,3 @@
         },
     });
 })();
-
