@@ -20,6 +20,20 @@
             this.$.inputArea.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
+        isDisabled: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
         valueChanged: function () {
             this.$.inputArea.value = this.value;
             this._adjust();
@@ -84,20 +98,6 @@
                 return false;
             }
             event.stopPropagation();
-        },
-        isDisabled: function(){
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                
-                if( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
         },
     });
 })();

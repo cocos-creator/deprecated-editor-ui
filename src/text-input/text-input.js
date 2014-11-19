@@ -14,7 +14,7 @@
             },
         },
 
-        observe:{
+        observe: {
             'disabled' : 'disabledChanged',
         },
 
@@ -30,11 +30,25 @@
             // }
         },
 
+        isDisabled: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
         disabledChanged: function () {
             if ( this.isDisabled() ) {
                 this.$.inputArea.setAttribute('disabled','');
             }
-            else{
+            else {
                 this.$.inputArea.removeAttribute('disabled');
             }
         },
@@ -67,8 +81,9 @@
         },
 
         focusAction: function (event) {
-            if (this.isDisabled())
+            if ( this.isDisabled() )
                 return;
+                
             this.lastVal = this.value;
             this.focused = true;
         },
@@ -139,21 +154,6 @@
                 }
             // }
             event.stopPropagation();
-        },
-        
-        isDisabled: function(){
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-
-                if( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
         },
     });
 })();

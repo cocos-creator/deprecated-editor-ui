@@ -24,6 +24,20 @@
             this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
         },
 
+        isDisabled: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
         update: function () {
             if ( this._editing )
                 return;
@@ -84,20 +98,6 @@
             }).bind(this);
             document.addEventListener ( 'mousemove', mouseMoveHandle );
             document.addEventListener ( 'mouseup', mouseUpHandle );
-        },
-
-        isDisabled: function(){
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if( parent.disabled )
-                    return true;
-                    
-                parent = parent.parentElement;
-            }
-            return false;
         },
     });
 })();

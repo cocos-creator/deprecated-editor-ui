@@ -18,7 +18,7 @@
             },
         },
 
-        observe:{
+        observe: {
             'disabled' : 'disabledChanged',
         },
 
@@ -39,11 +39,25 @@
             }
         },
 
+        isDisabled: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if ( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
         disabledChanged: function () {
             if ( this.isDisabled() ) {
                 this.$.input.setAttribute('disabled','');
             }
-            else{
+            else {
                 this.$.input.removeAttribute('disabled');
             }
         },
@@ -175,20 +189,6 @@
             }
             this.$.input.focus();
             event.stopPropagation();
-        },
-
-        isDisabled: function(){
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if ( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
         },
     });
 })();
