@@ -11,18 +11,18 @@
         border: 1px solid rgba(255, 255, 255, 0.08)
         padding: 3px 4px
 
-        cursor: pointer 
+        cursor: pointer
 
         font-family: Helvetica,Arial,sans-serif
         color: #bdbdbd
         background-color: #474747
         border-top-color: rgba(255, 255, 255, 0.2)
 
-        transition: 
+        transition:
             box-shadow .3s ease
 
         span {
-            cursor: inherit 
+            cursor: inherit
         }
 
         &:hover {
@@ -31,14 +31,15 @@
             border-top-color: rgba(255, 255, 255, 0.28)
         }
 
+
         &:focus {
             outline: none
         }
     }
 
-    &([focused]) button {                         
-        box-shadow: 
-            0px 0 0 1px rgba(20,40,150,1), 
+    &([focused]) button {
+        box-shadow:
+            0px 0 0 1px rgba(20,40,150,1),
             0px 0 4px 1px rgba(12,112,166,0.8)
     }
 
@@ -46,5 +47,25 @@
         border: 1px solid rgba(50,50,50,1)
         background-color: #474747 - 10%
         color: #bdbdbd - 10%
+    }
+}
+
+
+:host-context([disabled]), :host([disabled]) {
+    button {
+        box-shadow: 0px
+        background-color: #3A3A3A
+        color: #525252
+
+        &:hover {
+            background-color: #3A3A3A
+            border-color: rgba(255,255,255,0.08)
+            border-top-color: rgba(255, 255, 255, 0.2)
+        }
+
+        &:active {
+            background-color: #3A3A3A
+            color: #525252
+        }
     }
 }

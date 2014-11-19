@@ -1,7 +1,7 @@
 :host {
     display: flex
     flex-direction: row
-    flex-wrap: nowrap     
+    flex-wrap: nowrap
     align-items: baseline
     position: relative
 
@@ -15,8 +15,8 @@
     cursor: default
     background: #232323
     color: #ddd
-    box-shadow: 
-        inset 0 0 0 1px rgba(0,0,0,0.1), 
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.1),
         0px 0 0 1px rgba(255,255,255,0.1)
 
     transition: box-shadow .3s ease
@@ -24,14 +24,14 @@
     &(:focus) {
         outline: none
     }
-    &([focused]) {                         
-        box-shadow: 
-            inset 0 0 0 1px rgba(0,0,0,0.1), 
-            0px 0 0 1px #0c70a6, 
+    &([focused]) {
+        box-shadow:
+            inset 0 0 0 1px rgba(0,0,0,0.1),
+            0px 0 0 1px #0c70a6,
             0px 0 4px 1px rgba(12,112,166,0.8)
     }
 
-    .input {                         
+    .input {
         flex: auto
         display: block
         padding: 3px 4px
@@ -61,7 +61,7 @@
         }
     }
 
-    .unit {                         
+    .unit {
         flex: 0 0 auto
         margin-right: 4px
         text-align: center
@@ -76,7 +76,7 @@
         }
     }
 
-    .unit-buttons {                         
+    .unit-buttons {
         display: flex;
         flex: 0 0 auto
         flex-direction: column
@@ -84,7 +84,7 @@
         height: 100%
         border-left: 1px solid black
 
-        .button {                         
+        .button {
             flex: auto
             display: block
             border: 0
@@ -116,7 +116,7 @@
                 outline: none
             }
 
-            i {                         
+            i {
                 font-size: 9px
 
                 color: white
@@ -125,7 +125,7 @@
             }
         }
 
-        .sep {                         
+        .sep {
             flex: 0 0 1px
             display: block
 
@@ -133,3 +133,26 @@
         }
     }
 }
+
+
+ :host-context([disabled]), :host([disabled]) {
+     background: #3a3a3a
+     .input {
+         color: #525252
+     }
+     .unit-buttons {
+         .button {
+             background-color: #3a3a3a
+             cursor: auto
+             i {
+                 opacity: 0.1
+             }
+             &:hover {
+                 background-color: #3a3a3a
+                 i {
+                     opacity: 0.1
+                 }
+             }
+         }
+     }
+ }

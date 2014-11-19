@@ -8,6 +8,14 @@
                 value: false,
                 reflect: true
             },
+            disabled: {
+                value: false,
+                reflect: true
+            },
+        },
+
+        observe: {
+            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
@@ -20,6 +28,29 @@
             // if ( this.multiline ) {
             //     this._adjust();
             // }
+        },
+
+        isDisabled: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
+        disabledChanged: function () {
+            if ( this.isDisabled() ) {
+                this.$.inputArea.setAttribute('disabled','');
+            }
+            else {
+                this.$.inputArea.removeAttribute('disabled');
+            }
         },
 
         _adjust: function () {
@@ -50,6 +81,9 @@
         },
 
         focusAction: function (event) {
+            if ( this.isDisabled() )
+                return;
+                
             this.lastVal = this.value;
             this.focused = true;
         },
@@ -91,11 +125,13 @@
             //         // NOTE: textarea already have ctrl-z undo behavior
             //         // esc
             //         case 27:
-            //             this.blur(); 
+            //             this.blur();
             //         return false;
             //     }
             // }
             // else {
+
+
                 switch ( event.which ) {
                     // enter
                     case 13:

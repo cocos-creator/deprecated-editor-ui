@@ -1,4 +1,4 @@
-:host {                         
+:host {
     position: relative
 
     box-sizing: border-box
@@ -10,20 +10,20 @@
 
     background: #232323
     color: #ddd
-    box-shadow: 
-        inset 0 0 0 1px rgba(0,0,0,0.1), 
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.1),
         0px 0 0 1px rgba(255,255,255,0.1)
 
     transition: box-shadow .3s ease
 
-    &([focused]) {                         
-        box-shadow: 
-            inset 0 0 0 1px rgba(0,0,0,0.1), 
-            0px 0 0 1px #0c70a6, 
+    &([focused]) {
+        box-shadow:
+            inset 0 0 0 1px rgba(0,0,0,0.1),
+            0px 0 0 1px #0c70a6,
             0px 0 4px 1px rgba(12,112,166,0.8)
     }
 
-    .input-area {                         
+    .input-area {
         display: block
         padding: 3px 4px
         border: 0
@@ -49,7 +49,8 @@
         }
     }
 
-    .area {                         
+
+    .area {
         resize: none
         // &::-webkit-resizer {
         //     border: 1px solid rgba(255,0,0,1)
@@ -80,5 +81,17 @@
         &::-webkit-scrollbar-corner {
             background-color: #171717
         }
+    }
+}
+
+:host-context([disabled]), :host([disabled]) {
+    background: #3a3a3a
+
+    .input-area {
+        color: #525252
+    }
+
+    &([focused]) {
+        box-shadow: 0px
     }
 }
