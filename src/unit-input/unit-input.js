@@ -40,9 +40,10 @@
         },
 
         disabledChanged: function () {
-            if (this.isDisabled()) {
+            if ( this.isDisabled() ) {
                 this.$.input.setAttribute('disabled','');
-            }else{
+            }
+            else{
                 this.$.input.removeAttribute('disabled');
             }
         },
@@ -72,9 +73,9 @@
         },
 
         focusAction: function (event) {
-            if (this.isDisabled()){
+            if ( this.isDisabled() )
                 return;
-            }
+
             this.lastVal = this._convert(this.value);
             this.focused = true;
         },
@@ -151,8 +152,9 @@
         },
 
         increaseAction: function (event) {
-            if (this.isDisabled())
+            if ( this.isDisabled() )
                 return;
+
             var val = this._convert(this.value+this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -163,8 +165,9 @@
         },
 
         decreaseAction: function (event) {
-            if (this.isDisabled())
+            if ( this.isDisabled() )
                 return;
+
             var val = this._convert(this.value-this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -175,13 +178,14 @@
         },
 
         isDisabled: function(){
-            if (this.disabled) {
+            if ( this.disabled )
                 return true;
-            }
+
             var parent = this.parentElement;
-            while(parent) {
-                if(parent.disabled)
+            while ( parent ) {
+                if ( parent.disabled )
                     return true;
+
                 parent = parent.parentElement;
             }
             return false;
