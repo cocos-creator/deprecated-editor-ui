@@ -33,8 +33,9 @@
         },
 
         focusAction: function (event) {
-            if (this.isDisabled())
+            if ( this.isDisabled() )
                 return;
+
             this.focused = true;
         },
 
@@ -49,8 +50,9 @@
         },
 
         mousedownAction: function (event) {
-            if (this.isDisabled())
+            if ( this.isDisabled() )
                 return;
+
             EditorUI.addDragGhost("pointer");
             this._editing = true;
 
@@ -85,13 +87,14 @@
         },
 
         isDisabled: function(){
-            if (this.disabled) {
+            if ( this.disabled )
                 return true;
-            }
+
             var parent = this.parentElement;
-            while(parent) {
-                if(parent.disabled)
+            while ( parent ) {
+                if( parent.disabled )
                     return true;
+                    
                 parent = parent.parentElement;
             }
             return false;
