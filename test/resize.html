@@ -1,0 +1,57 @@
+﻿<html>
+
+ <head>
+ <title>Fireball-x Editor UI</title>
+ <link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+ <link rel="stylesheet" href="/bin/editor-ui.css">
+
+ <script src="/ext/webcomponentsjs/webcomponents.js"></script>
+ <script src="/ext/fire-core/core.dev.js"></script>
+
+ <link rel="import" href="/ext/polymer/polymer.html">
+ <link rel="import" href="/bin/editor-ui.html">
+ <link rel="import" href="control-status/control-status.html">
+ <link rel="import" href="custom-div/custom-div.html">
+ <style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
+    .custom-div {
+        width: 300px;
+        background: gray;
+        height: 250px;
+        min-height: 50px;
+
+        color: red;
+    }
+    .red{
+        background: white;
+    }
+ </style>
+ </head>
+ <body>
+ <template id="my-template" is="auto-binding">
+        <h2 style="text-align: center; color: #ccc;">Test Editor-UI Resizer</h2>
+        <span class="space" style="height: 20px"></span>
+        <fire-ui-section name="Resizer Test">
+            <fire-ui-newdock >
+                <custom-div minHeight="50" minWidth="50"></custom-div>
+                <custom-div minHeight="50" minWidth="50"></custom-div>
+                <custom-div minHeight="50" minWidth="50"></custom-div>
+                <custom-div minHeight="50" minWidth="50"></custom-div>
+
+            </fire-ui-newdock>
+        </fire-ui-section>
+ </template>
+ </body>
+ </html>
