@@ -24,8 +24,9 @@
         clickAction: function (event) {
             var bodyHeight = document.body.scrollHeight;
             var bodytop = this.getBoundingClientRect().top;
-            if ( bodyHeight - bodytop <= this.$.menu.scrollHeight+36 ) {
-                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight+26);
+            var borderHeight = this.$.border.getBoundingClientRect().height;
+            if ( bodyHeight - bodytop <= this.$.menu.scrollHeight + borderHeight + 4 + 10 ) {
+                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight + borderHeight + 4 );
             }
 
             this.showMenu = !this.showMenu;
