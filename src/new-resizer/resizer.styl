@@ -1,0 +1,32 @@
+:host {
+    display: flex
+    font-size: 12px
+    white-space: nowrap
+
+    font-family: Helvetica,Arial,sans-serif
+    color: #ddd
+
+    // transition: background-color .3s ease
+    // &(:hover) {
+    //     background-color: rgba(12,112,200,1.0)
+    // }
+
+    z-index: 99
+
+    size = 11px
+    &(.vertical) {
+        margin-left: -4px
+        margin-right: -4px
+        width: size
+        //height: 100%
+        cursor: col-resize
+    }
+
+    &(.horizontal) {
+        margin-top: -4px
+        margin-bottom: -4px
+        height: size
+        //width: 100%
+        cursor: row-resize
+    }
+}
