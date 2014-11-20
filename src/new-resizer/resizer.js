@@ -28,6 +28,11 @@
             this.target = this.previousElementSibling;
         },
 
+        domReady: function() {
+            this.previousElementSibling.style.height = "250px";
+            this.nextElementSibling.style.height = "250px";
+        },
+
         mousedownAction: function ( event ) {
 
             if ( this.target ) {
