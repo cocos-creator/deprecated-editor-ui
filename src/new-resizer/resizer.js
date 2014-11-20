@@ -31,7 +31,7 @@
             this.previous = this.previousElementSibling;
         },
 
-        domReady: function (){
+        domReady: function () {
             this.previous = this.previousElementSibling;
             this.next = this.nextElementSibling;;
         },
@@ -69,10 +69,10 @@
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
                         offset = this.inverse ? -offset : offset;
-                        if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth)){
+                        if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth)) {
                             return;
                         }
-                        else{
+                        else {
                             this.previous.Width = (lastRect.width + offset) + "px";
                             this.next.Width = (nextRect.width - offset) + "px";
                         }
@@ -82,10 +82,10 @@
                     else {
                         offset = event.clientY - mouseDownY;
                         offset = this.inverse ? -offset : offset;
-                        if ( (lastRect.height + offset) <= (lastMinheight) || (nextRect.height - offset) <= (nextMinheight)){
+                        if ( (lastRect.height + offset) <= (lastMinheight) || (nextRect.height - offset) <= (nextMinheight)) {
                             return;
                         }
-                        else{
+                        else {
                             this.previous.Height = (lastRect.height + offset) + "px";
                             this.next.Height = (nextRect.height - offset) + "px";
                         }
