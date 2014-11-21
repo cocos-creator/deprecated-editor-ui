@@ -2,7 +2,7 @@
     Polymer({
         publish: {
             value: -1,
-            options: null, 
+            options: null,
             focused: {
                 value: false,
                 reflect: true
@@ -22,8 +22,14 @@
         },
 
         clickAction: function (event) {
-            this.showMenu = !this.showMenu;
+            var bodyHeight = document.body.scrollHeight;
+            var bodytop = this.getBoundingClientRect().top;
+            var borderHeight = this.$.border.getBoundingClientRect().height;
+            if ( bodyHeight - bodytop <= this.$.menu.scrollHeight + borderHeight + 4 + 10 ) {
+                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight + borderHeight + 4 );
+            }
 
+            this.showMenu = !this.showMenu;
             this.$.focus.focus();
             event.stopPropagation();
         },
@@ -79,4 +85,3 @@
         },
     });
 })();
-
