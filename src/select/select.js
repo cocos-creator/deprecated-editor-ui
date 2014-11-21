@@ -2,8 +2,6 @@
     Polymer({
         publish: {
             value: -1,
-            bodytop: 0,
-            bodyHeight: 0,
             options: null,
             focused: {
                 value: false,
@@ -24,10 +22,11 @@
         },
 
         clickAction: function (event) {
-            this.bodyHeight = document.body.scrollHeight;
-            this.bodytop = this.getBoundingClientRect().top;
-            if ( this.bodyHeight - this.bodytop <= this.$.menu.scrollHeight+36 ) {
-                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight+26);
+            var bodyHeight = document.body.scrollHeight;
+            var bodytop = this.getBoundingClientRect().top;
+            var borderHeight = this.$.border.getBoundingClientRect().height;
+            if ( bodyHeight - bodytop <= this.$.menu.scrollHeight + borderHeight + 4 + 10 ) {
+                this.$.menu.style.marginTop=-(this.$.menu.scrollHeight + borderHeight + 4 );
             }
 
             this.showMenu = !this.showMenu;

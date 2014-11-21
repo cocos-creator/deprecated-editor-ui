@@ -1,0 +1,43 @@
+﻿<polymer-element
+    name="custom-div"
+    constructor="FireCustomDiv"
+    >
+<template>
+    <style>
+        .cdiv{
+            width: 100%;
+            height: 100px;
+            background: gray;
+        }
+    </style>
+    <div id="cdiv" class="cdiv"></div>
+</template>
+<script>
+    Polymer('custom-div',{
+        publish:{
+            Width: 0,
+            Height: 0,
+            minHeight: 0,
+            maxHeight: 0,
+            minWidth: 0,
+            maxWidth: 0
+        },
+
+        observe: {
+            Height: 'HeightValueChanged',
+            Width: 'WidthValueChanged'
+        },
+
+        HeightValueChanged: function () {
+            this.style.height=this.Height;
+            this.$.cdiv.style.height=this.Height;
+
+        },
+
+        WidthValueChanged: function () {
+            this.style.width=this.Width;
+            this.$.cdiv.style.width=this.Width;
+        }
+    });
+</script>
+</polymer-element>
