@@ -54,13 +54,15 @@
         },
 
         mousedownAction: function ( event ) {
-            if ( this.renaming ) {
+            if ( this.renaming ||
+                 event.target === this.$.foldIcon ) {
                 event.stopPropagation();
             }
         },
 
         mouseupAction: function ( event ) {
-            if ( this.renaming ) {
+            if ( this.renaming ||
+                 event.target === this.$.foldIcon ) {
                 event.stopPropagation();
             }
         },
@@ -78,7 +80,7 @@
             event.stopPropagation();
         },
 
-        foldMousedownAction: function ( event ) {
+        foldAction: function ( event ) {
             this.folded = !this.folded;
             event.stopPropagation();
         },
