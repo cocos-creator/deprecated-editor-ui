@@ -13,6 +13,9 @@
  <link rel="import" href="control-status/control-status.html">
  <link rel="import" href="custom-div/custom-div.html">
  <style>
+    :host {
+        margin: 5px;
+    }
     body {
         position: relative;
         background-color: #333;
@@ -44,10 +47,10 @@
         <h2 style="text-align: center; color: #ccc;">Test Editor-UI Resizer</h2>
         <span class="space" style="height: 20px"></span>
         <fire-ui-section name="Resizer Test">
-            <fire-ui-newdock >
-                <custom-div minHeight="50" minWidth="50"></custom-div>
-                <custom-div minHeight="50" minWidth="50"></custom-div>
-                <custom-div minHeight="50" minWidth="50"></custom-div>
+            <fire-ui-newdock vertical>
+                <custom-div minHeight="50" style="background:red" minWidth="50"></custom-div>
+                <custom-div minHeight="50" style="background:blue" minWidth="50"></custom-div>
+                <custom-div minHeight="50" style="background:white" minWidth="50"></custom-div>
                 <custom-div minHeight="50" minWidth="50"></custom-div>
 
             </fire-ui-newdock>

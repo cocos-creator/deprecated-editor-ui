@@ -61,6 +61,7 @@
         },
 
         selectAction: function (event, detail, sender) {
+            console.log("selectAction");
             var idx = parseInt(sender.getAttribute('index'));
             var entry = this.options[idx];
             if ( this.value !== entry.value ) {
