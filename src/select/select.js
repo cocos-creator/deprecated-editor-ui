@@ -30,7 +30,6 @@
             }
 
             this.showMenu = !this.showMenu;
-
             this.$.focus.focus();
             event.stopPropagation();
         },
@@ -61,7 +60,6 @@
         },
 
         selectAction: function (event, detail, sender) {
-            console.log("selectAction");
             var idx = parseInt(sender.getAttribute('index'));
             var entry = this.options[idx];
             if ( this.value !== entry.value ) {
