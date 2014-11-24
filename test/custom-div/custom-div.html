@@ -4,10 +4,17 @@
     >
 <template>
     <style>
+        :host {
+            width: 100px;
+            height: 100%;
+            min-width: 100px;
+            min-height: 100px;
+            background: red;
+        }
         .cdiv{
             width: 100%;
-            height: 100px;
-            background: gray;
+            height:100%;
+            background: white;
         }
     </style>
     <div id="cdiv" class="cdiv"></div>
@@ -29,6 +36,7 @@
         },
 
         HeightValueChanged: function () {
+            console.log(this.Height);
             this.style.height=this.Height;
             this.$.cdiv.style.height=this.Height;
 

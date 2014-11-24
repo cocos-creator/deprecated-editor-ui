@@ -48,12 +48,12 @@
            var ElmList = [];
            this.BrotherElments = [];
            for (var i = 0; i < r.length; i++ ) {
-               if(r[i].tagName!="FIRE-UI-NEWRESIZER"){
+               if(r[i].tagName != "FIRE-UI-NEWRESIZER") {
                    ElmList.push(r[i]);
                }
            }
            this.BrotherElments = ElmList;
-            return ElmList;
+           return ElmList;
         },
 
         //该函数用于返回当前操作的resizer的前一个元素在BrotherElments中的下标
@@ -67,21 +67,17 @@
         },
 
         mousedownAction: function ( event ) {
-            console.log(this.GetSubscript(this.previous));
             if ( this.previous ) {
                 // add drag-ghost
                 EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
-
-                //var targetRect = this.previousElementSibling.getBoundingClientRect();
                 var lastRect = this.previous.getBoundingClientRect();
                 var nextRect = this.next.getBoundingClientRect();
                 var lastMinheight = this.previous.minHeight;
                 var nextMinheight = this.next.minHeight;
                 var lastMinWidth = this.previous.minHeight;
-                var nextMinWidth = this.next.minHeight;
+                var nextMinWidth = this.next.minWidth;
                 var mouseDownX = event.clientX;
                 var mouseDownY = event.clientY;
-
                 var updateMouseMove = function (event) {
                     var offset = -1;
                     if ( this.vertical ) {
@@ -92,18 +88,9 @@
                         }
                         else {
                             this.previous.Width = (lastRect.width + offset) + "px";
-                            /*var tempElement = this.GetBrotherChild(this)[this.GetSubscript(this.previous)];
-                            for (var i =0; i < this.GetBrotherChild(this).length; i++) {
-                                tempElement.Width = (tempElement.getBoundingClientRect().width - (offset/this.GetBrotherChild(this).length-1)-11/3)+ "px";
-                                console.log(offset);
-                                tempElement = tempElement.nextElementSibling;
-                            }*/
                             this.next.Width = (nextRect.width - offset) + "px";
-                            /*this.next.nextElementSibling.Width = (nextRect.width - offset/3) + "px";
-                            this.next.nextElementSibling.nextElementSibling.Width = (nextRect.width - offset/3) + "px";*/
                         }
 
-                        //console.log(lastRect.width+",");
                     }
                     else {
                         offset = event.clientY - mouseDownY;
@@ -115,13 +102,11 @@
                             this.previous.Height = (lastRect.height + offset) + "px";
                             this.next.Height = (nextRect.height - offset) + "px";
                         }
-
                     }
 
                     // 事件完毕后触发 mouseup触发resized结束事件 mousemove触发resize事件
                     this.fire( "resized", { target: this.previous } );
 
-                    //
                     event.stopPropagation();
                 };
                 updateMouseMove.call(this,event);

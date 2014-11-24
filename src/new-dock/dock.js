@@ -3,6 +3,12 @@
         publish: {
             ElementCount: 0,
             Childrens: null,
+            Width: 0,
+            Height: 0,
+            minHeight: 0,
+            maxHeight: 0,
+            minWidth: 0,
+            maxWidth: 0,
             vertical: {
                 value: false,
                 reflect: true
@@ -11,20 +17,53 @@
                 value: false,
                 reflect: true
             }
+        },
+
+        observe: {
+            Height: 'HeightValueChanged',
+            Width: 'WidthValueChanged',
+            minHeight: 'minHeightChanged',
+            maxHeight: 'maxHeightChanged',
+            minWidth: 'minWidthChanged',
+            maxWidth: 'maxWidthChaged',
 
         },
 
-        created: function () {
+        HeightValueChanged: function () {
+            this.style.height = this.Height;
+        },
 
+        /*value Change Event*/
+        WidthValueChanged: function () {
+            this.style.width = this.Width;
+        },
 
+        minHeightChanged: function ()　{
+            this.style.minHeight = this.minHeight + "px";
+        },
+
+        maxHeightChanged: function () {
+            this.style.maxHeight = this.maxHeight + "px";
+        },
+
+        minWidthChanged: function () {
+            this.style.minWidth = this.minWidth + "px";
+        },
+
+        maxWidthChaged: function () {
+            this.style.maxWidth = this.maxWidth + "px";
         },
 
         ready: function () {
-            this.ElementCount=this.children.length;
-            this.Childrens=this.children;
+            /*自动添加resizer*/
+            this.ElementCount = this.children.length;
+            this.Childrens = this.children;
             var isrow = this.isRow();
-            for ( var i = 0; i < this.children.length; ++i ) {
-                if ( i != this.children.length-1 ) {
+            if (this.children.length <= 1)
+                return;
+
+            for ( var i = 0; i < this.children.length-1; ++i ) {
+                if (true ) {
                     var dockEL = this.children[i];
                     if ( true ) {
                         var resizer = new FireNewResizer();
@@ -37,6 +76,18 @@
             }
         },
 
+        // 获取子节点数目
+        getChildrenCount: function () {
+            var j=0;
+            for (var i = 0; i< this.children.length; i++ ) {
+                    if (this.children[i].tagName!='FIRE-UI-NEWRESIZER') {
+                        j++;
+                    }
+                }
+            return j;
+        },
+
+
         domReady: function () {
             for ( var i = 0; i < this.children.length; ++i ) {
                 var resizer = this.children[i];
@@ -48,11 +99,29 @@
             if (this.isRow()) {
                 this.style.display = "flex";
             }
+            
+            if (this.isRow()) {
+                for (var i = 0; i < this.Childrens.length; i+=2) {
+                    //下面的公式 是因为如果直接除以他子节点的总数，resizer在拖动的时候，有时候会变得很细直至看不见，加了这个公式，就没这个问题了
+                    this.Childrens[i].style.width = (this.getBoundingClientRect().width/this.ElementCount-(15*(this.Childrens.length/2))/(this.ElementCount*5)) + "px";
+                }
+            }
 
-            for (var i = 0; i < this.Childrens.length; i+=2) {
-                //下面的公式 是因为如果直接除以他子节点的总数，resizer在拖动的时候，有时候会变得很细直至看不见，加了这个公式，就没这个问题了
-                this.Childrens[i].style.width = (this.getBoundingClientRect().width/this.ElementCount-(15*(this.Childrens.length/2))/(this.ElementCount*5)) + "px";
+            for (var i = 0; i< this.children.length; i++ ) {
+                if ( this.children[i].tagName != 'FIRE-UI-NEWRESIZER' ) {
+                    if ( this.isRow() ) {
+                        this.children[i].style.width = this.Width / (this.getChildrenCount()) + "px" ;
+                        this.children[i].Width= this.Width / (this.getChildrenCount());
+                        this.children[i].style.height = this.Height + "px";
+                        this.children[i].Height = this.Height;
+                    }
 
+                    else {
+                        this.children[i].style.width = this.Width + "px";
+                        this.children[i].Width = this.Width;
+                        this.children[i].style.height = this.Height / (this.getChildrenCount()) + "px";
+                    }
+                }
             }
         },
 
