@@ -99,11 +99,11 @@
             if (this.isRow()) {
                 this.style.display = "flex";
             }
-            
+
             if (this.isRow()) {
                 for (var i = 0; i < this.Childrens.length; i+=2) {
                     //下面的公式 是因为如果直接除以他子节点的总数，resizer在拖动的时候，有时候会变得很细直至看不见，加了这个公式，就没这个问题了
-                    this.Childrens[i].style.width = (this.getBoundingClientRect().width/this.ElementCount-(15*(this.Childrens.length/2))/(this.ElementCount*5)) + "px";
+                   this.Childrens[i].style.width = (this.getBoundingClientRect().width/this.ElementCount-(15*(this.Childrens.length/2))/(this.ElementCount*5)) + "px";
                 }
             }
 
