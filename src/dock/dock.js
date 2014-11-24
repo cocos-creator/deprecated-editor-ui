@@ -5,14 +5,14 @@
 
         ready: function () {
             var isrow = this.isRow();
-
+console.log('ready');
             for ( var i = 0; i < this.children.length; ++i ) {
                 if ( i != this.children.length-1 ) {
                     var dockEL = this.children[i];
                     if ( dockEL instanceof FireDock ) {
                         var resizer = new FireResizer();
                         resizer.vertical = isrow;
-                        resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+                        resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in
 
                         this.insertBefore( resizer, dockEL.nextElementSibling );
                         i += 1;
@@ -81,7 +81,7 @@
                 newResizer.vertical = newDock.isRow();
                 newResizer.ready();
 
-                // 
+                //
                 this.parentElement.insertBefore(newDock, this);
                 if ( position === 'left' || position === 'top' ) {
                     newDock.appendChild(element);

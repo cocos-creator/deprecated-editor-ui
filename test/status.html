@@ -127,6 +127,27 @@ span.space {
                 <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>
             </control-status>
         </div>
+
+        <span class="space" style="height: 20px"></span>
+        <div flex-row>
+            <fire-ui-label>Fire Dock：</fire-ui-label>
+            <control-status>
+                <fire-ui-dock >
+
+                        <fire-ui-text-area value="{{myMultiText}}"></fire-ui-text-area>
+
+                    <fire-ui-newresizer ></fire-ui-newresizer>
+                    <fire-ui-button-group>
+                         <fire-ui-bi>Button 1</fire-ui-bi>
+                            <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>
+                            <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>
+                            <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>
+                            <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
+                        <fire-ui-bi>Button 2</fire-ui-bi>
+                    </fire-ui-button-group>
+                </fire-ui-dock>
+            </control-status>
+        </div>
     </fire-ui-section>
 </template>
 <script>
