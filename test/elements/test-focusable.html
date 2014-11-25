@@ -1,0 +1,64 @@
+﻿<polymer-element
+        name="test-focusable"
+        constructor="TestFocusable"
+        on-focus="{{_focusAction}}"
+        on-blur="{{_blurAction}}"
+        >
+<template>
+        <style>
+            :host {
+                display: block; 
+                outline: none;
+            }
+
+            .border {
+                position: relative;
+                padding: 20px;
+                border: 2px solid #aaa;
+            }
+
+            .title {
+                position: absolute;
+                top: -8px;
+                left: 5px;
+                padding-left: 3px;
+                padding-right: 3px;
+                font-size: 12px;
+
+                color: #aaa;
+                background: #333;
+            }
+
+            :host([disabled]) .border, :host-context([disabled]) .border {
+                border: 2px solid red;
+            }
+            :host([disabled]) .title, :host-context([disabled]) .title {
+                color: red;
+            }
+
+            :host([focused]) .border {
+                border: 2px solid #09f;
+            }
+            :host([focused]) .title {
+                color: #09f;
+            }
+        </style>
+
+        <div class="border">
+            <div class="title">{{title}}</div>
+            <content></content>
+        </div>
+</template>
+<script>
+    Polymer(Polymer.mixin({
+        public: {
+            title: 'Unknown'
+        },
+
+        ready: function () {
+            this._initTabIndex();
+        },
+
+    }, EditorUI.focusable));
+</script>
+</polymer-element>

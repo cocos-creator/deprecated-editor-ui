@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>Test Focusable</title>
+    <link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bin/editor-ui.css">
+
+    <script src="/ext/fire-core/core.dev.js"></script>
+
+    <link rel="import" href="/ext/polymer/polymer.html">
+    <link rel="import" href="/bin/editor-ui.html">
+    <link rel="import" href="elements/test-focusable.html">
+
+    <style>
+        body {
+            position: relative;
+            background-color: #333;
+            padding: 0px 100px;
+            margin-top: 20px;
+            color: white;
+            font-family: Helvetica,Arial,sans-serif;
+        }
+        span.space {
+            height: 20px;
+            width: 20px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <template id="my-template" is="auto-binding">
+        <test-focusable id="A" title="Test A">
+            <test-focusable id="A1" title="Test A1">
+            </test-focusable>
+
+            <span class="space"></span>
+
+            <test-focusable id="A2" title="Test A2">
+            </test-focusable>
+        </test-focusable>
+
+        <span class="space"></span>
+
+        <test-focusable id="B" title="Test B">
+            <test-focusable id="B1" title="Test B1">
+            </test-focusable>
+
+            <span class="space"></span>
+
+            <test-focusable id="B2" title="Test B2">
+                <test-focusable id="B21" title="Test B21">
+                </test-focusable>
+
+                <span class="space"></span>
+
+                <test-focusable id="B22" title="Test B22">
+                </test-focusable>
+            </test-focusable>
+        </test-focusable>
+
+        <span class="space"></span>
+
+        <div>Press "b" to toggle disable on Element B</div>
+        <div>Press "1" to toggle disable on Element B1</div>
+        <div>Press "2" to toggle disable on Element B2</div>
+
+        <script>
+            document.addEventListener( "keydown", function (e) {
+                var el = null;
+                if ( e.keyCode === 66 ) {
+                    el = document.querySelector('#B');
+                }
+                else if ( e.keyCode === 49 ) {
+                    el = document.querySelector('#B1');
+                } 
+                else if ( e.keyCode === 50 ) {
+                    el = document.querySelector('#B2');
+                }
+
+                if ( el )
+                    el.disabled = !el.disabled;
+            });
+        </script>
+    </template>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+﻿<polymer-element
+        name="control-status"
+        constructor="FireControlStatus"
+        >
+<template>
+        <style>
+            :host {
+                display: block;
+            }
+            span.space {
+                display: inline-block;
+                width: 5px;
+            }
+            .content {
+                margin-bottom: 20px;
+            }
+        </style>
+
+        <div class="content" flex-row>
+            <fire-ui-label style="flex: 0 0 150px;">{{label}}:</fire-ui-label>
+            <div flex-1>
+                <content></content>
+            </div>
+            <div flex-1 flex-row>
+                <fire-ui-checkbox on-changed="{{changeDisabledAction}}"></fire-ui-checkbox>
+                <span class="space"></span>
+                <fire-ui-label>Disabled</fire-ui-label>
+
+                <span class="space" style="width: 20px;"></span>
+
+                <fire-ui-checkbox on-changed="{{changeFocusedAction}}"></fire-ui-checkbox>
+                <span class="space"></span>
+                <fire-ui-label>Focused</fire-ui-label>
+            </div>
+        </div>
+</template>
+<script>
+    Polymer({
+        publish: {
+            label: "Unknown",
+        },
+
+        isDisabled: false,
+        isFocused: false,
+
+        changeDisabledAction: function (event) {
+            this.isDisabled = !this.isDisabled;
+
+            if ( this.isDisabled ) {
+                this.firstElementChild.setAttribute('disabled','');
+                console.log(this.firstElementChild.tagName+" have been disabled");
+            } 
+            else {
+                this.firstElementChild.removeAttribute('disabled','');
+                console.log(this.firstElementChild.tagName+" removed the disabled");
+            }
+        },
+
+        changeFocusedAction: function (event) {
+            this.isFocused = !this.isFocused;
+
+            if ( this.isFocused ) {
+                this.firstElementChild.setAttribute('focused','');
+                console.log(this.firstElementChild.tagName+" have been focused");
+            } 
+            else {
+                this.firstElementChild.removeAttribute('focused','');
+                console.log(this.firstElementChild.tagName+" removed the focused");
+            }
+        },
+    });
+</script>
+</polymer-element>
