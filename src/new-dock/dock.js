@@ -87,6 +87,37 @@
             return j;
         },
 
+        autoDock: function () {
+          // 这里自动分配节点长宽
+          console.log('auto dock');
+          // 取最大长宽 进行自动调整
+          for (var i = 0; i< this.children.length; i++ ) {
+            if ( this.children[i].tagName != 'FIRE-UI-NEWRESIZER' ) {
+              if ( this.isRow() ) {
+                if (this.maxWidth != 0 && this.Width > this.maxWidth) {
+                  console.log('max width');
+                  this.Width = this.maxWidth;
+                }
+
+                this.children[i].style.width = this.Width / (this.getChildrenCount()) + "px" ;
+                this.children[i].Width= this.Width / (this.getChildrenCount());
+                this.children[i].style.height = this.Height + "px";
+                this.children[i].Height = this.Height;
+              }
+
+              else {
+                if (this.maxHeight != 0 && this.Height > this.maxHeight ) {
+                  this.Height = this.maxHeight;
+                  console.log('max height');
+                }
+
+                this.children[i].style.width = this.Width + "px";
+                this.children[i].Width = this.Width;
+                this.children[i].style.height = this.Height / (this.getChildrenCount()) + "px";
+              }
+            }
+          }
+        },
 
         domReady: function () {
             for ( var i = 0; i < this.children.length; ++i ) {
@@ -107,22 +138,7 @@
                 }
             }
 
-            for (var i = 0; i< this.children.length; i++ ) {
-                if ( this.children[i].tagName != 'FIRE-UI-NEWRESIZER' ) {
-                    if ( this.isRow() ) {
-                        this.children[i].style.width = this.Width / (this.getChildrenCount()) + "px" ;
-                        this.children[i].Width= this.Width / (this.getChildrenCount());
-                        this.children[i].style.height = this.Height + "px";
-                        this.children[i].Height = this.Height;
-                    }
-
-                    else {
-                        this.children[i].style.width = this.Width + "px";
-                        this.children[i].Width = this.Width;
-                        this.children[i].style.height = this.Height / (this.getChildrenCount()) + "px";
-                    }
-                }
-            }
+            this.autoDock();
         },
 
         isRow: function () {

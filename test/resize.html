@@ -44,11 +44,14 @@
         <h2 style="text-align: center; color: #ccc;">Test Editor-UI Resizer</h2>
         <span class="space" style="height: 20px"></span>
         <fire-ui-section name="Resizer Test">
-            <fire-ui-newdock id="main"  Width="1700px" Height="500px"  vertical>
-                <fire-ui-newdock  minHeight="51"  minWidth="51"  style="background:red" >
-                    <fire-ui-newdock   minHeight="52"  minWidth="52"  style="background:gray">
+            <fire-ui-newdock id="main"  Width="1210px" Height="500px"  vertical>
+                <fire-ui-newdock  minHeight="51"  vertical  minWidth="51"  style="background:red" >
+                    <fire-ui-newdock   minHeight="52"  minWidth="52" maxWidth="800" maxHeight="200"  style="background:gray">
+                        dock1
                     </fire-ui-newdock>
-                    <fire-ui-newdock    minHeight="52"  minWidth="52"  style="background:yellow">
+
+                    <fire-ui-newdock    minHeight="52"  minWidth="52"  maxWidth="1200" maxHeight="300"  style="background:green">
+                        dock2
                     </fire-ui-newdock>
                 </fire-ui-newdock>
                 <fire-ui-newdock minHeight="200" minWidth="200"  style="background:white">

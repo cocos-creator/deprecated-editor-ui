@@ -16,6 +16,7 @@
             this.target = null;
             this.previous = null;
             this.next = null;
+            this.dock = new FireNewDock();
         },
 
         ready: function () {
@@ -56,6 +57,10 @@
            return ElmList;
         },
 
+        ChangeChild: function (elem) {
+
+        },
+
         //该函数用于返回当前操作的resizer的前一个元素在BrotherElments中的下标
         GetSubscript: function (elem) {
             this.GetBrotherChild(elem.nextElementSibling);
@@ -74,8 +79,14 @@
                 var nextRect = this.next.getBoundingClientRect();
                 var lastMinheight = this.previous.minHeight;
                 var nextMinheight = this.next.minHeight;
-                var lastMinWidth = this.previous.minHeight;
+                var lastMinWidth = this.previous.minWidth;
                 var nextMinWidth = this.next.minWidth;
+
+                var lastMaxheight = this.previous.maxHeight;
+                var nextMaxheight = this.next.maxHeight;
+                var lastMaxWidth = this.previous.maxWidth;
+                var nextMaxWidth = this.next.maxWidth;
+
                 var mouseDownX = event.clientX;
                 var mouseDownY = event.clientY;
                 var updateMouseMove = function (event) {
@@ -83,13 +94,15 @@
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
                         offset = this.inverse ? -offset : offset;
-                        if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth)) {
+                        if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth) ) {
+
                             return;
                         }
                         else {
                             this.previous.Width = (lastRect.width + offset) + "px";
                             this.next.Width = (nextRect.width - offset) + "px";
                         }
+
 
                     }
                     else {
@@ -104,6 +117,30 @@
                         }
                     }
 
+                    // 这里动态调整children的长宽和父节点一样 参考dock里的auto size
+                    for (var i = 0; i < this.previous.children.length; i ++) {
+                        if (this.previous.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
+                            if (!this.vertical) {
+                              this.previous.children[i].style.height = this.previous.Height  ;
+                            }
+                            else {
+                                this.previous.children[i].style.width = this.previous.Width ;
+                            }
+                        }
+                    }
+
+                    for (var i = 0; i < this.next.children.length; i ++) {
+                      if (this.next.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
+                        if (!this.vertical) {
+                          this.next.children[i].style.height = this.next.Height  ;
+                        }
+                        else {
+                          this.next.children[i].style.width = this.next.Width ;
+                        }
+                      }
+                    }
+
+                  //  console.log(lastRect.width + offset);
                     // 事件完毕后触发 mouseup触发resized结束事件 mousemove触发resize事件
                     this.fire( "resized", { target: this.previous } );
 
