@@ -44,10 +44,15 @@
         <h2 style="text-align: center; color: #ccc;">Test Editor-UI Resizer</h2>
         <span class="space" style="height: 20px"></span>
         <fire-ui-section name="Resizer Test">
-            <fire-ui-newdock id="main"  Width="1210px" Height="500px"  vertical>
-                <fire-ui-newdock  minHeight="51"  vertical  minWidth="51"  style="background:red" >
-                    <fire-ui-newdock   minHeight="52"  minWidth="52" maxWidth="800" maxHeight="200"  style="background:gray">
-                        dock1
+            <!--<fire-ui-newdock id="main"  Width="1210px" Height="500px"  vertical>
+                <fire-ui-newdock  minHeight="51"    minWidth="51"  style="background:red" >
+                    <fire-ui-newdock vertical  minHeight="52"  minWidth="52" maxWidth="800" maxHeight="200"  style="background:gray">
+                        <fire-ui-newdock   minHeight="52"  minWidth="52" maxWidth="900" maxHeight="100"  style="background:black">
+
+                        </fire-ui-newdock>
+                        <fire-ui-newdock   minHeight="52"  minWidth="52" maxWidth="800" maxHeight="200"  style="background:gray">
+
+                        </fire-ui-newdock>
                     </fire-ui-newdock>
 
                     <fire-ui-newdock    minHeight="52"  minWidth="52"  maxWidth="1200" maxHeight="300"  style="background:green">
@@ -56,7 +61,29 @@
                 </fire-ui-newdock>
                 <fire-ui-newdock minHeight="200" minWidth="200"  style="background:white">
                 </fire-ui-newdock>
-            </fire-ui-newdock>
+            </fire-ui-newdock>-->
+
+            <fire-ui-newdock id="main"  Width="1210px" Height="500px"  vertical>
+                <fire-ui-newdock   style="background:red" >
+                    <fire-ui-newdock  vertical  style="background:gray">
+                        <fire-ui-newdock    style="background:black">
+                        </fire-ui-newdock>
+
+                        <fire-ui-newdock  style="background:white">
+                        </fire-ui-newdock>
+                    </fire-ui-newdock>
+
+                    <fire-ui-newdock   vertical style="background:green">
+                      <fire-ui-newdock    style="background:white">
+                      </fire-ui-newdock>
+                      
+                      <fire-ui-newdock  style="background:black">
+                      </fire-ui-newdock>
+                    </fire-ui-newdock>
+              </fire-ui-newdock>
+              <fire-ui-newdock  style="background:white">
+              </fire-ui-newdock>
+          </fire-ui-newdock>
         </fire-ui-section>
  </template>
  </body>

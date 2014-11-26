@@ -81,21 +81,22 @@
                 var nextMinheight = this.next.minHeight;
                 var lastMinWidth = this.previous.minWidth;
                 var nextMinWidth = this.next.minWidth;
-
+/*
                 var lastMaxheight = this.previous.maxHeight;
                 var nextMaxheight = this.next.maxHeight;
                 var lastMaxWidth = this.previous.maxWidth;
                 var nextMaxWidth = this.next.maxWidth;
-
+*/
                 var mouseDownX = event.clientX;
                 var mouseDownY = event.clientY;
                 var updateMouseMove = function (event) {
                     var offset = -1;
+                    var nowheight = 0;
+                    var nowwidth = 0;
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
                         offset = this.inverse ? -offset : offset;
                         if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth) ) {
-
                             return;
                         }
                         else {
@@ -103,28 +104,34 @@
                             this.next.Width = (nextRect.width - offset) + "px";
                         }
 
-
+                        for (var i = 0; i<this.previous.children.length; i++) {
+                          this.previous.children[i].resizing = this.previous.getBoundingClientRect().width;
+                        }
                     }
                     else {
                         offset = event.clientY - mouseDownY;
                         offset = this.inverse ? -offset : offset;
                         if ( (lastRect.height + offset) <= (lastMinheight) || (nextRect.height - offset) <= (nextMinheight)) {
-                            return;
+                          return;
                         }
                         else {
                             this.previous.Height = (lastRect.height + offset) + "px";
                             this.next.Height = (nextRect.height - offset) + "px";
+                            nowheight=(nextRect.height - offset);
+                        }
+
+                        for (var i = 0; i<this.previous.children.length; i++) {
+                            this.previous.children[i].resizing = this.previous.getBoundingClientRect().height;
                         }
                     }
-
                     // 这里动态调整children的长宽和父节点一样 参考dock里的auto size
                     for (var i = 0; i < this.previous.children.length; i ++) {
                         if (this.previous.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
-                            if (!this.vertical) {
-                              this.previous.children[i].style.height = this.previous.Height  ;
+                            if (this.previous.vertical) {
+                              this.previous.children[i].style.height = this.previous.getBoundingClientRect().height +"px";
                             }
                             else {
-                                this.previous.children[i].style.width = this.previous.Width ;
+                              this.previous.children[i].style.width = this.previous.getBoundingClientRect().width +"px";
                             }
                         }
                     }
@@ -132,12 +139,13 @@
                     for (var i = 0; i < this.next.children.length; i ++) {
                       if (this.next.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
                         if (!this.vertical) {
-                          this.next.children[i].style.height = this.next.Height  ;
+                          this.next.children[i].style.height = this.next.getBoundingClientRect().height +"px";
                         }
                         else {
-                          this.next.children[i].style.width = this.next.Width ;
+                          this.next.children[i].style.width = this.next.getBoundingClientRect().width +"px";
                         }
                       }
+
                     }
 
                   //  console.log(lastRect.width + offset);
@@ -152,7 +160,7 @@
                 var mouseUpHandle = (function(event) {
                     document.removeEventListener('mousemove', mouseMoveHandle);
                     document.removeEventListener('mouseup', mouseUpHandle);
-                    console.log('结束事件');
+
                     EditorUI.removeDragGhost();
                     event.stopPropagation();
                 }).bind(this);

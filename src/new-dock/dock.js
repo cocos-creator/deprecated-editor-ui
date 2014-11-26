@@ -9,6 +9,7 @@
             maxHeight: 0,
             minWidth: 0,
             maxWidth: 0,
+            resizing: 0,
             vertical: {
                 value: false,
                 reflect: true
@@ -26,16 +27,31 @@
             maxHeight: 'maxHeightChanged',
             minWidth: 'minWidthChanged',
             maxWidth: 'maxWidthChaged',
+            resizing: 'Resizing',
 
+        },
+
+        Resizing: function () {
+            this.autoDock();
+            for (var i = 0; i< this.children.length;i++){
+                if (this.children[i].tagName !="FIRE-UI-NEWRESIZER") {
+                  this.children[i].style.width = this.getBoundingClientRect().width/this.getChildrenCount() +"px";
+                  console.log(this.Width);
+                }
+            }
         },
 
         HeightValueChanged: function () {
             this.style.height = this.Height;
+            this.autoDock();
+            //console.log(this);
         },
 
         /*value Change Event*/
         WidthValueChanged: function () {
             this.style.width = this.Width;
+            this.autoDock();
+            //console.log(this);
         },
 
         minHeightChanged: function ()　{
@@ -89,8 +105,8 @@
 
         autoDock: function () {
           // 这里自动分配节点长宽
-          console.log('auto dock');
           // 取最大长宽 进行自动调整
+
           for (var i = 0; i< this.children.length; i++ ) {
             if ( this.children[i].tagName != 'FIRE-UI-NEWRESIZER' ) {
               if ( this.isRow() ) {
@@ -101,8 +117,9 @@
 
                 this.children[i].style.width = this.Width / (this.getChildrenCount()) + "px" ;
                 this.children[i].Width= this.Width / (this.getChildrenCount());
-                this.children[i].style.height = this.Height + "px";
-                this.children[i].Height = this.Height;
+                this.children[i].style.height = this.getBoundingClientRect().height + "px";
+                this.children[i].Height = this.getBoundingClientRect().height ;
+                //console.log("height:"+this.children[i].Height);
               }
 
               else {
@@ -111,10 +128,13 @@
                   console.log('max height');
                 }
 
-                this.children[i].style.width = this.Width + "px";
-                this.children[i].Width = this.Width;
+                this.children[i].style.width = this.getBoundingClientRect().width + "px";
+                this.children[i].Width = this.getBoundingClientRect.width;
+                //console.log("width:"+this.children[i].Width);
                 this.children[i].style.height = this.Height / (this.getChildrenCount()) + "px";
+
               }
+            //  console.log(this.children);
             }
           }
         },
