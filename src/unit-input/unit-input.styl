@@ -1,60 +1,64 @@
+color-outter-border = #555
+color-outter-border-focus = #0c70a6
+color-inner-border = black
+color-bg = #232323
+color-input = #aaa
+color-unit = #ddd
+color-button = #474747
+
 :host {
-    display: flex
-    flex-direction: row
-    flex-wrap: nowrap
-    align-items: baseline
+    display: inline-block
     position: relative
 
     box-sizing: border-box
-    height: 21px
-    min-height: 21px
     width: 120px
     min-width: 50px
-    border: 1px solid black
+    border: 1px solid color-outter-border
 
     cursor: default
-    background: #232323
-    color: #ddd
-    box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,0.1),
-        0px 0 0 1px rgba(255,255,255,0.1)
-
-    transition: box-shadow .3s ease
+    background: color-bg
 
     &(:focus) {
         outline: none
     }
+
+    &(:hover) {
+        border: 1px solid color-outter-border + 30%
+    }
+
     &([focused]) {
-        box-shadow:
-            inset 0 0 0 1px rgba(0,0,0,0.1),
-            0px 0 0 1px #0c70a6,
-            0px 0 4px 1px rgba(12,112,166,0.8)
+        border: 1px solid color-outter-border-focus
+    }
+
+    .border {
+        border: 1px solid color-inner-border
     }
 
     .input {
         flex: auto
+
+        min-height: 19px
         display: block
-        padding: 3px 4px
+        padding: 0px 4px
         border: 0
         margin: 0
         font-size: 12px
 
         font-family: Helvetica,Arial,sans-serif
-        // text-shadow: 1px 1px 0 #000
         background: transparent
-        color: #aaa
+        color: color-input
 
         pointer-events: auto
         user-select: auto
         cursor: auto
 
-        /* // Note: A webkit bug that input::selection didn't works                    */
-        /* &::selection {                                                              */
-        /*     background: #f00                                                       */
-        /* }                                                                           */
-        /* &::-webkit-input-placeholder {                                              */
-        /*     font-style: italic                                                     */
-        /* }                                                                           */
+        /* // Note: A webkit bug that input::selection didn't works   */
+        /* &::selection {                                             */
+        /*     background: #f00                                       */
+        /* }                                                          */
+        /* &::-webkit-input-placeholder {                             */
+        /*     font-style: italic                                     */
+        /* }                                                          */
 
         &:focus {
             outline: none
@@ -63,12 +67,14 @@
 
     .unit {
         flex: 0 0 auto
+
         margin-right: 4px
         text-align: center
         font-size: 9px
 
         font-family: Helvetica,Arial,sans-serif
         text-transform: uppercase
+        color: color-unit
         opacity: .7
 
         &:focus {
@@ -77,44 +83,26 @@
     }
 
     .unit-buttons {
-        display: flex;
-        flex: 0 0 auto
+        flex: 0 0 9px
+        align-self: stretch
+
+        display: flex
         flex-direction: column
-        align-self: center
-        height: 100%
-        border-left: 1px solid black
+
+        border-left: 1px solid color-inner-border
 
         .button {
-            flex: auto
+            flex: 1 1 auto
+
             display: block
             border: 0
             margin: 0
             padding: 0
-            width: 9px
-            /* height: 9px */
 
             text-align: center
-            background-color: #474747
+            background-color: color-button
             box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset
             cursor: pointer
-
-            &:hover {
-                background-color: #616161
-                i {
-                    opacity: 1.0
-                }
-            }
-
-            &:active {
-                background-color: #373737
-                i {
-                    opacity: 0.3
-                }
-            }
-
-            &:focus {
-                outline: none
-            }
 
             i {
                 font-size: 9px
@@ -123,36 +111,63 @@
                 opacity: .5
                 cursor: inherit
             }
+
+            &:focus {
+                outline: none
+            }
+
+            &:hover {
+                background-color: color-button + 20%
+                i {
+                    opacity: 1.0
+                }
+            }
+
+            &:active {
+                background-color: color-button - 20%
+                i {
+                    opacity: 0.3
+                }
+            }
         }
 
         .sep {
             flex: 0 0 1px
+            height: 1px
             display: block
 
-            background-color: black
+            background-color: color-inner-border
         }
     }
 }
 
 
- :host-context([disabled]), :host([disabled]) {
-     background: #3a3a3a
-     .input {
-         color: #525252
-     }
-     .unit-buttons {
-         .button {
-             background-color: #3a3a3a
-             cursor: auto
-             i {
-                 opacity: 0.1
-             }
-             &:hover {
-                 background-color: #3a3a3a
-                 i {
-                     opacity: 0.1
-                 }
-             }
-         }
-     }
- }
+color-bg-disabled = #3a3a3a
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+    
+    background: color-bg-disabled
+
+    .input {
+        color: color-input - 50%
+    }
+
+    .unit-buttons {
+        .button {
+            background-color: color-bg-disabled
+            cursor: auto
+            i {
+                opacity: 0.1
+            }
+            &:hover {
+                background-color: color-bg-disabled
+                i {
+                    opacity: 0.1
+                }
+            }
+        }
+    }
+}

@@ -10,6 +10,20 @@
 
         created: function () {
             this.folded = false;
+
+            // TODO:
+            // this.addEventListener( "keydown", function ( e ) {
+            //     if ( e.keyCode === 9 ) {
+            //         if ( e.shiftKey ) {
+            //             console.log("up");
+            //         }
+            //         else {
+            //             console.log("down");
+            //         }
+            //         e.preventDefault();
+            //         e.stopPropagation();
+            //     }
+            // }, true );
         },
 
         ready: function() {

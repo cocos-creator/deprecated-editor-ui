@@ -1,56 +1,16 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: '',
-            multiline: false,
             placeholder: '',
-            focused: {
-                value: false,
-                reflect: true
-            },
-            disabled: {
-                value: false,
-                reflect: true
-            },
-        },
-
-        observe: {
-            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
-            this.$.inputArea.tabIndex = EditorUI.getParentTabIndex(this)+1;
+            this._init(this.$.inputArea);
         },
 
         valueChanged: function () {
             this.$.inputArea.value = this.value;
-
-            // if ( this.multiline ) {
-            //     this._adjust();
-            // }
-        },
-
-        isDisabled: function () {
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
-        },
-
-        disabledChanged: function () {
-            if ( this.isDisabled() ) {
-                this.$.inputArea.setAttribute('disabled','');
-            }
-            else {
-                this.$.inputArea.removeAttribute('disabled');
-            }
         },
 
         _adjust: function () {
@@ -68,24 +28,13 @@
             }
         },
 
-        focus: function () {
-            this.$.inputArea.focus();
-        },
-
-        blur: function () {
-            this.$.inputArea.blur();
-        },
-
         select: function () {
             this.$.inputArea.select();
         },
 
         focusAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-                
+            this._focusAction();
             this.lastVal = this.value;
-            this.focused = true;
         },
 
         blurAction: function (event, detail, sender) {
@@ -95,12 +44,14 @@
             if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
+            this._blurAction();
+
             //
             if ( this.value !== this.$.inputArea.value ) {
                 this.value = this.$.inputArea.value;
                 this.fire('changed');
             }
-            this.focused = false;
+
             this.fire('confirm');
         },
 
@@ -114,46 +65,38 @@
             event.stopPropagation();
         },
 
-        inputClickAction: function (event) {
-            event.stopPropagation();
+        inputMouseDownAction: function (event) {
+            if ( !this.focused ) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                this.select();
+            }
         },
 
         inputKeyDownAction: function (event) {
-            // if ( this.multiline ) {
-            //     switch ( event.which ) {
-            //         // NOTE: enter will be used as new-line, ESC here will be confirm behavior
-            //         // NOTE: textarea already have ctrl-z undo behavior
-            //         // esc
-            //         case 27:
-            //             this.blur();
-            //         return false;
-            //     }
-            // }
-            // else {
+            switch ( event.which ) {
+                // enter
+                case 13:
+                    if ( this.value != event.target.value ) {
+                        this.value = event.target.value;
+                        this.fire('changed');
+                    }
+                    this.$.inputArea.blur();
+                break;
 
+                // esc
+                case 27:
+                    this.$.inputArea.value = this.lastVal;
+                    if ( this.value != this.lastVal ) {
+                        this.value = this.lastVal;
+                        this.fire('changed');
+                    }
+                    this.$.inputArea.blur();
+                break;
+            }
 
-                switch ( event.which ) {
-                    // enter
-                    case 13:
-                        if ( this.value != event.target.value ) {
-                            this.value = event.target.value;
-                            this.fire('changed');
-                        }
-                        this.$.inputArea.blur();
-                    break;
-
-                    // esc
-                    case 27:
-                        this.$.inputArea.value = this.lastVal;
-                        if ( this.value != this.lastVal ) {
-                            this.value = this.lastVal;
-                            this.fire('changed');
-                        }
-                        this.$.inputArea.blur();
-                    break;
-                }
-            // }
             event.stopPropagation();
         },
-    });
+    }, EditorUI.focusable));
 })();

@@ -33,11 +33,51 @@ var EditorUI;
         },
 
         observe: {
+            focused: '_focusChanged',
             disabled: '_disabledChanged',
         },
 
+        _init: function ( focusEls ) {
+            if ( focusEls ) {
+                if ( Array.isArray(focusEls) ) {
+                    this.focusEls = focusEls;
+                }
+                else {
+                    this.focusEls = [focusEls];
+                }
+            }
+            else {
+                this.focusEls = [];
+            }
+
+            this._initTabIndex();
+        },
+
         _initTabIndex: function () {
-            this.tabIndex = EditorUI.getParentTabIndex(this) + 1;
+            for ( var i = 0; i < this.focusEls.length; ++i ) {
+                var el = this.focusEls[i];
+                el.tabIndex = EditorUI.getParentTabIndex(this) + 1;
+            }
+        },
+
+        _disabledInHierarchy: function () {
+            if ( this.disabled )
+                return true;
+
+            var parent = this.parentElement;
+            while ( parent ) {
+                if ( parent.disabled )
+                    return true;
+
+                parent = parent.parentElement;
+            }
+            return false;
+        },
+
+        _focusChanged: function () {
+            if ( this.disabled ) {
+                this.focused = false;
+            }
         },
 
         _disabledChanged: function () {

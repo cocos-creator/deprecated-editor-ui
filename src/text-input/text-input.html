@@ -5,47 +5,19 @@
 <template>
 <link rel="stylesheet" href="text-input.css">
 
-<input id="inputArea"
-    class="input-area"
-    type="text"
-    placeholder="{{placeholder}}"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
-    on-input="{{inputAction}}"
-    on-click="{{inputClickAction}}"
-    on-keydown="{{inputKeyDownAction}}"
-    >
-</input>
-
-<!-- NOTE: found bug when transform from multiline to single line -->
-<!-- <template if="{{multiline}}">               -->
-<!--     <style>:host { height: auto; }</style>  -->
-<!--     <textarea id="inputArea"                -->
-<!--         class="area input-area"             -->
-<!--         placeholder=""                      -->
-<!--         on-focus="{{focusAction}}"          -->
-<!--         on-blur="{{blurAction}}"            -->
-<!--         on-input="{{inputAction}}"          -->
-<!--         on-click="{{inputClickAction}}"     -->
-<!--         on-keydown="{{inputKeyDownAction}}" -->
-<!--         >                                   -->
-<!--     </textarea>                             -->
-<!-- </template>                                 -->
-
-<!-- <template if="{{!multiline}}">              -->
-<!--     <style>:host { height: 21px; }</style>  -->
-<!--     <input id="inputArea"                   -->
-<!--         class="input input-area"            -->
-<!--         type="text"                         -->
-<!--         placeholder=""                      -->
-<!--         on-focus="{{focusAction}}"          -->
-<!--         on-blur="{{blurAction}}"            -->
-<!--         on-input="{{inputAction}}"          -->
-<!--         on-click="{{inputClickAction}}"     -->
-<!--         on-keydown="{{inputKeyDownAction}}" -->
-<!--         >                                   -->
-<!--     </input>                                -->
-<!-- </template>                                 -->
+<div class="border">
+    <input id="inputArea" class="input-area"
+        tabindex="-1"
+        type="text"
+        placeholder="{{placeholder}}"
+        on-focus="{{focusAction}}"
+        on-blur="{{blurAction}}"
+        on-input="{{inputAction}}"
+        on-mousedown="{{inputMouseDownAction}}"
+        on-keydown="{{inputKeyDownAction}}"
+        >
+    </input>
+</div>
 
 </template>
 

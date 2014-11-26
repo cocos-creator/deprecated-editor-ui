@@ -153,4 +153,34 @@ var EditorUI;
         return result.charAt(0).toUpperCase() + result.slice(1);
     };
 
+    //
+    function _getPropertyDescriptor(obj, name) {
+        if (obj) {
+            var pd = Object.getOwnPropertyDescriptor(obj, name);
+            return pd || _getPropertyDescriptor(Object.getPrototypeOf(obj), name);
+        }
+    }
+    function _copyprop(name, source, target) {
+        var pd = _getPropertyDescriptor(source, name);
+        Object.defineProperty(target, name, pd);
+    }
+    EditorUI.mixin = function ( obj ) {
+        'use strict';
+        for (var i = 1, length = arguments.length; i < length; i++) {
+            var source = arguments[i];
+            for ( var name in source) {
+                if ( name === 'publish' ||
+                     name === 'observe' ||
+                     name === 'eventDelegates' ) 
+                {
+                    obj[name] = Fire.mixin( obj[name], source[name] );
+                }
+                else {
+                    _copyprop( name, source, obj);
+                }
+            }
+        }
+        return obj;
+    };
+
 })(EditorUI || (EditorUI = {}));

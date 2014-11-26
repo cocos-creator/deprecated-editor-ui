@@ -1,36 +1,35 @@
+color-button-text = #bdbdbd
+color-button-bg = #4a4a4a
+color-border-normal = #4a4a4a - 50%
+color-border-focus = #0c70a6
+
 :host {
     display: inline-block
     box-sizing: border-box
 
     button {
-        box-shadow: 0 0 0 1px #212121
-        font-size: 12px
+        font-size: 10px
         margin: 0px
         min-width: 20px
 
-        border: 1px solid rgba(255, 255, 255, 0.08)
-        padding: 3px 4px
+        border: 1px solid color-border-normal
+        border-radius: 2px
+        padding: 4px 8px
 
         cursor: pointer
 
         font-family: Helvetica,Arial,sans-serif
-        color: #bdbdbd
-        background-color: #474747
-        border-top-color: rgba(255, 255, 255, 0.2)
-
-        transition:
-            box-shadow .3s ease
+        color: color-button-text
+        background-color: color-button-bg
 
         span {
             cursor: inherit
         }
 
         &:hover {
-            background-color: #474747 + 10%
-            border-color: rgba(255,255,255,0.13)
-            border-top-color: rgba(255, 255, 255, 0.28)
+            border-color: color-border-normal
+            background-color: color-button-bg + 10%
         }
-
 
         &:focus {
             outline: none
@@ -38,34 +37,24 @@
     }
 
     &([focused]) button {
-        box-shadow:
-            0px 0 0 1px rgba(20,40,150,1),
-            0px 0 4px 1px rgba(12,112,166,0.8)
+        border-color: color-border-focus
     }
 
     button:active {
-        border: 1px solid rgba(50,50,50,1)
-        background-color: #474747 - 10%
-        color: #bdbdbd - 10%
+        background-color: color-button-bg - 10%
+        color: color-button-text - 10%
     }
 }
 
 
 :host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
     button {
-        box-shadow: 0px
-        background-color: #3A3A3A
-        color: #525252
-
-        &:hover {
-            background-color: #3A3A3A
-            border-color: rgba(255,255,255,0.08)
-            border-top-color: rgba(255, 255, 255, 0.2)
-        }
-
-        &:active {
-            background-color: #3A3A3A
-            color: #525252
-        }
+        border-color: color-border-normal - 10%
+        background-color: color-button-bg - 30%
+        color: color-button-text - 50%
     }
 }

@@ -1,51 +1,57 @@
+color-box-bg = #232323
+color-box-bg-disabled = #525252
+color-border-normal = #888
+color-border-focus = #0c70a6
+color-checked = #0c90e6
+
 :host {
     display: inline-block
-
-    #focus:focus {
-        outline: none
-    }
 
     .box {
         box-sizing: border-box
         width: 13px
         height: 13px
-        border: 1px solid #888
+        border: 1px solid color-border-normal
 
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1)
-        background: #232323
-
+        background: color-box-bg
         cursor: pointer
 
-        transition: border-color .3s ease, box-shadow .3s ease
-
         &:hover {
-            border-color: #bbb
+            border-color: color-border-normal + 50%
+        }
+
+        &:focus {
+            outline: none
         }
 
         i {
             font-size: 11px
 
-            color: #0c90e6
+            color: color-checked
             cursor: inherit
 
-            &.hide {
+            &.hidden {
                 visibility: hidden
             }
         }
     }
 
     &([focused]) .box {
-        border-color: #0c70a6
+        border-color: color-border-focus
     }
 }
 
 :host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
     .box {
-        border: 1px solid #181818
-        background: #525252
         cursor: auto
+        border: 1px solid color-border-normal - 30%
+        background: color-box-bg-disabled
         i {
-            color: #525252
+            color: color-box-bg-disabled + 20%
         }
     }
 }

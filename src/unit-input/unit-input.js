@@ -1,5 +1,5 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: null,
             unit: '',
@@ -8,22 +8,11 @@
             interval: null,
             min: null,
             max: null,
-            focused: {
-                value: false,
-                reflect: true
-            },
-            disabled: {
-                value: false,
-                reflect: true
-            },
-        },
-
-        observe: {
-            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
-            this.$.input.tabIndex = EditorUI.getParentTabIndex(this)+1;
+            this._init(this.$.input);
+
             switch ( this.type ) {
                 case 'int':
                     this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
@@ -39,28 +28,6 @@
             }
         },
 
-        isDisabled: function () {
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if ( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
-        },
-
-        disabledChanged: function () {
-            if ( this.isDisabled() ) {
-                this.$.input.setAttribute('disabled','');
-            }
-            else {
-                this.$.input.removeAttribute('disabled');
-            }
-        },
         _convert: function ( val ) {
             switch ( this.type ) {
                 case 'int':
@@ -87,11 +54,8 @@
         },
 
         focusAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-
+            this._focusAction();
             this.lastVal = this._convert(this.value);
-            this.focused = true;
         },
 
         blurAction: function (event, detail, sender) {
@@ -101,6 +65,8 @@
             if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
+            this._blurAction();
+
             var val = this._convert(this.$.input.value);
             if ( this.value !== val ) {
                 this.value = val;
@@ -109,7 +75,6 @@
             // NOTE: we set the input.value because this.value may not changed after invalid inputs
             this.$.input.value = val;
 
-            this.focused = false;
             this.fire('confirm');
         },
 
@@ -132,10 +97,6 @@
                 this.fire('changed');
             }
 
-            event.stopPropagation();
-        },
-
-        inputClickAction: function (event) {
             event.stopPropagation();
         },
 
@@ -166,9 +127,6 @@
         },
 
         increaseAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-
             var val = this._convert(this.value+this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -179,9 +137,6 @@
         },
 
         decreaseAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-
             var val = this._convert(this.value-this._interval);
             if ( this.value != val ) {
                 this.value = val;
@@ -190,5 +145,5 @@
             this.$.input.focus();
             event.stopPropagation();
         },
-    });
+    }, EditorUI.focusable));
 })();

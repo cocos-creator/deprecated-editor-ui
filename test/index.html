@@ -12,27 +12,36 @@
 <link rel="import" href="/bin/editor-ui.html">
 
 <style>
-body {
-    position: relative;
-    background-color: #333;
-    padding: 0px 100px;
-    margin-top: 20px;
-    color: white;
-    font-family: Helvetica,Arial,sans-serif;
-}
-span.space {
-    height: 5px;
-    width: 5px;
-    display: block;
-}
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
 
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
 </style>
 </head>
 
 <body>
+<h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI</h2>
+<my-test></my-test>
 
-<template id="my-template" is="auto-binding">
-    <h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI</h2>
+<polymer-element name="my-test">
+<template>
+    <style>
+        span.space {
+            height: 5px;
+            width: 5px;
+            display: block;
+        }
+    </style>
 
     <fire-ui-section name="Change Section">
         <div flex-row>
@@ -200,7 +209,7 @@ span.space {
     var tmpAtlas = new Fire.Atlas();
     tmpAtlas.name = "Atlas Foobar";
 
-    model = {
+    Polymer({
         toFixed: function ( val, precision ) {
             return val.toFixed(precision);
         },
@@ -307,14 +316,9 @@ span.space {
             this.myAtlas = new Fire.Atlas();
             this.myAtlas.name = "Atlas 002";
         },
-    };
-    var tmpl = document.querySelector('#my-template');
-    for ( var m in model ) {
-        if ( model.hasOwnProperty(m) ) {
-            tmpl[m] = model[m];
-        }
-    }
+    });
 </script>
+</polymer-element>
 
 </body>
 

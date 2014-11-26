@@ -12,7 +12,7 @@
                 width: 5px;
             }
             .content {
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
         </style>
 
@@ -43,16 +43,20 @@
         isDisabled: false,
         isFocused: false,
 
+        ready: function () {
+            this.target = this.firstElementChild;
+        },
+
         changeDisabledAction: function (event) {
             this.isDisabled = !this.isDisabled;
 
             if ( this.isDisabled ) {
-                this.firstElementChild.setAttribute('disabled','');
-                console.log(this.firstElementChild.tagName+" have been disabled");
+                this.target.disabled = true;
+                console.log(this.target.tagName + " have been disabled");
             } 
             else {
-                this.firstElementChild.removeAttribute('disabled','');
-                console.log(this.firstElementChild.tagName+" removed the disabled");
+                this.target.disabled = false;
+                console.log(this.target.tagName + " removed the disabled");
             }
         },
 
@@ -60,12 +64,12 @@
             this.isFocused = !this.isFocused;
 
             if ( this.isFocused ) {
-                this.firstElementChild.setAttribute('focused','');
-                console.log(this.firstElementChild.tagName+" have been focused");
+                this.target.focused = true;
+                console.log(this.target.tagName + " have been focused");
             } 
             else {
-                this.firstElementChild.removeAttribute('focused','');
-                console.log(this.firstElementChild.tagName+" removed the focused");
+                this.target.focused = false;
+                console.log(this.target.tagName + " removed the focused");
             }
         },
     });
