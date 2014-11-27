@@ -1,21 +1,12 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: null,
             type: "Fire.FObject",
-            focused: {
-                value: false,
-                reflect: true
-            },
         },
 
         ready: function () {
-            this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
-            this.$.focus2.tabIndex = EditorUI.getParentTabIndex(this)+1;
-        },
-
-        focusAction: function (event) {
-            this.focused = true;
+            this._init(this.$.focus);
         },
 
         blurAction: function (event) {
@@ -25,7 +16,7 @@
             if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
                 return;
 
-            this.focused = false;
+            this._blurAction();
         },
 
         typeToName: function (val) {
@@ -35,5 +26,5 @@
             }
             return name;
         }
-    });
+    }, EditorUI.focusable));
 })();

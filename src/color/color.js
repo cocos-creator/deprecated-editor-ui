@@ -1,11 +1,7 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: null,
-            focused: {
-                value: false,
-                reflect: true
-            },
         },
 
         observe: {
@@ -16,11 +12,10 @@
         created: function () {
             this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
             this.showPicker = false;
-            this.focused = false;
         },
 
         ready: function() {
-            this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
+            this._init( this.$.focus );
             this._updateColor();
         },
 
@@ -51,10 +46,6 @@
             }
         },
 
-        focusAction: function (event) {
-            this.focused = true;
-        },
-
         focusoutAction: function (event) {
             if ( this.focused === false )
                 return;
@@ -72,7 +63,7 @@
                 return;
             }
 
-            this.focused = false;
+            this._blurAction();
             this._hideColorPicker();
         },
 
@@ -102,7 +93,7 @@
             if ( this._colorPicker === null ) {
                 this._colorPicker = new FireColorPicker();
                 this._colorPicker.value = this.value;
-                this.$.border.appendChild(this._colorPicker);
+                this.$.colorPickerWrapper.appendChild(this._colorPicker);
             }
         },
 
@@ -124,6 +115,6 @@
                 this._timeoutID = window.setTimeout( timeoutHandle, 300 );
             }
         },
-    });
+    }, EditorUI.focusable));
 })();
 

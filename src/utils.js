@@ -173,7 +173,7 @@ var EditorUI;
                      name === 'observe' ||
                      name === 'eventDelegates' ) 
                 {
-                    obj[name] = Fire.mixin( obj[name], source[name] );
+                    obj[name] = Fire.addon( obj[name], source[name] );
                 }
                 else {
                     _copyprop( name, source, obj);

@@ -5,21 +5,20 @@
 <template>
 <link rel="stylesheet" href="fobject.css">
 
-<div id="focus" 
-    on-focus="{{focusAction}}"
+<div id="focus" class="wrapper" 
+    on-focus="{{_focusAction}}"
     on-blur="{{blurAction}}"
-    flex-1
+    flex-row
     >
-    <div class="content">
-        {{value ? value.name : "None"}} 
-        <span class="type">({{type|typeToName()}})</span>
+    <div class="border" flex-1> 
+        <div class="content">
+            {{value ? value.name : "None"}} 
+            <span class="type">({{type|typeToName()}})</span>
+        </div>
     </div>
-</div>
-<div id="focus2" class="icon"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
-    >
-    <i class="fa fa-share-square-o"></i>
+    <div class="icon">
+        <i class="fa fa-share-square-o"></i>
+    </div>
 </div>
 
 </template>

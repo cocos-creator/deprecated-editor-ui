@@ -1,19 +1,11 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         _editing: false,
 
         publish: {
             value: 0.0,
             min: 0.0,
             max: 1.0,
-            focused: {
-                value: false,
-                reflect: true
-            },
-            disabled: {
-                value: false,
-                reflect: true
-            }
         },
 
         observe: {
@@ -21,21 +13,7 @@
         },
 
         ready: function () {
-            this.$.focus.tabIndex = EditorUI.getParentTabIndex(this)+1;
-        },
-
-        isDisabled: function () {
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
+            this._init(this.$.focus);
         },
 
         update: function () {
@@ -46,27 +24,7 @@
             this.$.nubbin.style.left = ratio * 100 + "%";
         },
 
-        focusAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-
-            this.focused = true;
-        },
-
-        blurAction: function (event) {
-            if ( this.focused === false )
-                return;
-
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
-
-            this.focused = false;
-        },
-
         mousedownAction: function (event) {
-            if ( this.isDisabled() )
-                return;
-
             EditorUI.addDragGhost("pointer");
             this._editing = true;
 
@@ -99,5 +57,5 @@
             document.addEventListener ( 'mousemove', mouseMoveHandle );
             document.addEventListener ( 'mouseup', mouseUpHandle );
         },
-    });
+    }, EditorUI.focusable));
 })();

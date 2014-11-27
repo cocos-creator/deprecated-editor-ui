@@ -1,5 +1,5 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             multiple: {
                 value: false,
@@ -11,6 +11,10 @@
             this.activeItem = null;
         },
 
+        ready: function () {
+            this._init();
+        },
+
         clickAction: function ( event ) {
             var biEL = EditorUI.getSelfOrAncient(event.target, FireButtonItem);
             if ( biEL ) {
@@ -18,46 +22,6 @@
             }
             event.stopPropagation();
         },
-
-        // add: function ( name ) {
-        //     var tabEL = new FireTab();
-        //     tabEL.innerHTML = name;
-
-        //     this.appendChild(tabEL);
-
-        //     return tabEL;
-        // },
-
-        // remove: function ( tab ) {
-        //     var tabEL = null;
-        //     if ( typeof tab === "number" ) {
-        //         if ( tab < this.children.length ) {
-        //             tabEL = this.children[tab];
-        //         }
-        //     }
-        //     else if ( tab instanceof FireTab ) {
-        //         tabEL = tab;
-        //     }
-
-        //     //
-        //     if ( tabEL !== null ) {
-        //         if ( this.activeItem === tabEL ) {
-        //             this.activeItem = null;
-
-        //             if ( tabEL.nextElementSibling ) {
-        //                 this.activeItem = tabEL.nextElementSibling;
-        //             }
-        //             else if ( tabEL.previousElementSibling ) {
-        //                 this.activeItem = tabEL.previousElementSibling;
-        //             }
-
-        //             if ( this.activeItem )
-        //                 this.activeItem.classList.add('active');
-        //         }
-
-        //         this.removeChild(tabEL);
-        //     }
-        // },
 
         select: function ( param ) {
             var biEL = null;
@@ -94,5 +58,5 @@
         get buttonCount () {
             return this.children.length;
         },
-    });
+    }, EditorUI.focusable));
 })();

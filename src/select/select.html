@@ -1,30 +1,21 @@
+<link rel="import" href="option/option.html">
+
 <polymer-element
     name="fire-ui-select"
     constructor="FireSelect"
+    on-select="{{selectAction}}"
     >
 <template>
 <link rel="stylesheet" href="select.css">
 
-<div id="focus"
-    on-focus="{{focusAction}}"
+<div class="border" id="focus"
+    on-focus="{{_focusAction}}"
     on-blur="{{blurAction}}"
     on-click="{{clickAction}}"
     on-keydown="{{keyDownAction}}"
     >
-    <div id="border" class="border">
-        <span>{{valueName}}</span>
-        <i class="fa fa-caret-down"></i>
-    </div>
-    <div class="menu {{showMenu ? '':'hide'}}" id="menu">
-        <template repeat="{{item, itemIndex in options}}">
-        <div class="item {{ item.value == value ? 'selected':'' }}"
-            index="{{itemIndex}}"
-            on-click="{{selectAction}}"
-            >
-            {{item.name}}
-        </div>
-        </template>
-    </div>
+    <span>{{valueName}}</span>
+    <i class="fa fa-caret-down"></i>
 </div>
 </template>
 

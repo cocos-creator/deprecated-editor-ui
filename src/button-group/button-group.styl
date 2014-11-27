@@ -3,8 +3,19 @@
     box-sizing: border-box
     position: relative
     font-size: 10px
-    border: 1px solid #212121
+    border: 1px solid black
 
-    color: #aaa
     background-color: #333
+    border-radius: 2px
+
+    .border {
+        border: 1px solid #555
+        border-radius: 2px
+    }
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
 }

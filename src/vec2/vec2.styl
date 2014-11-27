@@ -7,3 +7,9 @@
         display: block
     }
 }
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+}

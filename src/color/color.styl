@@ -1,37 +1,72 @@
-:host {
-    totalHeight = 21
+color-outter-border = #555
+color-outter-border-focus = #0c70a6
+color-inner-border = black
+color-bg = #232323
+rgbHeight = 16px
 
-    display: inline-block
+:host {
+    display: flex
+    position: relative
 
     box-sizing: border-box
-    position: relative
-    height: (totalHeight)px
-    min-height: 21px
-    max-height: 21px
     width: 120px
     min-width: 60px
-    border: 1px solid black
+    border: 1px solid color-outter-border
 
-    background: #232323
-    color: #ddd
-    box-shadow: 
-        inset 0 0 0 1px rgba(0,0,0,0.1), 
-        0px 0 0 1px rgba(255,255,255,0.1)
+    background: color-bg
 
-    transition: box-shadow .3s ease
-
-    #focus:focus {
-        outline: none
+    &(:hover) {
+        border: 1px solid color-outter-border + 30%
     }
 
-    &([focused]) {                         
-        box-shadow: 
-            inset 0 0 0 1px rgba(0,0,0,0.1), 
-            0px 0 0 1px #0c70a6, 
-            0px 0 4px 1px rgba(12,112,166,0.8)
+    &([focused]) {
+        border: 1px solid color-outter-border-focus
     }
 
     .border {
+        position: relative
+        border: 1px solid color-inner-border
+        width: 100%
+
+        &:focus {
+            outline: none
+        }
+    }
+
+    .rgb-wrapper {
+        position: relative
+        display: block
+        height: rgbHeight
+
+        background-image: url('../img/transparent-bg.png')
+
+        .rgb {
+            cursor: pointer 
+            background-color: white
+        }
+
+        i {
+            font-size: 8px
+            position: absolute
+            right: 2px
+            bottom: 2px
+
+            cursor: pointer 
+            color: black
+        }
+    }
+
+    .alpha {
+        display: block
+        height: 3px
+        background: transparent
+        background-color: white
+
+        cursor: pointer 
+    }
+
+    // TODO: DELME!
+    .color-pciker-wrapper {
         duration = .2s
 
         position: absolute
@@ -56,39 +91,24 @@
         }
     }
 
-    .preview-rgb-bg {
-        position: relative
-        display: block
-        height: (totalHeight - 2 - 3)px
-        width: 100%
+    .mask {
+        display: none
+
         background-image: url('../img/transparent-bg.png')
+        opacity: 0.8
+    }
+}
 
-        & * {
-            cursor: pointer 
-        }
+color-bg-disabled = #3a3a3a
 
-        .preview-rgb {
-            height: 100%
-            width: 100%
-            background-color: red
-        }
-
-        i {
-            font-size: 8px
-            color: black
-            position: absolute
-            right: 2px
-            bottom: 2px
-        }
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
     }
 
-    .preview-alpha {
-        display: block
-        height: 3px
-        width: 100%
-        background: transparent
-        background-color: white
+    background: color-bg-disabled
 
-        cursor: pointer 
+    .mask {
+        display: block
     }
 }

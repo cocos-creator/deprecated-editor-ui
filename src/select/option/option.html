@@ -1,0 +1,23 @@
+<polymer-element
+    name="fire-ui-option"
+    constructor="FireOption"
+    tabIndex="1"
+    >
+<template>
+<link rel="stylesheet" href="option.css">
+
+<div class="border">          
+    <template repeat="{{item, index in options}}">         
+        <div class="item {{ item.value == value ? 'selected':'' }}"
+            index="{{index}}"                                  
+            on-click="{{clickAction}}"                            
+            >                                                      
+            {{item.name}}                                          
+        </div>                                                     
+    </template>                                                
+</div>                                                         
+
+</template>
+
+<script type="text/javascript" src="option.js"></script>
+</polymer-element>

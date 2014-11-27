@@ -1,17 +1,25 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: null,
-
-            disabled: {
-                value: false,
-                reflect: true
-            },
         },
 
+        observe: {
+            disabled: 'disabledChanged',
+        },
 
         created: function () {
             this.value = new Fire.Vec2(0,0);
+        },
+
+        ready: function() {
+            this._init();
+        },
+
+        disabledChanged: function () {
+            this._disabledChanged();
+            this.$.x.disabled = this.disabled;
+            this.$.y.disabled = this.disabled;
         },
 
         changedAction: function ( event ) {
@@ -19,5 +27,5 @@
             event.stopPropagation();
             this.fire("changed");
         },
-    });
+    }, EditorUI.focusable));
 })();

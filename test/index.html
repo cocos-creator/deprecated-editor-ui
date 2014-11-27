@@ -166,6 +166,12 @@
         </fire-ui-tabs>
         <span class="space"></span>
 
+        <div flex-row>
+            <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-option>                         
+            <span class="space"></span>
+            <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>                         
+        </div>
+
     </fire-ui-section>
 
     <span class="space" style="height: 20px"></span>                                                       
@@ -263,14 +269,14 @@
         // mySelect
         mySelect: 3, 
         mySelectList: [
-            { name: 'Hello',   value: 0 },
-            { name: 'Foo',  value: 1 },
-            { name: 'Bar',  value: 2 },
-            { name: 'Johnny',  value: 3 },
-            { name: 'Test Math', value: 4 },
-            { name: 'Foo Bar', value: 5 },
+            { name: 'Hello',             value: 0 },
+            { name: 'Foo',               value: 1 },
+            { name: 'Bar',               value: 2 },
+            { name: 'Johnny',            value: 3 },
+            { name: 'Test Math',         value: 4 },
+            { name: 'Foo Bar',           value: 5 },
             { name: 'This is the world', value: 6 },
-            ],
+        ],
         mySelectClick: function () {
             this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
         },

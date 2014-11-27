@@ -5,7 +5,7 @@ var EditorUI;
     function _removeTabIndexRecursively ( el ) {
         if ( el.focused !== undefined && el._initTabIndex !== undefined ) {
             el.focused = false;
-            el.removeAttribute('tabindex');
+            el._removeTabIndex();
         }
 
         for ( var i = 0; i < el.childElementCount; ++i ) {
@@ -57,6 +57,15 @@ var EditorUI;
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
                 el.tabIndex = EditorUI.getParentTabIndex(this) + 1;
+            }
+        },
+
+        _removeTabIndex: function () {
+            for ( var i = 0; i < this.focusEls.length; ++i ) {
+                var el = this.focusEls[i];
+                // NOTE: this is better than el.removeAttribute('tabindex'), 
+                // because <input> will still only not get focus when tabIndex=-1
+                el.tabIndex = -1;
             }
         },
 

@@ -1,50 +1,16 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             value: '',
-            focused: {
-                value: false,
-                reflect: true
-            },
-            disabled: {
-                value: false,
-                reflect: true
-            }
-        },
-
-        observe:{
-            'disabled' : 'disabledChanged',
         },
 
         ready: function() {
-            this.$.inputArea.tabIndex = EditorUI.getParentTabIndex(this)+1;
-        },
-
-        isDisabled: function () {
-            if ( this.disabled )
-                return true;
-
-            var parent = this.parentElement;
-            while ( parent ) {
-                if( parent.disabled )
-                    return true;
-
-                parent = parent.parentElement;
-            }
-            return false;
+            this._init(this.$.inputArea);
         },
 
         valueChanged: function () {
             this.$.inputArea.value = this.value;
             this._adjust();
-        },
-
-        disabledChanged: function () {
-            if (this.isDisabled()) {
-                this.$.inputArea.setAttribute('disabled','');
-            }else{
-                this.$.inputArea.removeAttribute('disabled');
-            }
         },
 
         _adjust: function () {
@@ -64,27 +30,20 @@
 
         focusAction: function (event) {
             this.lastVal = this.value;
-            this.focused = true;
+            this._focusAction();
         },
 
         blurAction: function (event, detail, sender) {
             if ( this.focused === false )
                 return;
 
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
-
-            this.focused = false;
+            this._blurAction();
         },
 
         inputAction: function (event) {
             this.value = event.target.value;
             this.fire('changed');
 
-            event.stopPropagation();
-        },
-
-        inputClickAction: function (event) {
             event.stopPropagation();
         },
 
@@ -99,5 +58,5 @@
             }
             event.stopPropagation();
         },
-    });
+    }, EditorUI.focusable));
 })();
