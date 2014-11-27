@@ -76,11 +76,17 @@
                 // add drag-ghost
                 EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
                 var lastRect = this.previous.getBoundingClientRect();
-                var nextRect = this.next.getBoundingClientRect();
                 var lastMinheight = this.previous.minHeight;
-                var nextMinheight = this.next.minHeight;
                 var lastMinWidth = this.previous.minWidth;
-                var nextMinWidth = this.next.minWidth;
+                try {
+                    var nextRect = this.next.getBoundingClientRect();
+                    var nextMinheight = this.next.minHeight;
+                    var nextMinWidth = this.next.minWidth;
+                }
+                catch (error) {
+
+                }
+
 /*
                 var lastMaxheight = this.previous.maxHeight;
                 var nextMaxheight = this.next.maxHeight;
@@ -91,17 +97,20 @@
                 var mouseDownY = event.clientY;
                 var updateMouseMove = function (event) {
                     var offset = -1;
-                    var nowheight = 0;
-                    var nowwidth = 0;
                     if ( this.vertical ) {
                         offset = event.clientX - mouseDownX;
                         offset = this.inverse ? -offset : offset;
                         if ( (lastRect.width + offset) <= (lastMinWidth) || (nextRect.width - offset) <= (nextMinWidth) ) {
                             return;
                         }
-                        else {
+                        else  {
                             this.previous.Width = (lastRect.width + offset) + "px";
-                            this.next.Width = (nextRect.width - offset) + "px";
+                            try {
+                              this.next.Width = (nextRect.width - offset) + "px";
+                            }
+                            catch (error) {
+
+                            }
                         }
 
                         for (var i = 0; i<this.previous.children.length; i++) {
@@ -116,8 +125,12 @@
                         }
                         else {
                             this.previous.Height = (lastRect.height + offset) + "px";
-                            this.next.Height = (nextRect.height - offset) + "px";
-                            nowheight=(nextRect.height - offset);
+                            try {
+                                this.next.Height = (nextRect.height - offset) + "px";
+                            }
+                            catch (error) {
+
+                            }
                         }
 
                         for (var i = 0; i<this.previous.children.length; i++) {
@@ -136,19 +149,23 @@
                         }
                     }
 
-                    for (var i = 0; i < this.next.children.length; i ++) {
-                      if (this.next.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
-                        if (!this.vertical) {
-                          this.next.children[i].style.height = this.next.getBoundingClientRect().height +"px";
+                    try {
+                        for (var i = 0; i < this.next.children.length; i ++) {
+                          if (this.next.children[i].tagName != 'FIRE-UI-NEWRESIZER') {
+                            if (!this.vertical) {
+                              this.next.children[i].style.height = this.next.getBoundingClientRect().height +"px";
+                            }
+                            else {
+                              this.next.children[i].style.width = this.next.getBoundingClientRect().width +"px";
+                            }
+                          }
+
                         }
-                        else {
-                          this.next.children[i].style.width = this.next.getBoundingClientRect().width +"px";
-                        }
-                      }
+                    }
+                    catch (error) {
 
                     }
 
-                  //  console.log(lastRect.width + offset);
                     // 事件完毕后触发 mouseup触发resized结束事件 mousemove触发resize事件
                     this.fire( "resized", { target: this.previous } );
 

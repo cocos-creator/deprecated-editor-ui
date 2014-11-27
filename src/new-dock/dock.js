@@ -32,12 +32,20 @@
         },
 
         Resizing: function () {
-            this.autoDock();
-            for (var i = 0; i< this.children.length;i++){
+            //this.autoDock();
+            if (this.isRow()){
+              for (var i = 0; i< this.children.length;i++){
+                  if (this.children[i].tagName !="FIRE-UI-NEWRESIZER") {
+                    this.children[i].style.width = this.getBoundingClientRect().width/this.getChildrenCount() +"px";
+                  }
+              }
+            }
+            else {
+              for (var i = 0; i< this.children.length;i++){
                 if (this.children[i].tagName !="FIRE-UI-NEWRESIZER") {
-                  this.children[i].style.width = this.getBoundingClientRect().width/this.getChildrenCount() +"px";
-                  console.log(this.Width);
+                  this.children[i].style.height = this.getBoundingClientRect().height/this.getChildrenCount() +"px";
                 }
+              }
             }
         },
 
@@ -78,7 +86,7 @@
             if (this.children.length <= 1)
                 return;
 
-            for ( var i = 0; i < this.children.length-1; ++i ) {
+            for ( var i = 0; i < this.children.length; ++i ) {
                 if (true ) {
                     var dockEL = this.children[i];
                     if ( true ) {
