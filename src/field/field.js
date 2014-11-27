@@ -47,10 +47,12 @@
                 break;
 
             case "object":
+                var classDef = Fire.getClassByName(typename);
+
                 if ( Array.isArray(this.value) ) {
                     typename = 'array';
                 }
-                else if ( this.value instanceof Fire.FObject ) {
+                else if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
                     typename = 'fobject';
                 }
                 else {
