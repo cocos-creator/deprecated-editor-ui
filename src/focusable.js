@@ -3,9 +3,9 @@ var EditorUI;
 
     //
     function _removeTabIndexRecursively ( el ) {
-        if ( el.focused !== undefined && el._initTabIndex !== undefined ) {
+        if ( el.focused !== undefined && el.initTabIndex !== undefined ) {
             el.focused = false;
-            el._removeTabIndex();
+            el.removeTabIndex();
         }
 
         for ( var i = 0; i < el.childElementCount; ++i ) {
@@ -14,9 +14,9 @@ var EditorUI;
     }
 
     function _initTabIndexRecursively ( el ) {
-        if ( el.focused !== undefined && el._initTabIndex !== undefined ) {
+        if ( el.focused !== undefined && el.initTabIndex !== undefined ) {
             if ( el.disabled === false ) {
-                el._initTabIndex();
+                el.initTabIndex();
             }
         }
 
@@ -33,7 +33,7 @@ var EditorUI;
         },
 
         observe: {
-            focused: '_focusChanged',
+            focused: '_focusedChanged',
             disabled: '_disabledChanged',
         },
 
@@ -83,7 +83,7 @@ var EditorUI;
             return false;
         },
 
-        _focusChanged: function () {
+        _focusedChanged: function () {
             if ( this.disabled ) {
                 this.focused = false;
             }
@@ -106,6 +106,32 @@ var EditorUI;
 
         _blurAction: function ( event ) {
             this.focused = false;
+        },
+
+        focus: function () {
+            if ( this._disabledInHierarchy() )
+                return;
+
+            if ( this.focusEls.length > 0 ) {
+                this.focusEls[0].focus();
+            }
+        },
+
+        blur: function () {
+            if ( this._disabledInHierarchy() )
+                return;
+
+            if ( this.focusEls.length > 0 ) {
+                this.focusEls[0].blur();
+            }
+        },
+
+        initTabIndex: function () {
+            this._initTabIndex();
+        },
+
+        removeTabIndex: function () {
+            this._removeTabIndex();
         },
     };
 })(EditorUI || (EditorUI = {}));

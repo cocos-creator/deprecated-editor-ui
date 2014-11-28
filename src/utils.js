@@ -176,7 +176,9 @@ var EditorUI;
                     obj[name] = Fire.addon( obj[name], source[name] );
                 }
                 else {
-                    _copyprop( name, source, obj);
+                    if ( obj[name] === undefined ) {
+                        _copyprop( name, source, obj);
+                    }
                 }
             }
         }

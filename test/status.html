@@ -21,7 +21,7 @@
         color: white;
         font-family: Helvetica,Arial,sans-serif;
     }
-    span.space {
+    html /deep/ span.space {
         height: 5px;
         width: 5px;
         display: block;
@@ -36,6 +36,10 @@
 <polymer-element name="my-test">
 <template>
     <fire-ui-section name="Test Elements">
+        <control-status label="Label">
+            <fire-ui-label>Foobar</fire-ui-label>
+        </control-status>
+    
         <control-status label="Button">
             <fire-ui-button>Button</fire-ui-button>
         </control-status>
@@ -57,7 +61,7 @@
         </control-status>
 
         <control-status label="Vec2">
-            <fire-ui-vec2></fire-ui-vec2>
+            <fire-ui-vec2 value="{{myVec2}}"></fire-ui-vec2>
         </control-status>
 
         <control-status label="Text Area">
@@ -87,6 +91,18 @@
             <fire-ui-fobject></fire-ui-fobject>
         </control-status>
 
+        <control-status label="Property">
+            <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
+        </control-status>
+
+        <control-status label="Custom Property">
+        <fire-ui-custom-prop name="Test">
+            <fire-ui-checkbox value="{{testEnabled}}"></fire-ui-checkbox>
+            <span class="space"></span>
+            <fire-ui-text-input id="test" value="Foobar"></fire-ui-text-input>
+        </fire-ui-custom-prop>                                                                                                                                
+        </control-status>
+
         <!-- TODO -->
         <!-- <control-status label="Tabs">                -->
         <!--     <fire-ui-tabs>                           -->
@@ -100,6 +116,7 @@
 <script>
     Polymer({
         created: function () {
+            this.myVec2 = new Fire.Vec2( 10.0, 20.0 );
             this.myColor = new Fire.Color( 0.0, 0.5, 1.0, 0.5 );
             this.mySelect = 3;
             this.mySelectList = [
@@ -111,7 +128,16 @@
                 { name: 'Foo Bar',           value: 5 },
                 { name: 'This is the world', value: 6 },
             ];
-        }
+            this.testEnabled = false;
+        },
+
+        domReady: function () {
+            this.testEnabled = !this.$.test.disabled;
+        },
+
+        testEnabledChanged: function () {
+            this.$.test.disabled = !this.testEnabled;
+        },
     });
 </script>
 </polymer-element>

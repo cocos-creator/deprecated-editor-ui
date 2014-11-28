@@ -1,10 +1,7 @@
 (function () {
-    Polymer({
-        publish: {
-            focused: {
-                value: false,
-                reflect: true
-            },
+    Polymer(EditorUI.mixin({
+        ready: function () {
+            this._init();
         },
-    });
+    }, EditorUI.focusable));
 })();

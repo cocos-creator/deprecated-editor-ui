@@ -1,3 +1,6 @@
+color-text = #ddd
+color-text-focus = #00a6ff
+
 :host {
     display: inline-block
     font-size: 12px
@@ -6,11 +9,19 @@
     overflow: hidden
     font-family: Helvetica,Arial,sans-serif
     cursor: default 
-    color: #ddd
-    text-shadow: 1px 1px 0 #000
     text-align: left
+    color: color-text
+    text-shadow: 1px 1px 0 black
 
     &([focused]) {
-        color: #00a6ff
+        color: color-text-focus
     }
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    color: color-text - 50%
 }

@@ -145,5 +145,6 @@
             this.$.input.focus();
             event.stopPropagation();
         },
+
     }, EditorUI.focusable));
 })();

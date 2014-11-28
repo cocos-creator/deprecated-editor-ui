@@ -7,27 +7,25 @@
 <template>
 <link rel="stylesheet" href="list.css">
 
-<div id="focus"
+<div class="border" id="focus"
     on-focusin="{{focusinAction}}"
     on-focusout="{{focusoutAction}}"
     on-click="{{clickAction}}"
     >
-    <div class="area">
-        <div id="list" class="inner" flex-col flex-stretch>
-            <!-- <template repeat="{{item, itemIndex in value}}">                        -->
-            <!--     <fire-ui-li index="{{itemIndex}}" on-changed="{{changedAction}}">   -->
-            <!--         <fire-ui-field flex-2 value="{{item}}"></fire-ui-field>         -->
-            <!--     </fire-ui-li>                                                       -->
-            <!-- </template>                                                             -->
-        </div>
-    </div>
-    <div class="area-add">
-        <div class="spacer"></div>
-        <div class="btn-add">
-            <i class="fa fa-plus"></i>
-        </div>
+    <div id="list" class="inner">
+        <!-- <template repeat="{{item, itemIndex in value}}">                        -->
+        <!--     <fire-ui-li index="{{itemIndex}}" on-changed="{{changedAction}}">   -->
+        <!--         <fire-ui-field flex-2 value="{{item}}"></fire-ui-field>         -->
+        <!--     </fire-ui-li>                                                       -->
+        <!-- </template>                                                             -->
     </div>
 </div>
+
+<div class="btn-add">         
+    <div class="btn-border">
+        <i class="fa fa-plus"></i>
+    </div>                        
+</div>                        
 </template>
 
 <script type="text/javascript" src="list.js"></script>

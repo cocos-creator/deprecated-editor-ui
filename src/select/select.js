@@ -31,8 +31,10 @@
                 this.updateMenu();
             }
             else {
-                this.menu.style.display = "none";
-                this.appendChild(this.menu);
+                if ( this.menu ) {
+                    this.menu.style.display = "none";
+                    this.appendChild(this.menu);
+                }
             }
         },
 

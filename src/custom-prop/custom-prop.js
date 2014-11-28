@@ -1,11 +1,11 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             name: '',
-            focused: {
-                value: false,
-                reflect: true
-            },
+        },
+
+        ready: function () {
+            this._init();
         },
 
         attached: function () {
@@ -17,7 +17,7 @@
         },
 
         focusinAction: function ( event ) {
-            this.focused = true;
+            this._focusAction();
             this.$.label.focused = true;
         },
 
@@ -25,10 +25,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
-
-            this.focused = false;
+            this._blurAction();
             this.$.label.focused = false;
         },
 
@@ -48,5 +45,5 @@
 
             return;
         }
-    });
+    }, EditorUI.focusable));
 })();

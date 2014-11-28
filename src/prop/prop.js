@@ -1,11 +1,11 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             name: '',
-            focused: {
-                value: false,
-                reflect: true
-            },
+        },
+
+        ready: function () {
+            this._init();
         },
 
         attached: function () {
@@ -25,12 +25,12 @@
             fieldEL.bind( 'value', new PathObserver(this,'value') );
             fieldEL.setAttribute( 'value', '{{value}}' );
             fieldEL.id = "field";
-            this.$.focus.appendChild(fieldEL);
+            this.appendChild(fieldEL);
             this.$.field = fieldEL;
         },
 
         focusinAction: function ( event ) {
-            this.focused = true;
+            this._focusAction();
             this.$.label.focused = true;
         },
 
@@ -38,10 +38,7 @@
             if ( this.focused === false )
                 return;
 
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
-
-            this.focused = false;
+            this._blurAction();
             this.$.label.focused = false;
         },
 
@@ -61,5 +58,5 @@
 
             return;
         }
-    });
+    }, EditorUI.focusable));
 })();

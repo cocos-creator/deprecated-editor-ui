@@ -1,5 +1,5 @@
 :host {
-    display: inline-block
+    display: flex
     min-height: 21px
 
     #focus:focus {
@@ -7,6 +7,7 @@
     }
 
     #focus {
+        width: 100%
         font-size: 12px
         white-space: nowrap
         padding: 3px 2px 3px 5px
@@ -24,10 +25,10 @@
 
     &([selected]) {
         #focus {
-            background-color: #2865c7
+            background-color: #005
 
             &:hover {
-                background-color: #2865c7 + 20%
+                background-color: #005 + 10%
             }
         }
     }

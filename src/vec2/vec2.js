@@ -5,6 +5,7 @@
         },
 
         observe: {
+            focused: 'focusedChanged',
             disabled: 'disabledChanged',
         },
 
@@ -14,6 +15,23 @@
 
         ready: function() {
             this._init();
+        },
+
+        initTabIndex: function () {
+            this.$.x.initTabIndex();
+            this.$.y.initTabIndex();
+        },
+
+        removeTabIndex: function () {
+            this.$.x.removeTabIndex();
+            this.$.y.removeTabIndex();
+        },
+
+        focusedChanged: function () {
+            this._focusedChanged();
+            if ( this.focused ) {
+                this.$.x.focus();
+            }
         },
 
         disabledChanged: function () {

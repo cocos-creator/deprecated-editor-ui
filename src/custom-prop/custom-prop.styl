@@ -22,3 +22,9 @@
         margin-top: 5px
     }
 }
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+}

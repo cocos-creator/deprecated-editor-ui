@@ -310,7 +310,14 @@
                 [ "foobar 1", "foobar 2", "foobar 3" ],
                 [ 1, 2, 3, 4 ],
         ],
-        myList: [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
+        myList: [ 
+            new Fire.Vec2(1,1), 
+            new Fire.Vec2(2,1),
+            new Fire.Vec2(3,1),
+            new Fire.Vec2(4,1),
+            new Fire.Vec2(5,1),
+            new Fire.Vec2(6,1),
+        ],
         myListClick: function () {
             this.cnt = (this.cnt + 1)%this.listList.length;
             this.myList = this.listList[this.cnt]; 
