@@ -10,13 +10,17 @@
     on-blur="{{blurAction}}"
     flex-row
     >
-    <div class="border" flex-1> 
-        <div class="content">
+    <div class="border" flex-1
+        on-click="{{borderClickAction}}"
+        > 
+        <div class="content"
+            >
             {{value ? value.name : "None"}} 
             <span class="type">({{type|typeToName()}})</span>
         </div>
     </div>
-    <div class="icon">
+    <div class="icon"
+        on-click="browseClickAction">
         <i class="fa fa-share-square-o"></i>
     </div>
 </div>
