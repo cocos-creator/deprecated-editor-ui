@@ -10,6 +10,7 @@
         },
 
         created: function () {
+            this.tabIndex = EditorUI.getParentTabIndex(this) + 1;
             this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
         },
 
@@ -44,6 +45,10 @@
             this.$.hueHandle.style.top = (1.0-this.hsv.h)*100 + "%";
             this.$.colorHandle.style.left = this.hsv.s*100 + "%";
             this.$.colorHandle.style.top = (1.0-this.hsv.v)*100 + "%";
+
+            if ( this.owner && this.owner.setColor ) {
+                this.owner.setColor( this.value.r, this.value.g, this.value.b, this.value.a );
+            }
         },
 
         // hue
@@ -155,5 +160,28 @@
 
             event.stopPropagation();
         },
+
+        focusoutAction: function ( event ) {
+            event.stopPropagation();
+
+            if ( event.relatedTarget === null ) {
+                this.focus();
+                return;
+            }
+        },
+
+        keydownAction: function ( event ) {
+            switch ( event.which ) {
+                // esc
+                case 27:
+                    if ( this.owner && this.owner.showColorPicker ) {
+                        this.owner.showColorPicker(false);
+                        this.owner.focus();
+                    }
+                break;
+            }
+            event.stopPropagation();
+        },
+
     });
 })();

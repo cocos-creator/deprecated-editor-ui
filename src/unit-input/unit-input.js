@@ -100,7 +100,7 @@
             event.stopPropagation();
         },
 
-        inputKeyDownAction: function (event) {
+        inputKeydownAction: function (event) {
             switch ( event.which ) {
                 // enter
                 case 13:

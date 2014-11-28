@@ -115,6 +115,7 @@ var EditorUI;
             if ( this.focusEls.length > 0 ) {
                 this.focusEls[0].focus();
             }
+            this.focused = true;
         },
 
         blur: function () {
@@ -124,6 +125,7 @@ var EditorUI;
             if ( this.focusEls.length > 0 ) {
                 this.focusEls[0].blur();
             }
+            this.focused = false;
         },
 
         initTabIndex: function () {

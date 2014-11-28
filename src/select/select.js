@@ -9,10 +9,13 @@
             value: 'updateValueName',
         },
 
+        created: function () {
+            this._showMenu = false;
+            this.menu = null;
+        },
+
         ready: function () {
             this._init(this.$.focus);
-            this.menu = null;
-            this._showMenu = false;
         },
 
         showOption: function ( show ) {
@@ -56,7 +59,7 @@
             this.showOption(false);
         },
 
-        keyDownAction: function (event) {
+        keydownAction: function (event) {
             switch ( event.which ) {
                 // esc
                 case 27:
@@ -85,6 +88,7 @@
                 style.position = "absolute";
                 style.width = selectRect.width + "px";
                 style.left = (selectRect.left - bodyRect.left) + "px";
+                style.zIndex = 999;
 
                 if ( document.body.clientHeight - selectRect.bottom <= menuRect.height + 10 ) {
                     style.top = (selectRect.top - bodyRect.top - menuRect.height + 2) + "px";

@@ -1,11 +1,13 @@
 <polymer-element 
     name="fire-ui-color-picker" 
     constructor="FireColorPicker"
+    on-keydown="{{keydownAction}}"
+    on-focusout="{{focusoutAction}}"
     >
 <template>
 <link rel="stylesheet" href="color-picker.css">
 
-<div flex-row class="color-group">
+<div class="color-group" flex-row>
     <div id="hueCtrl" class="hue" on-mousedown="{{hueCtrlMouseDownAction}}">
         <div id="hueHandle" class="handle">
             <i class="fa fa-caret-right"></i>
@@ -26,7 +28,7 @@
     </div>
 </div>
 
-<div flex-col style="align-items: stretch">                                                                                              
+<div style="align-items: stretch" flex-col>                                                                                              
     <span class="space"></span>
     <div flex-row>                                                                                              
         <fire-ui-unit-input flex-1 value="{{value.r|toInt}}" type="int" unit="r" min="0" max="255"></fire-ui-unitinput>

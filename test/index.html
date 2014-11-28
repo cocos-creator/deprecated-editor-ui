@@ -41,6 +41,16 @@
             width: 5px;
             display: block;
         }
+
+        .content {
+            padding: 10px;
+        }
+
+        .content span.space {
+            height: 10px;
+            width: 10px;
+            display: block;
+        }
     </style>
 
     <fire-ui-section name="Change Section">
@@ -169,34 +179,38 @@
     <span class="space" style="height: 20px"></span>                                                       
 
     <fire-ui-section name="Widgets">
-        <fire-ui-button-group>
-            <fire-ui-bi>Button 1</fire-ui-bi>                          
-            <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>  
-            <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
-            <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
-            <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
-            <fire-ui-bi>Button 2</fire-ui-bi>                          
-        </fire-ui-button-group>
+        <div class="content">
+            <fire-ui-button-group>
+                <fire-ui-bi>Button 1</fire-ui-bi>                          
+                <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>  
+                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
+                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
+                <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
+                <fire-ui-bi>Button 2</fire-ui-bi>                          
+            </fire-ui-button-group>
 
-        <fire-ui-button-group multiple>
-            <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
-            <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
-            <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
-        </fire-ui-button-group>
-        <span class="space"></span>
-
-        <fire-ui-tabs>
-            <fire-ui-tab>Project 1</fire-ui-tab>
-            <fire-ui-tab>Project 2</fire-ui-tab>
-        </fire-ui-tabs>
-        <span class="space"></span>
-
-        <div flex-row>
-            <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-option>                         
+            <fire-ui-button-group multiple>
+                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
+                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
+                <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
+            </fire-ui-button-group>
             <span class="space"></span>
-            <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>                         
+
+            <fire-ui-tabs>
+                <fire-ui-tab>Project 1</fire-ui-tab>
+                <fire-ui-tab>Project 2</fire-ui-tab>
+            </fire-ui-tabs>
+            <span class="space"></span>
+
+            <div flex-row>
+                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-option>                         
+                <span class="space"></span>
+                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>                         
+            </div>
+            <span class="space"></span>
+
+            <fire-ui-color-picker value="{{myColor}}"></fire-ui-color-picker>                         
         </div>
-        <span class="space"></span>
     </fire-ui-section>
 </template>
 

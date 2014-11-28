@@ -11,108 +11,110 @@
 
         created: function () {
             this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
-            this.showPicker = false;
+            this._showPicker = false;
+            this.colorPicker = null;
         },
 
         ready: function() {
             this._init( this.$.focus );
             this._updateColor();
+            this._updateAlpha();
+        },
+
+        setColor: function ( r, g, b, a ) {
+            this.value = new Fire.Color( r, g, b, a );
+            this.fire("changed");
         },
 
         _updateColor: function () {
-            if ( this.value !== null )
+            if ( this.value ) {
                 this.$.previewRGB.style.backgroundColor = this.value.toCSS('rgb');
-            this.fire('changed');
+            }
         },
 
         _updateAlpha: function () {
-            if ( this.value !== null )
+            if ( this.value ) {
                 this.$.previewA.style.width = Math.floor(this.value.a * 100)+'%';
-            this.fire('changed');
+            }
+        },
+
+        showColorPicker: function ( show ) {
+            this._showColorPicker = show;
+
+            if ( show ) {
+                if ( !this.colorPicker ) {
+                    this.colorPicker = new FireColorPicker();
+                    this.colorPicker.owner = this;
+                    this.colorPicker.value = this.value.clone(); // NOTE: one-way binding
+                }
+
+                document.body.appendChild(this.colorPicker);
+                this.colorPicker.style.display = "";
+                EditorUI.addHitGhost('cursor', '998', function () {
+                    this.showColorPicker(false);
+                    this.focus();
+                }.bind(this));
+                this.updateColorPicker();
+            }
+            else {
+                if ( this.colorPicker ) {
+                    this.colorPicker.style.display = "none";
+                    this.appendChild(this.colorPicker);
+
+                    EditorUI.removeHitGhost();
+                }
+            }
+        },
+
+        updateColorPicker: function () {
+            window.requestAnimationFrame ( function () {
+                if ( !this.colorPicker || !this._showColorPicker )
+                    return;
+
+                var bodyRect = document.body.getBoundingClientRect();
+                var elRect = this.getBoundingClientRect();
+                var menuRect = this.colorPicker.getBoundingClientRect();
+
+                var style = this.colorPicker.style;
+                style.position = "absolute";
+                style.right = (bodyRect.right - elRect.right) + "px";
+                style.zIndex = 999;
+
+                if ( document.body.clientHeight - elRect.bottom <= menuRect.height + 10 ) {
+                    style.top = (elRect.top - bodyRect.top - menuRect.height - 5) + "px";
+                }
+                else {
+                    style.top = (elRect.bottom - bodyRect.top + 5) + "px";
+                }
+
+                this.updateColorPicker();
+            }.bind(this) );
         },
 
         clickAction: function (event) {
-            if ( event.target === this.$.previewRGB || 
-                 event.target === this.$.previewA ||
-                 event.target === this.$.iconDown ||
-                 event.target === this ) {
-                this.$.focus.focus();
-                if ( this.showPicker ) {
-                    this._hideColorPicker();
-                }
-                else {
-                    this._showColorPicker();
-                }
-            }
+            this.showColorPicker( !this._showColorPicker );
+            event.stopPropagation();
         },
 
-        focusoutAction: function (event) {
+        blurAction: function (event) {
             if ( this.focused === false )
                 return;
 
-            if ( event.relatedTarget === null &&
-                 event.target === this._colorPicker ) 
-            {
-                this.$.focus.focus();
-
-                event.stopPropagation();
-                return;
-            }
-
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) ) {
+            if ( this.colorPicker === event.relatedTarget ) {
                 return;
             }
 
             this._blurAction();
-            this._hideColorPicker();
+            this.showColorPicker(false);
         },
 
-        keyDownAction: function (event) {
+        keydownAction: function (event) {
             switch ( event.which ) {
                 // esc
                 case 27:
-                    this.$.focus.blur(); 
+                    this.showColorPicker(false);
                     event.stopPropagation();
                 break;
-            }
-        },
-
-        _timeoutID: null,
-        _colorPicker: null,
-        _showColorPicker: function () {
-            if ( this.showPicker )
-                return;
-
-            this.showPicker = true;
-
-            if ( this._timeoutID !== null ) {
-                window.clearTimeout(_timeoutID);
-                this._timeoutID = null;
-            }
-
-            if ( this._colorPicker === null ) {
-                this._colorPicker = new FireColorPicker();
-                this._colorPicker.value = this.value;
-                this.$.colorPickerWrapper.appendChild(this._colorPicker);
-            }
-        },
-
-        _hideColorPicker: function () {
-            if ( this.showPicker === false )
-                return;
-
-            this.showPicker = false;
-
-            if ( this._colorPicker !== null ) {
-                // TODO: we need to add border.disable(); which will prevent event during fadeout 
-                var timeoutHandle = (function () {
-                    if ( this._colorPicker.parentElement ) {
-                        this._colorPicker.parentElement.removeChild(this._colorPicker);
-                        this._colorPicker = null;
-                        this._timeoutID = null;
-                    }
-                }).bind(this);
-                this._timeoutID = window.setTimeout( timeoutHandle, 300 );
             }
         },
     }, EditorUI.focusable));

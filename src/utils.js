@@ -119,15 +119,15 @@ var EditorUI;
         if ( _dragGhost === null ) {
             _dragGhost = document.createElement('div');
             _dragGhost.classList.add('drag-ghost');
-            _dragGhost.style.position = 'fixed';
+            _dragGhost.style.position = 'absolute';
             _dragGhost.style.zIndex = '999';
-            _dragGhost.style.left = '0';
             _dragGhost.style.top = '0';
+            _dragGhost.style.right = '0';
+            _dragGhost.style.bottom = '0';
+            _dragGhost.style.left = '0';
             _dragGhost.oncontextmenu = function() { return false; };
         }
         _dragGhost.style.cursor = cursor;
-        _dragGhost.style.width = window.innerWidth + 'px';
-        _dragGhost.style.height = window.innerHeight + 'px';
         document.body.appendChild(_dragGhost);
     };
 
@@ -139,6 +139,43 @@ var EditorUI;
             }
         }
     };
+
+    //
+    var _hitGhost = null; 
+    EditorUI.addHitGhost = function ( cursor, zindex, onhit ) {
+        // add drag-ghost
+        if ( _hitGhost === null ) {
+            _hitGhost = document.createElement('div');
+            _hitGhost.classList.add('hit-ghost');
+            _hitGhost.style.position = 'absolute';
+            _hitGhost.style.zIndex = zindex;
+            _hitGhost.style.top = '0';
+            _hitGhost.style.right = '0';
+            _hitGhost.style.bottom = '0';
+            _hitGhost.style.left = '0';
+            // _hitGhost.style.background = 'rgba(0,0,0,0.2)';
+            _hitGhost.oncontextmenu = function() { return false; };
+            _hitGhost.addEventListener('mousedown', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                if ( onhit ) 
+                    onhit();
+            });
+        }
+        _hitGhost.style.cursor = cursor;
+        document.body.appendChild(_hitGhost);
+    };
+
+    EditorUI.removeHitGhost = function () {
+        if ( _hitGhost !== null ) {
+            _hitGhost.style.cursor = 'auto';
+            if ( _hitGhost.parentElement !== null ) {
+                _hitGhost.parentElement.removeChild(_hitGhost);
+            }
+        }
+    };
+
+    //
 
     // string utils
     EditorUI.camelCaseToHuman = function ( text ) {
