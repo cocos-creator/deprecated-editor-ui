@@ -144,6 +144,31 @@
         </div>
         <span class="space"></span>
 
+    </fire-ui-section>
+
+    <span class="space" style="height: 20px"></span>                                                       
+
+    <fire-ui-dock-panel style="height: 500px;">
+        <div name="Property">
+            <fire-ui-section name="Property Section">
+                <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
+                <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
+                <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
+                <fire-ui-prop value="{{mySelect}}" type="enum" enumType="Fire.Atlas.SortBy"></fire-ui-prop>                                                             
+                <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
+                <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
+                <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
+                <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>                                                             
+            </fire-ui-section>
+        </div>
+
+        <div name="Widgets">
+        </div>
+    </fire-ui-dock-panel>
+
+    <span class="space" style="height: 20px"></span>                                                       
+
+    <fire-ui-section name="Widgets">
         <fire-ui-button-group>
             <fire-ui-bi>Button 1</fire-ui-bi>                          
             <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>  
@@ -171,37 +196,8 @@
             <span class="space"></span>
             <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>                         
         </div>
-
+        <span class="space"></span>
     </fire-ui-section>
-
-    <span class="space" style="height: 20px"></span>                                                       
-
-    <fire-ui-dock-panel style="min-height: 500px;">
-        <div name="Property">
-            <fire-ui-section name="Property Section">
-            <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
-            <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
-            <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
-            <fire-ui-prop value="{{mySelect}}" type="enum" enumType="Fire.Atlas.SortBy"></fire-ui-prop>                                                             
-            <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
-            <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
-            <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
-            <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>                                                             
-            </fire-ui-section>
-        </div>
-
-        <div name="Project 2" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
-            <h1>Project 2</h1>
-        </div>
-
-        <div name="Project 3" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
-            <h1>Project 3</h1>
-        </div>
-
-        <div name="Project 4" flex-1 style="padding: 5px; border: 1px solid #444; background: #333;">
-            <h1>Project 4</h1>
-        </div>
-    </fire-ui-dock-panel>
 </template>
 
 <script>
