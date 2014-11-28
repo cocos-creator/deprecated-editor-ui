@@ -1,23 +1,28 @@
+color-border = #1f1f1f
+color-border-focus = #0c70a6
+color-title-bg = #242424
+color-title = #b1b1b1
+color-title-focus = #00a6ff
+color-body-bg = #333
+color-body-top-line = #555
+
 :host {
     display: flex
     flex-direction: column
     flex-wrap: nowrap     
     align-items: stretch
+
     box-sizing: border-box
+    border: 1px solid color-border
 
     .title {
-        font-family: Helvetica,Arial,sans-serif
-        padding: 3px 5px
-        font-size: 10px
+        padding: 3px 8px
+        font-size: 12px
         font-weight: 700
-        border-top: 1px solid #1f1f1f
-        border-left: 1px solid #1f1f1f
-        border-right: 1px solid #1f1f1f
 
-        text-transform: uppercase
-        text-shadow: 0 -1px 0 #000
-        background: #242424
-        color: #b1b1b1
+        font-family: Helvetica,Arial,sans-serif
+        color: color-title
+        background: color-title-bg
         cursor: pointer 
 
         i {
@@ -29,28 +34,41 @@
         }
     }
 
-    &([focused]) .title {
-        color: #00a6ff
+    .body {
+        display: block
+        position: relative
+        padding: 5px
+        min-height: 10px
+        border-top: 1px solid color-body-top-line
+
+        background-color: color-body-bg
+
+        &.hidden {
+            display: none
+        }
+    }
+
+    &([focused]) {
+        // border: 1px solid color-border-focus
+        .title {
+            color: color-title-focus
+        }
+    }
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    border-color: color-border + 3%
+
+    .title {
+        color: color-title - 50%
+        background: color-title-bg + 3%
     }
 
     .body {
-        duration = .2s
-
-        display: block
-        position: relative
-        background-color: #333
-        padding: 5px
-        min-height: 10px
-        border: 1px solid #1f1f1f
-
-        opacity: 1.0
-
-        transition: opacity duration ease
-
-        &.hide {
-            display: none
-            opacity: 0.0
-            transition: display 0s ease duration, opacity duration ease
-        }
+        border-top-color: color-body-top-line - 20%
     }
 }

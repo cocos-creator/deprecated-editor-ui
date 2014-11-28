@@ -8,13 +8,13 @@
 <div id="title" 
     class="title"
     on-click="{{clickAction}}"
-    on-focus="{{focusAction}}"
-    on-blur="{{blurAction}}"
+    on-focus="{{_focusAction}}"
+    on-blur="{{_blurAction}}"
     >
-    <i id="icon" class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>
+    <i class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>
     {{name}}
 </div>
-<div id="body" class="body {{folded ? 'hide':''}}"><content/></div>
+<div id="body" class="body {{folded ? 'hidden':''}}"><content/></div>
 
 </template>
 

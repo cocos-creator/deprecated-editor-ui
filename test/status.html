@@ -35,7 +35,23 @@
 
 <polymer-element name="my-test">
 <template>
-    <fire-ui-section name="Test Elements">
+    <div flex-1 flex-row>
+        <fire-ui-label style="flex: 0 0 150px;">Section:</fire-ui-label>
+
+        <fire-ui-checkbox value="{{sectionDisabled}}"></fire-ui-checkbox>
+        <span class="space"></span>
+        <fire-ui-label>Disabled</fire-ui-label>
+
+        <span class="space" style="width: 20px;"></span>
+
+        <fire-ui-checkbox value="{{sectionFocused}}"></fire-ui-checkbox>
+        <span class="space"></span>
+        <fire-ui-label>Focused</fire-ui-label>
+    </div>
+
+    <span class="space"></span>
+
+    <fire-ui-section id="section" name="Test Elements">
         <control-status label="Label">
             <fire-ui-label>Foobar</fire-ui-label>
         </control-status>
@@ -128,11 +144,21 @@
                 { name: 'Foo Bar',           value: 5 },
                 { name: 'This is the world', value: 6 },
             ];
+            this.sectionFocused = false;
+            this.sectionDisabled = false;
             this.testEnabled = false;
         },
 
         domReady: function () {
             this.testEnabled = !this.$.test.disabled;
+        },
+
+        sectionDisabledChanged: function () {
+            this.$.section.disabled = this.sectionDisabled;
+        },
+
+        sectionFocusedChanged: function () {
+            this.$.section.focused = this.sectionFocused;
         },
 
         testEnabledChanged: function () {
