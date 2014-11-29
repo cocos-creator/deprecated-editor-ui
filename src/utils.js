@@ -155,14 +155,15 @@ var EditorUI;
             _hitGhost.style.left = '0';
             // _hitGhost.style.background = 'rgba(0,0,0,0.2)';
             _hitGhost.oncontextmenu = function() { return false; };
-            _hitGhost.addEventListener('mousedown', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                if ( onhit ) 
-                    onhit();
-            });
         }
+
         _hitGhost.style.cursor = cursor;
+        _hitGhost.addEventListener('mousedown', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if ( onhit ) 
+                onhit();
+        });
         document.body.appendChild(_hitGhost);
     };
 
@@ -171,6 +172,7 @@ var EditorUI;
             _hitGhost.style.cursor = 'auto';
             if ( _hitGhost.parentElement !== null ) {
                 _hitGhost.parentElement.removeChild(_hitGhost);
+                _hitGhost.removeEventListener('mousedown');
             }
         }
     };
