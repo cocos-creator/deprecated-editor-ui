@@ -1,6 +1,8 @@
 <polymer-element 
     name="fire-ui-fobject" 
     constructor="FireFObject"
+    on-drag-area-enter="{{dragAreaEnterAction}}"
+    on-drag-area-leave="{{dragAreaLeaveAction}}"
     >
 <template>
 <link rel="stylesheet" href="fobject.css">
@@ -10,7 +12,7 @@
     on-blur="{{blurAction}}"
     flex-row
     >
-    <div class="border" flex-1
+    <div id="dropArea" class="border" flex-1
         on-click="{{borderClickAction}}"
         > 
         <div class="content"

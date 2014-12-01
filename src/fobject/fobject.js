@@ -7,6 +7,7 @@
 
         ready: function () {
             this._init(this.$.focus);
+            this._initDroppable(this.$.dropArea);
         },
 
         typeToName: function (val) {
@@ -39,5 +40,13 @@
             }
         },
 
-    }, EditorUI.focusable));
+        dragAreaEnterAction: function (event) {
+            console.log("yes");
+        },
+
+        dragAreaLeaveAction: function (event) {
+            console.log("no");
+        },
+
+    }, EditorUI.focusable, EditorUI.droppable));
 })();
