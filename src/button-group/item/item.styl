@@ -55,6 +55,12 @@ color-active = #00aaff
     }
 }
 
+:host-context([active]) {
+    .border {
+        color: color-active
+    }
+}
+
 :host-context([disabled]) {
     * {
         pointer-events: none

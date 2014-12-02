@@ -29,14 +29,18 @@
         },
 
         borderClickAction: function (event) {
+            event.stopPropagation();
+
             if ( Fire.hintObject ) {
                 Fire.hintObject(this.value);
             }
         },
 
         browseClickAction: function (event) {
+            event.stopPropagation();
+
             if ( Fire.browseObject ) {
-                Fire.browseObject(this.type);
+                Fire.browseObject( Fire.getClassByName(this.type) );
             }
         },
 

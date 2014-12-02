@@ -1,6 +1,11 @@
 (function () {
     Polymer(EditorUI.mixin({
         publish: {
+            active: {
+                value: false,
+                reflect: true
+            },
+
             multiple: {
                 value: false,
                 reflect: true
@@ -38,18 +43,19 @@
             //
             if ( biEL !== null ) {
                 if ( this.multiple ) {
-                    this.fire( 'changed', { old: biEL, new: biEL  } );
                     biEL.active = !biEL.active;
+                    biEL.fire('changed');
                 }
                 else {
                     if ( biEL !== this.activeItem ) {
-                        this.fire( 'changed', { old: this.activeItem, new: biEL  } );
-
                         if ( this.activeItem !== null ) {
                             this.activeItem.active = false;
+                            this.activeItem.fire('deactive');
                         }
+
                         this.activeItem = biEL;
                         this.activeItem.active = true;
+                        this.activeItem.fire('active');
                     }
                 }
             }
