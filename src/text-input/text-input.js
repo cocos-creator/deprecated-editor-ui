@@ -57,10 +57,10 @@
 
         inputAction: function (event) {
             // NOTE: this will prevent Chinese input
-            // if ( this.value != event.target.value ) {
-            //     this.value = event.target.value;
-            //     this.fire('changed');
-            // }
+             if ( this.value != event.target.value ) {
+                 this.value = event.target.value;
+                 this.fire('changed');
+             }
 
             event.stopPropagation();
         },
