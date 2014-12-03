@@ -8,6 +8,14 @@
             textMode: 'single',
         },
 
+        created: function () {
+            // NOTE: the call back will execute code after prop field created,
+            //       sometimes we need to initialize fields, for example in fire-inspector 
+            //       the field will be disabled depends on watch values. And this callback 
+            //       make sure the tabIndex initialize after all elements are ready. 
+            this.onFieldCreated = null;
+        },
+
         attached: function () {
             var fieldEL = this.createFieldElement();
 
@@ -22,6 +30,10 @@
             fieldEL.id = "field";
             this.shadowRoot.appendChild(fieldEL);
             this.$.field = fieldEL;
+
+            if ( this.onFieldCreated ) {
+                this.onFieldCreated();
+            }
         },
 
         createFieldElement: function () {

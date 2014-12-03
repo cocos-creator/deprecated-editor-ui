@@ -64,7 +64,7 @@ var EditorUI;
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
                 // NOTE: this is better than el.removeAttribute('tabindex'), 
-                // because <input> will still only not get focus when tabIndex=-1
+                // because <input> only not get focused when tabIndex=-1
                 el.tabIndex = -1;
             }
         },
