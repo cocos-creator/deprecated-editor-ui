@@ -97,10 +97,11 @@
         },
 
         blurAction: function (event) {
-            if ( this.focused === false )
+            if ( this.focused === false ) {
                 return;
+            }
 
-            if ( this.colorPicker === event.relatedTarget ) {
+            if ( this.colorPicker && this.colorPicker === event.relatedTarget ) {
                 return;
             }
 
