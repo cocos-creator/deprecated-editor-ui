@@ -5,6 +5,8 @@ color-bg = #232323
 color-browse = #aaa
 color-asset-name = #999
 color-type = #770
+color-highlight-valid = green
+color-highlight-invalid = red
 
 :host {
     display: flex
@@ -59,11 +61,27 @@ color-type = #770
         }
     }
 
-    // &(:active) {                         
-    //     .border {
-    //         border: 1px solid color-outter-border
-    //     }
-    // }
+    &([highlighted]) {                         
+        .border {
+            border: 1px solid color-highlight-valid
+            background: color-highlight-valid - 50%
+
+            .content {                         
+                border: 1px solid color-highlight-valid
+            }
+        }
+    }
+
+    &([highlighted][invalid]) {                         
+        .border {
+            border: 1px solid color-highlight-invalid
+            background: color-highlight-invalid - 50%
+
+            .content {                         
+                border: 1px solid color-highlight-invalid
+            }
+        }
+    }
 
     .icon {
         margin-left: 5px
