@@ -1,32 +1,59 @@
+size = 11px
+blank-size = -4px
+hover-color = rgb(12,112,200)
+
 :host {
-    display: flex
-    font-size: 12px
+    flex: 0 0 size
+    position: relative
     white-space: nowrap
 
-    font-family: Helvetica,Arial,sans-serif
-    color: #ddd
+    z-index: 1
 
-    // transition: background-color .3s ease
-    // &(:hover) {
-    //     background-color: rgba(12,112,200,1.0)
-    // }
+    // horizontal resizer
+    margin-top: blank-size
+    margin-bottom: blank-size
+    margin-left: 0px
+    margin-right: 0px
+    width: auto
+    height: size
 
-    z-index: 99
-
-    size = 11px
-    &(.vertical) {
-        margin-left: -4px
-        margin-right: -4px
-        width: size
-
-        cursor: col-resize
+    .bar {
+        position: absolute
+        top: 4px
+        left: 0px
+        height: 3px
+        width: 100%
     }
 
-    &(.horizontal) {
-        margin-top: -4px
-        margin-bottom: -4px
-        height: size
+    &([vertical]) {
+        margin-top: 0px
+        margin-bottom: 0px
+        margin-left: blank-size
+        margin-right: blank-size
+        width: size
+        height: auto
 
+        .bar {
+            position: absolute
+            top: 0px
+            left: 4px
+            width: 3px
+            height: 100%
+        }
+    }
+
+    &(:hover) {
         cursor: row-resize
+        .bar {
+            cursor: row-resize
+            background-color: hover-color
+        } 
+    }
+
+    &(:hover[vertical]) {
+        cursor: col-resize
+        .bar {
+            cursor: col-resize
+        } 
     }
 }

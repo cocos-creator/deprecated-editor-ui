@@ -10,41 +10,40 @@
 
 <link rel="import" href="/ext/polymer/polymer.html">
 <link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="elements/simple-block.html">
 
 <style>
-body {
-    margin: 0px;
-    color: #ddd;
-    background-color: #333;
-    border: 0px solid black;
-    padding: 3px;
-    // overflow: hidden;
-}
-span.space {
-    height: 3px;
-    width: 3px;
-    display: block;
-}
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 10px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
 </style>
 
 </head>
 
 <body flex-col flex-stretch>
+    <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
-<template id="my-template" is="auto-binding">
-    <fire-ui-dock flex-1 flex-row flex-stretch>
-        <fire-ui-dock-panel>
-            <div name="View 1"></div>                                                                                                                                                          
-        </fire-ui-dock-panel>
-
-        <fire-ui-dock-panel>
-            <div name="View 2"></div>                                                                                                                                                          
-        </fire-ui-dock-panel>
-    </fire-ui-dock>
-</template>
-
-<script>
-</script>
+    <simple-block name="A" flex-1>
+        <simple-block style="flex: 0 0 500px; max-height: 300px;" name="A.a"></simple-block>
+        <simple-block style="flex: 0 0 500px; max-height: 300px;" name="A.b"></simple-block>
+        <simple-block row style="flex: auto;" name="A.c">
+            <simple-block style="flex: auto;" name="A.c.01"></simple-block>
+            <simple-block style="flex: 0 0 200px;" name="A.c.02"></simple-block>
+            <simple-block style="flex: 0 0 200px;" name="A.c.03"></simple-block>
+            <simple-block style="flex: auto;" name="A.c.04"></simple-block>
+        </simple-block>
+    </simple-block>
 
 </body>
 

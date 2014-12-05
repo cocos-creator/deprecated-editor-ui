@@ -1,20 +1,24 @@
 (function () {
+    var resizerSpace = 3;
+
     Polymer({
-        created: function () {
+        publish: {
+            row: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
-            var isrow = this.isRow();
+            if ( this.children.length > 1 ) {
+                for ( var i = 0; i < this.children.length; ++i ) {
+                    if ( i != this.children.length-1 ) {
+                        var el = this.children[i];
 
-            for ( var i = 0; i < this.children.length; ++i ) {
-                if ( i != this.children.length-1 ) {
-                    var dockEL = this.children[i];
-                    if ( dockEL instanceof FireDock ) {
                         var resizer = new FireResizer();
-                        resizer.vertical = isrow;
-                        resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+                        resizer.vertical = this.row;
 
-                        this.insertBefore( resizer, dockEL.nextElementSibling );
+                        this.insertBefore( resizer, el.nextElementSibling );
                         i += 1;
                     }
                 }
@@ -22,12 +26,12 @@
         },
 
         domReady: function () {
-            for ( var i = 0; i < this.children.length; ++i ) {
-                var resizer = this.children[i];
-                if ( resizer instanceof FireResizer ) {
-                    resizer.update();
-                }
-            }
+            // for ( var i = 0; i < this.children.length; ++i ) {
+            //     var resizer = this.children[i];
+            //     if ( resizer instanceof FireResizer ) {
+            //         resizer.update();
+            //     }
+            // }
         },
 
         isRow: function () {
