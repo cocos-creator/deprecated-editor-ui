@@ -5,64 +5,81 @@
                 value: false,
                 reflect: true
             },
-        },
-
-        update: function () {
-            // // NOTE: it is possible resize target is null (this.previousElementSibling and this.nextElementSibling are all flex)
-            // if ( EditorUI.isFlex(this.previousElementSibling) === false ) {
-            //     this.inverse = false;
-            //     this.target = this.previousElementSibling;
-            // }
-            // else {
-            //     if ( EditorUI.isFlex(this.nextElementSibling) === false ) {
-            //         this.inverse = true;
-            //         this.target = this.nextElementSibling;
-            //     }
-            // }
+            space: 3,
         },
 
         mousedownAction: function ( event ) {
-            // if ( this.target ) {
-            //     // add drag-ghost
-            //     EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
+            var prevEL = this.previousElementSibling;
+            var nextEL = this.nextElementSibling;
+            var pressx = event.clientX;
+            var pressy = event.clientY;
+            var rect, prevSize, nextSize;
 
-            //     var targetRect = this.target.getBoundingClientRect();
-            //     var mouseDownX = event.clientX;
-            //     var mouseDownY = event.clientY;
+            // get prevSize
+            rect = prevEL.getBoundingClientRect();
+            prevSize = this.vertical ? rect.width : rect.height;
 
-            //     var updateMouseMove = function (event) {
-            //         var offset = -1; 
-            //         if ( this.vertical ) {
-            //             offset = event.clientX - mouseDownX;
-            //             offset = this.inverse ? -offset : offset;
-            //             this.target.style.width = (targetRect.width + offset) + "px";
-            //         }
-            //         else {
-            //             offset = event.clientY - mouseDownY;
-            //             offset = this.inverse ? -offset : offset;
-            //             this.target.style.height = (targetRect.height + offset) + "px";
-            //         }
+            // get nextSize
+            rect = nextEL.getBoundingClientRect();
+            nextSize = this.vertical ? rect.width : rect.height;
 
-            //         this.fire( "resized", { target: this.target } );
+            // mousemove
+            var mousemoveHandle = function (event) {
+                var offset;
+                if ( this.vertical ) {
+                    offset = event.clientX - pressx;
+                }
+                else {
+                    offset = event.clientY - pressy;
+                }
 
-            //         //
-            //         event.stopPropagation();
-            //     };
-            //     updateMouseMove.call(this,event);
+                //
+                var size = -1;
+                if ( !prevEL._autoLayout ) {
+                    size = prevSize + offset;
+                    console.log( "prevSize = " + prevSize + " new = " + size);
+                    if ( this.vertical )
+                        size = prevEL.calcWidth(size);
+                    else
+                        size = prevEL.calcHeight(size);
 
-            //     var mouseMoveHandle = updateMouseMove.bind(this);
-            //     var mouseUpHandle = (function(event) {
-            //         document.removeEventListener('mousemove', mouseMoveHandle);
-            //         document.removeEventListener('mouseup', mouseUpHandle);
+                    prevEL.style.flex = "0 0 " + size + "px";
+                    // TODO: prevEL.fire( "resized", { target: this.target } );
+                }
 
-            //         EditorUI.removeDragGhost();
-            //         event.stopPropagation();
-            //     }).bind(this);
-            //     document.addEventListener ( 'mousemove', mouseMoveHandle );
-            //     document.addEventListener ( 'mouseup', mouseUpHandle );
-            // }
+                //
+                if ( !nextEL._autoLayout ) {
+                    size = nextSize - offset;
+                    console.log( "nextSize = " + nextSize + " new = " + size);
+                    if ( this.vertical )
+                        size = nextEL.calcWidth(size);
+                    else
+                        size = nextEL.calcHeight(size);
 
-            // event.stopPropagation();
+                    nextEL.style.flex = "0 0 " + size + "px";
+                    // TODO: nextEL.fire( "resized", { target: this.target } );
+                }
+
+                //
+                event.stopPropagation();
+            }.bind(this);
+
+            // mouseup
+            var mouseupHandle = function(event) {
+                document.removeEventListener('mousemove', mousemoveHandle);
+                document.removeEventListener('mouseup', mouseupHandle);
+                EditorUI.removeDragGhost();
+
+                event.stopPropagation();
+            }.bind(this);
+
+            // add drag-ghost
+            EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
+            document.addEventListener ( 'mousemove', mousemoveHandle );
+            document.addEventListener ( 'mouseup', mouseupHandle );
+
+            //
+            event.stopPropagation();
         },
     });
 })();

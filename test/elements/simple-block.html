@@ -6,12 +6,11 @@
 <template>
         <style>
             :host {
+                position: relative;
+                box-sizing: border-box;
+
                 display: block; 
                 outline: none;
-                position: relative;
-
-                min-width: 100px;
-                min-height: 100px;
 
                 border: 1px solid black;
             }
@@ -48,7 +47,7 @@
 
         <div class="border" flex-col flex-stretch fit>
             <div class="title">{{name}}</div>
-            <div class="content {{row ? 'row' : ''}}" flex-1>
+            <div id="content" class="content {{row ? 'row' : ''}}" flex-1>
                 <content/>
             </div>
         </div>
@@ -60,7 +59,9 @@
             row: {
                 value: false,
                 reflect: true
-            }
+            },
+            'min-width': 100,
+            'min-height': 100,
         },
     });
 </script>

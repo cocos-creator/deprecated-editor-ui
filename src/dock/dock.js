@@ -1,7 +1,7 @@
 (function () {
     var resizerSpace = 3;
 
-    Polymer({
+    Polymer(EditorUI.mixin({
         publish: {
             row: {
                 value: false,
@@ -10,6 +10,8 @@
         },
 
         ready: function () {
+            this._initResizable();
+
             if ( this.children.length > 1 ) {
                 for ( var i = 0; i < this.children.length; ++i ) {
                     if ( i != this.children.length-1 ) {
@@ -26,19 +28,42 @@
         },
 
         domReady: function () {
-            // for ( var i = 0; i < this.children.length; ++i ) {
-            //     var resizer = this.children[i];
-            //     if ( resizer instanceof FireResizer ) {
-            //         resizer.update();
-            //     }
-            // }
+            this._reflow();
         },
 
-        isRow: function () {
-            var result = this.getAttribute('flex-row');
-            if ( result === null )
-                return false;
-            return true;
+        _reflow: function () {
+            var resizerCnt = (this.children.length - 1)/2; 
+            var resizerSize = resizerCnt * resizerSpace;
+
+            var autoLayoutElements = [];
+            var i, element, size;
+
+            for ( i = 0; i < this.children.length; i += 2 ) {
+                element = this.children[i];
+                element._autoLayout = false;
+                if ( this.row ) {
+                    size = element.computedWidth;
+                }
+                else {
+                    size = element.computedHeight;
+                }
+
+                if ( size !== -1 ) {
+                    // if this is last element and we don't have auto-layout elements, give rest size to last element
+                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
+                        element.style.flex = "auto";
+                        element._autoLayout = true;
+                    }
+                    else {
+                        element.style.flex = "0 0 " + size + "px";
+                    }
+                }
+                else {
+                    element.style.flex = "auto";
+                    element._autoLayout = true;
+                    autoLayoutElements.push(element);
+                }
+            }
         },
 
         addDock: function ( position, element ) {
@@ -128,5 +153,5 @@
         get elementCount () {
             return this.children.length;
         },
-    });
+    }, EditorUI.resizable));
 })();
