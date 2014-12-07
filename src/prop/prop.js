@@ -27,6 +27,10 @@
             fieldEL.id = "field";
             this.appendChild(fieldEL);
             this.$.field = fieldEL;
+
+            if ( this.onFieldCreated ) {
+                this.onFieldCreated();
+            }
         },
 
         focusinAction: function ( event ) {

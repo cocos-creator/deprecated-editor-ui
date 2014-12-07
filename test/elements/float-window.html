@@ -1,0 +1,114 @@
+<polymer-element
+        name="float-window"
+        constructor="FloatWindow"
+        >
+<template>
+        <style>
+            :host {
+                position: absolute;
+                display: block; 
+                outline: none;
+
+                width: 400px;
+                height: 300px;
+
+                border: 1px solid black;
+                box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.5);
+            }
+
+            :host .border {
+                position: relative;
+                border: 1px solid #555;
+
+                background-color: #474747;
+            }
+
+            :host .border .title {
+                font-size: 14px;
+                padding: 3px 10px;
+
+                cursor: move;
+                color: #aaa;
+                background-color: #171717;
+            }
+            :host .border .v-resizer {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 5px;
+                height: 100%;
+            }
+            :host .border .h-resizer {
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 100%;
+                height: 5px;
+            }
+        </style>
+
+        <div class="border" fit>
+            <div class="title"
+                on-mousedown="{{mousedownAction}}"
+                >
+                {{name}}
+            </div>
+            <div class="v-resizer"></div>
+            <div class="h-resizer"></div>
+        </div>
+</template>
+<script>
+    Polymer(EditorUI.mixin({
+        publish: {
+            name: "Unknown",
+            x: 0,
+            y: 0,
+        },
+
+        ready: function () {
+            this._initResizable();
+            this.style.transform = "translate3d(" + this.x + "px, " + this.y + "px, 0)";
+        },
+
+        mousedownAction: function ( event ) {
+            event.stopPropagation();
+
+            if ( event.which === 1 ) {
+                this._pressx = event.clientX;
+                this._pressy = event.clientY;
+
+                //
+                var mousemoveHandle = function(event) {
+                    var dx = event.clientX - this._pressx;
+                    var dy = event.clientY - this._pressy;
+
+                    var currentX = this.x + dx;
+                    var currentY = this.y + dy;
+                    this.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+
+                    event.stopPropagation();
+                }.bind(this);
+
+                var mouseupHandle = function(event) {
+                    var dx = event.clientX - this._pressx;
+                    var dy = event.clientY - this._pressy;
+
+                    this.x += dx;
+                    this.y += dy;
+
+                    document.removeEventListener('mousemove', mousemoveHandle);
+                    document.removeEventListener('mouseup', mouseupHandle);
+                    EditorUI.removeDragGhost();
+
+                    event.stopPropagation();
+                }.bind(this);
+
+                EditorUI.addDragGhost("move");
+                document.addEventListener ( 'mousemove', mousemoveHandle );
+                document.addEventListener ( 'mouseup', mouseupHandle );
+            }
+        },
+
+    }, EditorUI.resizable));
+</script>
+</polymer-element>

@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<title>Float Window</title>
+<link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="/bin/editor-ui.css">
+
+<script src="/ext/webcomponentsjs/webcomponents.js"></script>
+<script src="/ext/fire-core/core.dev.js"></script>
+
+<link rel="import" href="/ext/polymer/polymer.html">
+<link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="elements/float-window.html">
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
+</style>
+</head>
+
+<body>
+<h2 style="text-align: center; color: #ccc;">Float Window</h2>
+<my-test></my-test>
+
+<polymer-element name="my-test">
+    <template>
+        <float-window name="Test 1"></float-window>
+        <float-window name="Test 2" y="400"></float-window>
+    </template>
+
+    <script>
+        Polymer({
+        });
+    </script>
+</polymer-element>
+
+</body>
+
+</html>
