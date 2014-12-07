@@ -175,6 +175,23 @@
         scrollAction: function (event) {
             this.scrollLeft = 0;
         },
+
+        getToplevelElements: function ( ids ) {
+            var elements = new Array(ids.length);
+            for ( var i = 0; i < ids.length; ++i ) {
+                elements[i] = this.idToItem[ids[i]];
+            }
+            var resultELs = Fire.Selection.filter( elements, 'top-level', function ( elA, elB ) {
+                if ( elA.contains(elB) ) {
+                    return 1;
+                }
+                if ( elB.contains(elA) ) {
+                    return -1;
+                }
+                return 0;
+            } );
+            return resultELs;
+        },
         
         keydownAction: function (event, activeElement) {
             switch ( event.which ) {
