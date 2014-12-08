@@ -30,18 +30,27 @@
 </style>
 
 </head>
+<!-- <simple-block name="auto"></simple-block> -->
 
 <body flex-col flex-stretch>
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
     <simple-block name="A" flex-1>
-        <simple-block default-height="200" name="A.a"></simple-block>
-        <simple-block default-height="200" name="A.b"></simple-block>
-        <simple-block default-height="200" row name="A.c">
-            <simple-block default-width="200" name="A.c.01"></simple-block>
-            <simple-block default-width="200" name="A.c.02"></simple-block>
-            <simple-block default-width="200" name="A.c.03"></simple-block>
-            <simple-block default-width="200" name="A.c.04"></simple-block>
+        <simple-block height="200" name="A.a">
+        </simple-block>
+
+        <simple-block height="200" row name="A.b">
+            <simple-block width="200" name="A.c.01"></simple-block>
+            <simple-block width="200" name="A.c.02"></simple-block>
+            <simple-block name="A.c.03"></simple-block>
+            <simple-block width="200" name="A.c.04"></simple-block>
+        </simple-block>
+
+        <simple-block height="200" row name="A.c">
+            <simple-block width="200" name="A.c.01"></simple-block>
+            <simple-block width="200" name="A.c.02"></simple-block>
+            <simple-block width="200" name="A.c.03"></simple-block>
+            <simple-block width="200" name="A.c.04"></simple-block>
         </simple-block>
     </simple-block>
 

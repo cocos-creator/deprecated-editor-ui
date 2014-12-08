@@ -122,7 +122,7 @@
                 newDock.setAttribute('flex-stretch', '');
 
                 // new resizer
-                newResizer = new FireResizer();
+                newResizer = new FireDockResizer();
                 newResizer.vertical = newDock.isRow();
                 newResizer.ready();
 

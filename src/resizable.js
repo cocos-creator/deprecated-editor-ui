@@ -2,11 +2,11 @@ var EditorUI;
 (function (EditorUI) {
     EditorUI.resizable = {
         publish: {
-            'default-width': -1,
+            'width': -1,
             'min-width': -1,
             'max-width': -1,
 
-            'default-height': -1,
+            'height': -1,
             'min-height': -1,
             'max-height': -1,
         },
@@ -52,7 +52,7 @@ var EditorUI;
         },
 
         getDefaultWidth: function () {
-            var defaultWidth = this['default-width'];
+            var defaultWidth = this.width;
             if ( defaultWidth > 0 ) {
                 var minWidth = this.getMinWidth();
                 if ( minWidth !== -1 && defaultWidth < minWidth ) {
@@ -71,7 +71,7 @@ var EditorUI;
         },
 
         getDefaultHeight: function () {
-            var defaultHeight = this['default-height'];
+            var defaultHeight = this.height;
             if ( defaultHeight > 0 ) {
                 var minHeight = this.getMinHeight();
                 if ( minHeight !== -1 && defaultHeight < minHeight ) {
@@ -114,6 +114,14 @@ var EditorUI;
         },
 
         _initResizable: function () {
+            // TODO:
+            // this.cachedWidth;
+            // this.cachedMinWidth;
+            // this.cachedMaxWidth;
+            // this.cachedHeight;
+            // this.cachedMinHeight;
+            // this.cachedMaxHeight;
+
             // min-width
             this.computedMinWidth = this.getMinWidth();
             if ( this.computedMinWidth !== -1 ) {

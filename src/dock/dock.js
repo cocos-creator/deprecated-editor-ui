@@ -17,7 +17,7 @@
                     if ( i != this.children.length-1 ) {
                         var el = this.children[i];
 
-                        var resizer = new FireResizer();
+                        var resizer = new FireDockResizer();
                         resizer.vertical = this.row;
 
                         this.insertBefore( resizer, el.nextElementSibling );
@@ -73,7 +73,7 @@
             }
 
             // check if need to create new Dock element
-            var isrow = this.isRow();
+            var isrow = this.row;
             var needNewDock = false;
             if ( position === 'left' || position === 'right' ) {
                 if ( isrow === false ) {
@@ -106,9 +106,8 @@
                 newDock.setAttribute('flex-stretch', '');
 
                 // new resizer
-                newResizer = new FireResizer();
-                newResizer.vertical = newDock.isRow();
-                newResizer.ready();
+                newResizer = new FireDockResizer();
+                newResizer.vertical = newDock.row;
 
                 // 
                 this.parentElement.insertBefore(newDock, this);
