@@ -2,15 +2,6 @@
     position: relative
     box-sizing: border-box;
 
-    display: flex
-    flex-wrap: nowrap     
-    align-items: stretch
-    flex-direction: column
-
-    &([row]) {
-        flex-direction: row
-    }
-
     white-space: nowrap
     overflow: hidden
 
@@ -18,4 +9,19 @@
     font-family: Helvetica,Arial,sans-serif
 
     color: #ddd
+
+    .content {
+        position: relative;
+
+        display: flex;
+        flex-wrap: nowrap;     
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    &([row]) {
+        .content {
+            flex-direction: row
+        }
+    }
 }

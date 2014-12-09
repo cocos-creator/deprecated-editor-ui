@@ -10,7 +10,6 @@
 
 <link rel="import" href="/ext/polymer/polymer.html">
 <link rel="import" href="/bin/editor-ui.html">
-<link rel="import" href="elements/simple-block.html">
 
 <style>
     body {
@@ -35,24 +34,19 @@
 <body flex-col flex-stretch>
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
-    <simple-block name="A" flex-1>
-        <simple-block height="200" name="A.a">
-        </simple-block>
-
-        <simple-block height="200" row name="A.b">
-            <simple-block width="200" name="A.c.01"></simple-block>
-            <simple-block width="200" name="A.c.02"></simple-block>
-            <simple-block name="A.c.03"></simple-block>
-            <simple-block width="200" name="A.c.04"></simple-block>
-        </simple-block>
-
-        <simple-block height="200" row name="A.c">
-            <simple-block width="200" name="A.c.01"></simple-block>
-            <simple-block width="200" name="A.c.02"></simple-block>
-            <simple-block width="200" name="A.c.03"></simple-block>
-            <simple-block width="200" name="A.c.04"></simple-block>
-        </simple-block>
-    </simple-block>
+    <fire-ui-dock flex-1>
+        <fire-ui-dock height="300" row>
+            <fire-ui-panel width="200">
+                <div name="foobar 01"></div>
+            </fire-ui-panel>
+            <fire-ui-panel width="200">
+                <div name="foobar 02"></div>
+            </fire-ui-panel>
+        </fire-ui-dock>
+        <fire-ui-panel width="200">
+            <div name="foobar 03"></div>
+        </fire-ui-panel>
+    </fire-ui-dock>
 
 </body>
 

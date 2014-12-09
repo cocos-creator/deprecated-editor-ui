@@ -1,4 +1,109 @@
 (function () {
+
+    function _resize ( elementList, sizeList, 
+                       prevTotalSize, prevMinSize, prevMaxSize,
+                       nextTotalSize, nextMinSize, nextMaxSize,
+                       vertical, resizerIndex, offset ) {
+        var expectSize, newPrevSize, newNextSize;
+        var prevOffset, nextOffset;
+        var prevIndex, nextIndex;
+        var dir = Math.sign(offset);
+
+        if ( dir > 0 ) {
+            prevIndex = resizerIndex - 1;
+            nextIndex = resizerIndex + 1;
+        }
+        else {
+            prevIndex = resizerIndex + 1;
+            nextIndex = resizerIndex - 1;
+        }
+
+        prevOffset = offset;
+
+        // prev
+        var prevEL = elementList[prevIndex];
+        var prevSize = sizeList[prevIndex];
+        if ( !prevEL._autoLayout ) {
+            expectSize = prevSize + prevOffset * dir;
+            if ( vertical )
+                newPrevSize = prevEL.calcWidth(expectSize);
+            else
+                newPrevSize = prevEL.calcHeight(expectSize);
+
+            prevOffset = (newPrevSize - prevSize) * dir;
+        }
+
+        // next
+        var nextEL = elementList[nextIndex];
+        var nextSize = sizeList[nextIndex];
+
+        while (1) {
+            if ( !nextEL._autoLayout ) {
+                expectSize = nextSize - prevOffset * dir;
+                if ( vertical )
+                    newNextSize = nextEL.calcWidth(expectSize);
+                else
+                    newNextSize = nextEL.calcHeight(expectSize);
+
+                nextOffset = (newNextSize - nextSize) * dir;
+
+                // // DEBUG:
+                // console.log("nextEL = " + nextEL.name + 
+                //             ", newNextSize = " + newNextSize +
+                //             ", nextSize = " + nextSize +
+                //             ", prevOffset = " + prevOffset +
+                //             ", nextOffset = " + nextOffset
+                //            );
+                nextEL.style.flex = "0 0 " + newNextSize + "px";
+                // TODO: compare and nextEL.fire( "resized", { target: this.target } );
+
+                if ( newNextSize - expectSize === 0 ) {
+                    break;
+                }
+
+                //
+                prevOffset += nextOffset;
+            }
+
+            // 
+            if ( dir > 0 ) {
+                nextIndex += 2;
+                if ( nextIndex >= elementList.length ) {
+                    break;
+                }
+            }
+            else {
+                nextIndex -= 2;
+                if ( nextIndex < 0 ) {
+                    break;
+                }
+            }
+
+            nextEL = elementList[nextIndex];
+            nextSize = sizeList[nextIndex];
+        }
+        
+        // re-calculate newPrevSize
+        if ( dir > 0 ) {
+            if ( nextTotalSize - offset * dir <= nextMinSize ) {
+                prevOffset = (nextTotalSize - nextMinSize) * dir;
+                newPrevSize = prevSize + prevOffset * dir;
+            }
+        }
+        else {
+            if ( prevTotalSize - offset * dir <= prevMinSize ) {
+                prevOffset = (prevTotalSize - prevMinSize) * dir;
+                newPrevSize = prevSize + prevOffset * dir;
+            }
+        }
+
+        //
+        if ( !prevEL._autoLayout ) {
+            prevEL.style.flex = "0 0 " + newPrevSize + "px";
+            // TODO: compare and prevEL.fire( "resized", { target: this.target } );
+        }
+    }
+
     Polymer({
         publish: {
             vertical: {
@@ -79,87 +184,22 @@
             // mousemove
             var mousemoveHandle = function (event) {
                 var expectSize, newPrevSize, newNextSize;
-                var dir, offset, prevOffset, nextOffset;
+                var offset, prevOffset, nextOffset;
 
                 // get offset
                 if ( this.vertical ) {
                     offset = event.clientX - pressx;
-                    dir = event.movementX;
                 }
                 else {
                     offset = event.clientY - pressy;
-                    dir = event.movementY;
                 }
 
-                // positive move
-                if ( dir > 0 ) {
-                    // prev
-                    var prevEL = parentEL.children[resizerIndex-1];
-                    var prevSize = sizeList[resizerIndex-1];
-                    if ( !prevEL._autoLayout ) {
-                        expectSize = prevSize + offset;
-                        if ( this.vertical )
-                            newPrevSize = prevEL.calcWidth(expectSize);
-                        else
-                            newPrevSize = prevEL.calcHeight(expectSize);
-
-                        prevOffset = newPrevSize - prevSize;
-                    }
-
-                    // next
-                    var nextIndex = resizerIndex+1;
-                    var nextEL = parentEL.children[nextIndex];
-                    var nextSize = sizeList[nextIndex];
-
-                    while (1) {
-                        if ( !nextEL._autoLayout ) {
-                            expectSize = nextSize - prevOffset;
-                            if ( this.vertical )
-                                newNextSize = nextEL.calcWidth(expectSize);
-                            else
-                                newNextSize = nextEL.calcHeight(expectSize);
-
-                            nextOffset = newNextSize - nextSize;
-
-                            // // DEBUG:
-                            // console.log("nextEL = " + nextEL.name + 
-                            //             ", newNextSize = " + newNextSize +
-                            //             ", nextSize = " + nextSize +
-                            //             ", prevOffset = " + prevOffset +
-                            //             ", nextOffset = " + nextOffset
-                            //            );
-                            nextEL.style.flex = "0 0 " + newNextSize + "px";
-                            // TODO: compare and nextEL.fire( "resized", { target: this.target } );
-
-                            if ( newNextSize - expectSize === 0 ) {
-                                break;
-                            }
-
-                            //
-                            prevOffset += nextOffset;
-                        }
-
-                        // 
-                        nextIndex += 2;
-                        if ( nextIndex >= parentEL.children.length ) {
-                            break;
-                        }
-
-                        nextEL = parentEL.children[nextIndex];
-                        nextSize = sizeList[nextIndex];
-                    }
-                    
-                    // re-calculate newPrevSize
-                    if ( nextTotalSize - offset <= nextMinSize ) {
-                        offset = nextTotalSize - nextMinSize;
-                        newPrevSize = prevSize + offset;
-                    }
-
-                    //
-                    if ( !prevEL._autoLayout ) {
-                        prevEL.style.flex = "0 0 " + newPrevSize + "px";
-                        // TODO: compare and prevEL.fire( "resized", { target: this.target } );
-                    }
+                //
+                if ( offset !== 0 ) {
+                    _resize( parentEL.children, sizeList, 
+                            prevTotalSize, prevMinSize, prevMaxSize,
+                            nextTotalSize, nextMinSize, nextMaxSize,
+                            this.vertical, resizerIndex, offset );
                 }
 
                 //

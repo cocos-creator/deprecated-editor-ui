@@ -51,28 +51,6 @@ var DockUtils;
     var _dockMask = null;
     var _draggingTabEL = null;
 
-    DockUtils.copyAttributes = function ( src, dest ) {
-        dest.style.width = src.style.width;
-        dest.style.minWidth = src.style.minWidth;
-        dest.style.maxWidth = src.style.maxWidth;
-        dest.style.height = src.style.height;
-        dest.style.minHeight = src.style.minHeight;
-        dest.style.maxHeight = src.style.maxHeight;
-
-        if ( src.getAttribute('flex-1')  !== null ) dest.setAttribute('flex-1','');
-        if ( src.getAttribute('flex-2')  !== null ) dest.setAttribute('flex-2','');
-        if ( src.getAttribute('flex-3')  !== null ) dest.setAttribute('flex-3','');
-        if ( src.getAttribute('flex-4')  !== null ) dest.setAttribute('flex-4','');
-        if ( src.getAttribute('flex-5')  !== null ) dest.setAttribute('flex-5','');
-        if ( src.getAttribute('flex-6')  !== null ) dest.setAttribute('flex-6','');
-        if ( src.getAttribute('flex-7')  !== null ) dest.setAttribute('flex-7','');
-        if ( src.getAttribute('flex-8')  !== null ) dest.setAttribute('flex-8','');
-        if ( src.getAttribute('flex-9')  !== null ) dest.setAttribute('flex-9','');
-        if ( src.getAttribute('flex-10') !== null ) dest.setAttribute('flex-10','');
-        if ( src.getAttribute('flex-11') !== null ) dest.setAttribute('flex-11','');
-        if ( src.getAttribute('flex-12') !== null ) dest.setAttribute('flex-12','');
-    };
-
     DockUtils.setDraggingTab = function ( tabEL ) {
         _draggingTabEL = tabEL;
     };
@@ -198,9 +176,9 @@ var DockUtils;
 
         if ( curHint ) {
             var srcDock = null;
-            if ( draggingTabEL.panel.elementCount > 1 ) {
+            if ( draggingTabEL.panel.children.length > 1 ) {
                 draggingTabEL.panel.close(draggingTabEL);
-                srcDock = new FireDockPanel();
+                srcDock = new FirePanel();
                 srcDock.add(draggingTabEL.content);
                 srcDock.select(0);
             }

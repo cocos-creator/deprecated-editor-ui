@@ -66,6 +66,7 @@
             }
         },
 
+        // position: left, right, top, bottom
         addDock: function ( position, element ) {
             if ( element instanceof FireDock === false ) {
                 Fire.warn('Dock element must be instanceof FireDock');
@@ -73,15 +74,14 @@
             }
 
             // check if need to create new Dock element
-            var isrow = this.row;
             var needNewDock = false;
             if ( position === 'left' || position === 'right' ) {
-                if ( isrow === false ) {
+                if ( !this.row ) {
                     needNewDock = true;
                 }
             }
             else {
-                if ( isrow ) {
+                if ( this.row ) {
                     needNewDock = true;
                 }
             }
@@ -91,19 +91,17 @@
             if ( needNewDock ) {
                 // new FireDock
                 var newDock = new FireDock();
-                DockUtils.copyAttributes( this, newDock );
+                newDock = this.clone();
+                newDock.copyResizable(this);
 
                 if ( position === 'left' ||
                      position === 'right' )
                 {
-                    newDock.setAttribute('flex-row', '');
-                    newDock.style.height = "";
+                    newDock.row = true;
                 }
                 else {
-                    newDock.setAttribute('flex-col', '');
-                    newDock.style.width = "";
+                    newDock.row = false;
                 }
-                newDock.setAttribute('flex-stretch', '');
 
                 // new resizer
                 newResizer = new FireDockResizer();
@@ -121,17 +119,28 @@
                     newDock.appendChild(newResizer);
                     newDock.appendChild(element);
                 }
+
+                //
+                newDock.ready();
             }
             else {
+                // new resizer
+                newResizer = new FireDockResizer();
+                newResizer.vertical = this.row;
+
+                //
                 if ( position === 'left' || position === 'top' ) {
-                    element.style.height = "";
                     this.insertBefore(element, this.firstElementChild);
+                    this.insertBefore(newResizer, element );
                 }
                 else {
-                    element.style.width = "";
+                    this.appendChild(newResizer);
                     this.appendChild(element);
                 }
             }
+
+            //
+            this._reflow();
         },
 
         dragEnterAction: function ( event ) {
@@ -149,8 +158,5 @@
             // this.style.outline = "";
         },
 
-        get elementCount () {
-            return this.children.length;
-        },
     }, EditorUI.resizable));
 })();

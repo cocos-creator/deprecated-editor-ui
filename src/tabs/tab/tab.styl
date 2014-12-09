@@ -1,3 +1,5 @@
+color-border = #212121
+
 :host {
     display: flex
     flex-direction: row
@@ -7,7 +9,7 @@
     box-sizing: border-box
     font-size: 12px
 
-    border-top: 1px solid #212121
+    border-top: 1px solid color-border
     height: 20px
 
     color: #aaa
@@ -25,7 +27,6 @@
         overflow: hidden
 
         &:hover {
-            transition: background-color .3s ease
             background-color: #333 + 10%
         }
 
@@ -41,12 +42,12 @@
     }
 
     &(.active) {
-        border-top: 1px solid #212121
+        border-top: 1px solid color-border
         height: 22px
 
         .border {
-            // border-top: 1px solid rgba(255, 255, 255, 0.2)
-            border-top: 1px solid rgba(12,112,200,1.0)
+            border-top: 1px solid rgba(255, 255, 255, 0.2)
+            // border-top: 1px solid rgba(12,112,200,1.0)
             height: 21px
             background-color: #444
         }
@@ -61,25 +62,25 @@
 
     span.left-tab-border {
         // display: inline-block
-        // border-left: 1px solid #212121
+        // border-left: 1px solid color-border
         // height: 20px
         display: none
     }
     span.right-tab-border {
         display: inline-block
-        border-left: 1px solid #212121
+        border-left: 1px solid color-border
         height: 20px
     }
 
     &(:first-child) span.left-tab-border {
         display: inline-block
-        border-left: 1px solid #212121
+        border-left: 1px solid color-border
         height: 22px
     }
 
     &(:last-child) span.right-tab-border {
         display: inline-block
-        border-left: 1px solid #212121
+        border-left: 1px solid color-border
         height: 20px
     }
 }

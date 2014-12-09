@@ -113,6 +113,22 @@ var EditorUI;
             return height;
         },
 
+        copyResizable: function ( element ) {
+            this.width = element.width;
+            this['min-width'] = element['min-width'];
+            this['max-width'] = element['max-width'];
+            this.height = element.height;
+            this['min-height'] = element['min-height'];
+            this['max-height'] = element['max-height'];
+
+            if ( element.width !== -1 ) this.setAttribute('width', element.width);
+            if ( element['min-width'] !== -1 ) this.setAttribute('min-width', element['min-width']);
+            if ( element['max-width'] !== -1 ) this.setAttribute('max-width', element['max-width']);
+            if ( element.height !== -1 ) this.setAttribute('height', element.height);
+            if ( element['min-height'] !== -1 ) this.setAttribute('min-height', element['min-height']);
+            if ( element['max-height'] !== -1 ) this.setAttribute('max-height', element['max-height']);
+        },
+
         _initResizable: function () {
             // TODO:
             // this.cachedWidth;
