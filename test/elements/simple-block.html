@@ -1,0 +1,68 @@
+<polymer-element
+        name="simple-block"
+        extends="fire-ui-dock"
+        constructor="SimpleBlock"
+        >
+<template>
+        <style>
+            :host {
+                position: relative;
+                box-sizing: border-box;
+
+                display: block; 
+                outline: none;
+
+                border: 1px solid black;
+            }
+
+            :host .border {
+                position: relative;
+                border: 1px solid #555;
+
+                background-color: #474747;
+            }
+
+            :host .border .title {
+                font-size: 12px;
+                padding: 3px 10px;
+                border-bottom: 1px solid #555;
+
+                color: #aaa;
+                background-color: #171717;
+            }
+
+            :host .border .content {
+                position: relative;
+
+                display: flex;
+                flex-wrap: nowrap;     
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            :host .border .content.row {
+                flex-direction: row;
+            }
+        </style>
+
+        <div class="border" flex-col flex-stretch fit>
+            <div class="title">{{name}}</div>
+            <div id="content" class="content {{row ? 'row' : ''}}" flex-1>
+                <content/>
+            </div>
+        </div>
+</template>
+<script>
+    Polymer({
+        publish: {
+            name: "Unknown",
+            row: {
+                value: false,
+                reflect: true
+            },
+            'min-width': 100,
+            'min-height': 100,
+        },
+    });
+</script>
+</polymer-element>

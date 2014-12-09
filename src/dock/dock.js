@@ -1,20 +1,26 @@
 (function () {
-    Polymer({
-        created: function () {
+    var resizerSpace = 3;
+
+    Polymer(EditorUI.mixin({
+        publish: {
+            row: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
-            var isrow = this.isRow();
+            this._initResizable();
 
-            for ( var i = 0; i < this.children.length; ++i ) {
-                if ( i != this.children.length-1 ) {
-                    var dockEL = this.children[i];
-                    if ( dockEL instanceof FireDock ) {
-                        var resizer = new FireResizer();
-                        resizer.vertical = isrow;
-                        resizer.ready(); // HACK: ready again, manual contructor cannot send attribute in 
+            if ( this.children.length > 1 ) {
+                for ( var i = 0; i < this.children.length; ++i ) {
+                    if ( i != this.children.length-1 ) {
+                        var el = this.children[i];
 
-                        this.insertBefore( resizer, dockEL.nextElementSibling );
+                        var resizer = new FireDockResizer();
+                        resizer.vertical = this.row;
+
+                        this.insertBefore( resizer, el.nextElementSibling );
                         i += 1;
                     }
                 }
@@ -22,21 +28,45 @@
         },
 
         domReady: function () {
-            for ( var i = 0; i < this.children.length; ++i ) {
-                var resizer = this.children[i];
-                if ( resizer instanceof FireResizer ) {
-                    resizer.update();
+            this._reflow();
+        },
+
+        _reflow: function () {
+            var resizerCnt = (this.children.length - 1)/2; 
+            var resizerSize = resizerCnt * resizerSpace;
+
+            var autoLayoutElements = [];
+            var i, element, size;
+
+            for ( i = 0; i < this.children.length; i += 2 ) {
+                element = this.children[i];
+                element._autoLayout = false;
+                if ( this.row ) {
+                    size = element.computedWidth;
+                }
+                else {
+                    size = element.computedHeight;
+                }
+
+                if ( size !== -1 ) {
+                    // if this is last element and we don't have auto-layout elements, give rest size to last element
+                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
+                        element.style.flex = "auto";
+                        element._autoLayout = true;
+                    }
+                    else {
+                        element.style.flex = "0 0 " + size + "px";
+                    }
+                }
+                else {
+                    element.style.flex = "auto";
+                    element._autoLayout = true;
+                    autoLayoutElements.push(element);
                 }
             }
         },
 
-        isRow: function () {
-            var result = this.getAttribute('flex-row');
-            if ( result === null )
-                return false;
-            return true;
-        },
-
+        // position: left, right, top, bottom
         addDock: function ( position, element ) {
             if ( element instanceof FireDock === false ) {
                 Fire.warn('Dock element must be instanceof FireDock');
@@ -44,15 +74,14 @@
             }
 
             // check if need to create new Dock element
-            var isrow = this.isRow();
             var needNewDock = false;
             if ( position === 'left' || position === 'right' ) {
-                if ( isrow === false ) {
+                if ( !this.row ) {
                     needNewDock = true;
                 }
             }
             else {
-                if ( isrow ) {
+                if ( this.row ) {
                     needNewDock = true;
                 }
             }
@@ -62,24 +91,21 @@
             if ( needNewDock ) {
                 // new FireDock
                 var newDock = new FireDock();
-                DockUtils.copyAttributes( this, newDock );
+                newDock = this.clone();
+                newDock.copyResizable(this);
 
                 if ( position === 'left' ||
                      position === 'right' )
                 {
-                    newDock.setAttribute('flex-row', '');
-                    newDock.style.height = "";
+                    newDock.row = true;
                 }
                 else {
-                    newDock.setAttribute('flex-col', '');
-                    newDock.style.width = "";
+                    newDock.row = false;
                 }
-                newDock.setAttribute('flex-stretch', '');
 
                 // new resizer
-                newResizer = new FireResizer();
-                newResizer.vertical = newDock.isRow();
-                newResizer.ready();
+                newResizer = new FireDockResizer();
+                newResizer.vertical = newDock.row;
 
                 // 
                 this.parentElement.insertBefore(newDock, this);
@@ -93,17 +119,28 @@
                     newDock.appendChild(newResizer);
                     newDock.appendChild(element);
                 }
+
+                //
+                newDock.ready();
             }
             else {
+                // new resizer
+                newResizer = new FireDockResizer();
+                newResizer.vertical = this.row;
+
+                //
                 if ( position === 'left' || position === 'top' ) {
-                    element.style.height = "";
                     this.insertBefore(element, this.firstElementChild);
+                    this.insertBefore(newResizer, element );
                 }
                 else {
-                    element.style.width = "";
+                    this.appendChild(newResizer);
                     this.appendChild(element);
                 }
             }
+
+            //
+            this._reflow();
         },
 
         dragEnterAction: function ( event ) {
@@ -121,8 +158,5 @@
             // this.style.outline = "";
         },
 
-        get elementCount () {
-            return this.children.length;
-        },
-    });
+    }, EditorUI.resizable));
 })();

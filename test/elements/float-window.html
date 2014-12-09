@@ -32,6 +32,8 @@
                 background-color: #171717;
             }
             :host .border .v-resizer {
+                cursor: e-resize;
+                
                 position: absolute;
                 top: 0px;
                 right: 0px;
@@ -39,6 +41,8 @@
                 height: 100%;
             }
             :host .border .h-resizer {
+                cursor: s-resize;
+
                 position: absolute;
                 left: 0px;
                 bottom: 0px;
@@ -48,9 +52,7 @@
         </style>
 
         <div class="border" fit>
-            <div class="title"
-                on-mousedown="{{mousedownAction}}"
-                >
+            <div class="title" on-mousedown="{{mousedownAction}}">
                 {{name}}
             </div>
             <div class="v-resizer"></div>

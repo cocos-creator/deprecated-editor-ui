@@ -12,39 +12,41 @@
 <link rel="import" href="/bin/editor-ui.html">
 
 <style>
-body {
-    margin: 0px;
-    color: #ddd;
-    background-color: #333;
-    border: 0px solid black;
-    padding: 3px;
-    // overflow: hidden;
-}
-span.space {
-    height: 3px;
-    width: 3px;
-    display: block;
-}
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 10px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
 </style>
 
 </head>
+<!-- <simple-block name="auto"></simple-block> -->
 
 <body flex-col flex-stretch>
+    <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
-<template id="my-template" is="auto-binding">
-    <fire-ui-dock flex-1 flex-row flex-stretch>
-        <fire-ui-dock-panel>
-            <div name="View 1"></div>                                                                                                                                                          
-        </fire-ui-dock-panel>
-
-        <fire-ui-dock-panel>
-            <div name="View 2"></div>                                                                                                                                                          
-        </fire-ui-dock-panel>
+    <fire-ui-dock flex-1>
+        <fire-ui-dock height="300" row>
+            <fire-ui-panel width="200">
+                <div name="foobar 01"></div>
+            </fire-ui-panel>
+            <fire-ui-panel width="200">
+                <div name="foobar 02"></div>
+            </fire-ui-panel>
+        </fire-ui-dock>
+        <fire-ui-panel width="200">
+            <div name="foobar 03"></div>
+        </fire-ui-panel>
     </fire-ui-dock>
-</template>
-
-<script>
-</script>
 
 </body>
 

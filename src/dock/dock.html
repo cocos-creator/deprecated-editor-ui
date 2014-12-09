@@ -1,3 +1,5 @@
+<link rel="import" href="dock-resizer/dock-resizer.html">
+
 <polymer-element 
     name="fire-ui-dock" 
     constructor="FireDock"
@@ -8,7 +10,9 @@
 <template>
 <link rel="stylesheet" href="dock.css">
 
-<content/>
+<div id="content" class="content" fit>
+    <content/>
+</div>
 </template>
 
 <script type="text/javascript" src="dock-utils.js"></script>

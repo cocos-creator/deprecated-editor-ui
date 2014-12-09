@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<title>Test Dock Resize</title>
+<link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="/bin/editor-ui.css">
+
+<script src="/ext/webcomponentsjs/webcomponents.js"></script>
+<script src="/ext/fire-core/core.dev.js"></script>
+
+<link rel="import" href="/ext/polymer/polymer.html">
+<link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="elements/simple-block.html">
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 10px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
+</style>
+
+</head>
+<!-- <simple-block name="auto"></simple-block> -->
+
+<body flex-col flex-stretch>
+    <h2 style="text-align: center; color: #ccc;">Test Dock Resize</h2>
+
+    <simple-block name="A" flex-1>
+        <simple-block height="200" row name="A.a">
+        </simple-block>
+
+        <simple-block height="200" row name="A.b">
+            <simple-block width="200" name="A.b.01"></simple-block>
+            <simple-block width="200" name="A.b.02"></simple-block>
+            <simple-block name="A.b.03"></simple-block>
+            <simple-block width="200" name="A.b.04"></simple-block>
+        </simple-block>
+
+        <simple-block height="200" row name="A.c">
+            <simple-block width="200" name="A.c.01"></simple-block>
+            <simple-block width="200" name="A.c.02"></simple-block>
+            <simple-block width="200" name="A.c.03"></simple-block>
+            <simple-block width="200" name="A.c.04"></simple-block>
+        </simple-block>
+    </simple-block>
+
+</body>
+
+</html>
