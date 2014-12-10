@@ -18,6 +18,12 @@
                     this.$.icon.removeChild(this.$.icon.firstChild);
                 }
             }
-        }
+        },
+
+        dragstartAction: function ( event ) {
+            event.stopPropagation();
+
+            DockUtils.setDraggingTab(this);
+        },
     });
 })();

@@ -3,9 +3,9 @@
 <polymer-element 
     name="fire-ui-dock" 
     constructor="FireDock"
-    on-dragenter="{{dragEnterAction}}"
-    on-dragover="{{dragOverAction}}"
-    on-dragleave="{{dragLeaveAction}}"
+    on-dragover="{{dragoverAction}}"
+    on-focus="{{_focusAction}}"
+    on-blur="{{_blurAction}}"
     >
 <template>
 <link rel="stylesheet" href="dock.css">
@@ -15,6 +15,5 @@
 </div>
 </template>
 
-<script type="text/javascript" src="dock-utils.js"></script>
 <script type="text/javascript" src="dock.js"></script>
 </polymer-element>

@@ -37,7 +37,7 @@ var EditorUI;
             disabled: '_disabledChanged',
         },
 
-        _init: function ( focusEls ) {
+        _initFocusable: function ( focusEls ) {
             if ( focusEls ) {
                 if ( Array.isArray(focusEls) ) {
                     this.focusEls = focusEls;

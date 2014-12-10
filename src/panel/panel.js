@@ -1,6 +1,8 @@
 (function () {
     Polymer({
         publish: {
+            'width': 200,
+            'height': 200,
             'min-width': 200,
             'min-height': 200,
         },
@@ -18,7 +20,6 @@
                 var name = el.getAttribute("name");
                 var tabEL = tabs.add(name);
                 tabEL.setAttribute("draggable", "true");
-                tabEL.addEventListener ( "dragstart", this._tabDragstartAction.bind(tabEL) );
 
                 el.style.display = "none";
                 tabEL.content = el;
@@ -28,6 +29,9 @@
             }
 
             tabs.select(0);
+        },
+
+        _reflow: function () {
         },
 
         select: function ( tab ) {
@@ -41,7 +45,6 @@
             var name = contentEL.getAttribute("name");
             var tabEL = tabs.add(name);
             tabEL.setAttribute("draggable", "true");
-            tabEL.addEventListener ( "dragstart", this._tabDragstartAction.bind(tabEL) );
 
             contentEL.style.display = "none";
             tabEL.content = contentEL;
@@ -61,7 +64,7 @@
             tabEL.panel = null;
 
             //
-            if ( tabs.tabCount > 0 ) {
+            if ( tabs.children.length > 0 ) {
                 tabs.select(0);
             }
             else {
@@ -74,18 +77,13 @@
             var detail = event.detail;
             if ( detail.old !== null ) {
                 detail.old.content.style.display = "none";
-                detail.new.content.dispatchEvent( new CustomEvent('hide') );
+                detail.new.fire('hide');
             }
             if ( detail.new !== null ) {
                 detail.new.content.style.display = "";
-                detail.new.content.dispatchEvent( new CustomEvent('show') );
+                detail.new.fire('show');
             }
 
-            event.stopPropagation();
-        },
-
-        _tabDragstartAction: function ( event ) {
-            DockUtils.setDraggingTab(this);
             event.stopPropagation();
         },
     });

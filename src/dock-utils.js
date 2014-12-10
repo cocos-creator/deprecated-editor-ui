@@ -4,16 +4,16 @@ var DockUtils;
     var _addDockMask = function ( x, y, w, h ) {
         // add dock mask
         var mask = document.createElement('div');
-        mask.classList.add('dock-mask');
-        mask.style.position = 'fixed';
-        mask.style.zIndex = '999';
-        mask.style.opacity = '0.5';
-        mask.style.background = 'rgba(0,128,255,0.5)';
         mask.style.left = x + 'px';
         mask.style.top = y + 'px';
         mask.style.width = w + 'px';
         mask.style.height = h + 'px';
         mask.style.pointerEvents = 'none';
+        mask.style.zIndex = '999';
+        mask.style.position = 'fixed';
+        mask.style.boxSizing = 'border-box';
+        mask.style.background = 'rgba(0,128,255,0.3)';
+        mask.style.border = '2px solid rgba(0,128,255,1.0)';
         mask.oncontextmenu = function() { return false; };
 
         document.body.appendChild(mask);
@@ -34,9 +34,7 @@ var DockUtils;
         if ( mask === null || mask === undefined )
             return;
 
-        if ( mask.parentElement !== null ) {
-            mask.parentElement.removeChild(mask);
-        }
+        mask.remove();
     };
 
     var _reset = function () {
@@ -166,10 +164,12 @@ var DockUtils;
 
         _dockHints = [];
     });
+
     document.addEventListener("dragend", function ( event ) {
         // reset internal states
         _reset();
     });
+
     document.addEventListener("drop", function ( event ) {
         var curHint = _curHint;
         var draggingTabEL = _draggingTabEL;
@@ -186,10 +186,10 @@ var DockUtils;
                 srcDock = draggingTabEL.panel;
             }
             curHint.target.addDock( curHint.position, srcDock );
-
-            // reset internal states
-            _reset();
         }
+
+        // reset internal states
+        _reset();
     });
 })(DockUtils || (DockUtils = {}));
 

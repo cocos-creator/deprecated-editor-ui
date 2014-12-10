@@ -15,7 +15,7 @@
 
         ready: function () {
             this._curDragObject = null;
-            this._init(this.$.focus);
+            this._initFocusable(this.$.focus);
             this._initDroppable(this.$.dropArea);
         },
 

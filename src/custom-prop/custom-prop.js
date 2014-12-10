@@ -5,7 +5,7 @@
         },
 
         ready: function () {
-            this._init();
+            this._initFocusable();
         },
 
         attached: function () {

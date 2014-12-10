@@ -16,7 +16,7 @@
         },
 
         ready: function() {
-            this._init( this.$.focus );
+            this._initFocusable( this.$.focus );
             this._updateColor();
             this._updateAlpha();
         },

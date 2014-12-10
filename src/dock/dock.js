@@ -10,6 +10,7 @@
         },
 
         ready: function () {
+            this._initFocusable(this.$.content);
             this._initResizable();
 
             if ( this.children.length > 1 ) {
@@ -73,25 +74,25 @@
                 return;
             }
 
-            // check if need to create new Dock element
             var needNewDock = false;
+            var parentEL = this.parentElement;
+
+            // check if need to create new Dock element
             if ( position === 'left' || position === 'right' ) {
-                if ( !this.row ) {
+                if ( !parentEL.row ) {
                     needNewDock = true;
                 }
             }
             else {
-                if ( this.row ) {
+                if ( parentEL.row ) {
                     needNewDock = true;
                 }
             }
-            var newResizer = null;
 
             // process dock
             if ( needNewDock ) {
                 // new FireDock
                 var newDock = new FireDock();
-                newDock = this.clone();
                 newDock.copyResizable(this);
 
                 if ( position === 'left' ||
@@ -103,60 +104,58 @@
                     newDock.row = false;
                 }
 
-                // new resizer
-                newResizer = new FireDockResizer();
-                newResizer.vertical = newDock.row;
+                //
+                parentEL.insertBefore(newDock, this);
 
-                // 
-                this.parentElement.insertBefore(newDock, this);
+                //
                 if ( position === 'left' || position === 'top' ) {
                     newDock.appendChild(element);
-                    newDock.appendChild(newResizer);
                     newDock.appendChild(this);
                 }
                 else {
                     newDock.appendChild(this);
-                    newDock.appendChild(newResizer);
                     newDock.appendChild(element);
                 }
+                newDock.ready();
+                newDock._reflow();
 
                 //
-                newDock.ready();
+                parentEL._reflow();
             }
             else {
                 // new resizer
+                var newResizer = null;
                 newResizer = new FireDockResizer();
-                newResizer.vertical = this.row;
+                newResizer.vertical = parentEL.row;
 
                 //
                 if ( position === 'left' || position === 'top' ) {
-                    this.insertBefore(element, this.firstElementChild);
-                    this.insertBefore(newResizer, element );
+                    parentEL.insertBefore(element, this);
+                    parentEL.insertBefore(newResizer, this);
                 }
                 else {
-                    this.appendChild(newResizer);
-                    this.appendChild(element);
+                    // insert after
+                    var nextEL = this.nextElementSibling;
+                    if ( nextEL === null ) {
+                        parentEL.appendChild(newResizer);
+                        parentEL.appendChild(element);
+                    }
+                    else {
+                        parentEL.insertBefore(newResizer, nextEL);
+                        parentEL.insertBefore(element, nextEL);
+                    }
                 }
+
+                parentEL._reflow();
             }
-
-            //
-            this._reflow();
         },
 
-        dragEnterAction: function ( event ) {
-            // this.style.outline = "1px solid white";
-        },
-
-        dragOverAction: function ( event ) {
+        dragoverAction: function ( event ) {
             event.preventDefault();
+
             event.dataTransfer.dropEffect = 'move';
             DockUtils.dockHint( event.currentTarget );
-            // this.style.outline = "1px solid white";
         },
 
-        dragLeaveAction: function ( event ) {
-            // this.style.outline = "";
-        },
-
-    }, EditorUI.resizable));
+    }, EditorUI.resizable, EditorUI.focusable));
 })();

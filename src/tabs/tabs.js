@@ -80,9 +80,5 @@
                 }
             }
         },
-
-        get tabCount () {
-            return this.children.length;
-        },
     });
 })();
