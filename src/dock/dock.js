@@ -150,6 +150,18 @@
             }
         },
 
+        removeDock: function ( childEL ) {
+            if ( !this.contains(childEL) )
+                return;
+
+            if ( childEL.previousElementSibling && 
+                 childEL.previousElementSibling instanceof FireDockResizer )
+            {
+                childEL.previousElementSibling.remove();
+            }
+            childEL.remove();
+        },
+
         dragoverAction: function ( event ) {
             event.preventDefault();
 

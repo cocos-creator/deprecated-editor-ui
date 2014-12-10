@@ -59,7 +59,8 @@
             //
             tabs.remove(tabEL);
             if ( tabEL.content ) {
-                tabEL.content.parentElement.removeChild(tabEL.content);
+                tabEL.content.remove();
+                tabEL.content = null;
             }
             tabEL.panel = null;
 
@@ -68,8 +69,8 @@
                 tabs.select(0);
             }
             else {
-                // TODO: dock.remove(this);
-                // this.parentElement.removeChild(this);
+                // remove from dock;
+                this.parentElement.removeDock(this);
             }
         },
 

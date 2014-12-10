@@ -174,18 +174,19 @@ var DockUtils;
         var curHint = _curHint;
         var draggingTabEL = _draggingTabEL;
 
-        if ( curHint ) {
-            var srcDock = null;
-            if ( draggingTabEL.panel.children.length > 1 ) {
-                draggingTabEL.panel.close(draggingTabEL);
-                srcDock = new FirePanel();
-                srcDock.add(draggingTabEL.content);
-                srcDock.select(0);
-            }
-            else {
-                srcDock = draggingTabEL.panel;
-            }
-            curHint.target.addDock( curHint.position, srcDock );
+        if ( curHint && curHint.target !== draggingTabEL.panel ) {
+            var contentEL = draggingTabEL.content;
+
+            //
+            draggingTabEL.panel.close(draggingTabEL);
+
+            //
+            var newPanel = new FirePanel();
+            newPanel.add(contentEL);
+            newPanel.select(0);
+
+            //
+            curHint.target.addDock( curHint.position, newPanel );
         }
 
         // reset internal states
