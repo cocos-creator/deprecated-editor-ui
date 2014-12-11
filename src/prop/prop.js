@@ -4,11 +4,17 @@
             name: '',
         },
 
+        _generated: false,
+
         ready: function () {
             this._initFocusable();
         },
 
         attached: function () {
+            if ( this._generated )
+                return;
+            this._generated = true;
+
             if ( this.name === '' ) {
                 var varName = this.attributes.value.value;
                 varName = varName.replace( /{{(.*)}}/, "$1" );
