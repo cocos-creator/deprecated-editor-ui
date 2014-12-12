@@ -1,6 +1,8 @@
 (function () {
     Polymer({
         publish: {
+            'width': 200,
+            'height': 200,
             'min-width': 200,
             'min-height': 200,
         },
@@ -47,6 +49,8 @@
             contentEL.style.display = "none";
             tabEL.content = contentEL;
             tabEL.panel = this;
+
+            tabEL.setIcon( contentEL.icon ); // TEMP HACK
 
             this.appendChild(contentEL);
         },

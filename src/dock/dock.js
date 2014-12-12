@@ -7,6 +7,10 @@
                 value: false,
                 reflect: true
             },
+            auto: {
+                value: false,
+                reflect: true
+            },
         },
 
         ready: function () {
@@ -39,33 +43,43 @@
             var autoLayoutElements = [];
             var i, element, size;
 
-            for ( i = 0; i < this.children.length; i += 2 ) {
-                element = this.children[i];
-                element._autoLayout = false;
-                if ( this.row ) {
-                    size = element.computedWidth;
-                }
-                else {
-                    size = element.computedHeight;
-                }
+            if ( this.children.length === 1 ) {
+                element = this.children[0];
 
-                if ( size !== -1 ) {
-                    // if this is last element and we don't have auto-layout elements, give rest size to last element
-                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
-                        element.style.flex = "auto";
-                        element._autoLayout = true;
+                element.style.flex = "auto";
+                element._autoLayout = true;
+                autoLayoutElements.push(element);
+                element._notifyResize();
+            }
+            else {
+                for ( i = 0; i < this.children.length; i += 2 ) {
+                    element = this.children[i];
+                    element._autoLayout = false;
+                    if ( this.row ) {
+                        size = element.computedWidth;
                     }
                     else {
-                        element.style.flex = "0 0 " + size + "px";
+                        size = element.computedHeight;
                     }
-                }
-                else {
-                    element.style.flex = "auto";
-                    element._autoLayout = true;
-                    autoLayoutElements.push(element);
-                }
 
-                element._notifyResize();
+                    if ( size !== -1 && !element.auto ) {
+                        // if this is last element and we don't have auto-layout elements, give rest size to last element
+                        if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
+                            element.style.flex = "auto";
+                            element._autoLayout = true;
+                        }
+                        else {
+                            element.style.flex = "0 0 " + size + "px";
+                        }
+                    }
+                    else {
+                        element.style.flex = "auto";
+                        element._autoLayout = true;
+                        autoLayoutElements.push(element);
+                    }
+
+                    element._notifyResize();
+                }
             }
         },
 
@@ -156,12 +170,23 @@
             if ( !this.contains(childEL) )
                 return;
 
-            if ( childEL.previousElementSibling && 
-                 childEL.previousElementSibling instanceof FireDockResizer )
-            {
-                childEL.previousElementSibling.remove();
+            if ( this.firstChild === childEL ) {
+                if ( childEL.nextElementSibling && 
+                     childEL.nextElementSibling instanceof FireDockResizer )
+                {
+                    childEL.nextElementSibling.remove();
+                }
+            }
+            else {
+                if ( childEL.previousElementSibling && 
+                     childEL.previousElementSibling instanceof FireDockResizer )
+                {
+                    childEL.previousElementSibling.remove();
+                }
             }
             childEL.remove();
+
+            this._reflow();
         },
 
         dragoverAction: function ( event ) {
