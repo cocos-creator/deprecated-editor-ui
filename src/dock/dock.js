@@ -3,11 +3,22 @@
 
     Polymer(EditorUI.mixin({
         publish: {
+            'width': 200,
+            'height': 200,
+            'min-width': 200,
+            'min-height': 200,
+
             row: {
                 value: false,
                 reflect: true
             },
-            auto: {
+
+            'auto-layout': {
+                value: false,
+                reflect: true
+            },
+
+            'no-collapse': {
                 value: false,
                 reflect: true
             },
@@ -62,7 +73,7 @@
                         size = element.computedHeight;
                     }
 
-                    if ( size !== -1 && !element.auto ) {
+                    if ( size !== -1 && !element['auto-layout'] ) {
                         // if this is last element and we don't have auto-layout elements, give rest size to last element
                         if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
                             element.style.flex = "auto";
@@ -185,6 +196,37 @@
                 }
             }
             childEL.remove();
+
+            // if dock can be collapsed
+            if ( !this['no-collapse'] ) {
+                var parentEL = this.parentElement;
+
+                if ( this.children.length === 0 ) {
+                    if ( parentEL instanceof FireDock ) {
+                        parentEL.removeDock(this);
+                    }
+                    else {
+                        this.remove();
+                    }
+
+                    return;
+                }
+
+
+                if ( this.children.length === 1 ) {
+                    if ( parentEL instanceof FireDock ) {
+                        parentEL.insertBefore( this.children[0], this );
+                        this.remove();
+                        parentEL._reflow();
+                    }
+                    else {
+                        parentEL.insertBefore( this.children[0], this );
+                        this.remove();
+                    }
+
+                    return;
+                }
+            }
 
             this._reflow();
         },

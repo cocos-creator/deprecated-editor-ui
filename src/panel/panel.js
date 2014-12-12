@@ -1,12 +1,5 @@
 (function () {
     Polymer({
-        publish: {
-            'width': 200,
-            'height': 200,
-            'min-width': 200,
-            'min-height': 200,
-        },
-
         ready: function () {
             this.super();
 
