@@ -48,7 +48,7 @@
             this.appendChild(contentEL);
         },
 
-        close: function ( tabEL ) {
+        closeNoCollapse: function ( tabEL ) {
             var tabs = this.$.tabs;
 
             //
@@ -63,10 +63,24 @@
             if ( tabs.children.length > 0 ) {
                 tabs.select(0);
             }
-            else {
-                // remove from dock;
-                this.parentElement.removeDock(this);
+        },
+
+        close: function ( tabEL ) {
+            this.closeNoCollapse(tabEL);
+            this.collapse();
+        },
+
+        collapse: function () {
+            // remove from dock;
+            if ( this.$.tabs.children.length === 0 ) {
+                if ( this.parentElement instanceof FireDock ) {
+                    this.parentElement.removeDock(this);
+                }
             }
+        },
+
+        get activeTab () {
+            return this.$.tabs.activeTab;
         },
 
         tabsChangedAction: function ( event ) {

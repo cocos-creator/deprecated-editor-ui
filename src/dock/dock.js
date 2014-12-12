@@ -88,7 +88,9 @@
                         element._autoLayout = true;
                         autoLayoutElements.push(element);
                     }
-
+                }
+                for ( i = 0; i < this.children.length; i += 2 ) {
+                    element = this.children[i];
                     element._notifyResize();
                 }
             }
@@ -103,77 +105,156 @@
 
             var needNewDock = false;
             var parentEL = this.parentElement;
+            var newDock, newResizer, nextEL;
 
-            // check if need to create new Dock element
-            if ( position === 'left' || position === 'right' ) {
-                if ( !parentEL.row ) {
-                    needNewDock = true;
-                }
-            }
-            else {
-                if ( parentEL.row ) {
-                    needNewDock = true;
-                }
-            }
-
-            // process dock
-            if ( needNewDock ) {
-                // new FireDock
-                var newDock = new FireDock();
-                newDock.copyResizable(this);
-
-                if ( position === 'left' ||
-                     position === 'right' )
-                {
-                    newDock.row = true;
+            if ( parentEL instanceof FireDock ) {
+                // check if need to create new Dock element
+                if ( position === 'left' || position === 'right' ) {
+                    if ( !parentEL.row ) {
+                        needNewDock = true;
+                    }
                 }
                 else {
-                    newDock.row = false;
+                    if ( parentEL.row ) {
+                        needNewDock = true;
+                    }
                 }
 
-                //
-                parentEL.insertBefore(newDock, this);
+                // process dock
+                if ( needNewDock ) {
+                    // new FireDock
+                    newDock = new FireDock();
+                    newDock.copyResizable(this);
 
-                //
-                if ( position === 'left' || position === 'top' ) {
-                    newDock.appendChild(element);
-                    newDock.appendChild(this);
-                }
-                else {
-                    newDock.appendChild(this);
-                    newDock.appendChild(element);
-                }
-                newDock.ready();
-                newDock._reflow();
-
-                //
-                parentEL._reflow();
-            }
-            else {
-                // new resizer
-                var newResizer = null;
-                newResizer = new FireDockResizer();
-                newResizer.vertical = parentEL.row;
-
-                //
-                if ( position === 'left' || position === 'top' ) {
-                    parentEL.insertBefore(element, this);
-                    parentEL.insertBefore(newResizer, this);
-                }
-                else {
-                    // insert after
-                    var nextEL = this.nextElementSibling;
-                    if ( nextEL === null ) {
-                        parentEL.appendChild(newResizer);
-                        parentEL.appendChild(element);
+                    if ( position === 'left' ||
+                         position === 'right' )
+                    {
+                        newDock.row = true;
                     }
                     else {
-                        parentEL.insertBefore(newResizer, nextEL);
-                        parentEL.insertBefore(element, nextEL);
+                        newDock.row = false;
+                    }
+
+                    //
+                    parentEL.insertBefore(newDock, this);
+
+                    //
+                    if ( position === 'left' || position === 'top' ) {
+                        newDock.appendChild(element);
+                        newDock.appendChild(this);
+                    }
+                    else {
+                        newDock.appendChild(this);
+                        newDock.appendChild(element);
+                    }
+                    newDock.ready();
+                    newDock._reflow();
+
+                    //
+                    parentEL._reflow();
+                }
+                else {
+                    // new resizer
+                    newResizer = null;
+                    newResizer = new FireDockResizer();
+                    newResizer.vertical = parentEL.row;
+
+                    //
+                    if ( position === 'left' || position === 'top' ) {
+                        parentEL.insertBefore(element, this);
+                        parentEL.insertBefore(newResizer, this);
+                    }
+                    else {
+                        // insert after
+                        nextEL = this.nextElementSibling;
+                        if ( nextEL === null ) {
+                            parentEL.appendChild(newResizer);
+                            parentEL.appendChild(element);
+                        }
+                        else {
+                            parentEL.insertBefore(newResizer, nextEL);
+                            parentEL.insertBefore(element, nextEL);
+                        }
+                    }
+
+                    parentEL._reflow();
+                }
+            }
+            else {
+                if ( position === 'left' || position === 'right' ) {
+                    if ( !this.row ) {
+                        needNewDock = true;
+                    }
+                }
+                else {
+                    if ( this.row ) {
+                        needNewDock = true;
                     }
                 }
 
-                parentEL._reflow();
+                // process dock
+                if ( needNewDock ) {
+                    // new FireDock
+                    newDock = new FireDock();
+                    newDock.copyResizable(this);
+
+                    newDock.row = this.row;
+                    if ( position === 'left' ||
+                         position === 'right' )
+                    {
+                        this.row = true;
+                    }
+                    else {
+                        this.row = false;
+                    }
+
+                    while ( this.children.length > 0 ) {
+                        newDock.appendChild( this.children[0] );
+                    }
+
+                    //
+                    if ( position === 'left' || position === 'top' ) {
+                        this.appendChild(element);
+                        this.appendChild(newDock);
+                    }
+                    else {
+                        this.appendChild(newDock);
+                        this.appendChild(element);
+                    }
+
+                    //
+                    newDock._reflow();
+
+                    //
+                    this.ready();
+                    this._reflow();
+                }
+                else {
+                    // new resizer
+                    newResizer = null;
+                    newResizer = new FireDockResizer();
+                    newResizer.vertical = this.row;
+
+                    //
+                    if ( position === 'left' || position === 'top' ) {
+                        this.insertBefore(element, this.firstElementChild);
+                        this.insertBefore(newResizer, this.firstElementChild);
+                    }
+                    else {
+                        // insert after
+                        nextEL = this.nextElementSibling;
+                        if ( nextEL === null ) {
+                            this.appendChild(newResizer);
+                            this.appendChild(element);
+                        }
+                        else {
+                            this.insertBefore(newResizer, nextEL);
+                            this.insertBefore(element, nextEL);
+                        }
+                    }
+
+                    this._reflow();
+                }
             }
         },
 
@@ -181,7 +262,7 @@
             if ( !this.contains(childEL) )
                 return;
 
-            if ( this.firstChild === childEL ) {
+            if ( this.firstElementChild === childEL ) {
                 if ( childEL.nextElementSibling && 
                      childEL.nextElementSibling instanceof FireDockResizer )
                 {
@@ -198,37 +279,67 @@
             childEL.remove();
 
             // if dock can be collapsed
-            if ( !this['no-collapse'] ) {
-                var parentEL = this.parentElement;
-
-                if ( this.children.length === 0 ) {
-                    if ( parentEL instanceof FireDock ) {
-                        parentEL.removeDock(this);
-                    }
-                    else {
-                        this.remove();
-                    }
-
-                    return;
-                }
-
-
-                if ( this.children.length === 1 ) {
-                    if ( parentEL instanceof FireDock ) {
-                        parentEL.insertBefore( this.children[0], this );
-                        this.remove();
-                        parentEL._reflow();
-                    }
-                    else {
-                        parentEL.insertBefore( this.children[0], this );
-                        this.remove();
-                    }
-
-                    return;
-                }
+            if ( this.collapse() ) {
+                return;
             }
 
             this._reflow();
+        },
+
+        collapse: function () {
+            if ( this['no-collapse'] ) 
+                return false;
+
+            var parentEL = this.parentElement;
+
+            // if we don't have any element in this panel
+            if ( this.children.length === 0 ) {
+                if ( parentEL instanceof FireDock ) {
+                    parentEL.removeDock(this);
+                }
+                else {
+                    this.remove();
+                }
+
+                return true;
+            }
+
+
+            // if we only have one element in this panel
+            if ( this.children.length === 1 ) {
+                var childEL = this.children[0];
+                if ( parentEL instanceof FireDock ) {
+                    parentEL.insertBefore( childEL, this );
+                    this.remove();
+
+                    if ( childEL instanceof FireDock ) {
+                        childEL.collapse();
+                    }
+
+                    parentEL._reflow();
+                }
+                else {
+                    parentEL.insertBefore( childEL, this );
+                    this.remove();
+
+                    if ( childEL instanceof FireDock ) {
+                        childEL.collapse();
+                    }
+                }
+
+                return true;
+            }
+
+            // if the parent dock direction is same as this panel 
+            if ( parentEL instanceof FireDock && parentEL.row === this.row ) {
+                while ( this.children.length > 0 ) {
+                    parentEL.insertBefore( this.children[0], this );
+                }
+                this.remove();
+                parentEL._reflow();
+
+                return true;
+            }
         },
 
         dragoverAction: function ( event ) {

@@ -174,25 +174,36 @@ var DockUtils;
     });
 
     document.addEventListener("drop", function ( event ) {
-        if ( _curHint && _curHint.target !== _draggingTabEL.panel ) {
-            var contentEL = _draggingTabEL.content;
-
-            //
-            _draggingTabEL.panel.close(_draggingTabEL);
-
-            //
-            var newPanel = new FirePanel();
-            newPanel.add(contentEL);
-            newPanel.select(0);
-
-            //
-            _curHint.target.addDock( _curHint.position, newPanel );
-
-            // reset internal states
-            _reset();
-
-            event.stopPropagation(); 
+        if ( _curHint === null ) {
+            return;
         }
+
+        if ( _curHint.target === _draggingTabEL.panel &&
+             _curHint.target.activeTab === _draggingTabEL ) 
+        {
+            return;
+        }
+
+        event.stopPropagation(); 
+        var contentEL = _draggingTabEL.content;
+        var panelEL = _draggingTabEL.panel;
+
+        //
+        panelEL.closeNoCollapse(_draggingTabEL);
+
+        //
+        var newPanel = new FirePanel();
+        newPanel.add(contentEL);
+        newPanel.select(0);
+
+        //
+        _curHint.target.addDock( _curHint.position, newPanel );
+
+        //
+        panelEL.collapse();
+
+        // reset internal states
+        _reset();
     }, true);
 })(DockUtils || (DockUtils = {}));
 
