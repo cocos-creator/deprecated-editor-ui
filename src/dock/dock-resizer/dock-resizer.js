@@ -1,5 +1,4 @@
 (function () {
-
     function _resize ( elementList, sizeList, 
                        prevTotalSize, prevMinSize, prevMaxSize,
                        nextTotalSize, nextMinSize, nextMaxSize,
@@ -55,7 +54,6 @@
                 //             ", nextOffset = " + nextOffset
                 //            );
                 nextEL.style.flex = "0 0 " + newNextSize + "px";
-                // TODO: compare and nextEL.fire( "resized", { target: this.target } );
 
                 if ( newNextSize - expectSize === 0 ) {
                     break;
@@ -100,7 +98,14 @@
         //
         if ( !prevEL._autoLayout ) {
             prevEL.style.flex = "0 0 " + newPrevSize + "px";
-            // TODO: compare and prevEL.fire( "resized", { target: this.target } );
+        }
+
+        for ( var i = 0; i < elementList.length; ++i ) {
+            var el = elementList[i];
+            if ( el instanceof FireDockResizer )
+                continue;
+
+            el._notifyResize();
         }
     }
 

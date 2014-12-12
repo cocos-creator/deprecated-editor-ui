@@ -49,15 +49,18 @@ var DockUtils;
     var _dockMask = null;
     var _draggingTabEL = null;
 
-    DockUtils.setDraggingTab = function ( tabEL ) {
+    DockUtils.dragstart = function ( tabEL ) {
         _draggingTabEL = tabEL;
     };
 
-    DockUtils.dockHint = function ( dockTarget ) {
+    DockUtils.dragover = function ( dockTarget ) {
         _dockHints.push(dockTarget);
     };
 
     document.addEventListener("dragover", function ( event ) {
+
+        // TODO: use dock-mask instead
+
         if ( _draggingTabEL === null )
             return;
 
@@ -171,14 +174,11 @@ var DockUtils;
     });
 
     document.addEventListener("drop", function ( event ) {
-        var curHint = _curHint;
-        var draggingTabEL = _draggingTabEL;
-
-        if ( curHint && curHint.target !== draggingTabEL.panel ) {
-            var contentEL = draggingTabEL.content;
+        if ( _curHint && _curHint.target !== _draggingTabEL.panel ) {
+            var contentEL = _draggingTabEL.content;
 
             //
-            draggingTabEL.panel.close(draggingTabEL);
+            _draggingTabEL.panel.close(_draggingTabEL);
 
             //
             var newPanel = new FirePanel();
@@ -186,11 +186,13 @@ var DockUtils;
             newPanel.select(0);
 
             //
-            curHint.target.addDock( curHint.position, newPanel );
-        }
+            _curHint.target.addDock( _curHint.position, newPanel );
 
-        // reset internal states
-        _reset();
-    });
+            // reset internal states
+            _reset();
+
+            event.stopPropagation(); 
+        }
+    }, true);
 })(DockUtils || (DockUtils = {}));
 

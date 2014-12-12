@@ -64,6 +64,8 @@
                     element._autoLayout = true;
                     autoLayoutElements.push(element);
                 }
+
+                element._notifyResize();
             }
         },
 
@@ -166,7 +168,7 @@
             event.preventDefault();
 
             event.dataTransfer.dropEffect = 'move';
-            DockUtils.dockHint( event.currentTarget );
+            DockUtils.dragover( event.currentTarget );
         },
 
     }, EditorUI.resizable, EditorUI.focusable));

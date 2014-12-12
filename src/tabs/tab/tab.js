@@ -23,7 +23,7 @@
         dragstartAction: function ( event ) {
             event.stopPropagation();
 
-            DockUtils.setDraggingTab(this);
+            DockUtils.dragstart(this);
         },
     });
 })();

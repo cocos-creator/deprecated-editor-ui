@@ -76,11 +76,11 @@
             var detail = event.detail;
             if ( detail.old !== null ) {
                 detail.old.content.style.display = "none";
-                detail.new.fire('hide');
+                detail.old.content.fire('hide');
             }
             if ( detail.new !== null ) {
                 detail.new.content.style.display = "";
-                detail.new.fire('show');
+                detail.new.content.fire('show');
             }
 
             event.stopPropagation();

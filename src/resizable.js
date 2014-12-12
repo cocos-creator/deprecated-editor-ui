@@ -1,5 +1,17 @@
 var EditorUI;
 (function (EditorUI) {
+    function _notifyResizeRecursively ( element ) {
+        element.fire("resize");
+        for ( var i = 0; i < element.children.length; ++i ) {
+            var childEL = element.children[i];
+            if ( childEL instanceof FireDockResizer )
+                continue;
+
+            childEL.fire("resize");
+            _notifyResizeRecursively(childEL);
+        }
+    }
+
     EditorUI.resizable = {
         publish: {
             'width': -1,
@@ -127,6 +139,10 @@ var EditorUI;
             if ( element.height !== -1 ) this.setAttribute('height', element.height);
             if ( element['min-height'] !== -1 ) this.setAttribute('min-height', element['min-height']);
             if ( element['max-height'] !== -1 ) this.setAttribute('max-height', element['max-height']);
+        },
+
+        _notifyResize: function () {
+            _notifyResizeRecursively(this);
         },
 
         _initResizable: function () {

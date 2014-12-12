@@ -42,18 +42,23 @@ hover-color = rgb(12,112,200)
         }
     }
 
-    &(:hover), &([active]) {
+    &(:hover) {
         cursor: row-resize
         .bar {
             cursor: row-resize
-            background-color: hover-color
         } 
     }
 
-    &(:hover[vertical]), &([active][vertical]) {
+    &(:hover[vertical]) {
         cursor: col-resize
         .bar {
             cursor: col-resize
         } 
+    }
+
+    &([active]) {
+        .bar {
+            background-color: hover-color
+        }
     }
 }
