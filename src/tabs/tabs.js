@@ -101,7 +101,7 @@
         dropAreaAcceptAction: function ( event ) {
             event.stopPropagation();
 
-            DockUtils.dropTab(this);
+            DockUtils.dropTab(this, this._curInsertTab);
             this.$.insertLine.style.display = "";
         },
 
@@ -118,9 +118,11 @@
             event.dataTransfer.dropEffect = 'move';
 
             //
+            this._curInsertTab = null;
             var style = this.$.insertLine.style;
             if ( event.target instanceof FireTab ) {
                 style.left = event.target.offsetLeft + "px";
+                this._curInsertTab = this.target;
             }
             else {
                 var el = this.lastElementChild;

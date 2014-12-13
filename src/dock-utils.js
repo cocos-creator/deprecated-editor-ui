@@ -66,16 +66,17 @@ var DockUtils;
         _updateMask ( 'tab', rect.left, rect.top, rect.width, rect.height+4 );
     };
 
-    DockUtils.dropTab = function ( target ) {
+    DockUtils.dropTab = function ( target, insertTab ) {
         var contentEL = _draggingTab.content;
         var panelEL = _draggingTab.parentElement.panel;
 
-        //
-        panelEL.close(_draggingTab);
+        if ( panelEL !== target.panel ) {
+            panelEL.close(_draggingTab);
+        }
 
         //
         var newPanel = target.panel;
-        var idx = newPanel.add(contentEL);
+        var idx = newPanel.add(contentEL,insertTab); // TODO
         newPanel.select(idx);
 
         // reset internal states
