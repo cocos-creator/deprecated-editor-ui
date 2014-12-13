@@ -11,6 +11,10 @@
                 value: false,
                 reflect: true,
             },
+
+            // droppable
+            droppable: 'asset,entity',
+            "single-drop": true,
         },
 
         ready: function () {
@@ -59,13 +63,18 @@
             this.invalid = false;
         },
 
-        dragAreaEnterAction: function (event) {
-            var dragItems = EditorUI.DragDrop.items(event.detail.dataTransfer);
-            var dragType = EditorUI.DragDrop.type(event.detail.dataTransfer);
+        dropAreaEnterAction: function (event) {
+            event.stopPropagation();
 
-            if ( dragItems.length === 1 && dragType === "asset" ) {
+            this.invalid = true;
+
+            var dragItems = event.detail.dragItems;
+            var dragType = event.detail.dragType;
+
+            //
+            var classDef = Fire.getClassByName(this.type);
+            if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
                 Fire.AssetLibrary.loadAssetByUuid( dragItems[0], function (asset) {
-                    var classDef = Fire.getClassByName(this.type);
                     if ( asset instanceof classDef ) {
                         this._curDragObject = asset;
                         this.highlighted = true;
@@ -77,17 +86,31 @@
                     }
                 }.bind(this) );
             }
+            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
+                // TODO
+                this.highlighted = true;
+                this.invalid = true;
+            }
+            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
+                // TODO
+                this.highlighted = true;
+                this.invalid = true;
+            }
             else {
                 this.highlighted = true;
                 this.invalid = true;
             }
         },
 
-        dragAreaLeaveAction: function (event) {
+        dropAreaLeaveAction: function (event) {
+            event.stopPropagation();
+
             this.resetDragState();
         },
 
-        dropAction: function (event) {
+        dropAreaAcceptAction: function (event) {
+            event.stopPropagation();
+
             if ( !this.invalid )
                 this.value = this._curDragObject;
 

@@ -345,8 +345,7 @@
         dragoverAction: function ( event ) {
             event.preventDefault();
 
-            event.dataTransfer.dropEffect = 'move';
-            DockUtils.dragover( event.currentTarget );
+            DockUtils.dragoverDock( event.currentTarget );
         },
 
     }, EditorUI.resizable, EditorUI.focusable));

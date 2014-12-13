@@ -4,6 +4,8 @@
             this.super();
 
             var tabs = this.$.tabs;
+            tabs.panel = this;
+
             for ( var i = 0; i < this.children.length; ++i ) {
                 var el = this.children[i];
 
@@ -16,7 +18,6 @@
 
                 el.style.display = "none";
                 tabEL.content = el;
-                tabEL.panel = this;
 
                 tabEL.setIcon( el.icon ); // TEMP HACK
             }
@@ -25,6 +26,14 @@
         },
 
         _reflow: function () {
+        },
+
+        get activeTab () {
+            return this.$.tabs.activeTab;
+        },
+
+        get tabCount () {
+            return this.$.tabs.children.length;
         },
 
         select: function ( tab ) {
@@ -41,11 +50,12 @@
 
             contentEL.style.display = "none";
             tabEL.content = contentEL;
-            tabEL.panel = this;
 
             tabEL.setIcon( contentEL.icon ); // TEMP HACK
 
             this.appendChild(contentEL);
+
+            return this.children.length-1;
         },
 
         closeNoCollapse: function ( tabEL ) {
@@ -56,12 +66,6 @@
             if ( tabEL.content ) {
                 tabEL.content.remove();
                 tabEL.content = null;
-            }
-            tabEL.panel = null;
-
-            //
-            if ( tabs.children.length > 0 ) {
-                tabs.select(0);
             }
         },
 
@@ -77,10 +81,6 @@
                     this.parentElement.removeDock(this);
                 }
             }
-        },
-
-        get activeTab () {
-            return this.$.tabs.activeTab;
         },
 
         tabsChangedAction: function ( event ) {

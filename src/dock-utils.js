@@ -1,74 +1,106 @@
 var DockUtils;
 (function (DockUtils) {
 
-    var _addDockMask = function ( x, y, w, h ) {
-        // add dock mask
-        var mask = document.createElement('div');
-        mask.style.left = x + 'px';
-        mask.style.top = y + 'px';
-        mask.style.width = w + 'px';
-        mask.style.height = h + 'px';
-        mask.style.pointerEvents = 'none';
-        mask.style.zIndex = '999';
-        mask.style.position = 'fixed';
-        mask.style.boxSizing = 'border-box';
-        mask.style.background = 'rgba(0,128,255,0.3)';
-        mask.style.border = '2px solid rgba(0,128,255,1.0)';
-        mask.oncontextmenu = function() { return false; };
+    var _resultDock = null;
+    var _potentialDocks = [];
+    var _dockMask = null;
+    var _draggingTab = null;
 
-        document.body.appendChild(mask);
+    var _updateMask = function ( type, x, y, w, h ) {
+        if ( !_dockMask ) {
+            // add dock mask
+            _dockMask = document.createElement('div');
+            _dockMask.style.pointerEvents = 'none';
+            _dockMask.style.zIndex = '999';
+            _dockMask.style.position = 'fixed';
+            _dockMask.style.boxSizing = 'border-box';
+            _dockMask.oncontextmenu = function() { return false; };
+        }
 
-        return mask;
-    };
+        if ( type === 'dock' ) {
+            _dockMask.style.background = 'rgba(0,128,255,0.3)';
+            _dockMask.style.border = '2px solid rgb(0,128,255)';
+        }
+        else if ( type === 'tab' ) {
+            _dockMask.style.background = 'rgba(255,128,0,0.15)';
+            _dockMask.style.border = '';
+        }
 
-    var _updateDockMask = function ( mask, x, y, w, h ) {
-        if ( mask !== null ) {
-            mask.style.left = x + 'px';
-            mask.style.top = y + 'px';
-            mask.style.width = w + 'px';
-            mask.style.height = h + 'px';
+        _dockMask.style.left = x + 'px';
+        _dockMask.style.top = y + 'px';
+        _dockMask.style.width = w + 'px';
+        _dockMask.style.height = h + 'px';
+
+        if ( !_dockMask.parentElement ) {
+            document.body.appendChild(_dockMask);
         }
     };
 
-    var _removeDockMask = function ( mask ) {
-        if ( mask === null || mask === undefined )
+    var _reset = function () {
+        if ( _dockMask ) {
+            _dockMask.remove();
+        }
+
+        _resultDock = null;
+        _draggingTab = null;
+    };
+
+    DockUtils.dragstart = function ( dataTransfer, tabEL ) {
+        _draggingTab = tabEL;
+        dataTransfer.setData('fire/type', 'tab');
+    };
+
+    DockUtils.dragoverTab = function ( target ) {
+        if ( _draggingTab === null )
             return;
 
-        mask.remove();
+        // clear docks hints
+        _potentialDocks = [];
+        if ( _dockMask ) {
+            _dockMask.remove();
+        }
+        _resultDock = null;
+
+
+        var rect = target.getBoundingClientRect();
+        _updateMask ( 'tab', rect.left, rect.top, rect.width, rect.height+4 );
     };
 
-    var _reset = function () {
-        _removeDockMask(_dockMask);
-        _curHint = null;
-        _dockMask = null;
-        _draggingTabEL = null;
+    DockUtils.dropTab = function ( target ) {
+        var contentEL = _draggingTab.content;
+        var panelEL = _draggingTab.parentElement.panel;
+
+        //
+        panelEL.close(_draggingTab);
+
+        //
+        var newPanel = target.panel;
+        var idx = newPanel.add(contentEL);
+        newPanel.select(idx);
+
+        // reset internal states
+        _reset();
     };
 
-    var _dockHints = [];
-    var _curHint = null;
-    var _dockMask = null;
-    var _draggingTabEL = null;
+    DockUtils.dragoverDock = function ( target ) {
+        if ( _draggingTab === null )
+            return;
 
-    DockUtils.dragstart = function ( tabEL ) {
-        _draggingTabEL = tabEL;
-    };
-
-    DockUtils.dragover = function ( dockTarget ) {
-        _dockHints.push(dockTarget);
+        _potentialDocks.push(target);
     };
 
     document.addEventListener("dragover", function ( event ) {
-
-        // TODO: use dock-mask instead
-
-        if ( _draggingTabEL === null )
+        if ( _draggingTab === null )
             return;
 
-        var minDistance = null;
-        _curHint = null;
+        event.dataTransfer.dropEffect = 'move';
+        event.preventDefault();
 
-        for ( var i = 0; i < _dockHints.length; ++i ) {
-            var hintTarget = _dockHints[i];
+        var minDistance = null;
+        _resultDock = null;
+
+        for ( var i = 0; i < _potentialDocks.length; ++i ) {
+            var hintTarget = _potentialDocks[i];
             var targetRect = hintTarget.getBoundingClientRect();
             var center_x = targetRect.left + targetRect.width/2;
             var center_y = targetRect.top + targetRect.height/2;
@@ -108,15 +140,15 @@ var DockUtils;
             //
             if ( pos !== null && (minDistance === null || distanceToEdgeCenter < minDistance) ) {
                 minDistance = distanceToEdgeCenter;
-                _curHint = { target: hintTarget, position: pos };
+                _resultDock = { target: hintTarget, position: pos };
             }
         }
 
-        if ( _curHint ) {
-            var rect = _curHint.target.getBoundingClientRect();
+        if ( _resultDock ) {
+            var rect = _resultDock.target.getBoundingClientRect();
             var maskRect = null;
 
-            if ( _curHint.position === 'top' ) {
+            if ( _resultDock.position === 'top' ) {
                 maskRect = { 
                     left: rect.left, 
                     top: rect.top, 
@@ -124,7 +156,7 @@ var DockUtils;
                     height: rect.height/4 
                 };
             }
-            else if ( _curHint.position === 'bottom' ) {
+            else if ( _resultDock.position === 'bottom' ) {
                 maskRect = { 
                     left: rect.left, 
                     top: rect.bottom-rect.height/4, 
@@ -132,7 +164,7 @@ var DockUtils;
                     height: rect.height/4 
                 };
             }
-            else if ( _curHint.position === 'left' ) {
+            else if ( _resultDock.position === 'left' ) {
                 maskRect = { 
                     left: rect.left,
                     top: rect.top,
@@ -140,7 +172,7 @@ var DockUtils;
                     height: rect.height 
                 };
             }
-            else if ( _curHint.position === 'right' ) {
+            else if ( _resultDock.position === 'right' ) {
                 maskRect = { 
                     left: rect.right-rect.width/4, 
                     top: rect.top,
@@ -150,22 +182,14 @@ var DockUtils;
             }
 
             //
-            if ( _dockMask ) {
-                _updateDockMask ( _dockMask, 
-                                  maskRect.left, 
-                                  maskRect.top, 
-                                  maskRect.width, 
-                                  maskRect.height );
-            }
-            else {
-                _dockMask = _addDockMask ( maskRect.left, 
-                                           maskRect.top, 
-                                           maskRect.width, 
-                                           maskRect.height );
-            }
+            _updateMask ( 'dock', maskRect.left, maskRect.top, maskRect.width, maskRect.height );
+        }
+        else {
+            if ( _dockMask )
+                _dockMask.remove();
         }
 
-        _dockHints = [];
+        _potentialDocks = [];
     });
 
     document.addEventListener("dragend", function ( event ) {
@@ -174,22 +198,24 @@ var DockUtils;
     });
 
     document.addEventListener("drop", function ( event ) {
-        if ( _curHint === null ) {
+        if ( _resultDock === null ) {
             return;
         }
 
-        if ( _curHint.target === _draggingTabEL.panel &&
-             _curHint.target.activeTab === _draggingTabEL ) 
+        if ( _resultDock.target === _draggingTab.parentElement.panel &&
+             _resultDock.target.tabCount === 1 ) 
         {
             return;
         }
 
+        event.preventDefault(); 
         event.stopPropagation(); 
-        var contentEL = _draggingTabEL.content;
-        var panelEL = _draggingTabEL.panel;
+
+        var contentEL = _draggingTab.content;
+        var panelEL = _draggingTab.parentElement.panel;
 
         //
-        panelEL.closeNoCollapse(_draggingTabEL);
+        panelEL.closeNoCollapse(_draggingTab);
 
         //
         var newPanel = new FirePanel();
@@ -197,13 +223,13 @@ var DockUtils;
         newPanel.select(0);
 
         //
-        _curHint.target.addDock( _curHint.position, newPanel );
+        _resultDock.target.addDock( _resultDock.position, newPanel );
 
         //
         panelEL.collapse();
 
         // reset internal states
         _reset();
-    }, true);
+    });
 })(DockUtils || (DockUtils = {}));
 
