@@ -122,6 +122,12 @@
             },
         },
 
+        ready: function () {
+            if ( Fire.isWin32 ) {
+                this.classList.add('platform-win');
+            }
+        },
+
         mousedownAction: function ( event ) {
             this.active = true;
             var pressx = event.clientX;
@@ -223,7 +229,12 @@
             }.bind(this);
 
             // add drag-ghost
-            EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
+            if ( Fire.isWin32 ) {
+                EditorUI.addDragGhost( this.vertical ? 'ew-resize' : 'ns-resize' );
+            }
+            else {
+                EditorUI.addDragGhost( this.vertical ? 'col-resize' : 'row-resize' );
+            }
             document.addEventListener ( 'mousemove', mousemoveHandle );
             document.addEventListener ( 'mouseup', mouseupHandle );
 

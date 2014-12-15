@@ -46,13 +46,27 @@ hover-color = rgb(12,112,200)
         cursor: row-resize
         .bar {
             cursor: row-resize
-        } 
+        }
     }
 
-    &(:hover[vertical]) {
+    &([vertical]:hover) {
         cursor: col-resize
         .bar {
             cursor: col-resize
+        } 
+    }
+
+    &(.platform-win:hover) {
+        cursor: ns-resize
+        .bar {
+            cursor: ns-resize
+        }
+    }
+
+    &(.platform-win[vertical]:hover) {
+        cursor: ew-resize
+        .bar {
+            cursor: ew-resize
         } 
     }
 
