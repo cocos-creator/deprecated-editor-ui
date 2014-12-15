@@ -1,0 +1,59 @@
+color-text = #aaa
+color-bg = #242424
+
+:host {
+    position: relative
+
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap     
+    align-items: center
+
+    padding: 2px
+
+    font-size: 12px
+    white-space: nowrap
+
+    overflow: hidden
+    font-family: Helvetica,Arial,sans-serif
+    color: color-text
+    background-color: color-bg
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    color: color-text - 50%
+}
+
+::content {
+    // &>* {
+    //     margin-right: 5px
+    // }
+    // &>*:last-child {
+    //     margin-right: 0px
+    // }
+
+    span.space {
+        display: block;
+        width: 5px;
+    }
+
+    fire-ui-button::shadow {
+        button {
+            border-radius: 0px
+            border: none
+            background: none 
+
+            &:hover {
+                background-color: #4a4a4a
+            }
+
+            &:active {
+                background-color: #4a4a4a - 10%
+            }
+        }
+    }
+}

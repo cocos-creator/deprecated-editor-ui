@@ -1,8 +1,7 @@
 (function () {
     Polymer(EditorUI.mixin({
         ready: function () {
-            this._initFocusable( this.$.focus );
+            this._initFocusable();
         },
-
     }, EditorUI.focusable));
 })();

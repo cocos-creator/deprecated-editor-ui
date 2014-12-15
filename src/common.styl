@@ -38,6 +38,25 @@ user-select() {
     align-self: flex-start
 }
 
+[flex-self-end] {
+    align-self: flex-end
+}
+
+// for toolbar which wants to have left and right align:
+// <toolbar flex-between>
+//     <align-left></align-left>
+//     <align-right></align-right>
+// </toolbar>
+[justify-between] {
+    justify-content: space-between
+}
+[justify-start] {
+    justify-content: flex-start
+}
+[justify-end] {
+    justify-content: flex-end
+}
+
 [fit] {
     position: absolute
     top: 0
