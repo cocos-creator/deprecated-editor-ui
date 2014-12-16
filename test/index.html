@@ -55,120 +55,120 @@
 
     <fire-ui-section name="Change Section">
         <div flex-row>
-            <fire-ui-checkbox value="{{myChecked}}"></fire-ui-checkbox>                                              
-            <span class="space"></span>                                                                            
-            <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button> 
-            <span class="space"></span>                                                                            
+            <fire-ui-checkbox value="{{myChecked}}"></fire-ui-checkbox>
+            <span class="space"></span>
+            <fire-ui-button on-click="{{myCheckedClick}}">Change</fire-ui-button>
+            <span class="space"></span>
             <fire-ui-label>myChecked = {{myChecked}}</fire-ui-label>
         </div>
-        <span class="space"></span>                                                                            
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>                   
-            <span class="space"></span>                                                                            
+            <fire-ui-unit-input value="{{myPixel}}" type="int" unit="px"></fire-ui-unit-input>
+            <span class="space"></span>
             <fire-ui-button on-click="{{myPixelClick}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>myPixel = {{myPixel}}</fire-ui-label>
         </div>
-        <span class="space"></span>                                                                            
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>                                                      
-            <span class="space"></span>                                                                            
+            <fire-ui-text-input value="{{myText}}"></fire-ui-text-input>
+            <span class="space"></span>
             <fire-ui-button on-click="{{myTextClick}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>myText = {{myText}}</fire-ui-label>
         </div>
-        <span class="space"></span>                                                                            
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>                         
-            <span class="space"></span>                                                                            
+            <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
+            <span class="space"></span>
             <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>mySelect = {{mySelect}}</fire-ui-label>
         </div>
-        <span class="space"></span>                                                                            
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-color value="{{myColor}}"></fire-ui-color>                                                      
-            <span class="space"></span>                                                                            
+            <fire-ui-color value="{{myColor}}"></fire-ui-color>
+            <span class="space"></span>
             <fire-ui-button on-click="{{myColorClick}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>myColor = rgba( {{myColor.r|toFixed(2)}}, {{myColor.g|toFixed(2)}}, {{myColor.b|toFixed(2)}}, {{myColor.a|toFixed(2)}})</fire-ui-label>
         </div>
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-vec2 value="{{myVec2}}"></fire-ui-vec2>                                                      
-            <span class="space"></span>                                                                            
+            <fire-ui-vec2 value="{{myVec2}}"></fire-ui-vec2>
+            <span class="space"></span>
             <fire-ui-button on-click="{{myVec2Click}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>myVec2 = ( {{myVec2.x|toFixed(2)}}, {{myVec2.y|toFixed(2)}} )</fire-ui-label>
         </div>
-        <span class="space"></span>                                                                            
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>                                                      
-            <span class="space"></span>                                                                            
+            <fire-ui-slider value="{{mySlider}}"></fire-ui-slider>
+            <span class="space"></span>
             <fire-ui-button on-click="{{mySliderClick}}">Change</fire-ui-button>
-            <span class="space"></span>                                                                            
+            <span class="space"></span>
             <fire-ui-label>mySlider = {{mySlider|toFixed(2)}}</fire-ui-label>
         </div>
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-fobject value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-fobject>                                                      
-            <span class="space"></span>                                                                            
-            <fire-ui-button on-click="{{myAtlasClick}}">Change</fire-ui-button>                                    
-            <span class="space"></span>                                                                            
-            <fire-ui-label>myAtlas = {{myAtlas|toFObjectName()}}</fire-ui-label>                                   
+            <fire-ui-fobject value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-fobject>
+            <span class="space"></span>
+            <fire-ui-button on-click="{{myAtlasClick}}">Change</fire-ui-button>
+            <span class="space"></span>
+            <fire-ui-label>myAtlas = {{myAtlas|toFObjectName()}}</fire-ui-label>
         </div>
         <span class="space"></span>
-
-        <div flex-row>                                                                                                                 
-            <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>                                                      
-            <span class="space"></span>                                                                                                        
-            <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>                                                                 
-            <span class="space"></span>                                                                                                        
-            <fire-ui-label>myMultiText = </fire-ui-label>                                                                                 
-            <span class="space"></span>                                                                                                        
+        
+        <div flex-row>
+            <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>
+            <span class="space"></span>
+            <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>
+            <span class="space"></span>
+            <fire-ui-label>myMultiText = </fire-ui-label>
+            <span class="space"></span>
             <div flex-1>
                 <pre style="font-size: 10px; white-space: pre-line;">
                     {{myMultiText}}
                 </pre>
             </div>
-        </div>                                                                                                                                 
-        <span class="space"></span>                                                                                                            
+        </div>
+        <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-list value="{{myList}}"></fire-ui-list>                                                      
-            <span class="space"></span>                                                                            
-            <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>                                   
-            <span class="space"></span>                                                                            
+            <fire-ui-list value="{{myList}}"></fire-ui-list>
+            <span class="space"></span>
+            <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>
+            <span class="space"></span>
             <fire-ui-label>
-                myList = [ 
+                myList = [
                     <template repeat="{{item in myList}}">{{item}}, </template>
                 ]
-            </fire-ui-label>                                      
+            </fire-ui-label>
         </div>
         <span class="space"></span>
 
     </fire-ui-section>
 
-    <span class="space" style="height: 20px"></span>                                                       
+    <span class="space" style="height: 20px"></span>
 
     <fire-ui-dock-panel style="height: 500px;">
         <div name="Property">
             <fire-ui-section name="Property Section">
-                <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>                                                                                                                                
-                <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>                                                                                                                                
-                <fire-ui-prop value="{{myText}}"></fire-ui-prop>                                                             
-                <fire-ui-prop value="{{mySelect}}" type="enum" enumType="Fire.Atlas.SortBy"></fire-ui-prop>                                                             
-                <fire-ui-prop value="{{myColor}}"></fire-ui-prop>                                                                                                                                
-                <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
-                <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>                                                             
-                <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>                                                             
+                <fire-ui-prop value="{{myChecked}}"></fire-ui-prop>
+                <fire-ui-prop value="{{myPixel}}" type="int"></fire-ui-prop>
+                <fire-ui-prop value="{{myText}}"></fire-ui-prop>
+                <fire-ui-prop value="{{mySelect}}" type="enum" enumType="Fire.Atlas.SortBy"></fire-ui-prop>
+                <fire-ui-prop value="{{myColor}}"></fire-ui-prop>
+                <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>
+                <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>
+                <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>
             </fire-ui-section>
         </div>
 
@@ -176,22 +176,22 @@
         </div>
     </fire-ui-dock-panel>
 
-    <span class="space" style="height: 20px"></span>                                                       
+    <span class="space" style="height: 20px"></span>
 
     <fire-ui-section name="Widgets">
         <div class="content">
             <fire-ui-button-group>
-                <fire-ui-bi>Button 1</fire-ui-bi>                          
-                <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>  
-                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
-                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
+                <fire-ui-bi>Button 1</fire-ui-bi>
+                <fire-ui-bi><i class="fa fa-caret-down"></i></fire-ui-bi>
+                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>
+                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>
                 <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
-                <fire-ui-bi>Button 2</fire-ui-bi>                          
+                <fire-ui-bi>Button 2</fire-ui-bi>
             </fire-ui-button-group>
 
             <fire-ui-button-group multiple>
-                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>        
-                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>       
+                <fire-ui-bi><i class="fa fa-play"></i></fire-ui-bi>
+                <fire-ui-bi><i class="fa fa-pause"></i></fire-ui-bi>
                 <fire-ui-bi><i class="fa fa-step-forward"></i></fire-ui-bi>
             </fire-ui-button-group>
             <span class="space"></span>
@@ -203,13 +203,13 @@
             <span class="space"></span>
 
             <div flex-row>
-                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-option>                         
+                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-option>
                 <span class="space"></span>
-                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>                         
+                <fire-ui-option value="{{mySelect}}" options="{{mySelectList}}" above></fire-ui-option>
             </div>
             <span class="space"></span>
 
-            <fire-ui-color-picker value="{{myColor}}"></fire-ui-color-picker>                         
+            <fire-ui-color-picker value="{{myColor}}"></fire-ui-color-picker>
         </div>
     </fire-ui-section>
 </template>
@@ -277,7 +277,7 @@
         },
 
         // mySelect
-        mySelect: 3, 
+        mySelect: 3,
         mySelectList: [
             { name: 'Hello',             value: 0 },
             { name: 'Foo',               value: 1 },
@@ -292,7 +292,7 @@
         },
 
         // myColor
-        myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ), 
+        myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ),
         myColorClick: function () {
             this.myColor.r = rangeRandom( 0.0, 1.0 );
             this.myColor.g = rangeRandom( 0.0, 1.0 );
@@ -320,8 +320,8 @@
                 [ "foobar 1", "foobar 2", "foobar 3" ],
                 [ 1, 2, 3, 4 ],
         ],
-        myList: [ 
-            new Fire.Vec2(1,1), 
+        myList: [
+            new Fire.Vec2(1,1),
             new Fire.Vec2(2,1),
             new Fire.Vec2(3,1),
             new Fire.Vec2(4,1),
@@ -330,7 +330,7 @@
         ],
         myListClick: function () {
             this.cnt = (this.cnt + 1)%this.listList.length;
-            this.myList = this.listList[this.cnt]; 
+            this.myList = this.listList[this.cnt];
         },
 
         // myAtlas
