@@ -29,13 +29,6 @@ color-bg = #474747
 }
 
 ::content {
-    // &>* {
-    //     margin-right: 5px
-    // }
-    // &>*:last-child {
-    //     margin-right: 0px
-    // }
-
     span.space {
         display: block;
         width: 5px;
@@ -63,6 +56,12 @@ color-bg = #474747
 
         & /deep/ .input-area {                         
             padding: 0px 2px
+        }
+    }
+
+    fire-ui-select::shadow {                         
+        .border {
+            padding: 0px 4px
         }
     }
 
