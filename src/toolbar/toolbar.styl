@@ -1,6 +1,5 @@
 color-text = #aaa
-// color-bg = #242424
-color-bg = none
+color-bg = #474747
 
 :host {
     position: relative
@@ -44,17 +43,38 @@ color-bg = none
 
     fire-ui-button::shadow {
         button {
+            padding: 2px 4px
             border-radius: 0px
             border: none
             background: none 
 
             &:hover {
-                background-color: #4a4a4a
+                background-color: color-bg - 20%
             }
 
             &:active {
-                background-color: #4a4a4a - 10%
+                background-color: color-bg + 10%
             }
+        }
+    }
+
+    fire-ui-text-input::shadow {                         
+        height: 18px
+
+        & /deep/ .input-area {                         
+            padding: 0px 2px
+        }
+    }
+
+    i {
+        padding: 2px 4px
+
+        &:hover {
+            color: color-text + 50%
+        } 
+
+        &:active {
+            color: color-text - 20%
         }
     }
 }
