@@ -4,13 +4,18 @@
     name="fire-ui-tabs" 
     constructor="FireTabs"
     on-click="{{clickAction}}"
+    on-drop-area-enter="{{dropAreaEnterAction}}"
+    on-drop-area-leave="{{dropAreaLeaveAction}}"
+    on-drop-area-accept="{{dropAreaAcceptAction}}"
+    on-dragover="{{dragoverAction}}"
     >
 <template>
 <link rel="stylesheet" href="tabs.css">
 
 <div flex-row class="border">
     <div flex-1 flex-row flex-stretch class="tabs">
-        <content/>
+        <content></content>
+        <div id="insertLine" class="insert"></div>
     </div>
     <div class="menu">
         <i class="fa fa-bars"></i>

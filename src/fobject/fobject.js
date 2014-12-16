@@ -3,10 +3,23 @@
         publish: {
             value: null,
             type: "Fire.FObject",
+            highlighted: {
+                value: false,
+                reflect: true,
+            },
+            invalid: {
+                value: false,
+                reflect: true,
+            },
+
+            // droppable
+            droppable: 'asset,entity',
+            "single-drop": true,
         },
 
         ready: function () {
-            this._init(this.$.focus);
+            this._curDragObject = null;
+            this._initFocusable(this.$.focus);
             this._initDroppable(this.$.dropArea);
         },
 
@@ -44,12 +57,64 @@
             }
         },
 
-        dragAreaEnterAction: function (event) {
-            console.log("yes");
+        resetDragState: function () {
+            this._curDragObject = null;
+            this.highlighted = false;
+            this.invalid = false;
         },
 
-        dragAreaLeaveAction: function (event) {
-            console.log("no");
+        dropAreaEnterAction: function (event) {
+            event.stopPropagation();
+
+            this.invalid = true;
+
+            var dragItems = event.detail.dragItems;
+            var dragType = event.detail.dragType;
+
+            //
+            var classDef = Fire.getClassByName(this.type);
+            if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
+                Fire.AssetLibrary.loadAssetByUuid( dragItems[0], function (asset) {
+                    if ( asset instanceof classDef ) {
+                        this._curDragObject = asset;
+                        this.highlighted = true;
+                        this.invalid = false;
+                    }
+                    else {
+                        this.highlighted = true;
+                        this.invalid = true;
+                    }
+                }.bind(this) );
+            }
+            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
+                // TODO
+                this.highlighted = true;
+                this.invalid = true;
+            }
+            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
+                // TODO
+                this.highlighted = true;
+                this.invalid = true;
+            }
+            else {
+                this.highlighted = true;
+                this.invalid = true;
+            }
+        },
+
+        dropAreaLeaveAction: function (event) {
+            event.stopPropagation();
+
+            this.resetDragState();
+        },
+
+        dropAreaAcceptAction: function (event) {
+            event.stopPropagation();
+
+            if ( !this.invalid )
+                this.value = this._curDragObject;
+
+            this.resetDragState();
         },
 
     }, EditorUI.focusable, EditorUI.droppable));

@@ -1,16 +1,18 @@
+color-border = #212121
+
 :host {
-    display: inline-block
-    border-left: 1px solid #212121
-    border-right: 1px solid #212121
-    border-top: 1px solid #212121
-    box-sizing: border-box
     position: relative
+    display: inline-block
+    border-left: 1px solid color-border
+    border-right: 1px solid color-border
+    border-top: 1px solid color-border
+    box-sizing: border-box
 
     font-size: 12px
 
     color: #aaa
     background-color: #333
-    z-index: 10
+    z-index: 1
 
     &>.border {
         border-left: 1px solid rgba(255, 255, 255, 0.08)
@@ -26,6 +28,16 @@
             margin-top: -2px
             padding-right: 20px
             overflow: hidden
+
+            .insert {
+                display: none
+                position: absolute
+                border: 1px solid #c7722c
+                box-sizing: border-box
+                height: 100%
+
+                pointer-events: none
+            }
         }
 
         .menu {

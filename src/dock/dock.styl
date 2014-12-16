@@ -1,13 +1,31 @@
 :host {
-    display: inline-block
-    font-size: 12px
-    white-space: nowrap
     position: relative
+    box-sizing: border-box;
 
-    min-width: 200px
-    min-height: 200px
+    white-space: nowrap
     overflow: hidden
 
+    font-size: 12px
     font-family: Helvetica,Arial,sans-serif
+
     color: #ddd
+
+    .content {
+        position: relative;
+
+        display: flex;
+        flex-wrap: nowrap;     
+        align-items: stretch;
+        flex-direction: column;
+
+        &:focus {
+            outline: none
+        }
+    }
+
+    &([row]) {
+        .content {
+            flex-direction: row
+        }
+    }
 }

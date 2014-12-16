@@ -14,7 +14,7 @@
         },
 
         ready: function () {
-            this._init(this.$.focus);
+            this._initFocusable(this.$.focus);
         },
 
         domReady: function () {

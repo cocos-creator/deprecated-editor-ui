@@ -1,10 +1,18 @@
 (function () {
-    Polymer({
+    Polymer(EditorUI.mixin({
+        publish: {
+            // droppable
+            droppable: 'tab',
+            "single-drop": true,
+        },
+
         created: function () {
             this.activeTab = null;
         },
 
         ready: function () {
+            this._initDroppable(this);
+
             if ( this.children.length > 0 ) {
                 this.select(this.children[0]);
             }
@@ -40,15 +48,12 @@
                 if ( this.activeTab === tabEL ) {
                     this.activeTab = null;
 
-                    if ( tabEL.nextElementSibling ) {
-                        this.activeTab = tabEL.nextElementSibling;
-                    }
-                    else if ( tabEL.previousElementSibling ) {
-                        this.activeTab = tabEL.previousElementSibling;
+                    var nextTab = tabEL.nextElementSibling;
+                    if ( !nextTab ) {
+                        nextTab = tabEL.previousElementSibling;
                     }
 
-                    if ( this.activeTab )
-                        this.activeTab.classList.add('active');
+                    this.select(nextTab);
                 }
 
                 this.removeChild(tabEL);
@@ -81,8 +86,48 @@
             }
         },
 
-        get tabCount () {
-            return this.children.length;
+        dropAreaEnterAction: function ( event ) {
+            event.stopPropagation();
+
+            this.$.insertLine.style.display = "block";
         },
-    });
+
+        dropAreaLeaveAction: function ( event ) {
+            event.stopPropagation();
+
+            this.$.insertLine.style.display = "";
+        },
+
+        dropAreaAcceptAction: function ( event ) {
+            event.stopPropagation();
+
+            DockUtils.dropTab(this, this._curInsertTab);
+            this.$.insertLine.style.display = "";
+        },
+
+        dragoverAction: function ( event ) {
+            var type = event.dataTransfer.getData('fire/type');
+            if ( type !== "tab" )
+                return;
+
+            DockUtils.dragoverTab( this );
+
+            //
+            event.preventDefault();
+            event.stopPropagation();
+            event.dataTransfer.dropEffect = 'move';
+
+            //
+            this._curInsertTab = null;
+            var style = this.$.insertLine.style;
+            if ( event.target instanceof FireTab ) {
+                style.left = event.target.offsetLeft + "px";
+                this._curInsertTab = this.target;
+            }
+            else {
+                var el = this.lastElementChild;
+                style.left = (el.offsetLeft + el.offsetWidth) + "px";
+            }
+        },
+    }, EditorUI.droppable));
 })();

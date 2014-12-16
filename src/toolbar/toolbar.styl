@@ -1,0 +1,80 @@
+color-text = #aaa
+color-bg = #474747
+
+:host {
+    position: relative
+
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap     
+    align-items: center
+
+    padding: 2px
+
+    font-size: 12px
+    white-space: nowrap
+
+    overflow: hidden
+    font-family: Helvetica,Arial,sans-serif
+    color: color-text
+    background-color: color-bg
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    color: color-text - 50%
+}
+
+::content {
+    // &>* {
+    //     margin-right: 5px
+    // }
+    // &>*:last-child {
+    //     margin-right: 0px
+    // }
+
+    span.space {
+        display: block;
+        width: 5px;
+    }
+
+    fire-ui-button::shadow {
+        button {
+            padding: 2px 4px
+            border-radius: 0px
+            border: none
+            background: none 
+
+            &:hover {
+                background-color: color-bg - 20%
+            }
+
+            &:active {
+                background-color: color-bg + 10%
+            }
+        }
+    }
+
+    fire-ui-text-input::shadow {                         
+        height: 18px
+
+        & /deep/ .input-area {                         
+            padding: 0px 2px
+        }
+    }
+
+    i {
+        padding: 2px 4px
+
+        &:hover {
+            color: color-text + 50%
+        } 
+
+        &:active {
+            color: color-text - 20%
+        }
+    }
+}

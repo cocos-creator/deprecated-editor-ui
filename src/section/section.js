@@ -12,7 +12,7 @@
         },
 
         ready: function() {
-            this._init(this.$.title);
+            this._initFocusable(this.$.title);
         },
 
         clickAction: function (event) {

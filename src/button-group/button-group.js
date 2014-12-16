@@ -17,7 +17,7 @@
         },
 
         ready: function () {
-            this._init();
+            this._initFocusable();
         },
 
         clickAction: function ( event ) {

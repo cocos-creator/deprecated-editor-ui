@@ -11,7 +11,7 @@
         },
 
         ready: function() {
-            this._init(this.$.input);
+            this._initFocusable(this.$.input);
 
             switch ( this.type ) {
                 case 'int':

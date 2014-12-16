@@ -5,7 +5,7 @@
         },
 
         ready: function() {
-            this._init(this.$.inputArea);
+            this._initFocusable(this.$.inputArea);
         },
 
         valueChanged: function () {

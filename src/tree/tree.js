@@ -7,6 +7,42 @@
         return curItem;
     }
 
+    function _filter ( items, func ) {
+        var results, item, i, j;
+        
+        results = [];
+        for ( i = 0; i < items.length; ++i ) {
+            item = items[i];
+            var add = true;
+
+            for ( j = 0; j < results.length; ++j ) {
+                var addedItem = results[j];
+
+                if ( item !== addedItem ) {
+                    // existed
+                    add = false;
+                    break;
+                }
+
+                var cmp = func( addedItem, item );
+                if ( cmp > 0 ) {
+                    add = false;
+                    break;
+                }
+                else if ( cmp < 0 ) {
+                    results.splice(j, 1);
+                    --j;
+                }
+            }
+
+            if ( add ) {
+                results.push(item);
+            }
+        }
+
+        return results;
+    }
+
     Polymer({
         publish: {
             focused: {
@@ -174,6 +210,23 @@
 
         scrollAction: function (event) {
             this.scrollLeft = 0;
+        },
+
+        getToplevelElements: function ( ids ) {
+            var elements = new Array(ids.length);
+            for ( var i = 0; i < ids.length; ++i ) {
+                elements[i] = this.idToItem[ids[i]];
+            }
+            var resultELs = _filter ( elements, function ( elA, elB ) {
+                if ( elA.contains(elB) ) {
+                    return 1;
+                }
+                if ( elB.contains(elA) ) {
+                    return -1;
+                }
+                return 0;
+            } );
+            return resultELs;
         },
         
         keydownAction: function (event, activeElement) {

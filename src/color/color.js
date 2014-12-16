@@ -16,7 +16,7 @@
         },
 
         ready: function() {
-            this._init( this.$.focus );
+            this._initFocusable( this.$.focus );
             this._updateColor();
             this._updateAlpha();
         },
@@ -97,10 +97,11 @@
         },
 
         blurAction: function (event) {
-            if ( this.focused === false )
+            if ( this.focused === false ) {
                 return;
+            }
 
-            if ( this.colorPicker === event.relatedTarget ) {
+            if ( this.colorPicker && this.colorPicker === event.relatedTarget ) {
                 return;
             }
 

@@ -11,6 +11,7 @@
                     this.$.icon.removeChild(this.$.icon.firstChild);
                 }
                 this.$.icon.appendChild(img);
+                img.setAttribute('draggable','false'); // this will prevent item dragging
             }
             else {
                 this.$.icon.style.display = "none";
@@ -18,6 +19,12 @@
                     this.$.icon.removeChild(this.$.icon.firstChild);
                 }
             }
-        }
+        },
+
+        dragstartAction: function ( event ) {
+            event.stopPropagation();
+
+            DockUtils.dragstart( event.dataTransfer, this );
+        },
     });
 })();

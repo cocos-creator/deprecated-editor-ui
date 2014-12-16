@@ -37,7 +37,7 @@ var EditorUI;
             disabled: '_disabledChanged',
         },
 
-        _init: function ( focusEls ) {
+        _initFocusable: function ( focusEls ) {
             if ( focusEls ) {
                 if ( Array.isArray(focusEls) ) {
                     this.focusEls = focusEls;
@@ -64,7 +64,7 @@ var EditorUI;
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
                 // NOTE: this is better than el.removeAttribute('tabindex'), 
-                // because <input> will still only not get focus when tabIndex=-1
+                // because <input> only not get focused when tabIndex=-1
                 el.tabIndex = -1;
             }
         },
