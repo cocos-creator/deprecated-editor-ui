@@ -1,0 +1,35 @@
+:host {
+    position: relative
+    flex: 0 0 size
+    height: 5px
+    z-index: 99
+    width: auto
+    cursor: row-resize
+    .bar{
+        position: relative
+        height: 4px
+        margin-top: 1px
+        margin-bottom: 1px
+    }
+
+    &([hold]) {
+        .bar {
+            background: rgb(12,112,200)
+        }
+    }
+
+
+    &([vertical]) {
+        background: white
+        width: 6px
+        height: auto
+    }
+
+    &(:hover) {
+        cursor: row-resize
+        .bar{
+            cursor: row-resize
+        }
+    }
+
+}

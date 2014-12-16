@@ -3,6 +3,10 @@
         publish: {
             value: '',
             placeholder: '',
+            inputValue: {
+                value: '',
+                reflect: true
+            },
         },
 
         ready: function() {
@@ -57,11 +61,12 @@
 
         inputAction: function (event) {
             // NOTE: this will prevent Chinese input
-             if ( this.value != event.target.value ) {
+            /*if ( this.value != event.target.value ) {
+                 console.log(event.target.value);
                  this.value = event.target.value;
                  this.fire('changed');
-             }
-
+            }*/
+            this.inputValue = event.target.value;
             event.stopPropagation();
         },
 
