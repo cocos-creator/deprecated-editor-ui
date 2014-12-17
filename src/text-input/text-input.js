@@ -61,7 +61,7 @@
             //     this.value = event.target.value;
             //     this.fire('changed');
             // }
-
+            
             event.stopPropagation();
         },
 

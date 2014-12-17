@@ -1,0 +1,195 @@
+<html>
+
+<head>
+    <title>Fireball-x Editor UI</title>
+    <link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bin/editor-ui.css">
+
+    <script src="/ext/webcomponentsjs/webcomponents.js"></script>
+    <script src="/ext/fire-core/core.dev.js"></script>
+
+    <link rel="import" href="/ext/polymer/polymer.html">
+    <link rel="import" href="/bin/editor-ui.html">
+    <style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align: center; color: #ccc;">Fireball-x Editor UI</h2>
+    <my-test></my-test>
+
+    <polymer-element name="my-test">
+        <template>
+        <style>
+        span.space {
+            height: 5px;
+            width: 5px;
+            display: block;
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .content span.space {
+            height: 10px;
+            width: 10px;
+            display: block;
+        }
+    </style>
+
+    <fire-ui-section name="Change Section">
+        <div flex>
+            <fire-ui-tree>
+                <fire-ui-ti></fire-ui-ti>
+            </fire-ui-tree>
+        </div>
+    </fire-ui-section>
+</template>
+
+<script>
+    function rangeRandom (min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    function rangeRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var tmpAtlas = new Fire.Atlas();
+    tmpAtlas.name = "Atlas Foobar";
+
+    Polymer({
+        toFixed: function ( val, precision ) {
+            return val.toFixed(precision);
+        },
+
+        toString: function ( val ) {
+            return val.toString();
+        },
+
+        toFObjectName: function ( val ) {
+            return val.name;
+        },
+
+        // myChecked
+        myChecked: false,
+        myCheckedClick: function () {
+            this.myChecked = !this.myChecked;
+        },
+
+        // myPixel
+        myPixel: 20,
+        myPixelClick: function () {
+            this.myPixel = rangeRandomInt(-1000, 1000);
+        },
+        myPixelMin: 0,
+        myPixelMax: 30,
+
+        // myText
+        myText: "Hello World",
+        myTextClick: function () {
+            var textList = [
+            "Hello World",
+            "FooBar",
+            "I'm Johnny Wu!",
+            "Who are you?"
+            ];
+            this.myText = textList[rangeRandomInt(0, textList.length-1)];
+        },
+
+        // myMultiText
+        myMultiText: "Hello World\nHello World FooBar\nHello World I'm Johnny Wu\nCool!",
+        myMultiTextClick: function () {
+            var textList = [
+            "Hello World\nHello World\nHello World",
+            "FooBar\nFooBar",
+            "I'm Johnny Wu!\nI'm Johnny Wu\nI'm Johnny Wu\nI'm Johnny Wu",
+            "Who are you?\nWho are you"
+            ];
+            this.myMultiText = textList[rangeRandomInt(0, textList.length-1)];
+        },
+
+        // mySelect
+        mySelect: 3,
+        mySelectList: [
+        { name: 'Hello',             value: 0 },
+        { name: 'Foo',               value: 1 },
+        { name: 'Bar',               value: 2 },
+        { name: 'Johnny',            value: 3 },
+        { name: 'Test Math',         value: 4 },
+        { name: 'Foo Bar',           value: 5 },
+        { name: 'This is the world', value: 6 },
+        ],
+        mySelectClick: function () {
+            this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
+        },
+
+        // myColor
+        myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ),
+        myColorClick: function () {
+            this.myColor.r = rangeRandom( 0.0, 1.0 );
+            this.myColor.g = rangeRandom( 0.0, 1.0 );
+            this.myColor.b = rangeRandom( 0.0, 1.0 );
+            this.myColor.a = rangeRandom( 0.0, 1.0 );
+        },
+
+        // myVec2
+        myVec2: new Fire.Vec2( 1.0, 1.0 ),
+        myVec2Click: function () {
+            this.myVec2.x = rangeRandom( 0.0, 1.0 );
+            this.myVec2.y = rangeRandom( 0.0, 1.0 );
+        },
+
+        // mySlider
+        mySlider: 0.0,
+        mySliderClick: function () {
+            this.mySlider = rangeRandom( 0.0, 1.0 );
+        },
+
+        // myList
+        cnt: 0,
+        listList: [
+        [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
+        [ "foobar 1", "foobar 2", "foobar 3" ],
+        [ 1, 2, 3, 4 ],
+        ],
+        myList: [
+        new Fire.Vec2(1,1),
+        new Fire.Vec2(2,1),
+        new Fire.Vec2(3,1),
+        new Fire.Vec2(4,1),
+        new Fire.Vec2(5,1),
+        new Fire.Vec2(6,1),
+        ],
+        myListClick: function () {
+            this.cnt = (this.cnt + 1)%this.listList.length;
+            this.myList = this.listList[this.cnt];
+        },
+
+        // myAtlas
+        myAtlas: tmpAtlas,
+        myAtlasClick: function () {
+            this.myAtlas = new Fire.Atlas();
+            this.myAtlas.name = "Atlas 002";
+        },
+    });
+</script>
+</polymer-element>
+
+</body>
+
+</html>
