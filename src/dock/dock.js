@@ -13,11 +13,6 @@
                 reflect: true
             },
 
-            'auto-layout': {
-                value: false,
-                reflect: true
-            },
-
             'no-collapse': {
                 value: false,
                 reflect: true
@@ -48,7 +43,7 @@
         },
 
         _reflow: function () {
-            var resizerCnt = (this.children.length - 1)/2; 
+            var resizerCnt = (this.children.length - 1)/2;
             var resizerSize = resizerCnt * resizerSpace;
 
             var autoLayoutElements = [];
@@ -263,14 +258,14 @@
                 return;
 
             if ( this.firstElementChild === childEL ) {
-                if ( childEL.nextElementSibling && 
+                if ( childEL.nextElementSibling &&
                      childEL.nextElementSibling instanceof FireDockResizer )
                 {
                     childEL.nextElementSibling.remove();
                 }
             }
             else {
-                if ( childEL.previousElementSibling && 
+                if ( childEL.previousElementSibling &&
                      childEL.previousElementSibling instanceof FireDockResizer )
                 {
                     childEL.previousElementSibling.remove();
@@ -287,7 +282,7 @@
         },
 
         collapse: function () {
-            if ( this['no-collapse'] ) 
+            if ( this['no-collapse'] )
                 return false;
 
             var parentEL = this.parentElement;
@@ -330,7 +325,7 @@
                 return true;
             }
 
-            // if the parent dock direction is same as this panel 
+            // if the parent dock direction is same as this panel
             if ( parentEL instanceof FireDock && parentEL.row === this.row ) {
                 while ( this.children.length > 0 ) {
                     parentEL.insertBefore( this.children[0], this );

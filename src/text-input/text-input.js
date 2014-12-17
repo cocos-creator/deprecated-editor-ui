@@ -61,8 +61,9 @@
             //     this.value = event.target.value;
             //     this.fire('changed');
             // }
-            
+
             event.stopPropagation();
+            this.fire('input-changed', { value: event.target.value } );
         },
 
         inputMouseDownAction: function (event) {

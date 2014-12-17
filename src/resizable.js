@@ -21,6 +21,11 @@ var EditorUI;
             'height': -1,
             'min-height': -1,
             'max-height': -1,
+
+            'auto-layout': {
+                value: false,
+                reflect: true
+            },
         },
 
         getMinWidth: function () {

@@ -1,37 +1,54 @@
+size = 11px
+blank-size = -4px
+
 :host {
     flex: 0 0 size
     position: relative
 
     z-index: 2
 
-    height: 5px
+    // horizontal resizer
+    margin-top: blank-size
+    margin-bottom: blank-size
+    margin-left: 0px
+    margin-right: 0px
     width: auto
-    cursor: row-resize
-    .bar{
-        position: relative
-        height: 4px
-        margin-top: 1px
-        margin-bottom: 1px
-    }
-
-    &([hold]) {
-        .bar {
-            background: rgb(12,112,200)
-        }
-    }
-
+    height: size
 
     &([vertical]) {
-        background: white
-        width: 6px
+        margin-top: 0px
+        margin-bottom: 0px
+        margin-left: blank-size
+        margin-right: blank-size
+        width: size
         height: auto
     }
 
     &(:hover) {
         cursor: row-resize
-        .bar{
+        .bar {
             cursor: row-resize
         }
     }
 
+    &([vertical]:hover) {
+        cursor: col-resize
+        .bar {
+            cursor: col-resize
+        }
+    }
+
+    &(.platform-win:hover) {
+        cursor: ns-resize
+        .bar {
+            cursor: ns-resize
+        }
+    }
+
+    &(.platform-win[vertical]:hover) {
+        cursor: ew-resize
+        .bar {
+            cursor: ew-resize
+        }
+    }
 }

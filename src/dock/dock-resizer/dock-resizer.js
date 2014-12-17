@@ -1,5 +1,5 @@
 (function () {
-    function _resize ( elementList, sizeList, 
+    function _resize ( elementList, sizeList,
                        prevTotalSize, prevMinSize, prevMaxSize,
                        nextTotalSize, nextMinSize, nextMaxSize,
                        vertical, resizerIndex, offset ) {
@@ -47,7 +47,7 @@
                 nextOffset = (newNextSize - nextSize) * dir;
 
                 // // DEBUG:
-                // console.log("nextEL = " + nextEL.name + 
+                // console.log("nextEL = " + nextEL.name +
                 //             ", newNextSize = " + newNextSize +
                 //             ", nextSize = " + nextSize +
                 //             ", prevOffset = " + prevOffset +
@@ -63,7 +63,7 @@
                 prevOffset += nextOffset;
             }
 
-            // 
+            //
             if ( dir > 0 ) {
                 nextIndex += 2;
                 if ( nextIndex >= elementList.length ) {
@@ -80,7 +80,7 @@
             nextEL = elementList[nextIndex];
             nextSize = sizeList[nextIndex];
         }
-        
+
         // re-calculate newPrevSize
         if ( dir > 0 ) {
             if ( nextTotalSize - offset * dir <= nextMinSize ) {
@@ -168,12 +168,12 @@
 
             for ( i = 0; i < resizerIndex; i += 2 ) {
                 prevTotalSize += sizeList[i];
-                prevMinSize += 
+                prevMinSize +=
                     this.vertical ?
-                    parentEL.children[i].computedMinWidth : 
+                    parentEL.children[i].computedMinWidth :
                     parentEL.children[i].computedMinHeight;
 
-                prevMaxSize += 
+                prevMaxSize +=
                     this.vertical ?
                     parentEL.children[i].computedMaxWidth :
                     parentEL.children[i].computedMaxHeight;
@@ -181,12 +181,12 @@
 
             for ( i = resizerIndex+1; i < parentEL.children.length; i += 2 ) {
                 nextTotalSize += sizeList[i];
-                nextMinSize += 
+                nextMinSize +=
                     this.vertical ?
-                    parentEL.children[i].computedMinWidth : 
+                    parentEL.children[i].computedMinWidth :
                     parentEL.children[i].computedMinHeight;
 
-                nextMaxSize += 
+                nextMaxSize +=
                     this.vertical ?
                     parentEL.children[i].computedMaxWidth :
                     parentEL.children[i].computedMaxHeight;
@@ -207,7 +207,7 @@
 
                 //
                 if ( offset !== 0 ) {
-                    _resize( parentEL.children, sizeList, 
+                    _resize( parentEL.children, sizeList,
                             prevTotalSize, prevMinSize, prevMaxSize,
                             nextTotalSize, nextMinSize, nextMaxSize,
                             this.vertical, resizerIndex, offset );
