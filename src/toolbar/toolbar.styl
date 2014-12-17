@@ -29,20 +29,44 @@ color-bg = #474747
 }
 
 ::content {
-    // &>* {
-    //     margin-right: 5px
-    // }
-    // &>*:last-child {
-    //     margin-right: 0px
-    // }
-
     span.space {
         display: block;
         width: 5px;
     }
 
+    i {
+        padding: 2px 4px
+
+        &:hover {
+            color: color-text + 50%
+        } 
+
+        &:active {
+            color: color-text - 20%
+        }
+    }
+
+    fire-ui-button {
+        i {
+            padding: 0px
+        }
+    }
+
+    fire-ui-button[disabled]::shadow {
+        button {
+            &:hover {
+                background: none
+            }
+
+            &:active {
+                background: none
+            }
+        }
+    }
+
     fire-ui-button::shadow {
         button {
+            font-size: 12px
             padding: 2px 4px
             border-radius: 0px
             border: none
@@ -66,15 +90,9 @@ color-bg = #474747
         }
     }
 
-    i {
-        padding: 2px 4px
-
-        &:hover {
-            color: color-text + 50%
-        } 
-
-        &:active {
-            color: color-text - 20%
+    fire-ui-select::shadow {                         
+        .border {
+            padding: 0px 4px
         }
     }
 }
