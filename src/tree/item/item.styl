@@ -71,14 +71,14 @@
 
             fire-ui-text-input {
                 position: absolute
-                left: 0px
+                left: 12px
                 top: -1px
                 height: 18px
-                width: 100%
+                width: calc(100% - 12px)
 
                 &[icon] {
-                    left: 18px
-                    width: calc(100% - 14px)
+                    left: 30px
+                    width: calc(100% - 30px)
                 }
 
                 & /deep/ .input-area {
@@ -96,16 +96,6 @@
                         .fold-icon {
                             visibility: visible
                         }
-                    }
-                }
-
-                fire-ui-text-input {
-                    left: 12px
-                    width: 100%
-
-                    &[icon] {
-                        left: 30px
-                        width: calc(100% - 30px)
                     }
                 }
             }
