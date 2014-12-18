@@ -47,8 +47,8 @@ Polymer({
                 }
             }
 
-            this.previousElementSibling._notifyResize();
-            this.nextElementSibling._notifyResize();
+            this.previousElementSibling.fire('resize');
+            this.nextElementSibling.fire('resize');
         }
     },
 

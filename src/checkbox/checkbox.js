@@ -9,8 +9,11 @@
         },
 
         clickAction: function (event) {
-            this.value = !this.value;
             event.stopPropagation();
+
+            this.value = !this.value;
+            if ( !this.focused )
+                this.$.focus.focus();
 
             this.fire('changed');
         },

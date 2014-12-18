@@ -38,15 +38,9 @@
     <div flex-1 flex-row>
         <fire-ui-label style="flex: 0 0 150px;">Section:</fire-ui-label>
 
-        <fire-ui-checkbox value="{{sectionDisabled}}"></fire-ui-checkbox>
-        <span class="space"></span>
-        <fire-ui-label>Disabled</fire-ui-label>
-
+        <fire-ui-checkbox value="{{sectionDisabled}}">Disabled</fire-ui-checkbox>
         <span class="space" style="width: 20px;"></span>
-
-        <fire-ui-checkbox value="{{sectionFocused}}"></fire-ui-checkbox>
-        <span class="space"></span>
-        <fire-ui-label>Focused</fire-ui-label>
+        <fire-ui-checkbox value="{{sectionFocused}}">Focused</fire-ui-checkbox>
     </div>
 
     <span class="space"></span>
@@ -55,7 +49,7 @@
         <control-status label="Label">
             <fire-ui-label>Foobar</fire-ui-label>
         </control-status>
-    
+
         <control-status label="Button">
             <fire-ui-button>Button</fire-ui-button>
         </control-status>
@@ -66,6 +60,10 @@
 
         <control-status label="Checkbox">
             <fire-ui-checkbox></fire-ui-checkbox>
+        </control-status>
+
+        <control-status label="Checkbox With Text">
+            <fire-ui-checkbox>Foobar</fire-ui-checkbox>
         </control-status>
 
         <control-status label="Unit Input">
@@ -108,7 +106,7 @@
         </control-status>
 
         <control-status label="Property">
-            <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>                                                                                                                                
+            <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>
         </control-status>
 
         <control-status label="Custom Property">
@@ -116,7 +114,7 @@
             <fire-ui-checkbox value="{{testEnabled}}"></fire-ui-checkbox>
             <span class="space"></span>
             <fire-ui-text-input id="test" value="Foobar"></fire-ui-text-input>
-        </fire-ui-custom-prop>                                                                                                                                
+        </fire-ui-custom-prop>
         </control-status>
 
         <!-- TODO -->
