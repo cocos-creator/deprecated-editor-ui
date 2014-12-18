@@ -9,7 +9,7 @@
 
     function _filter ( items, func ) {
         var results, item, i, j;
-        
+
         results = [];
         for ( i = 0; i < items.length; ++i ) {
             item = items[i];
@@ -176,7 +176,7 @@
 
             return parentItem;
         },
-        
+
         lastItem: function () {
             var lastChild = this.lastElementChild;
             if ( lastChild && lastChild.expanded ) {
@@ -194,7 +194,7 @@
                 return;
 
             if ( event.relatedTarget === null &&
-                 event.target instanceof FireTreeItem ) 
+                 event.target instanceof FireTreeItem )
             {
                 this.focus();
 
@@ -228,7 +228,7 @@
             } );
             return resultELs;
         },
-        
+
         keydownAction: function (event, activeElement) {
             switch ( event.which ) {
                 // Enter

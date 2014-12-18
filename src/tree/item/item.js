@@ -15,7 +15,7 @@
 
             this.renaming = false;
         },
-        
+
         get expanded() {
             // assume that it is foldable only if has child
             return this.foldable && !this.folded;
