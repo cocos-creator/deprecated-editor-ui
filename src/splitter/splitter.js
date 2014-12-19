@@ -121,6 +121,21 @@ Polymer({
             document.removeEventListener('mousemove', mousemoveHandle);
             document.removeEventListener('mouseup', mouseupHandle);
             EditorUI.removeDragGhost();
+
+            prevRect = this.previousElementSibling.getBoundingClientRect();
+            nextRect = this.nextElementSibling.getBoundingClientRect();
+            var ratio = 1;
+            if ( this.vertical ) {
+                ratio = nextRect.width / prevRect.width;
+                this.previousElementSibling.style.flex = "1 1 " + prevRect.width + "px";
+                this.nextElementSibling.style.flex = ratio + " " + ratio + " " + nextRect.width + "px";
+            }
+            else {
+                ratio = nextRect.height / prevRect.height;
+                this.previousElementSibling.style.flex = "1 1 " + prevRect.height + "px";
+                this.nextElementSibling.style.flex = ratio + " " + ratio + " " + nextRect.height + "px";
+            }
+
         }.bind(this);
 
         document.addEventListener ( 'mousemove', mousemoveHandle );
