@@ -2,6 +2,7 @@
     Polymer(EditorUI.mixin({
         publish: {
             value: '',
+            inputValue: '',
             placeholder: '',
         },
 
@@ -56,14 +57,17 @@
         },
 
         inputAction: function (event) {
-            // NOTE: this will prevent Chinese input
+            // DISABLE 1: this will prevent Chinese input
             // if ( this.value != event.target.value ) {
             //     this.value = event.target.value;
             //     this.fire('changed');
             // }
 
+            // DISABLE 2:
+            // this.fire('input-changed', { value: event.target.value } );
+
             event.stopPropagation();
-            this.fire('input-changed', { value: event.target.value } );
+            this.inputValue = event.target.value;
         },
 
         inputMouseDownAction: function (event) {
