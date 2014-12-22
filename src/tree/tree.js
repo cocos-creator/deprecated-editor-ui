@@ -18,7 +18,7 @@
             for ( j = 0; j < results.length; ++j ) {
                 var addedItem = results[j];
 
-                if ( item !== addedItem ) {
+                if ( item === addedItem ) {
                     // existed
                     add = false;
                     break;
