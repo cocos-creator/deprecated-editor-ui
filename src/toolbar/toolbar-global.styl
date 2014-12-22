@@ -1,0 +1,81 @@
+// NOTE: ::content is very slow.
+html /deep/ {
+    color-text = #aaa
+    color-bg = #474747
+
+    fire-ui-toolbar {
+        span.space {
+            display: block
+            width: 5px
+        }
+
+        i {
+            padding: 2px 4px
+
+            &:hover {
+                color: color-text + 50%
+            }
+
+            &:active {
+                color: color-text - 20%
+            }
+        }
+
+        fire-ui-bi::shadow {
+            .border {
+                padding: 0px 4px
+                height: 14px
+            }
+        }
+
+        fire-ui-button {
+            i {
+                padding: 0px
+            }
+        }
+
+        fire-ui-button[disabled]::shadow {
+            button {
+                &:hover {
+                    background: none
+                }
+
+                &:active {
+                    background: none
+                }
+            }
+        }
+
+        fire-ui-button::shadow {
+            button {
+                font-size: 12px
+                padding: 2px 4px
+                border-radius: 0px
+                border: none
+                background: none
+
+                &:hover {
+                    background-color: color-bg - 20%
+                }
+
+                &:active {
+                    background-color: color-bg + 10%
+                }
+            }
+        }
+
+        fire-ui-text-input::shadow {
+            height: 18px
+
+            .input-area {
+                padding: 0px 2px
+            }
+        }
+
+        fire-ui-select::shadow {
+            .border {
+                padding: 0px 4px
+            }
+        }
+    }
+}

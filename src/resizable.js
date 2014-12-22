@@ -2,6 +2,7 @@ var EditorUI;
 (function (EditorUI) {
     function _notifyResizeRecursively ( element ) {
         element.fire("resize");
+
         for ( var i = 0; i < element.children.length; ++i ) {
             var childEL = element.children[i];
             if ( childEL instanceof FireDockResizer )
