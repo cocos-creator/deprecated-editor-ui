@@ -1,9 +1,7 @@
 Polymer({
     publish: {
-        vertical: {
-            value: false,
-            reflect: true
-        },
+        vertical: { value: false, reflect: true },
+        hide: { value: false, reflect: true },
     },
 
     ready: function () {
@@ -65,7 +63,13 @@ Polymer({
 
         var prevRect = this.previousElementSibling.getBoundingClientRect();
         var nextRect = this.nextElementSibling.getBoundingClientRect();
-        var parentRect = this.parentElement.getBoundingClientRect();
+        var parentRect = null;
+        if ( this.parentElement ) {
+            parentRect = this.parentElement.getBoundingClientRect();
+        }
+        else if ( this.parentNode.host ) {
+            parentRect = this.parentNode.host.getBoundingClientRect();
+        }
         var totalSize = this.vertical ? parentRect.width : parentRect.height;
         totalSize -= 3; // remove splitter space
 
@@ -115,6 +119,10 @@ Polymer({
                 }
                 this.nextElementSibling.style.flex = "0 0 " + size + "px";
             }
+
+
+            this.previousElementSibling.fire('resize');
+            this.nextElementSibling.fire('resize');
         }.bind(this);
 
         var mouseupHandle = function (event) {
