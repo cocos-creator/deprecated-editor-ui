@@ -63,7 +63,7 @@ var EditorUI;
         _removeTabIndex: function () {
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
-                // NOTE: this is better than el.removeAttribute('tabindex'), 
+                // NOTE: this is better than el.removeAttribute('tabindex'),
                 // because <input> only not get focused when tabIndex=-1
                 el.tabIndex = -1;
             }
@@ -93,7 +93,7 @@ var EditorUI;
             if ( this.disabled ) {
                 this.style.pointerEvents = 'none';
                 _removeTabIndexRecursively(this);
-            } 
+            }
             else {
                 this.style.pointerEvents = '';
                 _initTabIndexRecursively(this);

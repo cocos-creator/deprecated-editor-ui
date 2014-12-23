@@ -150,35 +150,35 @@ var DockUtils;
             var maskRect = null;
 
             if ( _resultDock.position === 'top' ) {
-                maskRect = { 
-                    left: rect.left, 
-                    top: rect.top, 
-                    width: rect.width, 
-                    height: rect.height/4 
+                maskRect = {
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height/4
                 };
             }
             else if ( _resultDock.position === 'bottom' ) {
-                maskRect = { 
-                    left: rect.left, 
-                    top: rect.bottom-rect.height/4, 
-                    width: rect.width, 
-                    height: rect.height/4 
+                maskRect = {
+                    left: rect.left,
+                    top: rect.bottom-rect.height/4,
+                    width: rect.width,
+                    height: rect.height/4
                 };
             }
             else if ( _resultDock.position === 'left' ) {
-                maskRect = { 
+                maskRect = {
                     left: rect.left,
                     top: rect.top,
-                    width: rect.width/4, 
-                    height: rect.height 
+                    width: rect.width/4,
+                    height: rect.height
                 };
             }
             else if ( _resultDock.position === 'right' ) {
-                maskRect = { 
-                    left: rect.right-rect.width/4, 
+                maskRect = {
+                    left: rect.right-rect.width/4,
                     top: rect.top,
-                    width: rect.width/4, 
-                    height: rect.height 
+                    width: rect.width/4,
+                    height: rect.height
                 };
             }
 
@@ -204,13 +204,13 @@ var DockUtils;
         }
 
         if ( _resultDock.target === _draggingTab.parentElement.panel &&
-             _resultDock.target.tabCount === 1 ) 
+             _resultDock.target.tabCount === 1 )
         {
             return;
         }
 
-        event.preventDefault(); 
-        event.stopPropagation(); 
+        event.preventDefault();
+        event.stopPropagation();
 
         var contentEL = _draggingTab.content;
         var panelEL = _draggingTab.parentElement.panel;
