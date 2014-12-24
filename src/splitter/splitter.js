@@ -105,11 +105,9 @@ Polymer({
             if ( !this.nextElementSibling._autoLayout ) {
                 if ( this.vertical ) {
                     size = nextRect.width - offsetX;
-                    minSize = this.nextElementSibling.computedMinWidth;
                 }
                 else {
                     size = nextRect.height - offsetY;
-                    minSize = this.nextElementSibling.computedMinHeight;
                 }
                 if ( size < minNextSize ) {
                     size = minNextSize;
