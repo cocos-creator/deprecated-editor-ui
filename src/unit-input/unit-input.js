@@ -8,7 +8,10 @@
             interval: null,
             min: null,
             max: null,
-            timer: null,
+        },
+
+        created: function () {
+            this.timer = null;
         },
 
         ready: function() {
