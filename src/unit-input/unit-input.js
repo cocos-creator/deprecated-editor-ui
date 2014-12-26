@@ -162,6 +162,7 @@
         },
 
         increaseHold: function (event) {
+            //NOTE:waitTime是只有hold时间超过500毫秒,才会对数据进行增减操作,否则只会触发clickAction 
             var waitTime = 0;
             this.timer = setInterval(function (){
                 if (waitTime >= 5) {
