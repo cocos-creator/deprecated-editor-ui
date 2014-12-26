@@ -8,6 +8,7 @@
             interval: null,
             min: null,
             max: null,
+            timer: null,
         },
 
         ready: function() {
@@ -117,6 +118,27 @@
                     }
                     this.$.input.blur();
                 break;
+
+                //up
+                case 38:
+                    var val = this._convert(this.value + this._interval);
+                    if ( this.value != val ) {
+                        this.value = val;
+                        this.fire('changed');
+                    }
+                    this.$.input.focus();
+                break;
+
+                //down
+                case 40:
+                    var val = this._convert(this.value - this._interval);
+                    if ( this.value != val ) {
+                        this.value = val;
+                        this.fire('changed');
+                    }
+                    this.$.input.focus();
+                break;
+
             }
             event.stopPropagation();
         },
@@ -127,7 +149,7 @@
         },
 
         increaseAction: function (event) {
-            var val = this._convert(this.value+this._interval);
+            var val = this._convert(this.value + this._interval);
             if ( this.value != val ) {
                 this.value = val;
                 this.fire('changed');
@@ -136,8 +158,46 @@
             event.stopPropagation();
         },
 
+        increaseHold: function (event) {
+            var waitTime = 0;
+            this.timer = setInterval(function (){
+                if (waitTime >= 5) {
+                    var val = this._convert(this.value + this._interval);
+                    if ( this.value != val ) {
+                        this.value = val;
+                        this.fire('changed');
+                    }
+                    this.$.input.focus();
+                    event.stopPropagation();
+                }
+                waitTime ++;
+            }.bind(this), 100);
+        },
+
+        decreaseHold: function (event) {
+            var waitTime = 0;
+            this.timer = setInterval(function (){
+                if (waitTime >= 5) {
+                    var val = this._convert(this.value - this._interval);
+                    if ( this.value != val ) {
+                        this.value = val;
+                        this.fire('changed');
+                    }
+                    this.$.input.focus();
+                    event.stopPropagation();
+                }
+                waitTime ++;
+            }.bind(this), 100);
+        },
+
+        //clear holdAction
+        holdActionClear: function (event) {
+            clearTimeout(this.timer);
+            event.stopPropagation();
+        },
+
         decreaseAction: function (event) {
-            var val = this._convert(this.value-this._interval);
+            var val = this._convert(this.value - this._interval);
             if ( this.value != val ) {
                 this.value = val;
                 this.fire('changed');
