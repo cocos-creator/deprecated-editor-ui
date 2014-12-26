@@ -4,6 +4,10 @@
             value: '',
             inputValue: '',
             placeholder: '',
+            regex: {
+                value: false,
+                reflect: true
+            }
         },
 
         ready: function() {
@@ -38,6 +42,24 @@
             this.lastVal = this.value;
         },
 
+        regexCheck: function (regex) {
+            var input = regex;
+            try{
+                new RegExp(input);
+                this.removeAttribute("error");
+            }catch(e){
+                this.$.inputArea.animate([
+                    { background: "red", transform: "scale(1)" },
+                    { background: "rgb(255,200,200)", transform: "scale(1)" },
+                    { background: "red", transform: "scale(1)" },
+                    { background: "rgb(255,200,200)", transform: "scale(1)" }
+                    ], {
+                        duration: 400
+                });
+                this.setAttribute("error","");
+            }
+        },
+
         blurAction: function (event, detail, sender) {
             if ( this.focused === false )
                 return;
@@ -65,6 +87,9 @@
 
             // DISABLE 2:
             // this.fire('input-changed', { value: event.target.value } );
+            if (this.regex) {
+                this.regexCheck(event.target.value);
+            }
 
             event.stopPropagation();
             this.inputValue = event.target.value;
