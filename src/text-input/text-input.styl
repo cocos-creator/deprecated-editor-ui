@@ -61,6 +61,10 @@ color-button = #474747
             outline: none
         }
     }
+
+    &([invalid]) {
+        border: 1px solid red
+    }
 }
 
 color-bg-disabled = #3a3a3a
@@ -75,8 +79,4 @@ color-bg-disabled = #3a3a3a
     .input-area {
         color: color-input - 50%
     }
-}
-
-:host([invalid]) {
-    border: 1px solid red
 }

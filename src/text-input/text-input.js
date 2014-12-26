@@ -4,6 +4,10 @@
             value: '',
             inputValue: '',
             placeholder: '',
+            invalid: {
+                value: false,
+                reflect: true
+            },
             regex: {
                 value: false,
                 reflect: true
@@ -37,22 +41,29 @@
             this.$.inputArea.select();
         },
 
+        regexCheck: function () {
+            this.invalid = false;
+
+            try {
+                new RegExp(this.inputValue);
+            }
+            catch(e) {
+                this.invalid = true;
+            }
+        },
+
+        regexChanged: function () {
+            if ( this.regex ) {
+                this.regexCheck ();
+            }
+            else {
+                this.invalid = false;
+            }
+        },
+
         focusAction: function (event) {
             this._focusAction();
             this.lastVal = this.value;
-        },
-
-        regexCheck: function (regex) {
-            var input = regex;
-            try {
-                new RegExp(input);
-                this.removeAttribute("invalid");
-                return true;
-            }
-            catch(e) {
-                this.setAttribute("invalid","");
-                return false;
-            }
         },
 
         blurAction: function (event, detail, sender) {
@@ -82,16 +93,12 @@
 
             // DISABLE 2:
             // this.fire('input-changed', { value: event.target.value } );
+
+            event.stopPropagation();
+
+            this.inputValue = event.target.value;
             if ( this.regex ) {
-                if ( this.regexCheck(event.target.value)) {
-                    event.stopPropagation();
-                    this.inputValue = event.target.value;
-                }
-            }
-            else {
-                this.removeAttribute("invalid");
-                event.stopPropagation();
-                this.inputValue = event.target.value;
+                this.regexCheck();
             }
         },
 
