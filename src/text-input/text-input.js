@@ -46,11 +46,11 @@
             var input = regex;
             try {
                 new RegExp(input);
-                this.removeAttribute("error");
+                this.removeAttribute("invalid");
                 return true;
             }
             catch(e) {
-                this.setAttribute("error","");
+                this.setAttribute("invalid","");
                 return false;
             }
         },
@@ -89,7 +89,7 @@
                 }
             }
             else {
-                this.removeAttribute("error");
+                this.removeAttribute("invalid");
                 event.stopPropagation();
                 this.inputValue = event.target.value;
             }
