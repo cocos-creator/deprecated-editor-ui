@@ -4,6 +4,10 @@
             value: '',
             inputValue: '',
             placeholder: '',
+            regex: {
+                value: false,
+                reflect: true
+            }
         },
 
         ready: function() {
@@ -38,6 +42,19 @@
             this.lastVal = this.value;
         },
 
+        regexCheck: function (regex) {
+            var input = regex;
+            try {
+                new RegExp(input);
+                this.removeAttribute("invalid");
+                return true;
+            }
+            catch(e) {
+                this.setAttribute("invalid","");
+                return false;
+            }
+        },
+
         blurAction: function (event, detail, sender) {
             if ( this.focused === false )
                 return;
@@ -65,9 +82,17 @@
 
             // DISABLE 2:
             // this.fire('input-changed', { value: event.target.value } );
-
-            event.stopPropagation();
-            this.inputValue = event.target.value;
+            if ( this.regex ) {
+                if ( this.regexCheck(event.target.value)) {
+                    event.stopPropagation();
+                    this.inputValue = event.target.value;
+                }
+            }
+            else {
+                this.removeAttribute("invalid");
+                event.stopPropagation();
+                this.inputValue = event.target.value;
+            }
         },
 
         inputMouseDownAction: function (event) {
