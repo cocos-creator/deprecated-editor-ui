@@ -162,9 +162,9 @@
         },
 
         increaseHold: function (event) {
-            //NOTE:waitTime是只有hold时间超过500毫秒,才会对数据进行增减操作,否则只会触发clickAction 
+            //NOTE:waitTime是只有hold时间超过500毫秒,才会对数据进行增减操作,否则只会触发clickAction
             var waitTime = 0;
-            this.timer = setInterval(function (){
+            this.timer = setInterval( function () {
                 if (waitTime >= 5) {
                     var val = this._convert(this.value + this._interval);
                     if ( this.value != val ) {
@@ -172,15 +172,15 @@
                         this.fire('changed');
                     }
                     this.$.input.focus();
-                    event.stopPropagation();
                 }
                 waitTime ++;
             }.bind(this), 100);
+            event.stopPropagation();
         },
 
         decreaseHold: function (event) {
             var waitTime = 0;
-            this.timer = setInterval(function (){
+            this.timer = setInterval( function () {
                 if (waitTime >= 5) {
                     var val = this._convert(this.value - this._interval);
                     if ( this.value != val ) {
@@ -188,10 +188,10 @@
                         this.fire('changed');
                     }
                     this.$.input.focus();
-                    event.stopPropagation();
                 }
                 waitTime ++;
             }.bind(this), 100);
+            event.stopPropagation();
         },
 
         //clear holdAction
