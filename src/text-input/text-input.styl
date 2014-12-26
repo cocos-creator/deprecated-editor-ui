@@ -78,8 +78,20 @@ color-bg-disabled = #3a3a3a
 }
 
 :host([error]) {
+    @-webkit-keyframes error {
+        0% {
+            background-color:red;
+        }
+        100% {
+            background-color:rgb(255,200,200);
+        }
+    }
+
     .input-area {
         background-color: rgb(255,200,200)
+        -webkit-animation-name: error
+        -webkit-animation-duration: 0.2s
+        -webkit-animation-iteration-count: 2
         color: black
     }
 }

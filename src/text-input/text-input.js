@@ -50,14 +50,6 @@
                 return true;
             }
             catch(e) {
-                this.$.inputArea.animate([
-                    { background: "red", transform: "scale(1)" },
-                    { background: "rgb(255,200,200)", transform: "scale(1)" },
-                    { background: "red", transform: "scale(1)" },
-                    { background: "rgb(255,200,200)", transform: "scale(1)" }
-                    ], {
-                        duration: 400
-                });
                 this.setAttribute("error","");
                 return false;
             }
@@ -90,8 +82,8 @@
 
             // DISABLE 2:
             // this.fire('input-changed', { value: event.target.value } );
-            if (this.regex) {
-                if( this.regexCheck(event.target.value)) {
+            if ( this.regex ) {
+                if ( this.regexCheck(event.target.value)) {
                     event.stopPropagation();
                     this.inputValue = event.target.value;
                 }
