@@ -1,0 +1,61 @@
+color-outter-border = black
+color-outter-border-focus = #0c70a6
+color-inner-border = #555
+color-bg = #232323
+color-text = #aaa
+color-input = #aaa
+
+:host{
+	padding: 5px
+	background: rgb(71,71,71)
+	border: 1px solid color-outter-border
+	width: 200px
+	.border {
+		height: 20px
+		background: color-bg
+		border: 1px solid color-inner-border
+	}
+
+	.text-area {
+		display: block
+		padding-left: 6px
+		padding-right: 4px
+		border: 0
+		margin: 0
+		font-size: 12px
+		width: 100%
+
+		background: transparent
+		color: color-input
+		pointer-events: auto
+		user-select: auto
+		cursor: auto
+
+		&:focus {
+			outline: none
+		}
+
+		&::-webkit-input-placeholder {
+			font-style: italic
+			color: #666
+			text-shadow: none
+		}
+	}
+
+	.icon {
+		width: 20px
+		border: 0
+		margin: 0
+		color: color-text
+		font-family: FontAwesome
+		font-style: normal
+		font-size: 14px
+		font-weight: normal
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+	}
+
+	.icon:before {
+		content:"\f002"
+	}
+}

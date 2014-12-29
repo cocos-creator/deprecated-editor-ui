@@ -1,0 +1,25 @@
+<link rel="import" href="option/drop-option.html">
+
+<polymer-element
+	name="fire-ui-dropdown"
+	constructor="FireDropDown"
+	>
+<template >
+	<link rel="stylesheet" href="fire-ui-dropdown.css">
+	<div id="main">
+		<div class="border" flex-row>
+			<input
+			type="text"
+			id="input"
+			placeholder="search"
+			class="text-area"
+			on-input="{{inputAction}}"
+			on-keydown="{{keydownAction}}"
+			>
+			<span class="icon"></span>
+		</div>
+	</div>
+
+</template>
+<script type="text/javascript" src="fire-ui-dropdown.js"></script>
+</polymer-element>

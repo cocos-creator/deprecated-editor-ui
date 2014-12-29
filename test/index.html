@@ -125,7 +125,12 @@
             <fire-ui-label>myAtlas = {{myAtlas|toFObjectName()}}</fire-ui-label>
         </div>
         <span class="space"></span>
-        
+
+        <div flex-row>
+            <fire-ui-dropdown options="{{myDropDownList}}"></fire-ui-dropdown>
+        </div>
+        <span class="space"></span>
+
         <div flex-row>
             <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>
             <span class="space"></span>
@@ -181,8 +186,8 @@
     <fire-ui-section name="Widgets">
         <div class="content">
             <fire-ui-toolbar>
-                <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>  
-                <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>       
+                <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>
+                <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>
                 <span class="space"></span>
 
                 <fire-ui-label>Search</fire-ui-label>
@@ -195,8 +200,8 @@
             <span class="space"></span>
 
             <fire-ui-toolbar justify-end>
-                <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>  
-                <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>       
+                <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>
+                <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>
                 <span class="space"></span>
 
                 <fire-ui-label>Search</fire-ui-label>
@@ -210,8 +215,8 @@
                     <span class="space"></span>
                     <fire-ui-label>Left</fire-ui-label>
                     <span class="space"></span>
-                    <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>  
-                    <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>       
+                    <fire-ui-button><i class="fa fa-caret-down"></i></fire-ui-button>
+                    <fire-ui-button><i class="fa fa-pause"></i></fire-ui-button>
                 </div>
                 <div flex-row>
                     <fire-ui-label>Search</fire-ui-label>
@@ -335,6 +340,72 @@
             this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
         },
 
+        //dropDown
+
+        myDropDownList: [
+            { text: 'Hello Word',value: 0 },
+            { text: 'yoyo',value: 1 },
+            { text: 'abc',value: 2 },
+            { text: 'defg',value: 3 },
+            { text: 'Kamisama',value: 4 },
+            { text: 'mumi',value: 5 },
+            { text: 'close', value: 6 },
+        { text: 'Kamisama',value: 7 },
+    { text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+            { text: 'Kamisama',value: 14 },
+        { text: 'mumi',value: 51 },
+    { text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+        { text: 'mumi',value: 215 },
+    { text: 'close', value: 216 },
+{ text: 'Kamisama',value: 7 },
+{ text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+{ text: 'Kamisama',value: 14 },
+{ text: 'mumi',value: 51 },
+{ text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+{ text: 'mumi',value: 215 },
+{ text: 'close', value: 216 },
+{ text: 'Kamisama',value: 7 },
+{ text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+{ text: 'Kamisama',value: 14 },
+{ text: 'mumi',value: 51 },
+{ text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+{ text: 'mumi',value: 215 },
+{ text: 'close', value: 216 },
+{ text: 'Kamisama',value: 7 },
+{ text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+{ text: 'Kamisama',value: 14 },
+{ text: 'mumi',value: 51 },
+{ text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+{ text: 'mumi',value: 215 },
+{ text: 'close', value: 216 },
+{ text: 'Kamisama',value: 7 },
+{ text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+{ text: 'Kamisama',value: 14 },
+{ text: 'mumi',value: 51 },
+{ text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+{ text: 'mumi',value: 215 },
+{ text: 'close', value: 216 },
+{ text: 'Kamisama',value: 7 },
+{ text: 'mumi',value: 8 },
+{ text: 'close', value: 89 },
+{ text: 'Kamisama',value: 14 },
+{ text: 'mumi',value: 51 },
+{ text: 'close', value: 16 },
+{ text: 'Kamisama',value: 214 },
+{ text: 'mumi',value: 215 },
+{ text: 'close', value: 216 },
+        ],
+
         // myColor
         myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ),
         myColorClick: function () {
@@ -386,7 +457,7 @@
     });
 </script>
 </polymer-element>
-
+<drop-option ></drop-optin>
 </body>
 
 </html>

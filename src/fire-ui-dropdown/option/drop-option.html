@@ -1,0 +1,16 @@
+<polymer-element
+	name="drop-option"
+	constructor="DropOption"
+	>
+<template>
+	<link rel="stylesheet" href="drop-option.css">
+	<div id="data" class="data">
+		<div class="empty {{hide}}">
+			None Matched!
+		</div>
+		<ul id="ul" on-click="{{itemClickAction}}">
+		</ul>
+	</div>
+</template>
+<script type="text/javascript" src="drop-option.js"></script>
+</polymer-element>
