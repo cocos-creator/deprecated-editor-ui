@@ -1,12 +1,11 @@
 color-text = #aaa
 
 :host {
-	width: 100%
+	display: flex
 	background: rgb(71,71,71)
 	margin: 0px
 	border: 1px solid black
 	border-top: 0px
-
 	.item {
 		padding-left: 4px
 		padding-right: 4px
@@ -39,6 +38,7 @@ color-text = #aaa
 	}
 
 	.data {
+		width: 100%
 		margin-left: 5px
 		margin-right: 5px
 		margin-bottom: 5px
@@ -61,7 +61,6 @@ color-text = #aaa
 			border-left: 1px solid black
 		}
 		&::-webkit-scrollbar-track {
-			// background-clip: padding-box
 			background-color: rgba(128,128,128,0.1)
 			border-left: 1px solid black
 		}
