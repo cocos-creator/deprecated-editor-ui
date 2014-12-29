@@ -21,6 +21,7 @@ Polymer({
 	},
 
 	itemClickAction: function (event) {
+		//NOTE: `event.target.value` is options's index number
 		//console.log(event.target.value);
 		this.owner.$.input.focus();
 
@@ -53,6 +54,7 @@ Polymer({
 
 	},
 
+	//NOTE: 由于Polymer自带的repeat绑定数据,异步且不可控,生成节点后,不能直接进行操作,所以自己手动来绑定
 	bindData: function (list) {
 		this.$.ul.innerHTML = "";
 		if (this.tempSelect !== undefined) {
