@@ -13,6 +13,7 @@
             },
             searchValue: '',
             owner: null,
+            hide: 'hide',
         },
 
         domReady: function () {
@@ -21,6 +22,7 @@
 
         observe: {
             searchValue: 'searchValueChanged',
+            tempOption: 'isEmpty',
         },
 
         clickAction: function (event, detail, sender) {
@@ -40,6 +42,14 @@
 
             this.owner.focus();
             event.stopPropagation();
+        },
+
+        isEmpty: function () {
+            if (this.tempOption.length <= 0) {
+                this.hide = "";
+            }else{
+                this.hide = "hide";
+            }
         },
 
         searchValueChanged: function () {

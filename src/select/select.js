@@ -66,8 +66,6 @@
         },
 
         blurAction: function (event) {
-            //this.focused =true;
-                //return;
             if ( this.focused === false )
                 return;
             if ( this.menu === event.relatedTarget ) {
@@ -76,9 +74,6 @@
                 }
                 return;
             }
-            //this.focus();
-            //return
-            //this.focused = true;
             this._blurAction();
             this.showOption(false);
         },
