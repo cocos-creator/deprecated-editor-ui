@@ -6,16 +6,17 @@
 <template>
 <link rel="stylesheet" href="option.css">
 
-<div class="border">          
-    <template repeat="{{item, index in options}}">         
+<div class="border">
+    <fire-ui-text-input  inputValue="{{searchValue}}"  placeholder="search" id="searchinput" on-focus="{{inputFocus}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
+    <template repeat="{{item, index in tempOption}}">
         <div class="item {{ item.value == value ? 'selected':'' }}"
-            index="{{index}}"                                  
-            on-click="{{clickAction}}"                            
-            >                                                      
-            {{item.name}}                                          
-        </div>                                                     
-    </template>                                                
-</div>                                                         
+            index="{{index}}"
+            on-click="{{clickAction}}"
+            >
+            {{item.name}}
+        </div>
+    </template>
+</div>
 
 </template>
 
