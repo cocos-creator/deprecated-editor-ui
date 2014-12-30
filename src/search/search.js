@@ -11,7 +11,7 @@ Polymer({
 	},
 
 	created: function () {
-		this.option = new DropOption();
+		this.option = new SearchOption();
 		this.option.owner = this;
 		this.hide = true;
 		this._showOption = false;
