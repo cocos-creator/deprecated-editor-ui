@@ -1,16 +1,19 @@
 Polymer({
 	publish: {
-		options: []
+		options: [],
+		select: -1,
+		value: []
 	},
 
 	observe: {
-		searchList: "optionsChanged"
+		searchList: "optionsChanged",
+		select: "updateValue"
 	},
 
 	created: function () {
 		this.option = new DropOption();
 		this.option.owner = this;
-		this.hide = false;
+		this.hide = true;
 		this._showOption = false;
 		this.searchList = [];
 	},
@@ -34,11 +37,21 @@ Polymer({
 			}
 			this.option.options = this.searchList;
 			this._showOption = true;
+			this.hide = false;
 			this.showOption();
 		}.bind(this));
 	},
 
+	updateValue: function () {
+		if (this.searchList.length === 0)
+			return;
+
+		this.value = this.searchList[this.select];
+	},
+
 	hideMenu: function () {
+		this.updateValue();
+		this.$.input.focus();
 		this.option.style.display = "none";
 		this.hide = true;
 	},
@@ -52,13 +65,17 @@ Polymer({
 		this.option.options = this.searchList;
 	},
 
-	inputAction: function () {
+	inputAction: function (event) {
 		this.searchValue();
 		this.showOption();
+		event.stopPropagation();
 	},
 
 	keydownAction: function (event) {
-		this.option.pressKey(event.which);
+		event.stopPropagation();
+		if (!this.hide) {
+			this.option.pressKey(event.which);
+		}
 	},
 
 	searchValue: function () {

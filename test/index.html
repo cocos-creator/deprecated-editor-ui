@@ -127,7 +127,11 @@
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-dropdown options="{{myDropDownList}}"></fire-ui-dropdown>
+            <fire-ui-dropdown select="{{select}}" value="{{selectValue}}" options="{{myDropDownList}}"></fire-ui-dropdown>
+            <span class="space"></span>
+            <fire-ui-label>myDropdown = {{select}}</fire-ui-label>
+            <span class="space"></span>
+            <fire-ui-label>list = {{selectValue|toFObjectText()}}</fire-ui-label>
         </div>
         <span class="space"></span>
 
@@ -287,6 +291,10 @@
             return val.name;
         },
 
+        toFObjectText: function ( val ) {
+            return val.text;
+        },
+
         // myChecked
         myChecked: false,
         myCheckedClick: function () {
@@ -343,7 +351,7 @@
         //dropDown 这里故意添加这么多测试数据 不喜欢可以删了
 
         myDropDownList: [
-            { text: 'Hello Word',value: 0 },
+    { text: '<h1>lallala</h1>',value: 0 },
             { text: 'yoyo',value: 1 },
             { text: 'abc',value: 2 },
             { text: 'defg',value: 3 },
