@@ -71,7 +71,7 @@ Polymer({
 		for (var i = 0; i < list.length; i++) {
 			var li = document.createElement('li');
 			li.className = "item";
-			li.innerHTML= this.HtmlEncode(list[i].text);
+			li.innerHTML = this.HtmlEncode(list[i].text);
 			li.setAttribute("value",i);
 			if (i === 0) {
 				li.setAttribute("select","");
