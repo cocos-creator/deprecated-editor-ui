@@ -52,6 +52,13 @@
             }
         },
 
+        inputBlur: function (event) {
+            if (event.relatedTarget === null) {
+                this.owner.showOption(false);
+                this.owner.blur();
+            }
+        },
+
         searchValueChanged: function () {
             this.tempOption = [];
             for (var i = 0; i < this.options.length; i++) {

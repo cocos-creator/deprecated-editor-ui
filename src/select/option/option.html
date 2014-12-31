@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="option.css">
 
 <div class="border">
-    <fire-ui-text-input  inputValue="{{searchValue}}"  placeholder="search" id="searchinput" on-focus="{{inputFocus}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
+    <fire-ui-text-input  inputValue="{{searchValue}}"  placeholder="search" id="searchinput" on-blur="{{inputBlur}}"></fire-ui-text-input>
     <span class="none {{hide}}">None Matched!</span>
     <template repeat="{{item, index in tempOption}}">
         <div class="item {{ item.value == value ? 'selected':'' }}"

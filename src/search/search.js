@@ -1,4 +1,5 @@
-Polymer({
+(function () {
+Polymer(EditorUI.mixin({
 	publish: {
 		options: [],
 		select: -1,
@@ -7,7 +8,11 @@ Polymer({
 
 	observe: {
 		searchList: "optionsChanged",
-		select: "updateValue"
+		select: "updateValue",
+	},
+
+	ready: function () {
+		this._initFocusable( this.$.focus );
 	},
 
 	created: function () {
@@ -43,10 +48,21 @@ Polymer({
 	},
 
 	updateValue: function () {
-		if (this.searchList.length === 0)
+		if (this.searchList.length === 0 || this._showOption == false)
 			return;
 
 		this.value = this.searchList[this.select];
+		this.$.input.value = this.searchList[this.select].text;
+	},
+
+	blurAction: function (event) {
+		if (this.option === event.relatedTarget) {
+			return;
+		}
+
+		this.updateValue();
+		this.option.style.display = "none";
+		this.hide = true;
 	},
 
 	hideMenu: function () {
@@ -93,4 +109,5 @@ Polymer({
 			}
 		}
 	},
-});
+}, EditorUI.focusable));
+})();

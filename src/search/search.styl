@@ -4,16 +4,34 @@ color-inner-border = #555
 color-bg = #232323
 color-text = #aaa
 color-input = #aaa
+color-bg-disabled = #3a3a3a
+
 
 :host{
-	padding: 5px
+	//padding: 1px
 	background: rgb(71,71,71)
-	border: 1px solid color-outter-border
+	//border: 1px solid color-inner-border
 	width: 200px
+
 	.border {
 		height: 20px
+		//padding: 3px
 		background: color-bg
+		border: 1px solid black
+	}
+
+	#main {
+		//border: 1px solid black
+		//margin: 5px
 		border: 1px solid color-inner-border
+		&:hover {
+			border: 1px solid #888
+		}
+	}
+
+	&([focused]) #main{
+		border: 1px solid #0c70a6
+		outline: none
 	}
 
 	.text-area {
@@ -24,7 +42,6 @@ color-input = #aaa
 		margin: 0
 		font-size: 12px
 		width: 100%
-
 		background: transparent
 		color: color-input
 		pointer-events: auto
@@ -46,6 +63,7 @@ color-input = #aaa
 		width: 20px
 		border: 0
 		margin: 0
+		outline: none
 		color: color-text
 		font-family: FontAwesome
 		font-style: normal
@@ -57,5 +75,28 @@ color-input = #aaa
 
 	.icon:before {
 		content:"\f002"
+	}
+}
+
+:host-context([disabled]), :host([disabled]) {
+	* {
+		pointer-events: none
+	}
+
+	.border {
+		background: color-bg-disabled
+	}
+
+	.text-area {
+		color: #555
+		&::-webkit-input-placeholder {
+			font-style: italic
+			color: #555
+			text-shadow: none
+		}
+	}
+
+	.icon{
+		color: #555
 	}
 }

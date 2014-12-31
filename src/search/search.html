@@ -5,8 +5,11 @@
 	constructor="FireSearch"
 	select="{{select}}"
 	value="{{value}}"
+	id="focus"
+	on-focus="{{_focusAction}}"
+	on-blur="{{_blurAction}}"
 	>
-<template >
+<template>
 	<link rel="stylesheet" href="search.css">
 	<div id="main">
 		<div class="border" flex-row>
@@ -17,6 +20,7 @@
 			class="text-area"
 			on-input="{{inputAction}}"
 			on-keydown="{{keydownAction}}"
+			on-blur="{{blurAction}}"
 			>
 			<span class="icon"></span>
 		</div>
