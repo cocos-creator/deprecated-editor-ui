@@ -24,8 +24,8 @@
         <div class="button"
             tabindex="-1"
             on-click="{{increaseAction}}"
-            on-mousedown="{{increaseHold}}"
-            on-mouseup="{{holdActionClear}}"
+            on-mousedown="{{increaseHoldAction}}"
+            on-mouseup="{{holdUpAction}}"
             >
             <i class="fa fa-caret-up"></i>
         </div>
@@ -33,8 +33,8 @@
         <div class="button"
             tabindex="-1"
             on-click="{{decreaseAction}}"
-            on-mousedown="{{decreaseHold}}"
-            on-mouseup="{{holdActionClear}}"
+            on-mousedown="{{decreaseHoldAction}}"
+            on-mouseup="{{holdUpAction}}"
             >
             <i class="fa fa-caret-down"></i>
         </div>
