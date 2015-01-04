@@ -8,6 +8,9 @@
 
 <div class="border">
     <fire-ui-text-input  inputValue="{{searchValue}}"  placeholder="search" id="searchinput" on-blur="{{inputBlur}}"></fire-ui-text-input>
+    <span class="icon" tabindex="-1" on-click="{{ unitClickAction }}">
+        <i class="fa fa-search"></i>
+    </span>
     <span class="none {{hide}}">None Matched!</span>
     <template repeat="{{item, index in tempOption}}">
         <div class="item {{ item.value == value ? 'selected':'' }}"

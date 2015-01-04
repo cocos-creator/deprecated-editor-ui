@@ -59,6 +59,10 @@
             }
         },
 
+        unitClickAction: function () {
+            this.$.searchinput.focus();
+        },
+
         searchValueChanged: function () {
             this.tempOption = [];
             for (var i = 0; i < this.options.length; i++) {
