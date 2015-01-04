@@ -187,7 +187,7 @@
             this._decrease();
         },
 
-        holdUpAction: function (event) {
+        holdClearAction: function (event) {
             event.stopPropagation();
 
             clearInterval(this.holdingID);
