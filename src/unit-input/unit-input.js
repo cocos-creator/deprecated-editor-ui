@@ -155,6 +155,8 @@
         },
 
         increaseHoldAction: function (event) {
+            if (event.which === 3)
+                return;
             event.stopPropagation();
             this.$.input.focus();
 
@@ -166,6 +168,8 @@
         },
 
         decreaseHoldAction: function (event) {
+            if (event.which === 3)
+                return;
             event.stopPropagation();
             this.$.input.focus();
 
