@@ -70,6 +70,14 @@
             }
         },
 
+        _clearHover: function () {
+            clearInterval(this.holdingID);
+            this.holdingID = null;
+
+            clearTimeout(this.timeoutID);
+            this.timeoutID = null;
+        },
+
         valueChanged: function () {
             this.$.input.value = this._convert(this.value);
         },
@@ -148,6 +156,9 @@
         },
 
         increaseAction: function (event) {
+            if (event.which !== 1)
+                return;
+
             event.stopPropagation();
             this.$.input.focus();
 
@@ -155,8 +166,9 @@
         },
 
         increaseHoldAction: function (event) {
-            if (event.which === 3)
+            if (event.which !== 1)
                 return;
+
             event.stopPropagation();
             this.$.input.focus();
 
@@ -168,8 +180,9 @@
         },
 
         decreaseHoldAction: function (event) {
-            if (event.which === 3)
+            if (event.which !== 1)
                 return;
+
             event.stopPropagation();
             this.$.input.focus();
 
@@ -181,20 +194,33 @@
         },
 
         decreaseAction: function (event) {
+            if (event.which !== 1)
+                return;
+
             event.stopPropagation();
             this.$.input.focus();
 
             this._decrease();
         },
 
-        holdClearAction: function (event) {
+        mouseupAction: function (event) {
+            if (event.which !== 1)
+                return;
+
             event.stopPropagation();
+            this.$.input.focus();
 
-            clearInterval(this.holdingID);
-            this.holdingID = null;
+            this._clearHover();
+        },
 
-            clearTimeout(this.timeoutID);
-            this.timeoutID = null;
+        mouseoutAction: function (event) {
+            if (event.which !== 1)
+                return;
+
+            event.stopPropagation();
+            this.$.input.focus();
+
+            this._clearHover();
         },
 
     }, EditorUI.focusable));
