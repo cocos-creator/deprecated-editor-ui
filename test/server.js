@@ -40,9 +40,9 @@ app.get('/test/*', function(req, res){
 });
 
 // serves all the static files
-app.get(/^(.+)$/, function(req, res){ 
+app.get(/^(.+)$/, function(req, res){
     // console.log('static file request : ' + req.params);
-    res.sendFile( cwd + req.params[0]); 
+    res.sendFile( cwd + req.params[0]);
 });
 
 app.use(function(err, req, res, next){
