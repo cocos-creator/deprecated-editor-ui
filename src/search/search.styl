@@ -1,0 +1,98 @@
+color-outter-border = black
+color-outter-border-focus = #0c70a6
+color-inner-border = #555
+color-bg = #232323
+color-text = #aaa
+color-input = #aaa
+color-bg-disabled = #3a3a3a
+
+
+:host{
+	min-width: 120px
+	background: rgb(71,71,71)
+	width: 200px
+
+	.border {
+		height: 20px
+		background: color-bg
+		border: 1px solid black
+	}
+
+	#main {
+		border: 1px solid color-inner-border
+		&:hover {
+			border: 1px solid #888
+		}
+	}
+
+	&([focused]) #main{
+		border: 1px solid #0c70a6
+		outline: none
+	}
+
+	.text-area {
+		display: block
+		padding-left: 6px
+		padding-right: 4px
+		border: 0
+		margin: 0
+		font-size: 12px
+		width: 100%
+		background: transparent
+		color: color-input
+		pointer-events: auto
+		user-select: auto
+		cursor: auto
+
+		&:focus {
+			outline: none
+		}
+
+		&::-webkit-input-placeholder {
+			font-style: italic
+			color: #666
+			text-shadow: none
+		}
+	}
+
+	.icon {
+		width: 20px
+		border: 0
+		margin: 0
+		outline: none
+		color: color-text
+		font-family: FontAwesome
+		font-style: normal
+		font-size: 14px
+		font-weight: normal
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+	}
+
+	.icon:before {
+		content:"\f002"
+	}
+}
+
+:host-context([disabled]), :host([disabled]) {
+	* {
+		pointer-events: none
+	}
+
+	.border {
+		background: color-bg-disabled
+	}
+
+	.text-area {
+		color: #555
+		&::-webkit-input-placeholder {
+			font-style: italic
+			color: #555
+			text-shadow: none
+		}
+	}
+
+	.icon{
+		color: #555
+	}
+}

@@ -86,6 +86,10 @@
             <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
         </control-status>
 
+        <control-status label="searchinput">
+            <fire-ui-search options="{{myDropDownList}}" ></fire-ui-search>
+        </control-status>
+
         <control-status label="Button Group">
             <fire-ui-button-group>
                 <fire-ui-bi>Button 1</fire-ui-bi>
@@ -142,6 +146,22 @@
                 { name: 'Foo Bar',           value: 5 },
                 { name: 'This is the world', value: 6 },
             ];
+            //searchmenu
+             this.myDropDownList = [
+                    { text: '<h1>lallala</h1>',value: 0 },
+                    { text: 'yoyo',value: 1 },
+                    { text: 'meant',value: 2 },
+                    { text: 'Interesting',value: 3 },
+                    { text: 'Kamisama',value: 4 },
+                    { text: 'mumi',value: 5 },
+                    { text: 'close', value: 6 },
+                    { text: 'what', value: 6 },
+                    { text: 'dly admit it t', value: 7 },
+                    { text: 'steering', value: 8 },
+                    { text: 'similarity', value: 9 },
+                    { text: 'Windows', value: 10 },
+                    { text: 'customization', value: 11 },
+                ];
             this.sectionFocused = false;
             this.sectionDisabled = false;
             this.testEnabled = false;
