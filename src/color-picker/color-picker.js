@@ -5,8 +5,8 @@
         },
 
         observe: {
-            'value.r value.g value.b': 'colorChanged', 
-            'value.a': '_updateColor', 
+            'value.r value.g value.b': 'colorChanged',
+            'value.a': '_updateColor',
         },
 
         created: function () {
@@ -88,7 +88,7 @@
             event.stopPropagation();
         },
 
-        // color 
+        // color
         colorCtrlMouseDownAction: function ( event ) {
             // add drag-ghost
             EditorUI.addDragGhost("crosshair");

@@ -82,7 +82,9 @@
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-select dropdown value="{{mySelect}}" options="{{mySelectList}}"></fire-ui-select>
+            <fire-ui-select value="{{mySelect}}" options="{{mySelectList}}" searchable="{{mySelectSearchable}}"></fire-ui-select>
+            <span class="space"></span>
+            <fire-ui-checkbox value="{{mySelectSearchable}}">Searchable</fire-ui-checkbox>
             <span class="space"></span>
             <fire-ui-button on-click="{{mySelectClick}}">Change</fire-ui-button>
             <span class="space"></span>
@@ -347,6 +349,7 @@
         mySelectClick: function () {
             this.mySelect = this.mySelectList[rangeRandomInt(0,6)].value;
         },
+        mySelectSearchable: false,
 
         //searchmenu
         myDropDownList: [

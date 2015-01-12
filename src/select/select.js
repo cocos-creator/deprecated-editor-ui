@@ -3,49 +3,56 @@
         publish: {
             value: -1,
             options: [],
-            oninput: false,
-            dropdown: {
+            searchable: {
                 value: false,
                 reflect: true
             },
-            tempoption: [],
-            tempValue: -1,
         },
 
         observe: {
             value: 'updateValueName',
-            dropdown: 'isDropDown',
             focused: 'focusedChanged'
         },
 
         created: function () {
             this._showMenu = false;
-            this.menu = new FireOption();
+            this.menu = null;
         },
 
         ready: function () {
             this._initFocusable(this.$.focus);
-            this.tempoption = this.options;
         },
 
         showOption: function ( show ) {
             this._showMenu = show;
 
             if ( show ) {
-                if ( this.menu.owner ===null ) {
+                if ( !this.menu ) {
+                    this.menu = new FireOption();
                     this.menu.owner = this;
                     this.menu.bind( 'value', new PathObserver(this,'value') );
                     this.menu.bind( 'options', new PathObserver(this,'options') );
                 }
 
                 document.body.appendChild(this.menu);
+
+                this.menu.value = this.value;
+                this.menu.options = this.options;
+                this.menu.searchable = this.searchable;
+                this.menu.searchValue = ""; // clear last search value
                 this.menu.style.display = "";
+                EditorUI.addHitGhost('cursor', '998', function () {
+                    this.showOption(false);
+                    this.focus();
+                }.bind(this));
                 this.updateMenu();
             }
             else {
                 if ( this.menu ) {
                     this.menu.style.display = "none";
                     this.appendChild(this.menu);
+
+                    EditorUI.removeHitGhost();
                 }
             }
         },
@@ -55,25 +62,15 @@
             event.stopPropagation();
         },
 
-        focusedChanged: function () {
-            if (!this.focused) {
-                this.showOption(false);
-            }
-        },
-
-        isDropDown: function () {
-            this.menu.dropdown = this.dropdown;
-        },
-
         blurAction: function (event) {
-            if ( this.focused === false )
-                return;
-            if ( this.menu === event.relatedTarget ) {
-                if (this.oninput) {
-                    this.$.focus.focus();
-                }
+            if ( this.focused === false ) {
                 return;
             }
+
+            if ( this.menu && this.menu === event.relatedTarget ) {
+                return;
+            }
+
             this._blurAction();
             this.showOption(false);
         },
