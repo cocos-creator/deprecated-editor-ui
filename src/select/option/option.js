@@ -1,5 +1,5 @@
 (function () {
-    Polymer(EditorUI.mixin({
+    Polymer({
         publish: {
             value: -1,
             options: [],
@@ -7,29 +7,17 @@
                 value: false,
                 reflect: true
             },
-            dropdown: {
+            searchable: {
                 value: false,
                 reflect: true
             },
             searchValue: '',
             owner: null,
-            hide: 'hide',
-        },
-
-        domReady: function () {
-            this.tempOption = this.options;
-        },
-
-        observe: {
-            searchValue: 'searchValueChanged',
-            tempOption: 'isEmpty',
         },
 
         clickAction: function (event, detail, sender) {
             var idx = parseInt(sender.getAttribute('index'));
-            var entry = this.tempOption[idx];
-            this.owner.tempoption = this.tempOption;
-            this.owner.value = this.value;
+            var entry = this.options[idx];
             if ( this.value !== entry.value ) {
                 this.value = entry.value;
                 if ( this.owner )
@@ -44,33 +32,26 @@
             event.stopPropagation();
         },
 
-        isEmpty: function () {
-            if (this.tempOption.length <= 0) {
-                this.hide = "";
-            }else{
-                this.hide = "hide";
+        applyFilter: function ( options, searchValue ) {
+            var i = 0;
+            return options.map( function ( item ) {
+                item.index = i;
+                i += 1;
+                return item;
+            })
+            .filter( function ( item ) {
+                return item.name.toLowerCase().indexOf(searchValue) !== -1;
+            });
+        },
+
+        focusoutAction: function ( event ) {
+            event.stopPropagation();
+
+            if ( event.relatedTarget === null ) {
+                this.owner.focus();
+                return;
             }
         },
 
-        inputBlur: function (event) {
-            if (event.relatedTarget === null) {
-                this.owner.showOption(false);
-                this.owner.blur();
-            }
-        },
-
-        unitClickAction: function () {
-            this.$.searchinput.focus();
-        },
-
-        searchValueChanged: function () {
-            this.tempOption = [];
-            for (var i = 0; i < this.options.length; i++) {
-                if (this.options[i].name.toUpperCase().indexOf(this.searchValue.toUpperCase()) > -1) {
-                    this.tempOption.push(this.options[i]);
-                }
-            }
-        },
-
-    }, EditorUI.focusable));
+    });
 })();

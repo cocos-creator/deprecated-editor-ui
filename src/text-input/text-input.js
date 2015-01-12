@@ -20,6 +20,7 @@
 
         valueChanged: function () {
             this.$.inputArea.value = this.value;
+            this.inputValue = this.value;
         },
 
         _adjust: function () {
@@ -125,6 +126,7 @@
                 // esc
                 case 27:
                     this.$.inputArea.value = this.lastVal;
+                    this.inputValue = this.lastVal;
                     if ( this.value != this.lastVal ) {
                         this.value = this.lastVal;
                         this.fire('changed');

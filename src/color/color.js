@@ -45,11 +45,11 @@
                 if ( !this.colorPicker ) {
                     this.colorPicker = new FireColorPicker();
                     this.colorPicker.owner = this;
-                    this.colorPicker.value = this.value.clone(); // NOTE: one-way binding
                 }
 
                 document.body.appendChild(this.colorPicker);
                 this.colorPicker.style.display = "";
+                this.colorPicker.value = this.value.clone(); // NOTE: one-way binding
                 EditorUI.addHitGhost('cursor', '998', function () {
                     this.showColorPicker(false);
                     this.focus();

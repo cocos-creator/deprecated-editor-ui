@@ -1,20 +1,17 @@
 <polymer-element
     name="fire-ui-option"
     constructor="FireOption"
+    on-focusout="{{focusoutAction}}"
     tabIndex="1"
     >
 <template>
 <link rel="stylesheet" href="option.css">
 
 <div class="border">
-    <fire-ui-text-input  inputValue="{{searchValue}}"  placeholder="search" id="searchinput" on-blur="{{inputBlur}}"></fire-ui-text-input>
-    <span class="icon" tabindex="-1" on-click="{{ unitClickAction }}">
-        <i class="fa fa-search"></i>
-    </span>
-    <span class="none {{hide}}">None Matched!</span>
-    <template repeat="{{item, index in tempOption}}">
+    <fire-ui-text-input class="search-bar" placeholder="search" value="{{searchValue}}" inputValue="{{searchValue}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
+    <template repeat="{{item in options | applyFilter(searchValue)}}">
         <div class="item {{ item.value == value ? 'selected':'' }}"
-            index="{{index}}"
+            index="{{item.index}}"
             on-click="{{clickAction}}"
             >
             {{item.name}}
