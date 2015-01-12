@@ -1,0 +1,31 @@
+<link rel="import" href="option/search-option.html">
+
+<polymer-element
+	name="fire-ui-search"
+	constructor="FireSearch"
+	select="{{select}}"
+	value="{{value}}"
+	id="focus"
+	on-focus="{{_focusAction}}"
+	on-blur="{{_blurAction}}"
+	>
+<template>
+	<link rel="stylesheet" href="search.css">
+	<div id="main">
+		<div class="border" flex-row>
+			<input
+			type="text"
+			id="input"
+			placeholder="search"
+			class="text-area"
+			on-input="{{inputAction}}"
+			on-keydown="{{keydownAction}}"
+			on-blur="{{blurAction}}"
+			>
+			<span class="icon"></span>
+		</div>
+	</div>
+
+</template>
+<script type="text/javascript" src="search.js"></script>
+</polymer-element>

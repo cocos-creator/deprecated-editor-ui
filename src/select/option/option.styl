@@ -72,4 +72,36 @@ color-text = #aaa
             border-bottom: 0px
         }
     }
+
+    #searchinput {
+        width: auto
+        margin-bottom: 5px
+        display: none
+    }
+
+    &([dropdown]) #searchinput {
+        display: flex
+    }
+
+    .none{
+        color: red
+        padding: 3px 7px
+    }
+
+    .hide{
+        display: none
+    }
+
+    .icon {
+        position: absolute
+        top: 9px
+        margin-left: 100%
+        right: 10px
+        outline: none
+        display: none
+    }
+
+    &([dropdown]) .icon {
+        display: flex
+    }
 }
