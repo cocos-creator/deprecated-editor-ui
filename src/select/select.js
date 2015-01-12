@@ -3,27 +3,36 @@
         publish: {
             value: -1,
             options: [],
+            oninput: false,
+            dropdown: {
+                value: false,
+                reflect: true
+            },
+            tempoption: [],
+            tempValue: -1,
         },
 
         observe: {
             value: 'updateValueName',
+            dropdown: 'isDropDown',
+            focused: 'focusedChanged'
         },
 
         created: function () {
             this._showMenu = false;
-            this.menu = null;
+            this.menu = new FireOption();
         },
 
         ready: function () {
             this._initFocusable(this.$.focus);
+            this.tempoption = this.options;
         },
 
         showOption: function ( show ) {
             this._showMenu = show;
 
             if ( show ) {
-                if ( !this.menu ) {
-                    this.menu = new FireOption();
+                if ( this.menu.owner ===null ) {
                     this.menu.owner = this;
                     this.menu.bind( 'value', new PathObserver(this,'value') );
                     this.menu.bind( 'options', new PathObserver(this,'options') );
@@ -46,15 +55,25 @@
             event.stopPropagation();
         },
 
+        focusedChanged: function () {
+            if (!this.focused) {
+                this.showOption(false);
+            }
+        },
+
+        isDropDown: function () {
+            this.menu.dropdown = this.dropdown;
+        },
+
         blurAction: function (event) {
             if ( this.focused === false )
                 return;
-
             if ( this.menu === event.relatedTarget ) {
-                this.$.focus.focus();
+                if (this.oninput) {
+                    this.$.focus.focus();
+                }
                 return;
             }
-
             this._blurAction();
             this.showOption(false);
         },
