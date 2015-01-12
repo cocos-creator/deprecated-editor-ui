@@ -74,7 +74,7 @@
             //
             var classDef = Fire.getClassByName(this.type);
             if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
-                Fire.AssetLibrary.loadAssetByUuid( dragItems[0], function (asset) {
+                Fire.AssetLibrary.loadAsset( dragItems[0], function (asset) {
                     if ( asset instanceof classDef ) {
                         this._curDragObject = asset;
                         this.highlighted = true;
