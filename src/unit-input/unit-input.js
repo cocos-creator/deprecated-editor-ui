@@ -11,7 +11,8 @@
         },
 
         created: function () {
-            this.timer = null;
+            this.holdingID = null;
+            this.timeoutID = null;
         },
 
         ready: function() {
@@ -51,6 +52,30 @@
 
             Fire.log("can't find proper type for " + this.type);
             return val;
+        },
+
+        _increase: function () {
+            var val = this._convert(this.value + this._interval);
+            if ( this.value != val ) {
+                this.value = val;
+                this.fire('changed');
+            }
+        },
+
+        _decrease: function () {
+            var val = this._convert(this.value - this._interval);
+            if ( this.value != val ) {
+                this.value = val;
+                this.fire('changed');
+            }
+        },
+
+        _clearHover: function () {
+            clearInterval(this.holdingID);
+            this.holdingID = null;
+
+            clearTimeout(this.timeoutID);
+            this.timeoutID = null;
         },
 
         valueChanged: function () {
@@ -121,27 +146,6 @@
                     }
                     this.$.input.blur();
                 break;
-
-                //up
-                case 38:
-                    var val = this._convert(this.value + this._interval);
-                    if ( this.value != val ) {
-                        this.value = val;
-                        this.fire('changed');
-                    }
-                    this.$.input.focus();
-                break;
-
-                //down
-                case 40:
-                    var val = this._convert(this.value - this._interval);
-                    if ( this.value != val ) {
-                        this.value = val;
-                        this.fire('changed');
-                    }
-                    this.$.input.focus();
-                break;
-
             }
             event.stopPropagation();
         },
@@ -152,62 +156,71 @@
         },
 
         increaseAction: function (event) {
-            var val = this._convert(this.value + this._interval);
-            if ( this.value != val ) {
-                this.value = val;
-                this.fire('changed');
-            }
+            if (event.which !== 1)
+                return;
+
+            event.stopPropagation();
             this.$.input.focus();
-            event.stopPropagation();
+
+            this._increase();
         },
 
-        increaseHold: function (event) {
-            //NOTE:waitTime是只有hold时间超过500毫秒,才会对数据进行增减操作,否则只会触发clickAction
-            var waitTime = 0;
-            this.timer = setInterval( function () {
-                if (waitTime >= 5) {
-                    var val = this._convert(this.value + this._interval);
-                    if ( this.value != val ) {
-                        this.value = val;
-                        this.fire('changed');
-                    }
-                    this.$.input.focus();
-                }
-                waitTime ++;
-            }.bind(this), 100);
+        increaseHoldAction: function (event) {
+            if (event.which !== 1)
+                return;
+
             event.stopPropagation();
+            this.$.input.focus();
+
+            this.timeoutID = setTimeout( function () {
+                this.holdingID = setInterval( function () {
+                    this._increase();
+                }.bind(this), 100);
+            }.bind(this), 500 );
         },
 
-        decreaseHold: function (event) {
-            var waitTime = 0;
-            this.timer = setInterval( function () {
-                if (waitTime >= 5) {
-                    var val = this._convert(this.value - this._interval);
-                    if ( this.value != val ) {
-                        this.value = val;
-                        this.fire('changed');
-                    }
-                    this.$.input.focus();
-                }
-                waitTime ++;
-            }.bind(this), 100);
-            event.stopPropagation();
-        },
+        decreaseHoldAction: function (event) {
+            if (event.which !== 1)
+                return;
 
-        //clear holdAction
-        holdActionClear: function (event) {
-            clearTimeout(this.timer);
             event.stopPropagation();
+            this.$.input.focus();
+
+            this.timeoutID = setTimeout( function () {
+                this.holdingID = setInterval( function () {
+                    this._decrease();
+                }.bind(this), 100);
+            }.bind(this), 500 );
         },
 
         decreaseAction: function (event) {
-            var val = this._convert(this.value - this._interval);
-            if ( this.value != val ) {
-                this.value = val;
-                this.fire('changed');
-            }
-            this.$.input.focus();
+            if (event.which !== 1)
+                return;
+
             event.stopPropagation();
+            this.$.input.focus();
+
+            this._decrease();
+        },
+
+        mouseupAction: function (event) {
+            if (event.which !== 1)
+                return;
+
+            event.stopPropagation();
+            this.$.input.focus();
+
+            this._clearHover();
+        },
+
+        mouseoutAction: function (event) {
+            if (event.which !== 1)
+                return;
+
+            event.stopPropagation();
+            this.$.input.focus();
+
+            this._clearHover();
         },
 
     }, EditorUI.focusable));
