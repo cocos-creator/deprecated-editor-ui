@@ -1,5 +1,4 @@
-var DockUtils;
-(function (DockUtils) {
+EditorUI.DockUtils = (function () {
 
     var _resultDock = null;
     var _potentialDocks = [];
@@ -44,6 +43,8 @@ var DockUtils;
         _resultDock = null;
         _draggingTab = null;
     };
+
+    var DockUtils = {};
 
     DockUtils.dragstart = function ( dataTransfer, tabEL ) {
         _draggingTab = tabEL;
@@ -232,5 +233,7 @@ var DockUtils;
         // reset internal states
         _reset();
     });
-})(DockUtils || (DockUtils = {}));
+
+    return DockUtils;
+})();
 

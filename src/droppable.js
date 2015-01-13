@@ -1,12 +1,11 @@
-var EditorUI;
-(function (EditorUI) {
-    EditorUI.droppable = {
+EditorUI.droppable = (function () {
+    var droppable = {
         publish: {
             droppable: {
                 value: "file",
                 reflect: true
             },
-            "single-drop": { 
+            "single-drop": {
                 value: false,
                 reflect: true
             },
@@ -19,7 +18,7 @@ var EditorUI;
                 ++this._dragenterCnt;
                 if ( this._dragenterCnt === 1 ) {
                     this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
-                        this.fire('drop-area-enter', { 
+                        this.fire('drop-area-enter', {
                             dragType: dragType,
                             dragItems: dragItems,
                             dataTransfer: event.dataTransfer
@@ -32,7 +31,7 @@ var EditorUI;
                 --this._dragenterCnt;
                 if ( this._dragenterCnt === 0 ) {
                     this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
-                        this.fire('drop-area-leave', { 
+                        this.fire('drop-area-leave', {
                             dragType: dragType,
                             dragItems: dragItems,
                             dataTransfer: event.dataTransfer
@@ -52,7 +51,7 @@ var EditorUI;
 
                     EditorUI.DragDrop.end();
 
-                    this.fire('drop-area-accept', { 
+                    this.fire('drop-area-accept', {
                         dragType: dragType,
                         dragItems: dragItems,
                         dataTransfer: event.dataTransfer
@@ -65,7 +64,7 @@ var EditorUI;
             var droppableList = this.droppable.split(',');
             var dragType = EditorUI.DragDrop.type(dataTransfer);
 
-            var found = false; 
+            var found = false;
             for ( var i = 0; i < droppableList.length; ++i ) {
                 if ( dragType === droppableList[i] ) {
                     found = true;
@@ -83,4 +82,6 @@ var EditorUI;
             fn.call( this, dragType, dragItems );
         },
     };
-})(EditorUI || (EditorUI = {}));
+
+    return droppable;
+})();

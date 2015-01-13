@@ -1,22 +1,20 @@
-(function () {
-    Polymer(EditorUI.mixin({
-        publish: {
-            value: false,
-        },
+Polymer(EditorUI.mixin({
+    publish: {
+        value: false,
+    },
 
-        ready: function () {
-            this._initFocusable( this.$.focus );
-        },
+    ready: function () {
+        this._initFocusable( this.$.focus );
+    },
 
-        clickAction: function (event) {
-            event.stopPropagation();
+    clickAction: function (event) {
+        event.stopPropagation();
 
-            this.value = !this.value;
-            if ( !this.focused )
-                this.$.focus.focus();
+        this.value = !this.value;
+        if ( !this.focused )
+            this.$.focus.focus();
 
-            this.fire('changed');
-        },
+        this.fire('changed');
+    },
 
-    }, EditorUI.focusable));
-})();
+}, EditorUI.focusable));

@@ -1,0 +1,82 @@
+color-outter-border = #555
+color-outter-border-focus = #0c70a6
+color-inner-border = black
+color-bg = #232323
+color-input = #aaa
+color-unit = #ddd
+color-button = #474747
+
+:host {
+    display: flex
+    position: relative
+
+    box-sizing: border-box
+    width: 240px
+    min-width: 60px
+    border: 1px solid color-outter-border
+
+    cursor: default
+    background: color-bg
+
+    &(:focus) {
+        outline: none
+    }
+
+    &(:hover) {
+        border: 1px solid color-outter-border + 30%
+    }
+
+    &([focused]) {
+        border: 1px solid color-outter-border-focus
+    }
+
+    .border {
+        border: 1px solid color-inner-border
+        width: 100%
+    }
+
+    .input-area {
+        display: block
+        padding: 2px 4px
+        border: 0
+        margin: 0
+        font-size: 12px
+        width: 100%
+
+        font-family: Helvetica,Arial,sans-serif
+        background: transparent
+        color: color-input
+
+        pointer-events: auto
+        user-select: auto
+        cursor: auto
+
+        &::-webkit-input-placeholder {
+            font-style: italic
+            color: #666
+            text-shadow: none
+        }
+
+        &:focus {
+            outline: none
+        }
+    }
+
+    &([invalid]) {
+        border: 1px solid red
+    }
+}
+
+color-bg-disabled = #3a3a3a
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    background: color-bg-disabled
+
+    .input-area {
+        color: color-input - 50%
+    }
+}

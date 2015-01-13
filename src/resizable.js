@@ -1,5 +1,4 @@
-var EditorUI;
-(function (EditorUI) {
+EditorUI.resizable = (function () {
     function _notifyResizeRecursively ( element ) {
         element.fire("resize");
 
@@ -13,7 +12,7 @@ var EditorUI;
         }
     }
 
-    EditorUI.resizable = {
+    var resizable = {
         publish: {
             'width': -1,
             'min-width': -1,
@@ -190,4 +189,5 @@ var EditorUI;
             this.computedHeight = this.getDefaultHeight();
         },
     };
-})(EditorUI || (EditorUI = {}));
+    return resizable;
+})();
