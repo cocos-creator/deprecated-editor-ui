@@ -1,17 +1,21 @@
 <polymer-element
-	name="search-option"
-	constructor="SearchOption"
+	name="fire-ui-search-option"
+	constructor="FireSearchOption"
 	tabindex="1"
 	>
 <template>
-	<link rel="stylesheet" href="search-option.css">
-	<div id="data" class="data">
-		<div class="empty {{hide}}">
-			None Matched!
-		</div>
-		<ul id="ul" on-click="{{itemClickAction}}">
-		</ul>
-	</div>
+<link rel="stylesheet" href="search-option.css">
+
+<div class="border">
+    <template repeat="{{item in options | applyFilter(searchText)}}">
+        <div class="item"
+            on-click="{{clickAction}}"
+            >
+            {{item}}
+        </div>
+    </template>
+</div>
+
 </template>
 <script type="text/javascript" src="search-option.js"></script>
 </polymer-element>

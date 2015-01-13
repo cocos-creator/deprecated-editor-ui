@@ -23,6 +23,9 @@ Polymer(EditorUI.mixin({
     },
 
     showOption: function ( show ) {
+        if ( this._showMenu === show )
+            return;
+
         this._showMenu = show;
 
         if ( show ) {
@@ -30,7 +33,6 @@ Polymer(EditorUI.mixin({
                 this.menu = new FireOption();
                 this.menu.owner = this;
                 this.menu.bind( 'value', new PathObserver(this,'value') );
-                this.menu.bind( 'options', new PathObserver(this,'options') );
             }
 
             document.body.appendChild(this.menu);

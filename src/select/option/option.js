@@ -11,7 +11,10 @@ Polymer({
             reflect: true
         },
         searchValue: '',
-        owner: null,
+    },
+
+    created: function () {
+        this.owner = null;
     },
 
     clickAction: function (event, detail, sender) {

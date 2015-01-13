@@ -1,113 +1,115 @@
 Polymer(EditorUI.mixin({
     publish: {
         options: [],
-        select: -1,
-        value: []
-    },
-
-    observe: {
-        searchList: "optionsChanged",
-        select: "updateValue",
+        placeholder: 'Search',
     },
 
     ready: function () {
-        this._initFocusable( this.$.focus );
+        this._initFocusable( this.$.inputArea );
     },
 
-    created: function () {
-        this.value = [];
+    showOption: function ( show ) {
+        if ( this._showMenu === show )
+            return;
 
-        this.option = new SearchOption();
-        this.option.owner = this;
-        this.hide = true;
-        this._showOption = false;
-        this.searchList = [];
-    },
-
-    showOption: function () {
-        window.requestAnimationFrame ( function () {
-            if (this.hide) {
-                return;
+        this._showMenu = show;
+        if ( this._showMenu ) {
+            if ( !this.menu ) {
+                this.menu = new FireSearchOption();
+                this.menu.owner = this;
+                this.menu.bind( 'options', new PathObserver(this,'options') );
             }
+
+            document.body.appendChild(this.menu);
+
+            this.menu.style.display = "";
+            this.updateMenu();
+        }
+        else {
+            if ( this.menu ) {
+                this.menu.style.display = "none";
+                this.appendChild(this.menu);
+            }
+        }
+    },
+
+    updateMenu: function () {
+        window.requestAnimationFrame ( function () {
+            if ( !this.menu || !this._showMenu )
+                return;
+
             var bodyRect = document.body.getBoundingClientRect();
             var selectRect = this.getBoundingClientRect();
-            var optionRect = this.getBoundingClientRect();
+            var menuRect = this.menu.getBoundingClientRect();
 
-            this.option.style.width = optionRect.width - 2 + "px";
-            this.option.style.left =  optionRect.left - bodyRect.left + "px";
-            this.option.style.top = optionRect.top - bodyRect.top + optionRect.height - 2 + "px";
-            this.option.style.position = "absolute";
-            this.option.style.zIndex = 999;
-            if ( !this._showOption ) {
-                document.body.appendChild(this.option);
+            var style = this.menu.style;
+            style.position = "absolute";
+            style.width = selectRect.width + "px";
+            style.left = (selectRect.left - bodyRect.left) + "px";
+            style.zIndex = 999;
+
+            if ( document.body.clientHeight - selectRect.bottom <= menuRect.height + 10 ) {
+                style.top = (selectRect.top - bodyRect.top - menuRect.height + 2) + "px";
+                this.menu.above = true;
             }
-            this.option.options = this.searchList;
-            this._showOption = true;
-            this.hide = false;
-            this.showOption();
-        }.bind(this));
-    },
+            else {
+                style.top = (selectRect.bottom - bodyRect.top - 2) + "px";
+                this.menu.above = false;
+            }
 
-    updateValue: function () {
-        if (this.searchList.length === 0 || this._showOption === false)
-            return;
-
-        this.value = this.searchList[this.select];
-        this.$.input.value = this.searchList[this.select].text;
-    },
-
-    blurAction: function (event) {
-        if (this.option === event.relatedTarget) {
-            return;
-        }
-
-        this.updateValue();
-        this.option.style.display = "none";
-        this.hide = true;
-    },
-
-    hideMenu: function () {
-        this.updateValue();
-        this.$.input.focus();
-        this.option.style.display = "none";
-        this.hide = true;
-    },
-
-    showMenu: function () {
-        this.option.style.display = "";
-        this.hide = false;
-    },
-
-    optionsChanged: function () {
-        this.option.options = this.searchList;
+            this.updateMenu();
+        }.bind(this) );
     },
 
     inputAction: function (event) {
-        this.searchValue();
-        this.showOption();
         event.stopPropagation();
+
+        this.showOption(true);
+        this.menu.searchText = this.$.inputArea.value;
     },
 
-    keydownAction: function (event) {
-        event.stopPropagation();
-        if (!this.hide) {
-            this.option.pressKey(event.which);
+    inputKeyDownAction: function (event) {
+        switch ( event.which ) {
+            // enter
+            case 13:
+                this.$.inputArea.blur();
+            break;
+
+            // esc
+            case 27:
+                if ( this.$.inputArea.value !== "" ) {
+                    this.$.inputArea.value = "";
+                    this.menu.searchText = this.$.inputArea.value;
+                }
+                else {
+                    this.$.inputArea.blur();
+                }
+            break;
         }
+
+        event.stopPropagation();
     },
 
-    searchValue: function () {
-        var inputValue = this.$.input.value;
-        this.searchList = [];
-        if (inputValue === "") {
-            this.hideMenu();
+    iconClickAction: function ( event ) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        this.focus();
+    },
+
+    focusAction: function (event) {
+        this._focusAction();
+    },
+
+    blurAction: function (event) {
+        if ( this.focused === false )
             return;
-        }
-        this.showMenu();
-        this.searchList = [];
-        for (var i = 0; i < this.options.length; i++) {
-            if (this.options[i].text.toUpperCase().indexOf(inputValue.toUpperCase()) > -1) {
-                this.searchList.push(this.options[i]);
-            }
-        }
+
+        if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
+            return;
+
+        this._blurAction();
+        this.showOption(false);
     },
+
 }, EditorUI.focusable));

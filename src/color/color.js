@@ -38,6 +38,9 @@ Polymer(EditorUI.mixin({
     },
 
     showColorPicker: function ( show ) {
+        if ( this._showColorPicker === show )
+            return;
+
         this._showColorPicker = show;
 
         if ( show ) {

@@ -70,9 +70,6 @@ Polymer(EditorUI.mixin({
         if ( this.focused === false )
             return;
 
-        if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-            return;
-
         this._blurAction();
 
         //
