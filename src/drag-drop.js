@@ -98,14 +98,14 @@ EditorUI.DragDrop = (function () {
 
         //NOTE: 如果是用canvas来做的话,没法解决字体模糊的问题(retina下)。
         getDropIcon: function (items) {
-          var DropIcon = document.createElement("img");
+          var DropIcon = new Image();
           var DropCanvas = document.createElement('canvas');
           var imgPanel = DropCanvas.getContext('2d');
           imgPanel.font = "normal 12px Arial";
           imgPanel.fillStyle = "white";
           var top = 0;
           for (var i = 0; i < items.length; i++) {
-            if (i <=4 ) {
+            if (i <= 4 ) {
               DropIcon.src = "uuid://" + items[i] + "?thumb";
               imgPanel.drawImage(DropIcon,0,top,16,16); //icon
               imgPanel.fillText(items[i],20,top + 15); //text
