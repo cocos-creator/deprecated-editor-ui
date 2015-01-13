@@ -12,7 +12,7 @@ EditorUI.DragDrop = (function () {
             dataTransfer.dropEffect = 'none';
             dataTransfer.setData('fire/type', type);
             dataTransfer.setData('fire/items', items.join());
-            var img = this.getDropIcon(items);
+            var img = this.getDragIcon(items);
             dataTransfer.setDragImage(img, -20, 0);
             // TODO: event.dataTransfer.setDragImage( null, 0, 0 );
         },
@@ -96,31 +96,31 @@ EditorUI.DragDrop = (function () {
             return items;
         },
 
-        //NOTE: 如果是用canvas来做的话,没法解决字体模糊的问题(retina下)。
-        getDropIcon: function (items) {
-          var DropIcon = new Image();
-          var DropCanvas = document.createElement('canvas');
-          var imgPanel = DropCanvas.getContext('2d');
-          imgPanel.font = "normal 12px Arial";
-          imgPanel.fillStyle = "white";
-          var top = 0;
-          for (var i = 0; i < items.length; i++) {
-            if (i <= 4 ) {
-              DropIcon.src = "uuid://" + items[i] + "?thumb";
-              imgPanel.drawImage(DropIcon,0,top,16,16); //icon
-              imgPanel.fillText(items[i],20,top + 15); //text
-              top += 15;
-            }
-            else {
-              imgPanel.fillStyle = "red";
-              imgPanel.fillText("[more.....]",20,top + 15);
-              break;
+        // NOTE: The image will be blur in retina, still not find a solution.
+        getDragIcon: function (items) {
+            var icon = new Image();
+            var canvas = document.createElement('canvas');
+            var imgPanel = canvas.getContext('2d');
+            imgPanel.font = "normal 12px Arial";
+            imgPanel.fillStyle = "white";
+            var top = 0;
+            for ( var i = 0; i < items.length; ++i ) {
+                if ( i <= 4 ) {
+                    icon.src = "uuid://" + items[i] + "?thumb";
+                    imgPanel.drawImage(icon,0,top,16,16); // icon
+                    imgPanel.fillText(items[i],20,top + 15); // text
+                    top += 15;
+                }
+                else {
+                    imgPanel.fillStyle = "gray";
+                    imgPanel.fillText("[more.....]",20,top + 15);
+                    break;
+                }
+
             }
 
-          }
-
-          DropIcon.src = DropCanvas.toDataURL();
-          return DropIcon;
+            icon.src = canvas.toDataURL();
+            return icon;
         },
     };
 
