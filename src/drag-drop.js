@@ -8,13 +8,15 @@ EditorUI.DragDrop = (function () {
 
     var DragDrop = {
         start: function ( dataTransfer, effect, type, items ) {
+            var ids = items.map( function (item) {
+                return item.id;
+            } );
             dataTransfer.effectAllowed = effect;
             dataTransfer.dropEffect = 'none';
             dataTransfer.setData('fire/type', type);
-            dataTransfer.setData('fire/items', items.join());
+            dataTransfer.setData('fire/items', ids.join());
             var img = this.getDragIcon(items);
-            dataTransfer.setDragImage(img, -20, 0);
-            // TODO: event.dataTransfer.setDragImage( null, 0, 0 );
+            dataTransfer.setDragImage(img, -10, 10);
         },
 
         drop: function ( dataTransfer ) {
@@ -105,10 +107,11 @@ EditorUI.DragDrop = (function () {
             imgPanel.fillStyle = "white";
             var top = 0;
             for ( var i = 0; i < items.length; ++i ) {
+                var item = items[i];
                 if ( i <= 4 ) {
-                    icon.src = "uuid://" + items[i] + "?thumb";
+                    icon.src = "uuid://" + item.id + "?thumb";
                     imgPanel.drawImage(icon,0,top,16,16); // icon
-                    imgPanel.fillText(items[i],20,top + 15); // text
+                    imgPanel.fillText(item.name,20,top + 15); // text
                     top += 15;
                 }
                 else {
