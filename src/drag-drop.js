@@ -1,5 +1,4 @@
-var EditorUI;
-(function (EditorUI) {
+EditorUI.DragDrop = (function () {
     var Path = null;
     if ( Fire.isApp ) {
         Path = require('fire-path');
@@ -129,5 +128,5 @@ var EditorUI;
         get: function () { return _allowed; }
     });
 
-    EditorUI.DragDrop = DragDrop;
-})(EditorUI || (EditorUI = {}));
+    return DragDrop;
+})();

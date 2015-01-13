@@ -1,10 +1,8 @@
-(function () {
-    Polymer({
-        publish: {
-            active: {
-                value: false,
-                reflect: true
-            },
+Polymer({
+    publish: {
+        active: {
+            value: false,
+            reflect: true
         },
-    });
-})();
+    },
+});
