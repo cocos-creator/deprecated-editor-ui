@@ -129,15 +129,6 @@
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-search select="{{select}}" value="{{selectValue}}" options="{{myDropDownList}}"></fire-ui-search>
-            <span class="space"></span>
-            <fire-ui-label>myDropdown = {{select}}</fire-ui-label>
-            <span class="space"></span>
-            <fire-ui-label>list = {{selectValue|toFObjectText()}}</fire-ui-label>
-        </div>
-        <span class="space"></span>
-
-        <div flex-row>
             <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>
             <span class="space"></span>
             <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>
@@ -233,6 +224,9 @@
                     <span class="space"></span>
                 </div>
             </fire-ui-toolbar>
+            <span class="space"></span>
+
+            <fire-ui-search select="{{select}}" value="{{selectValue}}" options="{{myDropDownList}}"></fire-ui-search>
             <span class="space"></span>
 
             <fire-ui-button-group>

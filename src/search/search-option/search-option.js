@@ -28,12 +28,13 @@ Polymer({
 
 	pressKey: function (keyCode) {
 		var thisRect = this.getBoundingClientRect();
+        var optionRect;
 		if (keyCode == 38) {
 			if (this.tempSelect.previousElementSibling !== null) {
 				this.tempSelect.removeAttribute("select");
 				this.tempSelect.previousElementSibling.setAttribute("select","");
 				this.tempSelect = this.tempSelect.previousElementSibling;
-				var optionRect = this.tempSelect.getBoundingClientRect();
+				optionRect = this.tempSelect.getBoundingClientRect();
 				if (optionRect.top <= thisRect.top - 15) {
 					this.$.data.scrollTop -= optionRect.height + 1;
 				}
@@ -44,7 +45,7 @@ Polymer({
 				this.tempSelect.removeAttribute("select");
 				this.tempSelect.nextElementSibling.setAttribute("select","");
 				this.tempSelect = this.tempSelect.nextElementSibling;
-				var optionRect = this.tempSelect.getBoundingClientRect();
+				optionRect = this.tempSelect.getBoundingClientRect();
 				if (optionRect.top >= (thisRect.top + thisRect.height) - 15) {
 					this.$.data.scrollTop += optionRect.height + 1;
 				}

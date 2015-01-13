@@ -1,13 +1,5 @@
-var EditorUI;
-(function (EditorUI) {
-    // DISABLE: use wrap, unwrap instead
-    // EditorUI.getDOM = function ( domWrapper ) {
-    //     if ( Platform.flags.shadow )
-    //         return domWrapper.impl;
-    //     else
-    //         return domWrapper;
-    // };
-
+var EditorUI = (function () {
+    var EditorUI = {};
     EditorUI.isFlex = function ( element ) {
         if ( element.getAttribute("flex-1") !== null ) return true;
         if ( element.getAttribute("flex-2") !== null ) return true;
@@ -40,9 +32,9 @@ var EditorUI;
 
     //
     EditorUI.find = function ( elements, elementToFind ) {
-        if ( Array.isArray(elements) || 
+        if ( Array.isArray(elements) ||
              elements instanceof NodeList ||
-             elements instanceof HTMLCollection ) 
+             elements instanceof HTMLCollection )
         {
             for ( var i = 0; i < elements.length; ++i ) {
                 var element = elements[i];
@@ -66,7 +58,7 @@ var EditorUI;
     EditorUI.getParentTabIndex = function ( element ) {
         var parent = element.parentElement;
         while ( parent ) {
-            if ( parent.tabIndex !== null && 
+            if ( parent.tabIndex !== null &&
                  parent.tabIndex !== undefined &&
                  parent.tabIndex !== -1 )
                 return parent.tabIndex;
@@ -90,7 +82,7 @@ var EditorUI;
 
     //
     EditorUI.getFirstFocusableChild = function ( element ) {
-        if ( element.tabIndex !== null && 
+        if ( element.tabIndex !== null &&
              element.tabIndex !== undefined &&
              element.tabIndex !== -1 )
         {
@@ -113,7 +105,7 @@ var EditorUI;
     };
 
     //
-    var _dragGhost = null; 
+    var _dragGhost = null;
     EditorUI.addDragGhost = function ( cursor ) {
         // add drag-ghost
         if ( _dragGhost === null ) {
@@ -141,7 +133,7 @@ var EditorUI;
     };
 
     //
-    var _hitGhost = null; 
+    var _hitGhost = null;
     EditorUI.addHitGhost = function ( cursor, zindex, onhit ) {
         // add drag-ghost
         if ( _hitGhost === null ) {
@@ -161,7 +153,7 @@ var EditorUI;
         _hitGhost.addEventListener('mousedown', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            if ( onhit ) 
+            if ( onhit )
                 onhit();
         });
         document.body.appendChild(_hitGhost);
@@ -210,7 +202,7 @@ var EditorUI;
             for ( var name in source) {
                 if ( name === 'publish' ||
                      name === 'observe' ||
-                     name === 'eventDelegates' ) 
+                     name === 'eventDelegates' )
                 {
                     obj[name] = Fire.addon( obj[name], source[name] );
                 }
@@ -224,4 +216,5 @@ var EditorUI;
         return obj;
     };
 
-})(EditorUI || (EditorUI = {}));
+    return EditorUI;
+})();

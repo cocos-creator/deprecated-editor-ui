@@ -1,72 +1,70 @@
-(function () {
-    Polymer(EditorUI.mixin({
-        publish: {
-            name: '',
-        },
+Polymer(EditorUI.mixin({
+    publish: {
+        name: '',
+    },
 
-        _generated: false,
+    _generated: false,
 
-        ready: function () {
-            this._initFocusable();
-        },
+    ready: function () {
+        this._initFocusable();
+    },
 
-        attached: function () {
-            if ( this._generated )
-                return;
-            this._generated = true;
+    attached: function () {
+        if ( this._generated )
+            return;
+        this._generated = true;
 
-            if ( this.name === '' ) {
-                var varName = this.attributes.value.value;
-                varName = varName.replace( /{{(.*)}}/, "$1" );
-                this.name = EditorUI.camelCaseToHuman(varName); 
-            }
+        if ( this.name === '' ) {
+            var varName = this.attributes.value.value;
+            varName = varName.replace( /{{(.*)}}/, "$1" );
+            this.name = EditorUI.camelCaseToHuman(varName);
+        }
 
-            var fieldEL = this.createFieldElement();
-            if ( fieldEL === null ) {
-                Fire.error("Failed to create field " + this.name );
-                return;
-            }
-
-            fieldEL.setAttribute('flex-2','');
-            fieldEL.bind( 'value', new PathObserver(this,'value') );
-            fieldEL.setAttribute( 'value', '{{value}}' );
-            fieldEL.id = "field";
-            this.appendChild(fieldEL);
-            this.$.field = fieldEL;
-
-            if ( this.onFieldCreated ) {
-                this.onFieldCreated();
-            }
-        },
-
-        focusinAction: function ( event ) {
-            this._focusAction();
-            this.$.label.focused = true;
-        },
-
-        focusoutAction: function ( event ) {
-            if ( this.focused === false )
-                return;
-
-            this._blurAction();
-            this.$.label.focused = false;
-        },
-
-        mousedownAction: function ( event ) {
-            if ( this.$.focus !== event.target &&
-                 this.$.label !== event.target && 
-                 EditorUI.find(this.$.label, event.target) === false )
-                return;
-
-            var focusableEL = EditorUI.getFirstFocusableChild(this.$.field.shadowRoot);
-            if ( focusableEL ) {
-                focusableEL.focus();
-            }
-
-            event.preventDefault();
-            event.stopPropagation();
-
+        var fieldEL = this.createFieldElement();
+        if ( fieldEL === null ) {
+            Fire.error("Failed to create field " + this.name );
             return;
         }
-    }, EditorUI.focusable));
-})();
+
+        fieldEL.setAttribute('flex-2','');
+        fieldEL.bind( 'value', new PathObserver(this,'value') );
+        fieldEL.setAttribute( 'value', '{{value}}' );
+        fieldEL.id = "field";
+        this.appendChild(fieldEL);
+        this.$.field = fieldEL;
+
+        if ( this.onFieldCreated ) {
+            this.onFieldCreated();
+        }
+    },
+
+    focusinAction: function ( event ) {
+        this._focusAction();
+        this.$.label.focused = true;
+    },
+
+    focusoutAction: function ( event ) {
+        if ( this.focused === false )
+            return;
+
+        this._blurAction();
+        this.$.label.focused = false;
+    },
+
+    mousedownAction: function ( event ) {
+        if ( this.$.focus !== event.target &&
+             this.$.label !== event.target &&
+             EditorUI.find(this.$.label, event.target) === false )
+            return;
+
+        var focusableEL = EditorUI.getFirstFocusableChild(this.$.field.shadowRoot);
+        if ( focusableEL ) {
+            focusableEL.focus();
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        return;
+    }
+}, EditorUI.focusable));

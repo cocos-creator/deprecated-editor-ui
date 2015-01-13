@@ -7,6 +7,23 @@ var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
 var del = require('del');
+var es = require('event-stream');
+var path = require('path');
+
+function wrapScope () {
+    var header = new Buffer("(function () {\n");
+    var footer = new Buffer("})();\n");
+    return es.through(function (file) {
+        // do not wrap scope on first classes
+        if ( path.dirname(file.relative) === "." ) {
+            this.emit('data', file);
+            return;
+        }
+
+        file.contents = Buffer.concat([header, file.contents, footer]);
+        this.emit('data', file);
+    });
+}
 
 var paths = {
     ext_core: '../core/bin/**/*.js',
@@ -42,6 +59,7 @@ gulp.task('cp-html', function() {
 // js
 gulp.task('js', function() {
     return gulp.src(paths.js, {base: 'src'})
+    .pipe(wrapScope())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(uglify())
@@ -50,6 +68,7 @@ gulp.task('js', function() {
 });
 gulp.task('js-no-uglify', function() {
     return gulp.src(paths.js, {base: 'src'})
+    .pipe(wrapScope())
     .pipe(gulp.dest('bin'))
     ;
 });
