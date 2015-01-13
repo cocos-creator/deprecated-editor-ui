@@ -10,9 +10,9 @@
 
         created: function () {
             // NOTE: the call back will execute code after prop field created,
-            //       sometimes we need to initialize fields, for example in fire-inspector 
-            //       the field will be disabled depends on watch values. And this callback 
-            //       make sure the tabIndex initialize after all elements are ready. 
+            //       sometimes we need to initialize fields, for example in fire-inspector
+            //       the field will be disabled depends on watch values. And this callback
+            //       make sure the tabIndex initialize after all elements are ready.
             this.onFieldCreated = null;
         },
 
@@ -59,7 +59,7 @@
                 break;
 
             case "object":
-                var classDef = Fire.getClassByName(typename);
+                var classDef = Fire.getClassById(typename);
 
                 if ( Array.isArray(this.value) ) {
                     typename = 'array';
@@ -68,7 +68,7 @@
                     typename = 'fobject';
                 }
                 else {
-                    typename = Fire.getClassName(this.value);
+                    typename = Fire.getClassId(this.value);
                 }
                 break;
 
@@ -90,7 +90,7 @@
                         }
                     }
                     if ( this.finalEnumList ) {
-                        fieldEL = new FireSelect(); 
+                        fieldEL = new FireSelect();
                         fieldEL.options = this.finalEnumList;
                     }
                     break;

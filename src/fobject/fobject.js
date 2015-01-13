@@ -53,7 +53,7 @@
             event.stopPropagation();
 
             if ( Fire.browseObject ) {
-                Fire.browseObject( Fire.getClassByName(this.type) );
+                Fire.browseObject( Fire.getClassById(this.type) );
             }
         },
 
@@ -72,7 +72,7 @@
             var dragType = event.detail.dragType;
 
             //
-            var classDef = Fire.getClassByName(this.type);
+            var classDef = Fire.getClassById(this.type);
             if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
                 Fire.AssetLibrary.loadAsset( dragItems[0], function (asset) {
                     if ( asset instanceof classDef ) {
