@@ -1,0 +1,21 @@
+<polymer-element
+	name="fire-ui-search-option"
+	constructor="FireSearchOption"
+	tabindex="1"
+	>
+<template>
+<link rel="stylesheet" href="search-option.css">
+
+<div class="border">
+    <template repeat="{{item in options | applyFilter(searchText)}}">
+        <div class="item"
+            on-click="{{clickAction}}"
+            >
+            {{item}}
+        </div>
+    </template>
+</div>
+
+</template>
+<script type="text/javascript" src="search-option.js"></script>
+</polymer-element>

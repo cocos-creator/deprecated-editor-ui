@@ -1,113 +1,115 @@
-(function () {
 Polymer(EditorUI.mixin({
-	publish: {
-		options: [],
-		select: -1,
-		value: []
-	},
+    publish: {
+        options: [],
+        placeholder: 'Search',
+    },
 
-	observe: {
-		searchList: "optionsChanged",
-		select: "updateValue",
-	},
+    ready: function () {
+        this._initFocusable( this.$.inputArea );
+    },
 
-	ready: function () {
-		this._initFocusable( this.$.focus );
-	},
+    showOption: function ( show ) {
+        if ( this._showMenu === show )
+            return;
 
-	created: function () {
-		this.option = new SearchOption();
-		this.option.owner = this;
-		this.hide = true;
-		this._showOption = false;
-		this.searchList = [];
-	},
+        this._showMenu = show;
+        if ( this._showMenu ) {
+            if ( !this.menu ) {
+                this.menu = new FireSearchOption();
+                this.menu.owner = this;
+                this.menu.bind( 'options', new PathObserver(this,'options') );
+            }
 
-	showOption: function () {
-		window.requestAnimationFrame ( function () {
-			if (this.hide) {
-				return;
-			}
-			var bodyRect = document.body.getBoundingClientRect();
-			var selectRect = this.getBoundingClientRect();
-			var optionRect = this.getBoundingClientRect();
+            document.body.appendChild(this.menu);
 
-			this.option.style.width = optionRect.width - 2 + "px";
-			this.option.style.left =  optionRect.left - bodyRect.left + "px";
-			this.option.style.top = optionRect.top - bodyRect.top + optionRect.height - 2 + "px";
-			this.option.style.position = "absolute";
-			this.option.style.zIndex = 999;
-			if ( !this._showOption ) {
-				document.body.appendChild(this.option);
-			}
-			this.option.options = this.searchList;
-			this._showOption = true;
-			this.hide = false;
-			this.showOption();
-		}.bind(this));
-	},
+            this.menu.style.display = "";
+            this.updateMenu();
+        }
+        else {
+            if ( this.menu ) {
+                this.menu.style.display = "none";
+                this.appendChild(this.menu);
+            }
+        }
+    },
 
-	updateValue: function () {
-		if (this.searchList.length === 0 || this._showOption == false)
-			return;
+    updateMenu: function () {
+        window.requestAnimationFrame ( function () {
+            if ( !this.menu || !this._showMenu )
+                return;
 
-		this.value = this.searchList[this.select];
-		this.$.input.value = this.searchList[this.select].text;
-	},
+            var bodyRect = document.body.getBoundingClientRect();
+            var selectRect = this.getBoundingClientRect();
+            var menuRect = this.menu.getBoundingClientRect();
 
-	blurAction: function (event) {
-		if (this.option === event.relatedTarget) {
-			return;
-		}
+            var style = this.menu.style;
+            style.position = "absolute";
+            style.width = selectRect.width + "px";
+            style.left = (selectRect.left - bodyRect.left) + "px";
+            style.zIndex = 999;
 
-		this.updateValue();
-		this.option.style.display = "none";
-		this.hide = true;
-	},
+            if ( document.body.clientHeight - selectRect.bottom <= menuRect.height + 10 ) {
+                style.top = (selectRect.top - bodyRect.top - menuRect.height + 2) + "px";
+                this.menu.above = true;
+            }
+            else {
+                style.top = (selectRect.bottom - bodyRect.top - 2) + "px";
+                this.menu.above = false;
+            }
 
-	hideMenu: function () {
-		this.updateValue();
-		this.$.input.focus();
-		this.option.style.display = "none";
-		this.hide = true;
-	},
+            this.updateMenu();
+        }.bind(this) );
+    },
 
-	showMenu: function () {
-		this.option.style.display = "";
-		this.hide = false;
-	},
+    inputAction: function (event) {
+        event.stopPropagation();
 
-	optionsChanged: function () {
-		this.option.options = this.searchList;
-	},
+        this.showOption(true);
+        this.menu.searchText = this.$.inputArea.value;
+    },
 
-	inputAction: function (event) {
-		this.searchValue();
-		this.showOption();
-		event.stopPropagation();
-	},
+    inputKeyDownAction: function (event) {
+        switch ( event.which ) {
+            // enter
+            case 13:
+                this.$.inputArea.blur();
+            break;
 
-	keydownAction: function (event) {
-		event.stopPropagation();
-		if (!this.hide) {
-			this.option.pressKey(event.which);
-		}
-	},
+            // esc
+            case 27:
+                if ( this.$.inputArea.value !== "" ) {
+                    this.$.inputArea.value = "";
+                    this.menu.searchText = this.$.inputArea.value;
+                }
+                else {
+                    this.$.inputArea.blur();
+                }
+            break;
+        }
 
-	searchValue: function () {
-		var inputValue = this.$.input.value;
-		this.searchList = [];
-		if (inputValue === "") {
-			this.hideMenu();
-			return;
-		}
-		this.showMenu();
-		this.searchList = [];
-		for (var i = 0; i < this.options.length; i++) {
-			if (this.options[i].text.toUpperCase().indexOf(inputValue.toUpperCase()) > -1) {
-				this.searchList.push(this.options[i]);
-			}
-		}
-	},
+        event.stopPropagation();
+    },
+
+    iconClickAction: function ( event ) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        this.focus();
+    },
+
+    focusAction: function (event) {
+        this._focusAction();
+    },
+
+    blurAction: function (event) {
+        if ( this.focused === false )
+            return;
+
+        if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
+            return;
+
+        this._blurAction();
+        this.showOption(false);
+    },
+
 }, EditorUI.focusable));
-})();

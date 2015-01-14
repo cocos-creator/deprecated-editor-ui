@@ -1,5 +1,4 @@
-var EditorUI;
-(function (EditorUI) {
+EditorUI.focusable = (function () {
 
     //
     function _removeTabIndexRecursively ( el ) {
@@ -26,7 +25,7 @@ var EditorUI;
     }
 
 
-    EditorUI.focusable = {
+    var focusable = {
         publish: {
             focused: { value: false, reflect: true },
             disabled: { value: false, reflect: true },
@@ -136,4 +135,5 @@ var EditorUI;
             this._removeTabIndex();
         },
     };
-})(EditorUI || (EditorUI = {}));
+    return focusable;
+})();

@@ -1,141 +1,136 @@
-(function () {
-    Polymer(EditorUI.mixin({
-        publish: {
-            value: '',
-            inputValue: '',
-            placeholder: '',
-            invalid: {
-                value: false,
-                reflect: true
-            },
-            regex: {
-                value: false,
-                reflect: true
-            }
+Polymer(EditorUI.mixin({
+    publish: {
+        value: '',
+        inputValue: '',
+        placeholder: '',
+        invalid: {
+            value: false,
+            reflect: true
         },
+        regex: {
+            value: false,
+            reflect: true
+        }
+    },
 
-        ready: function() {
-            this._initFocusable(this.$.inputArea);
-        },
+    ready: function() {
+        this._initFocusable(this.$.inputArea);
+    },
 
-        valueChanged: function () {
-            this.$.inputArea.value = this.value;
-            this.inputValue = this.value;
-        },
+    valueChanged: function () {
+        this.$.inputArea.value = this.value;
+        this.inputValue = this.value;
+    },
 
-        _adjust: function () {
-            var areaEL = this.$.inputArea;
+    _adjust: function () {
+        var areaEL = this.$.inputArea;
 
-            // NOTE: this will make sure the scrollHeight calculate even we shrink it.
-            areaEL.style.height = "0px";
-            areaEL.style.height = areaEL.scrollHeight + "px";
+        // NOTE: this will make sure the scrollHeight calculate even we shrink it.
+        areaEL.style.height = "0px";
+        areaEL.style.height = areaEL.scrollHeight + "px";
 
-            if ( areaEL.scrollWidth > areaEL.clientWidth &&
-                 areaEL.style.overflowX !== 'hidden' )
-            {
-                var scrollBarHeight = areaEL.offsetHeight - areaEL.clientHeight;
-                areaEL.style.height = (areaEL.scrollHeight + scrollBarHeight) + "px";
-            }
-        },
+        if ( areaEL.scrollWidth > areaEL.clientWidth &&
+             areaEL.style.overflowX !== 'hidden' )
+        {
+            var scrollBarHeight = areaEL.offsetHeight - areaEL.clientHeight;
+            areaEL.style.height = (areaEL.scrollHeight + scrollBarHeight) + "px";
+        }
+    },
 
-        select: function () {
-            this.$.inputArea.select();
-        },
+    select: function () {
+        this.$.inputArea.select();
+    },
 
-        regexCheck: function () {
+    regexCheck: function () {
+        this.invalid = false;
+
+        try {
+            new RegExp(this.inputValue);
+        }
+        catch(e) {
+            this.invalid = true;
+        }
+    },
+
+    regexChanged: function () {
+        if ( this.regex ) {
+            this.regexCheck ();
+        }
+        else {
             this.invalid = false;
+        }
+    },
 
-            try {
-                new RegExp(this.inputValue);
-            }
-            catch(e) {
-                this.invalid = true;
-            }
-        },
+    focusAction: function (event) {
+        this._focusAction();
+        this.lastVal = this.value;
+    },
 
-        regexChanged: function () {
-            if ( this.regex ) {
-                this.regexCheck ();
-            }
-            else {
-                this.invalid = false;
-            }
-        },
+    blurAction: function (event, detail, sender) {
+        if ( this.focused === false )
+            return;
 
-        focusAction: function (event) {
-            this._focusAction();
-            this.lastVal = this.value;
-        },
+        this._blurAction();
 
-        blurAction: function (event, detail, sender) {
-            if ( this.focused === false )
-                return;
+        //
+        if ( this.value !== this.$.inputArea.value ) {
+            this.value = this.$.inputArea.value;
+            this.fire('changed');
+        }
 
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
+        this.fire('confirm');
+    },
 
-            this._blurAction();
+    inputAction: function (event) {
+        // DISABLE 1: this will prevent Chinese input
+        // if ( this.value != event.target.value ) {
+        //     this.value = event.target.value;
+        //     this.fire('changed');
+        // }
 
-            //
-            if ( this.value !== this.$.inputArea.value ) {
-                this.value = this.$.inputArea.value;
-                this.fire('changed');
-            }
+        // DISABLE 2:
+        // this.fire('input-changed', { value: event.target.value } );
 
-            this.fire('confirm');
-        },
+        event.stopPropagation();
 
-        inputAction: function (event) {
-            // DISABLE 1: this will prevent Chinese input
-            // if ( this.value != event.target.value ) {
-            //     this.value = event.target.value;
-            //     this.fire('changed');
-            // }
+        this.inputValue = event.target.value;
+        if ( this.regex ) {
+            this.regexCheck();
+        }
+    },
 
-            // DISABLE 2:
-            // this.fire('input-changed', { value: event.target.value } );
-
+    inputMouseDownAction: function (event) {
+        if ( !this.focused ) {
+            event.preventDefault();
             event.stopPropagation();
 
-            this.inputValue = event.target.value;
-            if ( this.regex ) {
-                this.regexCheck();
-            }
-        },
+            this.select();
+        }
+    },
 
-        inputMouseDownAction: function (event) {
-            if ( !this.focused ) {
-                event.preventDefault();
-                event.stopPropagation();
+    inputKeyDownAction: function (event) {
+        switch ( event.which ) {
+            // enter
+            case 13:
+                if ( this.value != event.target.value ) {
+                    this.value = event.target.value;
+                    this.fire('changed');
+                }
+                this.$.inputArea.blur();
+            break;
 
-                this.select();
-            }
-        },
+            // esc
+            case 27:
+                this.$.inputArea.value = this.lastVal;
+                this.inputValue = this.lastVal;
+                if ( this.value != this.lastVal ) {
+                    this.value = this.lastVal;
+                    this.fire('changed');
+                }
+                this.$.inputArea.blur();
+            break;
+        }
 
-        inputKeyDownAction: function (event) {
-            switch ( event.which ) {
-                // enter
-                case 13:
-                    if ( this.value != event.target.value ) {
-                        this.value = event.target.value;
-                        this.fire('changed');
-                    }
-                    this.$.inputArea.blur();
-                break;
-
-                // esc
-                case 27:
-                    this.$.inputArea.value = this.lastVal;
-                    this.inputValue = this.lastVal;
-                    if ( this.value != this.lastVal ) {
-                        this.value = this.lastVal;
-                        this.fire('changed');
-                    }
-                    this.$.inputArea.blur();
-                break;
-            }
-
-            event.stopPropagation();
-        },
-    }, EditorUI.focusable));
-})();
+        event.stopPropagation();
+    },
+}, EditorUI.focusable));

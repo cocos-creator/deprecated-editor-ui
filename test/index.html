@@ -129,15 +129,6 @@
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-search select="{{select}}" value="{{selectValue}}" options="{{myDropDownList}}"></fire-ui-search>
-            <span class="space"></span>
-            <fire-ui-label>myDropdown = {{select}}</fire-ui-label>
-            <span class="space"></span>
-            <fire-ui-label>list = {{selectValue|toFObjectText()}}</fire-ui-label>
-        </div>
-        <span class="space"></span>
-
-        <div flex-row>
             <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>
             <span class="space"></span>
             <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>
@@ -233,6 +224,9 @@
                     <span class="space"></span>
                 </div>
             </fire-ui-toolbar>
+            <span class="space"></span>
+
+            <fire-ui-search options="{{mySearchResult}}"></fire-ui-search>
             <span class="space"></span>
 
             <fire-ui-button-group>
@@ -351,21 +345,21 @@
         },
         mySelectSearchable: false,
 
-        //searchmenu
-        myDropDownList: [
-            { text: '<h1>lallala</h1>',value: 0 },
-            { text: 'yoyo',value: 1 },
-            { text: 'meant',value: 2 },
-            { text: 'Interesting',value: 3 },
-            { text: 'Kamisama',value: 4 },
-            { text: 'mumi',value: 5 },
-            { text: 'close', value: 6 },
-            { text: 'what', value: 6 },
-            { text: 'dly admit it t', value: 7 },
-            { text: 'steering', value: 8 },
-            { text: 'similarity', value: 9 },
-            { text: 'Windows', value: 10 },
-            { text: 'customization', value: 11 },
+        // searchmenu
+        mySearchResult: [
+            '<h1>lallala</h1>',
+            'yoyo',
+            'meant',
+            'Interesting',
+            'Kamisama',
+            'mumi',
+            'close',
+            'what',
+            'dly admit it t',
+            'steering',
+            'similarity',
+            'Windows',
+            'customization',
         ],
 
         // myColor

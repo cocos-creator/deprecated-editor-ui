@@ -1,121 +1,119 @@
-(function () {
-    Polymer(EditorUI.mixin({
-        publish: {
-            value: null,
-            type: "Fire.FObject",
-            highlighted: {
-                value: false,
-                reflect: true,
-            },
-            invalid: {
-                value: false,
-                reflect: true,
-            },
-
-            // droppable
-            droppable: 'asset,entity',
-            "single-drop": true,
+Polymer(EditorUI.mixin({
+    publish: {
+        value: null,
+        type: "Fire.FObject",
+        highlighted: {
+            value: false,
+            reflect: true,
+        },
+        invalid: {
+            value: false,
+            reflect: true,
         },
 
-        ready: function () {
-            this._curDragObject = null;
-            this._initFocusable(this.$.focus);
-            this._initDroppable(this.$.dropArea);
-        },
+        // droppable
+        droppable: 'asset,entity',
+        "single-drop": true,
+    },
 
-        typeToName: function (val) {
-            var name = val;
-            if ( name.substr(0,5) === "Fire." ) {
-                return name.substr(5);
-            }
-            return name;
-        },
+    ready: function () {
+        this._curDragObject = null;
+        this._initFocusable(this.$.focus);
+        this._initDroppable(this.$.dropArea);
+    },
 
-        blurAction: function (event) {
-            if ( this.focused === false )
-                return;
+    typeToName: function (val) {
+        var name = val;
+        if ( name.substr(0,5) === "Fire." ) {
+            return name.substr(5);
+        }
+        return name;
+    },
 
-            if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
-                return;
+    blurAction: function (event) {
+        if ( this.focused === false )
+            return;
 
-            this._blurAction();
-        },
+        if ( EditorUI.find( this.shadowRoot, event.relatedTarget ) )
+            return;
 
-        borderClickAction: function (event) {
-            event.stopPropagation();
+        this._blurAction();
+    },
 
-            if ( Fire.hintObject ) {
-                Fire.hintObject(this.value);
-            }
-        },
+    borderClickAction: function (event) {
+        event.stopPropagation();
 
-        browseClickAction: function (event) {
-            event.stopPropagation();
+        if ( Fire.hintObject ) {
+            Fire.hintObject(this.value);
+        }
+    },
 
-            if ( Fire.browseObject ) {
-                Fire.browseObject( Fire.getClassByName(this.type) );
-            }
-        },
+    browseClickAction: function (event) {
+        event.stopPropagation();
 
-        resetDragState: function () {
-            this._curDragObject = null;
-            this.highlighted = false;
-            this.invalid = false;
-        },
+        if ( Fire.browseObject ) {
+            Fire.browseObject( Fire.getClassById(this.type) );
+        }
+    },
 
-        dropAreaEnterAction: function (event) {
-            event.stopPropagation();
+    resetDragState: function () {
+        this._curDragObject = null;
+        this.highlighted = false;
+        this.invalid = false;
+    },
 
+    dropAreaEnterAction: function (event) {
+        event.stopPropagation();
+
+        this.invalid = true;
+
+        var dragItems = event.detail.dragItems;
+        var dragType = event.detail.dragType;
+
+        //
+        var classDef = Fire.getClassById(this.type);
+        if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
+            Fire.AssetLibrary.loadAsset( dragItems[0], function (asset) {
+                if ( asset instanceof classDef ) {
+                    this._curDragObject = asset;
+                    this.highlighted = true;
+                    this.invalid = false;
+                }
+                else {
+                    this.highlighted = true;
+                    this.invalid = true;
+                }
+            }.bind(this) );
+        }
+        else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
+            // TODO
+            this.highlighted = true;
             this.invalid = true;
+        }
+        else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
+            // TODO
+            this.highlighted = true;
+            this.invalid = true;
+        }
+        else {
+            this.highlighted = true;
+            this.invalid = true;
+        }
+    },
 
-            var dragItems = event.detail.dragItems;
-            var dragType = event.detail.dragType;
+    dropAreaLeaveAction: function (event) {
+        event.stopPropagation();
 
-            //
-            var classDef = Fire.getClassByName(this.type);
-            if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
-                Fire.AssetLibrary.loadAssetByUuid( dragItems[0], function (asset) {
-                    if ( asset instanceof classDef ) {
-                        this._curDragObject = asset;
-                        this.highlighted = true;
-                        this.invalid = false;
-                    }
-                    else {
-                        this.highlighted = true;
-                        this.invalid = true;
-                    }
-                }.bind(this) );
-            }
-            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
-                // TODO
-                this.highlighted = true;
-                this.invalid = true;
-            }
-            else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
-                // TODO
-                this.highlighted = true;
-                this.invalid = true;
-            }
-            else {
-                this.highlighted = true;
-                this.invalid = true;
-            }
-        },
+        this.resetDragState();
+    },
 
-        dropAreaLeaveAction: function (event) {
-            event.stopPropagation();
+    dropAreaAcceptAction: function (event) {
+        event.stopPropagation();
 
-            this.resetDragState();
-        },
+        if ( !this.invalid )
+            this.value = this._curDragObject;
 
-        dropAreaAcceptAction: function (event) {
-            event.stopPropagation();
+        this.resetDragState();
+    },
 
-            if ( !this.invalid )
-                this.value = this._curDragObject;
-
-            this.resetDragState();
-        },
-
-    }, EditorUI.focusable, EditorUI.droppable));
-})();
+}, EditorUI.focusable, EditorUI.droppable));

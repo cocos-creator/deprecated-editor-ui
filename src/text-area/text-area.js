@@ -1,62 +1,60 @@
-(function () {
-    Polymer(EditorUI.mixin({
-        publish: {
-            value: '',
-        },
+Polymer(EditorUI.mixin({
+    publish: {
+        value: '',
+    },
 
-        ready: function() {
-            this._initFocusable(this.$.inputArea);
-        },
+    ready: function() {
+        this._initFocusable(this.$.inputArea);
+    },
 
-        valueChanged: function () {
-            this.$.inputArea.value = this.value;
-            this._adjust();
-        },
+    valueChanged: function () {
+        this.$.inputArea.value = this.value;
+        this._adjust();
+    },
 
-        _adjust: function () {
-            var areaEL = this.$.inputArea;
+    _adjust: function () {
+        var areaEL = this.$.inputArea;
 
-            // NOTE: this will make sure the scrollHeight calculate even we shrink it.
-            areaEL.style.height = "0px";
-            areaEL.style.height = areaEL.scrollHeight + "px";
+        // NOTE: this will make sure the scrollHeight calculate even we shrink it.
+        areaEL.style.height = "0px";
+        areaEL.style.height = areaEL.scrollHeight + "px";
 
-            if ( areaEL.scrollWidth > areaEL.clientWidth &&
-                 areaEL.style.overflowX !== 'hidden' )
-            {
-                var scrollBarHeight = areaEL.offsetHeight - areaEL.clientHeight;
-                areaEL.style.height = (areaEL.scrollHeight + scrollBarHeight) + "px";
-            }
-        },
+        if ( areaEL.scrollWidth > areaEL.clientWidth &&
+             areaEL.style.overflowX !== 'hidden' )
+        {
+            var scrollBarHeight = areaEL.offsetHeight - areaEL.clientHeight;
+            areaEL.style.height = (areaEL.scrollHeight + scrollBarHeight) + "px";
+        }
+    },
 
-        focusAction: function (event) {
-            this.lastVal = this.value;
-            this._focusAction();
-        },
+    focusAction: function (event) {
+        this.lastVal = this.value;
+        this._focusAction();
+    },
 
-        blurAction: function (event, detail, sender) {
-            if ( this.focused === false )
-                return;
+    blurAction: function (event, detail, sender) {
+        if ( this.focused === false )
+            return;
 
-            this._blurAction();
-        },
+        this._blurAction();
+    },
 
-        inputAction: function (event) {
-            this.value = event.target.value;
-            this.fire('changed');
+    inputAction: function (event) {
+        this.value = event.target.value;
+        this.fire('changed');
 
-            event.stopPropagation();
-        },
+        event.stopPropagation();
+    },
 
-        inputKeyDownAction: function (event) {
-            switch ( event.which ) {
-                // NOTE: enter will be used as new-line, ESC here will be confirm behavior
-                // NOTE: textarea already have ctrl-z undo behavior
-                // esc
-                case 27:
-                    this.$.inputArea.blur();
-                return false;
-            }
-            event.stopPropagation();
-        },
-    }, EditorUI.focusable));
-})();
+    inputKeyDownAction: function (event) {
+        switch ( event.which ) {
+            // NOTE: enter will be used as new-line, ESC here will be confirm behavior
+            // NOTE: textarea already have ctrl-z undo behavior
+            // esc
+            case 27:
+                this.$.inputArea.blur();
+            return false;
+        }
+        event.stopPropagation();
+    },
+}, EditorUI.focusable));
