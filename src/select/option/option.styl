@@ -13,6 +13,7 @@ color-text = #aaa
     font-size: 12px
     width: 120px
     min-width: 60px
+    max-height: 300px
 
     &(:focus) {
         outline: none
@@ -28,6 +29,10 @@ color-text = #aaa
         color: color-text
         background-color: color-bg
         opacity: 1.0
+
+        .options {
+            overflow-y: auto
+        }
 
         .item {
             padding: 3px 7px
@@ -75,11 +80,30 @@ color-text = #aaa
 
     .search-bar {
         width: auto
+        min-height: 22px
         margin-bottom: 5px
         display: none
     }
 
     &([searchable]) .search-bar {
         display: flex
+    }
+
+    ::-webkit-scrollbar {
+        height: 5px
+        width: 5px
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.3)
+    }
+    ::-webkit-scrollbar-track {
+        // background-clip: padding-box
+        background-color: rgba(255,255,255,0.1)
+    }
+    ::-webkit-scrollbar-corner {
+        background-color: #171717
+    }
+    ::-webkit-scrollbar-button {
+        display: none
     }
 }

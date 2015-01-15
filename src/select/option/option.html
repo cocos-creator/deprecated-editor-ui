@@ -7,16 +7,18 @@
 <template>
 <link rel="stylesheet" href="option.css">
 
-<div class="border">
+<div class="border" flex-col flex-stretch>
     <fire-ui-text-input class="search-bar" placeholder="search" value="{{searchValue}}" inputValue="{{searchValue}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
-    <template repeat="{{item in options | applyFilter(searchValue)}}">
-        <div class="item {{ item.value == value ? 'selected':'' }}"
-            index="{{item.index}}"
-            on-click="{{clickAction}}"
-            >
-            {{item.name}}
-        </div>
-    </template>
+    <div class="options" flex-auto>
+        <template repeat="{{item in options | applyFilter(searchValue)}}">
+            <div class="item {{ item.value == value ? 'selected':'' }}"
+                index="{{item.index}}"
+                on-click="{{clickAction}}"
+                >
+                {{item.name}}
+            </div>
+        </template>
+    </div>
 </div>
 
 </template>

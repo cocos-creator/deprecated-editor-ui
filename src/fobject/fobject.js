@@ -110,8 +110,10 @@ Polymer(EditorUI.mixin({
     dropAreaAcceptAction: function (event) {
         event.stopPropagation();
 
-        if ( !this.invalid )
+        if ( !this.invalid ) {
             this.value = this._curDragObject;
+            this.fire("changed");
+        }
 
         this.resetDragState();
     },
