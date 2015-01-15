@@ -11,7 +11,9 @@ Polymer(EditorUI.mixin({
 
     ready: function () {
         this._initDroppable(this);
+    },
 
+    domReady: function () {
         if ( this.children.length > 0 ) {
             this.select(this.children[0]);
         }
@@ -81,6 +83,7 @@ Polymer(EditorUI.mixin({
                 }
                 this.activeTab = tabEL;
                 this.activeTab.classList.add('active');
+                tabEL.fire('active');
             }
         }
     },
