@@ -17,7 +17,7 @@ Polymer(EditorUI.mixin({
         if ( this.name === '' ) {
             var varName = this.attributes.value.value;
             varName = varName.replace( /{{(.*)}}/, "$1" );
-            this.name = EditorUI.camelCaseToHuman(varName); 
+            this.name = EditorUI.camelCaseToHuman(varName);
         }
     },
 
@@ -36,7 +36,7 @@ Polymer(EditorUI.mixin({
 
     mousedownAction: function ( event ) {
         if ( this.$.focus !== event.target &&
-             this.$.label !== event.target && 
+             this.$.label !== event.target &&
              EditorUI.find(this.$.label, event.target) === false )
             return;
 

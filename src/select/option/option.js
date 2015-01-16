@@ -28,9 +28,9 @@ Polymer({
 
         if ( this.owner ) {
             this.owner.fire('select', this.value);
+            this.owner.focus();
         }
 
-        this.owner.focus();
         event.stopPropagation();
     },
 
@@ -50,7 +50,9 @@ Polymer({
         event.stopPropagation();
 
         if ( event.relatedTarget === null ) {
-            this.owner.focus();
+            if ( this.owner ) {
+                this.owner.focus();
+            }
             return;
         }
     },

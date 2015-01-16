@@ -1,6 +1,5 @@
-<polymer-element 
-    name="fire-ui-prop" 
-    extends="fire-ui-field"
+<polymer-element
+    name="fire-ui-prop"
     constructor="FireProp"
     >
 <template>
@@ -13,7 +12,14 @@
     >
     <fire-ui-label id="label" flex-1>{{name}}</fire-ui-label>
     <span class="space"></span>
-    <!-- field will added here -->
+    <fire-ui-field id="field" flex-2
+        value="{{value}}"
+        type="{{type}}"
+        enumType="{{enumType}}"
+        enumList="{{enumList}}"
+        textMode="{{textMode}}"
+        >
+    </fire-ui-field>
     <content/>
 </div>
 

@@ -7,15 +7,7 @@ Polymer({
         textMode: 'single',
     },
 
-    created: function () {
-        // NOTE: the call back will execute code after prop field created,
-        //       sometimes we need to initialize fields, for example in fire-inspector
-        //       the field will be disabled depends on watch values. And this callback
-        //       make sure the tabIndex initialize after all elements are ready.
-        this.onFieldCreated = null;
-    },
-
-    attached: function () {
+    domReady: function () {
         var fieldEL = this.createFieldElement();
 
         if ( fieldEL === null ) {
@@ -23,16 +15,9 @@ Polymer({
             return;
         }
 
-        fieldEL.setAttribute('flex-2','');
+        fieldEL.setAttribute('flex-auto','');
         fieldEL.bind( 'value', new PathObserver(this,'value') );
-        fieldEL.setAttribute( 'value', '{{value}}' );
-        fieldEL.id = "field";
         this.shadowRoot.appendChild(fieldEL);
-        this.$.field = fieldEL;
-
-        if ( this.onFieldCreated ) {
-            this.onFieldCreated();
-        }
     },
 
     createFieldElement: function () {
@@ -109,7 +94,6 @@ Polymer({
                     fieldEL = new FireTextInput();
                 }
                 else if ( this.textMode === 'multi' ) {
-                    this.$.label.setAttribute('flex-self-start','');
                     fieldEL = new FireTextArea();
                 }
                 break;
