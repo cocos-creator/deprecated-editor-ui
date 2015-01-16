@@ -14,6 +14,7 @@ Polymer(EditorUI.mixin({
         //       the field will be disabled depends on watch values. And this callback
         //       make sure the tabIndex initialize after all elements are ready.
         this.onFieldCreated = null;
+        this.folded = true;
     },
 
     ready: function () {
@@ -64,5 +65,11 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
 
         return;
-    }
+    },
+
+    foldAction: function ( event ) {
+        this.folded = !this.folded;
+        event.stopPropagation();
+    },
+
 }, EditorUI.focusable));

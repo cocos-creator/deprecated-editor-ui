@@ -9,24 +9,30 @@ color-body-top-line = #555
 :host {
     display: flex
     flex-direction: column
-    flex-wrap: nowrap     
+    flex-wrap: nowrap
     align-items: stretch
 
     box-sizing: border-box
     border: 1px solid color-border
 
     .title {
-        padding: 3px 8px
+        padding: 3px 2px 3px 4px
         font-size: 12px
         font-weight: 700
 
         font-family: Helvetica,Arial,sans-serif
         color: color-title
         background: color-title-bg
-        cursor: pointer 
+        cursor: pointer
 
         i {
+            display: inline-block
+            font-size: 14px
             width: 10px
+            margin-right: 5px
+
+            text-align: center
+            cursor: pointer
         }
 
         &:focus {
@@ -37,7 +43,7 @@ color-body-top-line = #555
     .body {
         display: block
         position: relative
-        padding: 5px
+        padding: 0px 2px 0px 4px
         min-height: 10px
         border-top: 1px solid color-body-top-line
 
