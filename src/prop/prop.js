@@ -18,15 +18,15 @@ Polymer(EditorUI.mixin({
 
     ready: function () {
         this._initFocusable();
+    },
 
+    domReady: function () {
         if ( this.name === '' ) {
             var varName = this.attributes.value.value;
             varName = varName.replace( /{{(.*)}}/, "$1" );
             this.name = EditorUI.camelCaseToHuman(varName);
         }
-    },
 
-    domReady: function () {
         if ( this.textMode === 'multi') {
             this.$.label.setAttribute('flex-self-start','');
         }
