@@ -171,6 +171,7 @@
                 <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>
                 <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>
                 <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>
+                <fire-ui-prop value="{{myList}}" type="{{myListType}}"></fire-ui-prop>
             </fire-ui-section>
         </div>
 
@@ -386,11 +387,17 @@
 
         // myList
         cnt: 0,
+        listType: [
+            'Fire.Vec2',
+            'string',
+            'int',
+        ],
         listList: [
                 [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
                 [ "foobar 1", "foobar 2", "foobar 3" ],
                 [ 1, 2, 3, 4 ],
         ],
+        myListType: 'Fire.Vec2',
         myList: [
             new Fire.Vec2(1,1),
             new Fire.Vec2(2,1),
@@ -401,6 +408,7 @@
         ],
         myListClick: function () {
             this.cnt = (this.cnt + 1)%this.listList.length;
+            this.myListType = this.listType[this.cnt]
             this.myList = this.listList[this.cnt];
         },
 
