@@ -1,10 +1,12 @@
+color-text-focus = #00a6ff
+
 :host {
     display: block
 
     &>#focus {
         display: flex
         flex-direction: row
-        flex-wrap: nowrap     
+        flex-wrap: nowrap
         align-items: center
 
         margin-top: 5px
@@ -16,10 +18,47 @@
             height: 5px
             display: block
         }
+
+        #fold {
+            display: inline-block
+            font-size: 14px
+            width: 10px
+            margin-right: 5px
+
+            visibility: hidden
+            cursor: pointer
+            text-align: center
+        }
     }
 
-    .flex-self-start {
+    .children {
+        margin-left: 10px
+    }
+
+    [flex-self-start] {
         margin-top: 5px
+    }
+
+    &([focused]) {
+        &>#focus {
+            #fold {
+                color: color-text-focus
+            }
+        }
+    }
+
+    &([foldable]) {
+        &>#focus {
+            #fold {
+                visibility: visible
+            }
+        }
+    }
+
+    &([folded]) {
+        .children {
+            display: none
+        }
     }
 }
 

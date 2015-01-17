@@ -1,3 +1,37 @@
+var defaultValues = {
+    'undefined': undefined,
+    'enum': -1,
+    'int': 0,
+    'float': 0.0,
+    'string': '',
+    'boolean': false,
+    'fobject': null,
+    'Fire.Color': new Fire.Color(0,0,0,1),
+    'Fire.Vec2': new Fire.Vec2(0,0),
+};
+
+function getDefaultType ( typename, additionalType ) {
+    var result;
+
+    if ( typename === 'array' ) {
+        // proctect array with array
+        if ( additionalType === 'array' )
+            return null;
+
+        result = defaultValues[additionalType];
+        if ( result === undefined )
+            return null;
+
+        return result;
+    }
+
+    result = defaultValues[typename];
+    if ( result === undefined )
+        return null;
+
+    return result;
+}
+
 Polymer({
     publish: {
         value: null,
@@ -7,32 +41,28 @@ Polymer({
         textMode: 'single',
     },
 
-    created: function () {
-        // NOTE: the call back will execute code after prop field created,
-        //       sometimes we need to initialize fields, for example in fire-inspector
-        //       the field will be disabled depends on watch values. And this callback
-        //       make sure the tabIndex initialize after all elements are ready.
-        this.onFieldCreated = null;
-    },
+    _defaultType: null, // used in array resize, confirm when type detected
 
-    attached: function () {
+    domReady: function () {
         var fieldEL = this.createFieldElement();
-
         if ( fieldEL === null ) {
             Fire.error("Failed to create field");
             return;
         }
 
-        fieldEL.setAttribute('flex-2','');
-        fieldEL.bind( 'value', new PathObserver(this,'value') );
-        fieldEL.setAttribute( 'value', '{{value}}' );
-        fieldEL.id = "field";
-        this.shadowRoot.appendChild(fieldEL);
-        this.$.field = fieldEL;
-
-        if ( this.onFieldCreated ) {
-            this.onFieldCreated();
+        fieldEL.setAttribute('flex-auto','');
+        if ( Array.isArray(this.value) ) {
+            fieldEL.bind( 'value', new PathObserver(this,'value.length') );
+            fieldEL.addEventListener( 'changed', function ( event ) {
+                if ( this.value.length > 0 ) {
+                    Fire.arrayFillUndefined( this.value, this._defaultType );
+                }
+            }.bind(this));
         }
+        else {
+            fieldEL.bind( 'value', new PathObserver(this,'value') );
+        }
+        this.shadowRoot.appendChild(fieldEL);
     },
 
     createFieldElement: function () {
@@ -43,6 +73,10 @@ Polymer({
         // get typename
         var typename = this.type;
         switch ( typeof this.value ) {
+        case "undefined":
+            typename = 'undefined';
+            break;
+
         case "number":
             if ( !typename ) {
                 typename = 'float';
@@ -78,6 +112,12 @@ Polymer({
 
         // process typename
         switch ( typename ) {
+            case "undefined":
+                fieldEL = new FireLabel();
+                fieldEL.innerText = 'Undefined';
+                fieldEL.disabled = true;
+                break;
+
             case "enum":
                 if ( this.enumType !== null ) {
                     enumTypeDef = Fire.getVarFrom(window,this.enumType);
@@ -109,7 +149,6 @@ Polymer({
                     fieldEL = new FireTextInput();
                 }
                 else if ( this.textMode === 'multi' ) {
-                    this.$.label.setAttribute('flex-self-start','');
                     fieldEL = new FireTextArea();
                 }
                 break;
@@ -124,7 +163,10 @@ Polymer({
                 break;
 
             case "array":
-                // TODO
+                fieldEL = new FireUnitInput();
+                fieldEL.type = 'int';
+                fieldEL.min = 0;
+                fieldEL.unit = 'size';
                 break;
 
             case "Fire.Color":
@@ -136,6 +178,7 @@ Polymer({
                 break;
         }
 
+        this._defaultType = getDefaultType(typename,this.type);
         return fieldEL;
     },
 });

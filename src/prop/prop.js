@@ -1,37 +1,48 @@
 Polymer(EditorUI.mixin({
     publish: {
         name: '',
+        value: null,
+        type: null,
+        enumType: null,
+        enumList: null,
+        textMode: 'single',
+
+        foldable: {
+            value: false,
+            reflect: true,
+        },
+
+        folded: {
+            value: false,
+            reflect: true,
+        }
     },
 
-    _generated: false,
+    created: function () {
+        // NOTE: the call back will execute code after prop field created,
+        //       sometimes we need to initialize fields, for example in fire-inspector
+        //       the field will be disabled depends on watch values. And this callback
+        //       make sure the tabIndex initialize after all elements are ready.
+        this.onFieldCreated = null;
+        this.folded = true;
+    },
 
     ready: function () {
         this._initFocusable();
     },
 
-    attached: function () {
-        if ( this._generated )
-            return;
-        this._generated = true;
-
+    domReady: function () {
         if ( this.name === '' ) {
             var varName = this.attributes.value.value;
             varName = varName.replace( /{{(.*)}}/, "$1" );
             this.name = EditorUI.camelCaseToHuman(varName);
         }
 
-        var fieldEL = this.createFieldElement();
-        if ( fieldEL === null ) {
-            Fire.error("Failed to create field " + this.name );
-            return;
+        if ( this.textMode === 'multi') {
+            this.$.label.setAttribute('flex-self-start','');
         }
 
-        fieldEL.setAttribute('flex-2','');
-        fieldEL.bind( 'value', new PathObserver(this,'value') );
-        fieldEL.setAttribute( 'value', '{{value}}' );
-        fieldEL.id = "field";
-        this.appendChild(fieldEL);
-        this.$.field = fieldEL;
+        this.foldable = Array.isArray(this.value);
 
         if ( this.onFieldCreated ) {
             this.onFieldCreated();
@@ -54,6 +65,7 @@ Polymer(EditorUI.mixin({
     mousedownAction: function ( event ) {
         if ( this.$.focus !== event.target &&
              this.$.label !== event.target &&
+             this.$.fold !== event.target &&
              EditorUI.find(this.$.label, event.target) === false )
             return;
 
@@ -66,5 +78,11 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
 
         return;
-    }
+    },
+
+    foldAction: function ( event ) {
+        this.folded = !this.folded;
+        event.stopPropagation();
+    },
+
 }, EditorUI.focusable));
