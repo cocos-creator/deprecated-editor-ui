@@ -16,7 +16,10 @@ Polymer(EditorUI.mixin({
 
     ready: function() {
         this._initFocusable(this.$.input);
+        this.updateMinMax();
+    },
 
+    updateMinMax: function () {
         switch ( this.type ) {
             case 'int':
                 this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
@@ -79,6 +82,14 @@ Polymer(EditorUI.mixin({
 
     valueChanged: function () {
         this.$.input.value = this._convert(this.value);
+    },
+
+    minChanged: function () {
+        this.updateMinMax();
+    },
+
+    maxChanged: function () {
+        this.updateMinMax();
     },
 
     focusAction: function (event) {

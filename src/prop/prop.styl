@@ -1,3 +1,5 @@
+color-text-focus = #00a6ff
+
 :host {
     display: block
 
@@ -17,7 +19,7 @@
             display: block
         }
 
-        .fold-icon {
+        #fold {
             display: inline-block
             font-size: 14px
             width: 10px
@@ -29,8 +31,34 @@
         }
     }
 
-    .flex-self-start {
+    .children {
+        margin-left: 10px
+    }
+
+    [flex-self-start] {
         margin-top: 5px
+    }
+
+    &([focused]) {
+        &>#focus {
+            #fold {
+                color: color-text-focus
+            }
+        }
+    }
+
+    &([foldable]) {
+        &>#focus {
+            #fold {
+                visibility: visible
+            }
+        }
+    }
+
+    &([folded]) {
+        .children {
+            display: none
+        }
     }
 }
 

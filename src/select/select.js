@@ -50,10 +50,11 @@ Polymer(EditorUI.mixin({
         }
         else {
             if ( this.menu ) {
-                this.menu.style.display = "none";
-                this.appendChild(this.menu);
-
                 EditorUI.removeHitGhost();
+
+                this.menu.style.display = "none";
+                // NOTE: must save in shadowRoot, otherwise getFirstFocusableChild not working
+                this.shadowRoot.appendChild(this.menu);
             }
         }
     },

@@ -1,3 +1,37 @@
+var defaultValues = {
+    'undefined': undefined,
+    'enum': -1,
+    'int': 0,
+    'float': 0.0,
+    'string': '',
+    'boolean': false,
+    'fobject': null,
+    'Fire.Color': new Fire.Color(0,0,0,1),
+    'Fire.Vec2': new Fire.Vec2(0,0),
+};
+
+function getDefaultType ( typename, additionalType ) {
+    var result;
+
+    if ( typename === 'array' ) {
+        // proctect array with array
+        if ( additionalType === 'array' )
+            return null;
+
+        result = defaultValues[additionalType];
+        if ( result === undefined )
+            return null;
+
+        return result;
+    }
+
+    result = defaultValues[typename];
+    if ( result === undefined )
+        return null;
+
+    return result;
+}
+
 Polymer({
     publish: {
         value: null,
@@ -7,16 +41,27 @@ Polymer({
         textMode: 'single',
     },
 
+    _defaultType: null, // used in array resize, confirm when type detected
+
     domReady: function () {
         var fieldEL = this.createFieldElement();
-
         if ( fieldEL === null ) {
             Fire.error("Failed to create field");
             return;
         }
 
         fieldEL.setAttribute('flex-auto','');
-        fieldEL.bind( 'value', new PathObserver(this,'value') );
+        if ( Array.isArray(this.value) ) {
+            fieldEL.bind( 'value', new PathObserver(this,'value.length') );
+            fieldEL.addEventListener( 'changed', function ( event ) {
+                if ( this.value.length > 0 ) {
+                    Fire.arrayFillUndefined( this.value, this._defaultType );
+                }
+            }.bind(this));
+        }
+        else {
+            fieldEL.bind( 'value', new PathObserver(this,'value') );
+        }
         this.shadowRoot.appendChild(fieldEL);
     },
 
@@ -28,6 +73,10 @@ Polymer({
         // get typename
         var typename = this.type;
         switch ( typeof this.value ) {
+        case "undefined":
+            typename = 'undefined';
+            break;
+
         case "number":
             if ( !typename ) {
                 typename = 'float';
@@ -63,6 +112,12 @@ Polymer({
 
         // process typename
         switch ( typename ) {
+            case "undefined":
+                fieldEL = new FireLabel();
+                fieldEL.innerText = 'Undefined';
+                fieldEL.disabled = true;
+                break;
+
             case "enum":
                 if ( this.enumType !== null ) {
                     enumTypeDef = Fire.getVarFrom(window,this.enumType);
@@ -108,7 +163,10 @@ Polymer({
                 break;
 
             case "array":
-                // TODO
+                fieldEL = new FireUnitInput();
+                fieldEL.type = 'int';
+                fieldEL.min = 0;
+                fieldEL.unit = 'size';
                 break;
 
             case "Fire.Color":
@@ -120,6 +178,7 @@ Polymer({
                 break;
         }
 
+        this._defaultType = getDefaultType(typename,this.type);
         return fieldEL;
     },
 });

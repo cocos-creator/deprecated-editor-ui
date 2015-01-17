@@ -10,7 +10,7 @@
     on-focusout="{{focusoutAction}}"
     on-mousedown="{{mousedownAction}}"
     >
-    <i class="fold-icon fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"
+    <i id="fold" class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"
        on-click="{{foldAction}}"></i>
     <fire-ui-label id="label" flex-1>{{name}}</fire-ui-label>
     <span class="space"></span>
@@ -22,7 +22,21 @@
         textMode="{{textMode}}"
         >
     </fire-ui-field>
-    <content/>
+</div>
+<div class="children">
+    <template if="{{foldable}}">
+        <template repeat="{{prop, index in value}}">
+            <fire-ui-prop
+                name="{{index}}"
+                value="{{prop}}"
+                type="{{type}}"
+                enumType="{{enumType}}"
+                enumList="{{enumList}}"
+                textMode="{{textMode}}"
+            >
+            </fire-ui-prop>
+        </template>
+    </template>
 </div>
 
 </template>

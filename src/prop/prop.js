@@ -6,6 +6,16 @@ Polymer(EditorUI.mixin({
         enumType: null,
         enumList: null,
         textMode: 'single',
+
+        foldable: {
+            value: false,
+            reflect: true,
+        },
+
+        folded: {
+            value: false,
+            reflect: true,
+        }
     },
 
     created: function () {
@@ -32,6 +42,8 @@ Polymer(EditorUI.mixin({
             this.$.label.setAttribute('flex-self-start','');
         }
 
+        this.foldable = Array.isArray(this.value);
+
         if ( this.onFieldCreated ) {
             this.onFieldCreated();
         }
@@ -53,6 +65,7 @@ Polymer(EditorUI.mixin({
     mousedownAction: function ( event ) {
         if ( this.$.focus !== event.target &&
              this.$.label !== event.target &&
+             this.$.fold !== event.target &&
              EditorUI.find(this.$.label, event.target) === false )
             return;
 

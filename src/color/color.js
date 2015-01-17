@@ -60,10 +60,11 @@ Polymer(EditorUI.mixin({
         }
         else {
             if ( this.colorPicker ) {
-                this.colorPicker.style.display = "none";
-                this.appendChild(this.colorPicker);
-
                 EditorUI.removeHitGhost();
+
+                this.colorPicker.style.display = "none";
+                // NOTE: must save in shadowRoot, otherwise getFirstFocusableChild not working
+                this.shadowRoot.appendChild(this.colorPicker);
             }
         }
     },
