@@ -227,6 +227,9 @@ Polymer(EditorUI.mixin({
         if (event.which !== 1)
             return;
 
+        if (this.holdingID === null)
+            return;
+
         event.stopPropagation();
         this.$.input.focus();
 
