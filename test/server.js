@@ -29,8 +29,6 @@ app.get('/', function(req, res){
     res.sendFile( cwd + '/test/index.html' );
 });
 app.get('/test/*', function(req, res){
-    // console.log('static file request : ' + req.params[0]);
-
     if ( path.extname(req.params[0]) !== '' ) {
         res.sendFile( cwd + '/test/' + req.params[0]);
     }
@@ -41,7 +39,6 @@ app.get('/test/*', function(req, res){
 
 // serves all the static files
 app.get(/^(.+)$/, function(req, res){
-    // console.log('static file request : ' + req.params);
     res.sendFile( cwd + req.params[0]);
 });
 

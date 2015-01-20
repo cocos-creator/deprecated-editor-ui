@@ -1,14 +1,27 @@
 Polymer({
     publish: {
         value: null,
+        index: -1,
         selected: {
-            reflect: true,
             value: false,
+            reflect: true,
         },
-        icon: {
-            reflect: true,
-            value: false,
-        }
+    },
+
+    ready: function () {
+        var fieldEL = new FireField();
+        fieldEL.setAttribute('flex-2','');
+        fieldEL.bind( 'value', new PathObserver(this,'value') );
+        fieldEL.id = "field";
+        this.$.field = fieldEL;
+
+        var delBtnEL = this.$['btn-del'];
+        this.$.focus.insertBefore( fieldEL, delBtnEL );
+    },
+
+    delClickAction: function ( event ) {
+        this.fire("delete");
+        event.stopPropagation();
     },
 
     toggle: function () {

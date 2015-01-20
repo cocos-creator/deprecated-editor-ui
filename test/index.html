@@ -144,13 +144,13 @@
         <span class="space"></span>
 
         <div flex-row>
-            <fire-ui-list value="{{myList}}"></fire-ui-list>
+            <fire-ui-sortable-list value="{{myArray}}"></fire-ui-sortable-list>
             <span class="space"></span>
             <fire-ui-button on-click="{{myListClick}}">Change</fire-ui-button>
             <span class="space"></span>
             <fire-ui-label>
-                myList = [
-                    <template repeat="{{item in myList}}">{{item}}, </template>
+                myArray = [
+                    <template repeat="{{item in myArray}}">{{item}}, </template>
                 ]
             </fire-ui-label>
         </div>
@@ -171,7 +171,7 @@
                 <fire-ui-prop value="{{myVec2}}"></fire-ui-prop>
                 <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>
                 <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>
-                <fire-ui-prop value="{{myList}}" type="{{myListType}}"></fire-ui-prop>
+                <fire-ui-prop value="{{myArray}}" type="{{myArrayType}}"></fire-ui-prop>
             </fire-ui-section>
         </div>
 
@@ -260,6 +260,10 @@
             <span class="space"></span>
 
             <fire-ui-color-picker value="{{myColor}}"></fire-ui-color-picker>
+            <span class="space"></span>
+
+            <fire-ui-list value="{{myList}}" icon></fire-ui-list>
+            <span class="space"></span>
         </div>
     </fire-ui-section>
 </template>
@@ -385,20 +389,20 @@
             this.mySlider = rangeRandom( 0.0, 1.0 );
         },
 
-        // myList
+        // myArray
         cnt: 0,
-        listType: [
+        arrayType: [
             'Fire.Vec2',
             'string',
             'int',
         ],
-        listList: [
-                [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
-                [ "foobar 1", "foobar 2", "foobar 3" ],
-                [ 1, 2, 3, 4 ],
+        arrays: [
+            [ new Fire.Vec2(1,1), new Fire.Vec2(2,1) ],
+            [ "foobar 1", "foobar 2", "foobar 3" ],
+            [ 1, 2, 3, 4 ],
         ],
-        myListType: 'Fire.Vec2',
-        myList: [
+        myArrayType: 'Fire.Vec2',
+        myArray: [
             new Fire.Vec2(1,1),
             new Fire.Vec2(2,1),
             new Fire.Vec2(3,1),
@@ -407,9 +411,9 @@
             new Fire.Vec2(6,1),
         ],
         myListClick: function () {
-            this.cnt = (this.cnt + 1)%this.listList.length;
-            this.myListType = this.listType[this.cnt]
-            this.myList = this.listList[this.cnt];
+            this.cnt = (this.cnt + 1)%this.arrays.length;
+            this.myArrayType = this.arrayType[this.cnt]
+            this.myArray = this.arrays[this.cnt];
         },
 
         // myAtlas
@@ -418,6 +422,17 @@
             this.myAtlas = new Fire.Atlas();
             this.myAtlas.name = "Atlas 002";
         },
+
+        // myList
+        myList: [
+            { text: 'Foo 00', icon: 'test/img/assets-anim.png', value: 0 },
+            { text: 'Foo 01', icon: 'test/img/assets-co.png', value: 1 },
+            { text: 'Foo 02', icon: 'test/img/assets-css.png', value: 2 },
+            { text: 'Foo 03', icon: 'test/img/assets-db.png', value: 3 },
+            { text: 'Foo 04', icon: 'test/img/assets-html.png', value: 4 },
+            { text: 'Foo 05', icon: 'test/img/assets-txt.png', value: 5 },
+            { text: 'Foo 06', icon: 'test/img/assets-ts.png', value: 6 },
+        ]
     });
 </script>
 </polymer-element>

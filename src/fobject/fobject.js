@@ -30,6 +30,12 @@ Polymer(EditorUI.mixin({
         return name;
     },
 
+    setAsset: function ( uuid ) {
+        Fire.AssetLibrary.loadAsset( uuid, function (asset) {
+            this.value = asset;
+        }.bind(this) );
+    },
+
     blurAction: function (event) {
         if ( this.focused === false )
             return;
@@ -52,7 +58,7 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
 
         if ( Fire.browseObject ) {
-            Fire.browseObject( Fire.getClassById(this.type) );
+            Fire.browseObject( Fire.getClassById(this.type), this );
         }
     },
 

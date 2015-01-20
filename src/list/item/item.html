@@ -1,18 +1,13 @@
-<polymer-element 
-    name="fire-ui-li" 
+<polymer-element
+    name="fire-ui-li"
     constructor="FireListItem"
     >
 <template>
 <link rel="stylesheet" href="item.css">
 
-<div id="focus" flex-row>
-    <i id="move-bar" class="fa fa-bars"></i>
-    <!-- content field here -->
-    <div id="btn-del" class="del"
-        on-click="{{delClickAction}}">
-        <i class="fa fa-close"></i>
-    </div>
-</div>
+<img src="{{value.icon}}"></img>
+<span>{{value.text}}</span>
+
 </template>
 
 <script type="text/javascript" src="item.js"></script>

@@ -1,32 +1,27 @@
 <link rel="import" href="item/item.html">
 
-<polymer-element 
-    name="fire-ui-list" 
+<polymer-element
+    name="fire-ui-list"
     constructor="FireList"
     >
-<template>
-<link rel="stylesheet" href="list.css">
+    <template>
+        <link rel="stylesheet" href="list.css">
 
-<div class="border" id="focus"
-    on-focusin="{{focusinAction}}"
-    on-focusout="{{focusoutAction}}"
-    on-click="{{clickAction}}"
-    >
-    <div id="list" class="inner">
-        <!-- <template repeat="{{item, itemIndex in value}}">                        -->
-        <!--     <fire-ui-li index="{{itemIndex}}" on-changed="{{changedAction}}">   -->
-        <!--         <fire-ui-field flex-2 value="{{item}}"></fire-ui-field>         -->
-        <!--     </fire-ui-li>                                                       -->
-        <!-- </template>                                                             -->
-    </div>
-</div>
+        <div id="content" class="content"
+            on-focus="{{_focusAction}}"
+            on-blur="{{_blurAction}}"
+            >
+            <template repeat="{{item in value}}">
+                <fire-ui-li
+                    value="{{item}}"
+                    icon="{{icon}}"
+                    selected="{{item.selected}}"
+                    on-mousedown="{{selectAction}}"
+                    >
+                </fire-ui-li>
+            </template>
+        </div>
 
-<div class="btn-add">         
-    <div class="btn-border">
-        <i class="fa fa-plus"></i>
-    </div>                        
-</div>                        
-</template>
-
-<script type="text/javascript" src="list.js"></script>
+    </template>
+    <script type="text/javascript" src="list.js"></script>
 </polymer-element>

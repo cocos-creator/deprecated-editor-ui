@@ -101,7 +101,7 @@ Polymer({
                 typename = 'fobject';
             }
             else {
-                typename = Fire.getClassId(this.value);
+                typename = Fire.getClassName(this.value);
             }
             break;
 
