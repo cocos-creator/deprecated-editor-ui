@@ -92,7 +92,7 @@ Polymer({
             break;
 
         case "object":
-            var classDef = Fire.getClassById(typename);
+            var classDef = Fire.getClassByName(typename);
 
             if ( Array.isArray(this.value) ) {
                 typename = 'array';
