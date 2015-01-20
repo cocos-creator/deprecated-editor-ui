@@ -33,6 +33,7 @@ Polymer(EditorUI.mixin({
     setAsset: function ( uuid ) {
         Fire.AssetLibrary.loadAsset( uuid, function (asset) {
             this.value = asset;
+            this.fire("changed");
         }.bind(this) );
     },
 
