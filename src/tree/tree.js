@@ -14,8 +14,9 @@ Polymer({
     },
 
     created: function () {
-        this.focused = false;
         this.idToItem = {};
+        this.curSelection = [];
+        this.activeElement = null;
     },
 
     ready: function () {
@@ -42,7 +43,6 @@ Polymer({
 
         var self = this;
         function deleteRecursively (item) {
-            self.onDeleteItem(item);
             delete self.idToItem[item.userId];
             // children
             var children = item.children;
@@ -63,10 +63,6 @@ Polymer({
     // overridable for children
     addChild: function (child) {
         this.appendChild(child);
-    },
-
-    // overridable for children
-    onDeleteItem: function (item) {
     },
 
     setItemParent: function (item, parent) {
@@ -191,31 +187,68 @@ Polymer({
         return resultELs;
     },
 
-    keydownAction: function (event, activeElement) {
+    select: function ( element ) {
+        this.clearSelect();
+        this.curSelection.push(element);
+        element.selected = true;
+    },
+
+    clearSelect: function ( event ) {
+        this.curSelection.forEach ( function (item) {
+            item.selected = false;
+        } );
+        this.curSelection = [];
+        this.activeElement = null;
+    },
+
+    selectingAction: function ( event ) {
+        this.focus();
+
+        if ( event.detail.shift ) {
+        }
+        if ( event.detail.toggle ) {
+            var idx = this.curSelection.indexOf( event.target );
+            if ( idx === -1 ) {
+                this.curSelection.push(event.target);
+                event.target.selected = true;
+            }
+            else {
+                this.curSelection.splice( idx, 1 );
+                event.target.selected = false;
+            }
+        }
+        else {
+            this.select(event.target);
+        }
+    },
+
+    selectAction: function ( event ) {
+        this.activeElement = event.target;
+    },
+
+    keydownAction: function (event) {
         switch ( event.which ) {
             // Enter
             case 13:
-                if ( activeElement instanceof FireTreeItem ) {
-                    if ( Fire.isDarwin ) {
-                        activeElement.rename();
-                        event.stopPropagation();
-                    }
+                if ( Fire.isDarwin && this.activeElement ) {
+                    this.activeElement.rename();
+                    event.stopPropagation();
                 }
             break;
 
             // F2
             case 113:
-                if ( activeElement instanceof FireTreeItem ) {
-                    activeElement.rename();
+                if ( this.activeElement ) {
+                    this.activeElement.rename();
                     event.stopPropagation();
                 }
             break;
 
             // left-arrow
             case 37:
-                if ( activeElement instanceof FireTreeItem ) {
-                    if ( activeElement.foldable && !activeElement.folded ) {
-                        activeElement.folded = true;
+                if ( this.activeElement ) {
+                    if ( this.activeElement.foldable && !this.activeElement.folded ) {
+                        this.activeElement.folded = true;
                     }
                     event.stopPropagation();
                 }
@@ -223,13 +256,61 @@ Polymer({
 
             // right-arrow
             case 39:
-                if ( activeElement instanceof FireTreeItem ) {
-                    if ( activeElement.foldable && activeElement.folded ) {
-                        activeElement.folded = false;
+                if ( this.activeElement ) {
+                    if ( this.activeElement.foldable && this.activeElement.folded ) {
+                        this.activeElement.folded = false;
                     }
                     event.stopPropagation();
                 }
                 break;
+
+            // up-arrow
+            case 38:
+                if ( this.activeElement ) {
+                    var prev = this.prevItem(this.activeElement);
+                    if ( prev ) {
+                        if (prev !== this.activeElement) {
+                            this.select(prev);
+                            this.activeElement = prev;
+
+                            if ( prev.offsetTop <= this.scrollTop ) {
+                                this.scrollTop = prev.offsetTop;
+                            }
+                        }
+                    }
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            break;
+
+            // down-arrow
+            case 40:
+                if ( this.activeElement ) {
+                    var next = this.nextItem(this.activeElement, false);
+                    if ( next ) {
+                        if ( next !== this.activeElement ) {
+                            this.select(next);
+                            this.activeElement = next;
+
+                            var headerHeight = next.$.header.offsetHeight + 1;
+                            var contentHeight = this.offsetHeight - 2; // 2 for border
+                            if ( next.offsetTop + headerHeight >= this.scrollTop + contentHeight ) {
+                                this.scrollTop = next.offsetTop + headerHeight - contentHeight;
+                            }
+                        }
+                    }
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            break;
+        }
+    },
+
+    mousedownAction: function ( event ) {
+        if (event.which === 1) {
+            event.stopPropagation();
+
+            this.clearSelect();
         }
     },
 

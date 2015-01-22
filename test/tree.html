@@ -1,0 +1,145 @@
+<html>
+
+<head>
+<title>Tree View Performance</title>
+<link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+<link rel="stylesheet" href="/bin/editor-ui.css">
+
+<script src="/ext/fire-core/core.dev.js"></script>
+
+<link rel="import" href="/ext/polymer/polymer.html">
+<link rel="import" href="/bin/editor-ui.html">
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 100px;
+        margin-top: 20px;
+        color: white;
+        font-family: Helvetica,Arial,sans-serif;
+    }
+
+    .spinner {
+        width: 10px;
+        height: 10px;
+        border: 2px solid;
+        border-radius: 50%;
+        border-color: transparent rgb(0,128,255) rgb(0,128,255);
+        -webkit-animation: spin 600ms infinite linear;
+    }
+
+    @-webkit-keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+
+<body>
+    <h2 style="text-align: center; color: #ccc;">Tree View Performance</h2>
+
+    <div id="spinner" class="spinner" style="display: none;"></div>
+    <span class="space"></span>
+    <my-test></my-test>
+
+    <polymer-element name="my-test">
+        <template>
+            <style>
+                #tree {
+                    display: block;
+                    height: 500px;
+                    width: 300px;
+                }
+
+                span.space {
+                    height: 5px;
+                    width: 5px;
+                    display: block;
+                }
+            </style>
+
+            <fire-ui-tree id="tree"></fire-ui-tree>
+            <span class="space"></span>
+
+            <fire-ui-button on-click="{{hintAction}}">Hint</fire-ui-button>
+            <span class="space"></span>
+
+            <fire-ui-label>tree: {{timeForTree1}} ms</fire-ui-label>
+            <span class="space"></span>
+        </template>
+
+        <script>
+            Polymer({
+                created: function () {
+                    this.timeForTree1 = 0;
+                },
+
+                ready: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if ( xhr.readyState === XMLHttpRequest.DONE ) {
+                            var data = JSON.parse(xhr.responseText);
+                            this.build(data);
+                        }
+                    }.bind(this);
+                    xhr.open('GET', "data/zed-tree.json", true);
+                    xhr.send();
+                },
+
+                build: function ( data ) {
+                    console.time('tree');
+                    var d1 = new Date();
+                    data.forEach( function ( entry ) {
+                        var newEL = this.newEntryRecursively(entry);
+                        this.$.tree.appendChild(newEL);
+                        newEL.folded = false;
+
+                        // var newEL = this.newEntryRecursively2(entry,this.$.tree);
+                    }.bind(this));
+                    var d2 = new Date();
+                    this.timeForTree1 = (d2-d1);
+                    console.timeEnd('tree');
+                },
+
+                newEntryRecursively: function ( entry ) {
+                    var el = this.newEntry(entry);
+
+                    if ( entry.children ) {
+                        entry.children.forEach( function ( childEntry ) {
+                            var childEL = this.newEntryRecursively(childEntry);
+                            el.appendChild(childEL);
+                            el.folded = true;
+                        }.bind(this) )
+                    }
+
+                    return el;
+                },
+
+                newEntryRecursively2: function ( entry, parentEL ) {
+                    var el = this.newEntry(entry);
+                    parentEL.appendChild(el);
+
+                    if ( entry.children ) {
+                        entry.children.forEach( function ( childEntry ) {
+                            this.newEntryRecursively2(childEntry,el);
+                        }.bind(this) )
+                    }
+                },
+
+                newEntry: function ( entry ) {
+                    var entryEL = new FireTreeItem();
+                    entryEL.name = entry.name;
+                    entryEL.foldable = entry.isDirectory;
+
+                    return entryEL;
+                },
+
+                hintAction: function () {
+                    this.$.tree.children[0].hint();
+                },
+            });
+        </script>
+    </polymer-element>
+</body>
+
+</html>

@@ -2,103 +2,93 @@
     display: block
 
     font-size: 12px
-    margin-left: 0px // NOTE: will be setup in editor.styl
+    padding-left: 0px // NOTE: will be setup in editor.styl
     padding-top: 1px
+}
 
-    .wrapper {
+:host([folded]) #content {
+    display: none
+}
 
-        .bar {
-            display: block
-            position: absolute
-            left: 0
-            width: 100%
-            height: 16px
+#bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 16px;
+}
 
-            visibility: none
-        }
+:host([selected]) #bar {
+    background-color: #555
+}
 
-        .input-wrapper {
-            position: relative
+.wrapper {
+    position: relative
 
-            .item {
-                display: inline-block
-                white-space: nowrap
-                position: relative
-                height: 16px
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    align-items: flex-end
 
-                font-family: Helvetica,Arial,sans-serif
-                color: #aaa
-                cursor: default
+    white-space: nowrap
+    height: 16px
 
-                .item-wrapper {
-                    display: flex
-                    flex-direction: row
-                    flex-wrap: nowrap
-                    align-items: flex-end
+    font-family: Helvetica,Arial,sans-serif
+    color: #aaa
+    cursor: default
+}
 
-                    .fold-icon {
-                        display: inline-block
-                        font-size: 14px
-                        width: 10px
-                        margin-right: 2px
+#foldIcon {
+    display: inline-block
+    font-size: 14px
+    width: 10px
+    margin-right: 2px
 
-                        visibility: hidden
-                        cursor: pointer
-                        text-align: center
-                    }
+    visibility: hidden
+    cursor: pointer
+    text-align: center
+}
 
-                    .type-icon {
-                        font-size: 16px
-                        width: 16px
-                        height: 16px
-                        margin-right: 2px
+:host([foldable]) #foldIcon {
+    visibility: visible
+}
 
-                        &[hidden] {
-                            display: none
-                        }
-                    }
+#typeIcon {
+    font-size: 16px
+    width: 16px
+    height: 16px
+    margin-right: 2px
 
-                    img {
-                        width: 16px
-                        height: 16px
-                    }
-
-                    .name.no-name {
-                        color: #6e6e6e
-                    }
-                }
-            }
-
-            fire-ui-text-input {
-                position: absolute
-                left: 12px
-                top: -1px
-                height: 18px
-                width: calc(100% - 12px)
-
-                &[icon] {
-                    left: 30px
-                    width: calc(100% - 30px)
-                }
-
-                & /deep/ .input-area {
-                    padding: 0px 2px
-                }
-            }
-        }
+    &[hidden] {
+        display: none
     }
 
-    &([foldable]) {
-        .wrapper {
-            .input-wrapper {
-                .item {
-                    .item-wrapper {
-                        .fold-icon {
-                            visibility: visible
-                        }
-                    }
-                }
-            }
-        }
+    img {
+        width: 16px
+        height: 16px
     }
 }
+
+#name.no-name {
+    color: #6e6e6e
+}
+
+#content {
+    display: block
+}
+
+// fire-ui-text-input {
+//     position: absolute
+//     left: 12px
+//     top: -1px
+//     height: 18px
+//     width: calc(100% - 12px)
+
+//     &[icon] {
+//         left: 30px
+//         width: calc(100% - 30px)
+//     }
+
+//     & /deep/ .input-area {
+//         padding: 0px 2px
+//     }
+// }

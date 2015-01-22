@@ -1,0 +1,1898 @@
+[
+  {
+    "name": "Assets",
+    "isDirectory": true,
+    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/",
+    "children": [
+      {
+        "name": "BenchMark",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark",
+        "children": [
+          {
+            "name": "RapidTestCpu",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu",
+            "children": [
+              {
+                "name": "RapidTestCpu.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/RapidTestCpu.cs"
+              },
+              {
+                "name": "RapidTestCpu.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/RapidTestCpu.unity"
+              },
+              {
+                "name": "TestBinarySearch.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/TestBinarySearch.cs"
+              },
+              {
+                "name": "TestMatrix.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/TestMatrix.cs"
+              },
+              {
+                "name": "TestReferenceEquals.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/TestReferenceEquals.cs"
+              },
+              {
+                "name": "TestReferenceEquals.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/RapidTestCpu/TestReferenceEquals.unity"
+              }
+            ]
+          },
+          {
+            "name": "Res",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res",
+            "children": [
+              {
+                "name": "Atlas0",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0",
+                "children": [
+                  {
+                    "name": "Atlas0.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/Atlas0.png"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop05.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop05.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop06.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop06.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop07.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop07.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop08.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop08.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_down_loop09.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_down_loop09.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_hit_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_hit_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_hit_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_hit_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_hit_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_hit_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_hit_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_hit_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop05.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop05.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop06.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop06.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_jump_loop07.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_jump_loop07.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_run_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_run_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_run_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_run_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_run_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_run_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_run_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_run_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_run_loop05.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_run_loop05.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_down_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_down_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_down_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_down_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_down_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_down_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_hit_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_hit_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_hit_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_hit_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_hit_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_hit_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop01..asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop01..asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop05.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop05.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_jump_loop06.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_jump_loop06.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_speed_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_speed_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_stop_loop01.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_stop_loop01.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_stop_loop02.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_stop_loop02.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_stop_loop03.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_stop_loop03.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_stop_loop04.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_stop_loop04.asset"
+                  },
+                  {
+                    "name": "ip3_a_sheep_stop_loop05.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/ip3_a_sheep_stop_loop05.asset"
+                  },
+                  {
+                    "name": "s_ip3_land_01_b.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0/s_ip3_land_01_b.asset"
+                  }
+                ]
+              },
+              {
+                "name": "Atlas0.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Atlas0.asset"
+              },
+              {
+                "name": "NGUIAsset",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/NGUIAsset",
+                "children": [
+                  {
+                    "name": "New Atlas.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/NGUIAsset/New Atlas.mat"
+                  },
+                  {
+                    "name": "New Atlas.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/NGUIAsset/New Atlas.png"
+                  },
+                  {
+                    "name": "New Atlas.prefab",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/NGUIAsset/New Atlas.prefab"
+                  }
+                ]
+              },
+              {
+                "name": "TK2DAsset",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset",
+                "children": [
+                  {
+                    "name": "Sheep Data",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/Sheep Data",
+                    "children": [
+                      {
+                        "name": "Sheep.prefab",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/Sheep Data/Sheep.prefab"
+                      },
+                      {
+                        "name": "atlas0 material.mat",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/Sheep Data/atlas0 material.mat"
+                      },
+                      {
+                        "name": "atlas0.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/Sheep Data/atlas0.png"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Sheep.prefab",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/Sheep.prefab"
+                  },
+                  {
+                    "name": "SheepAni.prefab",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/TK2DAsset/SheepAni.prefab"
+                  }
+                ]
+              },
+              {
+                "name": "Textures",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures",
+                "children": [
+                  {
+                    "name": "WhiteSheep",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep",
+                    "children": [
+                      {
+                        "name": "ip3_a_sheep_down_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop05.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop05.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop06.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop06.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop07.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop07.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop08.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop08.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_down_loop09.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_down_loop09.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_hit_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_hit_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_hit_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_hit_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_hit_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_hit_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_hit_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_hit_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop05.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop05.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop06.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop06.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_jump_loop07.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_jump_loop07.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_run_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_run_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_run_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_run_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_run_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_run_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_run_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_run_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_run_loop05.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_run_loop05.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_down_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_down_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_down_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_down_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_down_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_down_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_hit_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_hit_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_hit_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_hit_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_hit_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_hit_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop01..png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop01..png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop05.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop05.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_jump_loop06.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_jump_loop06.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_speed_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_speed_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_stop_loop01.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_stop_loop01.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_stop_loop02.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_stop_loop02.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_stop_loop03.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_stop_loop03.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_stop_loop04.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_stop_loop04.png"
+                      },
+                      {
+                        "name": "ip3_a_sheep_stop_loop05.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/WhiteSheep/ip3_a_sheep_stop_loop05.png"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "pixel.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/pixel.png"
+                  },
+                  {
+                    "name": "s_ip3_land_01_b.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/Textures/s_ip3_land_01_b.png"
+                  }
+                ]
+              },
+              {
+                "name": "WhiteSheepRun.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Res/WhiteSheepRun.asset"
+              }
+            ]
+          },
+          {
+            "name": "Scripts",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Scripts",
+            "children": [
+              {
+                "name": "EasyProfiler.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/Scripts/EasyProfiler.cs"
+              }
+            ]
+          },
+          {
+            "name": "TestFps",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps",
+            "children": [
+              {
+                "name": "DynamicScene0_NGUI.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_NGUI.cs"
+              },
+              {
+                "name": "DynamicScene0_NGUI.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_NGUI.unity"
+              },
+              {
+                "name": "DynamicScene0_TK2D.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_TK2D.cs"
+              },
+              {
+                "name": "DynamicScene0_TK2D.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_TK2D.unity"
+              },
+              {
+                "name": "DynamicScene0_ex2D.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_ex2D.cs"
+              },
+              {
+                "name": "DynamicScene0_ex2D.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/DynamicScene0_ex2D.unity"
+              },
+              {
+                "name": "Launch.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/Launch.unity"
+              },
+              {
+                "name": "Main.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/Main.cs"
+              },
+              {
+                "name": "Menu.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/Menu.cs"
+              },
+              {
+                "name": "Menu.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/Menu.unity"
+              },
+              {
+                "name": "PingPongMove.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/PingPongMove.cs"
+              },
+              {
+                "name": "PingPongMove_NGUI.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/PingPongMove_NGUI.cs"
+              },
+              {
+                "name": "PingPongMove_TK2D.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/BenchMark/TestFps/PingPongMove_TK2D.cs"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Examples",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples",
+        "children": [
+          {
+            "name": "01 - LeaderBoard",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/01 - LeaderBoard",
+            "children": [
+              {
+                "name": "01 - LeaderBoard.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/01 - LeaderBoard/01 - LeaderBoard.unity"
+              },
+              {
+                "name": "Leaderboard.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/01 - LeaderBoard/Leaderboard.cs"
+              },
+              {
+                "name": "LeaderboardElement.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/01 - LeaderBoard/LeaderboardElement.cs"
+              }
+            ]
+          },
+          {
+            "name": "02 - ButtonEffect",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/02 - ButtonEffect",
+            "children": [
+              {
+                "name": "02 - ButtonEffect.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/02 - ButtonEffect/02 - ButtonEffect.unity"
+              }
+            ]
+          },
+          {
+            "name": "03 - UITransition",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/03 - UITransition",
+            "children": [
+              {
+                "name": "03 - UITransition.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/03 - UITransition/03 - UITransition.unity"
+              },
+              {
+                "name": "PanelTransition.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/03 - UITransition/PanelTransition.cs"
+              },
+              {
+                "name": "UITransitionCtrl.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/03 - UITransition/UITransitionCtrl.cs"
+              }
+            ]
+          },
+          {
+            "name": "04 - TextBlink",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/04 - TextBlink",
+            "children": [
+              {
+                "name": "04 - TextBlink.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/04 - TextBlink/04 - TextBlink.unity"
+              },
+              {
+                "name": "Blink.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/04 - TextBlink/Blink.cs"
+              }
+            ]
+          },
+          {
+            "name": "05 - ProgressBar",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/05 - ProgressBar",
+            "children": [
+              {
+                "name": "05 - ProgressBar.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/05 - ProgressBar/05 - ProgressBar.unity"
+              }
+            ]
+          },
+          {
+            "name": "06 - ScrollViewWithButton",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/06 - ScrollViewWithButton",
+            "children": [
+              {
+                "name": "06 - ScrollViewWithButton.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/06 - ScrollViewWithButton/06 - ScrollViewWithButton.unity"
+              },
+              {
+                "name": "ScrollViewEventTester.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/06 - ScrollViewWithButton/ScrollViewEventTester.cs"
+              }
+            ]
+          },
+          {
+            "name": "07 - WrapText",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/07 - WrapText",
+            "children": [
+              {
+                "name": "07 - WrapText.unity",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/07 - WrapText/07 - WrapText.unity"
+              }
+            ]
+          },
+          {
+            "name": "Initer.cs",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Initer.cs"
+          },
+          {
+            "name": "Res",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res",
+            "children": [
+              {
+                "name": "Atlas0",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0",
+                "children": [
+                  {
+                    "name": "Atlas0.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/Atlas0.png"
+                  },
+                  {
+                    "name": "boopon_coin_small.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/boopon_coin_small.asset"
+                  },
+                  {
+                    "name": "btn_back.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/btn_back.asset"
+                  },
+                  {
+                    "name": "btn_crimson 1.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/btn_crimson 1.asset"
+                  },
+                  {
+                    "name": "btn_darkblue 1.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/btn_darkblue 1.asset"
+                  },
+                  {
+                    "name": "coin_1.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_1.asset"
+                  },
+                  {
+                    "name": "coin_2.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_2.asset"
+                  },
+                  {
+                    "name": "coin_3.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_3.asset"
+                  },
+                  {
+                    "name": "coin_4.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_4.asset"
+                  },
+                  {
+                    "name": "coin_5.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_5.asset"
+                  },
+                  {
+                    "name": "coin_6.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/coin_6.asset"
+                  },
+                  {
+                    "name": "eira_coin_small.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/eira_coin_small.asset"
+                  },
+                  {
+                    "name": "molika_coin_small.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/molika_coin_small.asset"
+                  },
+                  {
+                    "name": "panelBody.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/panelBody.asset"
+                  },
+                  {
+                    "name": "panel_blue-gold-rim.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/panel_blue-gold-rim.asset"
+                  },
+                  {
+                    "name": "panel_dark-gold-rim.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/panel_dark-gold-rim.asset"
+                  },
+                  {
+                    "name": "questUI_bg.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/questUI_bg.asset"
+                  },
+                  {
+                    "name": "scrollbar.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/scrollbar.asset"
+                  },
+                  {
+                    "name": "totalCostBG.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0/totalCostBG.asset"
+                  }
+                ]
+              },
+              {
+                "name": "Atlas0.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Atlas0.asset"
+              },
+              {
+                "name": "Fonts",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts",
+                "children": [
+                  {
+                    "name": "BerlinSansFB_MonoOutline.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_MonoOutline.asset"
+                  },
+                  {
+                    "name": "BerlinSansFB_MonoOutline.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_MonoOutline.png"
+                  },
+                  {
+                    "name": "BerlinSansFB_MonoOutline.txt",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_MonoOutline.txt"
+                  },
+                  {
+                    "name": "BerlinSansFB_Small.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_Small.asset"
+                  },
+                  {
+                    "name": "BerlinSansFB_Small.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_Small.png"
+                  },
+                  {
+                    "name": "BerlinSansFB_Small.txt",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/BerlinSansFB_Small.txt"
+                  },
+                  {
+                    "name": "MolotFineLineShadow.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/MolotFineLineShadow.asset"
+                  },
+                  {
+                    "name": "MolotFineLineShadow.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/MolotFineLineShadow.png"
+                  },
+                  {
+                    "name": "MolotFineLineShadow.txt",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/MolotFineLineShadow.txt"
+                  },
+                  {
+                    "name": "folk_flash.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_flash.asset"
+                  },
+                  {
+                    "name": "folk_flash.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_flash.png"
+                  },
+                  {
+                    "name": "folk_flash.txt",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_flash.txt"
+                  },
+                  {
+                    "name": "folk_solid.asset",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_solid.asset"
+                  },
+                  {
+                    "name": "folk_solid.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_solid.png"
+                  },
+                  {
+                    "name": "folk_solid.txt",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Fonts/folk_solid.txt"
+                  }
+                ]
+              },
+              {
+                "name": "Prefabs",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Prefabs",
+                "children": [
+                  {
+                    "name": "LeaderboardEL.prefab",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Prefabs/LeaderboardEL.prefab"
+                  }
+                ]
+              },
+              {
+                "name": "Textures",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures",
+                "children": [
+                  {
+                    "name": "boopon_coin_small.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/boopon_coin_small.png"
+                  },
+                  {
+                    "name": "eira_coin_small.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/eira_coin_small.png"
+                  },
+                  {
+                    "name": "loadingCoin",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin",
+                    "children": [
+                      {
+                        "name": "coin_1.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_1.png"
+                      },
+                      {
+                        "name": "coin_2.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_2.png"
+                      },
+                      {
+                        "name": "coin_3.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_3.png"
+                      },
+                      {
+                        "name": "coin_4.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_4.png"
+                      },
+                      {
+                        "name": "coin_5.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_5.png"
+                      },
+                      {
+                        "name": "coin_6.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/loadingCoin/coin_6.png"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "molika_coin_small.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/molika_coin_small.png"
+                  },
+                  {
+                    "name": "uiElements",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements",
+                    "children": [
+                      {
+                        "name": "btn_back.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/btn_back.png"
+                      },
+                      {
+                        "name": "btn_crimson 1.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/btn_crimson 1.png"
+                      },
+                      {
+                        "name": "btn_darkblue 1.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/btn_darkblue 1.png"
+                      },
+                      {
+                        "name": "panelBody.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/panelBody.png"
+                      },
+                      {
+                        "name": "panel_blue-gold-rim.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/panel_blue-gold-rim.png"
+                      },
+                      {
+                        "name": "panel_dark-gold-rim.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/panel_dark-gold-rim.png"
+                      },
+                      {
+                        "name": "questUI_bg.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/questUI_bg.png"
+                      },
+                      {
+                        "name": "scrollbar.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/scrollbar.png"
+                      },
+                      {
+                        "name": "totalCostBG.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/Res/Textures/uiElements/totalCostBG.png"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "template.unity",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/Examples/template.unity"
+          }
+        ]
+      },
+      {
+        "name": "ex2D",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D",
+        "children": [
+          {
+            "name": "Editor",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor",
+            "children": [
+              {
+                "name": "MenuItems.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/MenuItems.cs"
+              },
+              {
+                "name": "Res",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res",
+                "children": [
+                  {
+                    "name": "Textures",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures",
+                    "children": [
+                      {
+                        "name": "Checkerboard_64x64.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/Checkerboard_64x64.png"
+                      },
+                      {
+                        "name": "border.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/border.png"
+                      },
+                      {
+                        "name": "box.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/box.png"
+                      },
+                      {
+                        "name": "ex2d_logo.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/ex2d_logo.png"
+                      },
+                      {
+                        "name": "pixel.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/pixel.png"
+                      },
+                      {
+                        "name": "rect_select.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/rect_select.png"
+                      },
+                      {
+                        "name": "water_mark.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/Textures/water_mark.png"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ex2DEditorStyle.guiskin",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Res/ex2DEditorStyle.guiskin"
+                  }
+                ]
+              },
+              {
+                "name": "Utilities",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Utilities",
+                "children": [
+                  {
+                    "name": "exAtlasUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Utilities/exAtlasUtility.cs"
+                  },
+                  {
+                    "name": "exBitmapFontUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Utilities/exBitmapFontUtility.cs"
+                  },
+                  {
+                    "name": "exEditorUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Utilities/exEditorUtility.cs"
+                  },
+                  {
+                    "name": "exRectSelection.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/Utilities/exRectSelection.cs"
+                  }
+                ]
+              },
+              {
+                "name": "ex2DAboutWindow.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/ex2DAboutWindow.cs"
+              },
+              {
+                "name": "ex2DEditor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/ex2DEditor.cs"
+              },
+              {
+                "name": "ex2DPreferencesWindow.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/ex2DPreferencesWindow.cs"
+              },
+              {
+                "name": "exAtlasEditor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/exAtlasEditor.cs"
+              },
+              {
+                "name": "exSceneEditor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/exSceneEditor.cs"
+              },
+              {
+                "name": "exSpriteAnimationEditor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/exSpriteAnimationEditor.cs"
+              },
+              {
+                "name": "exTextureInfoEditor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Editor/exTextureInfoEditor.cs"
+              }
+            ]
+          },
+          {
+            "name": "Runtime",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime",
+            "children": [
+              {
+                "name": "Assets",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets",
+                "children": [
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/Editor",
+                    "children": [
+                      {
+                        "name": "exAtlasInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/Editor/exAtlasInspector.cs"
+                      },
+                      {
+                        "name": "exBitmapFontInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/Editor/exBitmapFontInspector.cs"
+                      },
+                      {
+                        "name": "exSpriteAnimationClipInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/Editor/exSpriteAnimationClipInspector.cs"
+                      },
+                      {
+                        "name": "exTextureInfoInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/Editor/exTextureInfoInspector.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "exAtlas.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/exAtlas.cs"
+                  },
+                  {
+                    "name": "exBitmapFont.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/exBitmapFont.cs"
+                  },
+                  {
+                    "name": "exFont.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/exFont.cs"
+                  },
+                  {
+                    "name": "exSpriteAnimationClip.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/exSpriteAnimationClip.cs"
+                  },
+                  {
+                    "name": "exTextureInfo.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Assets/exTextureInfo.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Components",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components",
+                "children": [
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor",
+                    "children": [
+                      {
+                        "name": "ex2DRendererInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/ex2DRendererInspector.cs"
+                      },
+                      {
+                        "name": "ex3DSpriteFontInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/ex3DSpriteFontInspector.cs"
+                      },
+                      {
+                        "name": "ex3DSpriteInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/ex3DSpriteInspector.cs"
+                      },
+                      {
+                        "name": "exClippingInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exClippingInspector.cs"
+                      },
+                      {
+                        "name": "exLayeredSpriteInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exLayeredSpriteInspector.cs"
+                      },
+                      {
+                        "name": "exPlaneInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exPlaneInspector.cs"
+                      },
+                      {
+                        "name": "exSpriteBaseInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exSpriteBaseInspector.cs"
+                      },
+                      {
+                        "name": "exSpriteFontInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exSpriteFontInspector.cs"
+                      },
+                      {
+                        "name": "exSpriteInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exSpriteInspector.cs"
+                      },
+                      {
+                        "name": "exStandaloneSpriteInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Editor/exStandaloneSpriteInspector.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Internal",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal",
+                    "children": [
+                      {
+                        "name": "exISprite.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exISprite.cs"
+                      },
+                      {
+                        "name": "exISpriteFont.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exISpriteFont.cs"
+                      },
+                      {
+                        "name": "exLayeredSprite.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exLayeredSprite.cs"
+                      },
+                      {
+                        "name": "exMesh.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exMesh.cs"
+                      },
+                      {
+                        "name": "exPlane.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exPlane.cs"
+                      },
+                      {
+                        "name": "exSpriteBase.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exSpriteBase.cs"
+                      },
+                      {
+                        "name": "exStandaloneSprite.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/Internal/exStandaloneSprite.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ex2DRenderer.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/ex2DRenderer.cs"
+                  },
+                  {
+                    "name": "ex3DSprite.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/ex3DSprite.cs"
+                  },
+                  {
+                    "name": "ex3DSpriteFont.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/ex3DSpriteFont.cs"
+                  },
+                  {
+                    "name": "exClipping.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/exClipping.cs"
+                  },
+                  {
+                    "name": "exLayer.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/exLayer.cs"
+                  },
+                  {
+                    "name": "exSprite.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/exSprite.cs"
+                  },
+                  {
+                    "name": "exSpriteAnimation.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/exSpriteAnimation.cs"
+                  },
+                  {
+                    "name": "exSpriteFont.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Components/exSpriteFont.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Effects",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects",
+                "children": [
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/Editor",
+                    "children": [
+                      {
+                        "name": "exSpriteColorControllerInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/Editor/exSpriteColorControllerInspector.cs"
+                      },
+                      {
+                        "name": "exSpriteFontOverlapInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/Editor/exSpriteFontOverlapInspector.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "exPanelFadeEffect.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/exPanelFadeEffect.cs"
+                  },
+                  {
+                    "name": "exSpriteColorController.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/exSpriteColorController.cs"
+                  },
+                  {
+                    "name": "exSpriteFontOverlap.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Effects/exSpriteFontOverlap.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Resources",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources",
+                "children": [
+                  {
+                    "name": "Shaders",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders",
+                    "children": [
+                      {
+                        "name": "AlphaBlend.shader",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders/AlphaBlend.shader"
+                      },
+                      {
+                        "name": "AlphaBlendClipping.shader",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders/AlphaBlendClipping.shader"
+                      },
+                      {
+                        "name": "AlphaBlendNoZTest.shader",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders/AlphaBlendNoZTest.shader"
+                      },
+                      {
+                        "name": "AlphaBlendVertColor.shader",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders/AlphaBlendVertColor.shader"
+                      },
+                      {
+                        "name": "AlphaBlendVertColorClipping.shader",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/Shaders/AlphaBlendVertColorClipping.shader"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "TextureInfos",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/TextureInfos",
+                    "children": [
+                      {
+                        "name": "WhiteTexture_2x2.asset",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/TextureInfos/WhiteTexture_2x2.asset"
+                      },
+                      {
+                        "name": "WhiteTexture_2x2.png",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Resources/TextureInfos/WhiteTexture_2x2.png"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "UI",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI",
+                "children": [
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor",
+                    "children": [
+                      {
+                        "name": "exUIButtonInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIButtonInspector.cs"
+                      },
+                      {
+                        "name": "exUIControlInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIControlInspector.cs"
+                      },
+                      {
+                        "name": "exUIEffectInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIEffectInspector.cs"
+                      },
+                      {
+                        "name": "exUIMngInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIMngInspector.cs"
+                      },
+                      {
+                        "name": "exUIPanelInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIPanelInspector.cs"
+                      },
+                      {
+                        "name": "exUIProgressBarInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIProgressBarInspector.cs"
+                      },
+                      {
+                        "name": "exUIScrollBarInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIScrollBarInspector.cs"
+                      },
+                      {
+                        "name": "exUIScrollViewInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIScrollViewInspector.cs"
+                      },
+                      {
+                        "name": "exUIToggleGroupInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIToggleGroupInspector.cs"
+                      },
+                      {
+                        "name": "exUIToggleInspector.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/Editor/exUIToggleInspector.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "UITransition.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/UITransition.cs"
+                  },
+                  {
+                    "name": "exUIButton.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIButton.cs"
+                  },
+                  {
+                    "name": "exUIControl.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIControl.cs"
+                  },
+                  {
+                    "name": "exUIEffect.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIEffect.cs"
+                  },
+                  {
+                    "name": "exUIEvent.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIEvent.cs"
+                  },
+                  {
+                    "name": "exUIEventSender.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIEventSender.cs"
+                  },
+                  {
+                    "name": "exUIMng.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIMng.cs"
+                  },
+                  {
+                    "name": "exUIPanel.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIPanel.cs"
+                  },
+                  {
+                    "name": "exUIProgressBar.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIProgressBar.cs"
+                  },
+                  {
+                    "name": "exUIScrollBar.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIScrollBar.cs"
+                  },
+                  {
+                    "name": "exUIScrollView.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIScrollView.cs"
+                  },
+                  {
+                    "name": "exUIToggle.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIToggle.cs"
+                  },
+                  {
+                    "name": "exUIToggleGroup.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIToggleGroup.cs"
+                  },
+                  {
+                    "name": "exUIUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/UI/exUIUtility.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Utilities",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Utilities",
+                "children": [
+                  {
+                    "name": "exSpriteUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Utilities/exSpriteUtility.cs"
+                  },
+                  {
+                    "name": "exTextUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Utilities/exTextUtility.cs"
+                  },
+                  {
+                    "name": "exTextureUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/ex2D/Runtime/Utilities/exTextureUtility.cs"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "exUnity",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity",
+        "children": [
+          {
+            "name": "Debugger",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger",
+            "children": [
+              {
+                "name": "Editor",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger/Editor",
+                "children": [
+                  {
+                    "name": "exAnimationDebugger.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger/Editor/exAnimationDebugger.cs"
+                  },
+                  {
+                    "name": "exDebugHelperEditor.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger/Editor/exDebugHelperEditor.cs"
+                  },
+                  {
+                    "name": "exGenericComponentDebugger.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger/Editor/exGenericComponentDebugger.cs"
+                  }
+                ]
+              },
+              {
+                "name": "exDebugHelper.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Debugger/exDebugHelper.cs"
+              }
+            ]
+          },
+          {
+            "name": "Editor",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Editor",
+            "children": [
+              {
+                "name": "exGenericAssetUtility.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Editor/exGenericAssetUtility.cs"
+              }
+            ]
+          },
+          {
+            "name": "FSM",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM",
+            "children": [
+              {
+                "name": "AnimState.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/AnimState.cs"
+              },
+              {
+                "name": "Editor",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/Editor",
+                "children": [
+                  {
+                    "name": "exFSMDebugger.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/Editor/exFSMDebugger.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Event.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/Event.cs"
+              },
+              {
+                "name": "FSMBase.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/FSMBase.cs"
+              },
+              {
+                "name": "Machine.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/Machine.cs"
+              },
+              {
+                "name": "State.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/State.cs"
+              },
+              {
+                "name": "Transition.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/FSM/Transition.cs"
+              }
+            ]
+          },
+          {
+            "name": "Utilities",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities",
+            "children": [
+              {
+                "name": "exEase.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities/exEase.cs"
+              },
+              {
+                "name": "exGeometryUtility.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities/exGeometryUtility.cs"
+              },
+              {
+                "name": "exList.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities/exList.cs"
+              },
+              {
+                "name": "exMath.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities/exMath.cs"
+              },
+              {
+                "name": "exUtility.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/ex2d-dev/core/Assets/exUnity/Utilities/exUtility.cs"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

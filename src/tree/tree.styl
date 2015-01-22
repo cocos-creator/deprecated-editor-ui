@@ -1,22 +1,23 @@
 :host {
+    display: block
     outline: none
+    box-sizing: border-box
 
     overflow-x: hidden
     overflow-y: auto
     border: 1px solid #171717
-    padding: 5px
+    padding: 0px 5px
     position: relative
 
     box-shadow: inset 0 0 8px 2px rgba(0,0,0,0.2)
     background: #333
 
-    .content {
-        // enable this will allow the width exceed the .view.width
-        // display: inline-block
-        // position: relative
-    }
-
-    // &([focused]) .view {
-    //     border: 1px solid #04a
-    // }
+    min-width: 100px
+    min-height: 100px
 }
+
+// #content {
+//     // enable this will allow the width exceed the .view.width
+//     display: inline-block
+//     position: relative
+// }

@@ -1,0 +1,1229 @@
+[
+  {
+    "name": "Assets",
+    "isDirectory": true,
+    "path": "/Users/johnny/exdev/zed/Assets/",
+    "children": [
+      {
+        "name": "Characters",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Characters",
+        "children": [
+          {
+            "name": "Ashe",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe",
+            "children": [
+              {
+                "name": "Ashe.controller",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Ashe.controller"
+              },
+              {
+                "name": "Ashe.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Ashe.fbx"
+              },
+              {
+                "name": "Materials",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Materials",
+                "children": [
+                  {
+                    "name": "ashe_base_2011_TX_CM.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Materials/ashe_base_2011_TX_CM.mat"
+                  }
+                ]
+              },
+              {
+                "name": "Textures",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Textures",
+                "children": [
+                  {
+                    "name": "ashe_base_2011_TX_CM.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Textures/ashe_base_2011_TX_CM.dds"
+                  },
+                  {
+                    "name": "ashe_base_2011_TX_CM.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Ashe/Textures/ashe_base_2011_TX_CM.png"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Darius",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius",
+            "children": [
+              {
+                "name": "Darius.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius.fbx"
+              },
+              {
+                "name": "Darius@Attack1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Attack1.fbx"
+              },
+              {
+                "name": "Darius@Attack2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Attack2.fbx"
+              },
+              {
+                "name": "Darius@Channel.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Channel.fbx"
+              },
+              {
+                "name": "Darius@ChannelWindUp.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@ChannelWindUp.fbx"
+              },
+              {
+                "name": "Darius@Crit.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Crit.fbx"
+              },
+              {
+                "name": "Darius@Dance.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Dance.fbx"
+              },
+              {
+                "name": "Darius@Death.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Death.fbx"
+              },
+              {
+                "name": "Darius@Idle1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Idle1.fbx"
+              },
+              {
+                "name": "Darius@Idle2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Idle2.fbx"
+              },
+              {
+                "name": "Darius@Joke.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Joke.fbx"
+              },
+              {
+                "name": "Darius@Laugh.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Laugh.fbx"
+              },
+              {
+                "name": "Darius@Recall.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Recall.fbx"
+              },
+              {
+                "name": "Darius@Run.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Run.fbx"
+              },
+              {
+                "name": "Darius@Spell1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell1.fbx"
+              },
+              {
+                "name": "Darius@Spell2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell2.fbx"
+              },
+              {
+                "name": "Darius@Spell2_Idle.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell2_Idle.fbx"
+              },
+              {
+                "name": "Darius@Spell2_Run.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell2_Run.fbx"
+              },
+              {
+                "name": "Darius@Spell3.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell3.fbx"
+              },
+              {
+                "name": "Darius@Spell4.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Spell4.fbx"
+              },
+              {
+                "name": "Darius@Taunt.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Darius@Taunt.fbx"
+              },
+              {
+                "name": "Materials",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Materials",
+                "children": [
+                  {
+                    "name": "darius_base_TX_CM.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/Materials/darius_base_TX_CM.mat"
+                  }
+                ]
+              },
+              {
+                "name": "darius_base_TX_CM.dds",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Darius/darius_base_TX_CM.dds"
+              }
+            ]
+          },
+          {
+            "name": "Garen",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen",
+            "children": [
+              {
+                "name": "Garen.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen.fbx"
+              },
+              {
+                "name": "Garen@attack1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@attack1.fbx"
+              },
+              {
+                "name": "Garen@attack2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@attack2.fbx"
+              },
+              {
+                "name": "Garen@channel.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@channel.fbx"
+              },
+              {
+                "name": "Garen@channelin.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@channelin.fbx"
+              },
+              {
+                "name": "Garen@idle1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@idle1.fbx"
+              },
+              {
+                "name": "Garen@idle_leadin.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@idle_leadin.fbx"
+              },
+              {
+                "name": "Garen@run.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@run.fbx"
+              },
+              {
+                "name": "Garen@spell1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@spell1.fbx"
+              },
+              {
+                "name": "Garen@spell3.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@spell3.fbx"
+              },
+              {
+                "name": "Garen@spell4.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Garen@spell4.fbx"
+              },
+              {
+                "name": "Materials",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials",
+                "children": [
+                  {
+                    "name": "Garen_Base_E_Spin_Blur.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/Garen_Base_E_Spin_Blur.dds"
+                  },
+                  {
+                    "name": "Garen_Base_E_Spin_Edge.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/Garen_Base_E_Spin_Edge.dds"
+                  },
+                  {
+                    "name": "Garen_Base_E_Spin_TopDown.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/Garen_Base_E_Spin_TopDown.dds"
+                  },
+                  {
+                    "name": "Garen_base_TX_CM.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/Garen_base_TX_CM.dds"
+                  },
+                  {
+                    "name": "Garen_base_TX_CM.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/Garen_base_TX_CM.mat"
+                  },
+                  {
+                    "name": "spin.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/Materials/spin.mat"
+                  }
+                ]
+              },
+              {
+                "name": "fx_spin.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Garen/fx_spin.fbx"
+              }
+            ]
+          },
+          {
+            "name": "Zed",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed",
+            "children": [
+              {
+                "name": "FX",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX",
+                "children": [
+                  {
+                    "name": "Materials",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/Materials",
+                    "children": [
+                      {
+                        "name": "zed_atk_crit.mat",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/Materials/zed_atk_crit.mat"
+                      },
+                      {
+                        "name": "zed_basatk_stab.mat",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/Materials/zed_basatk_stab.mat"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "fx_atk_stab.fbx",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/fx_atk_stab.fbx"
+                  },
+                  {
+                    "name": "fx_crit.fbx",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/fx_crit.fbx"
+                  },
+                  {
+                    "name": "fx_shadow_wisps.prefab",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/fx_shadow_wisps.prefab"
+                  },
+                  {
+                    "name": "zed_atk_crit.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/zed_atk_crit.dds"
+                  },
+                  {
+                    "name": "zed_atk_critadd.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/zed_atk_critadd.dds"
+                  },
+                  {
+                    "name": "zed_basatk_stab.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/FX/zed_basatk_stab.dds"
+                  }
+                ]
+              },
+              {
+                "name": "Materials",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Materials",
+                "children": [
+                  {
+                    "name": "Zed_base_TX_CM.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Materials/Zed_base_TX_CM.mat"
+                  },
+                  {
+                    "name": "zed_shadowwisps.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Materials/zed_shadowwisps.mat"
+                  }
+                ]
+              },
+              {
+                "name": "Textures",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Textures",
+                "children": [
+                  {
+                    "name": "ZedShadow_base_TX_CM.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Textures/ZedShadow_base_TX_CM.dds"
+                  },
+                  {
+                    "name": "Zed_base_TX_CM.DDS",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Textures/Zed_base_TX_CM.DDS"
+                  },
+                  {
+                    "name": "Zed_base_TX_CM.png",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Textures/Zed_base_TX_CM.png"
+                  },
+                  {
+                    "name": "zed_shadowwisps.dds",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Textures/zed_shadowwisps.dds"
+                  }
+                ]
+              },
+              {
+                "name": "Zed.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed.fbx"
+              },
+              {
+                "name": "Zed@attack1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@attack1.fbx"
+              },
+              {
+                "name": "Zed@attack2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@attack2.fbx"
+              },
+              {
+                "name": "Zed@attack2_part1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@attack2_part1.fbx"
+              },
+              {
+                "name": "Zed@attack_passive.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@attack_passive.fbx"
+              },
+              {
+                "name": "Zed@attack_spell4.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@attack_spell4.fbx"
+              },
+              {
+                "name": "Zed@channel.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@channel.fbx"
+              },
+              {
+                "name": "Zed@channel_WNDUP.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@channel_WNDUP.fbx"
+              },
+              {
+                "name": "Zed@channel_leadin.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@channel_leadin.fbx"
+              },
+              {
+                "name": "Zed@crit.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@crit.fbx"
+              },
+              {
+                "name": "Zed@dance.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@dance.fbx"
+              },
+              {
+                "name": "Zed@idle1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@idle1.fbx"
+              },
+              {
+                "name": "Zed@idle_LeadIn1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@idle_LeadIn1.fbx"
+              },
+              {
+                "name": "Zed@idle_LeadIn2.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@idle_LeadIn2.fbx"
+              },
+              {
+                "name": "Zed@idle_LeadIn3.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@idle_LeadIn3.fbx"
+              },
+              {
+                "name": "Zed@idle_LeadIn4.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@idle_LeadIn4.fbx"
+              },
+              {
+                "name": "Zed@run.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@run.fbx"
+              },
+              {
+                "name": "Zed@run_fast.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@run_fast.fbx"
+              },
+              {
+                "name": "Zed@run_haste.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@run_haste.fbx"
+              },
+              {
+                "name": "Zed@run_leadin.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@run_leadin.fbx"
+              },
+              {
+                "name": "Zed@spell1.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@spell1.fbx"
+              },
+              {
+                "name": "Zed@spell3.fbx",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Characters/Zed/Zed@spell3.fbx"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DemoTurnbase",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase",
+        "children": [
+          {
+            "name": "CombatStage.cs",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase/CombatStage.cs"
+          },
+          {
+            "name": "enemy_pos.mat",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase/enemy_pos.mat"
+          },
+          {
+            "name": "hero_pos.mat",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase/hero_pos.mat"
+          },
+          {
+            "name": "origin.mat",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase/origin.mat"
+          },
+          {
+            "name": "turnbase_combat.unity",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/DemoTurnbase/turnbase_combat.unity"
+          }
+        ]
+      },
+      {
+        "name": "FX",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/FX",
+        "children": [
+          {
+            "name": "MouseIndicator.anim",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/FX/MouseIndicator.anim"
+          },
+          {
+            "name": "MouseIndicator.controller",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/FX/MouseIndicator.controller"
+          }
+        ]
+      },
+      {
+        "name": "Misc",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Misc",
+        "children": [
+          {
+            "name": "Checkerboard_64x64.png",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/Checkerboard_64x64.png"
+          },
+          {
+            "name": "DEV_UV_by_peterdackers.png",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/DEV_UV_by_peterdackers.png"
+          },
+          {
+            "name": "Indicator",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator",
+            "children": [
+              {
+                "name": "Materials",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/Materials",
+                "children": [
+                  {
+                    "name": "touchIndicator_1.mat",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/Materials/touchIndicator_1.mat"
+                  }
+                ]
+              },
+              {
+                "name": "touchIndicator_1.png",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/touchIndicator_1.png"
+              },
+              {
+                "name": "touchIndicator_2.png",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/touchIndicator_2.png"
+              },
+              {
+                "name": "touchIndicator_3.png",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/touchIndicator_3.png"
+              },
+              {
+                "name": "touchIndicator_4.png",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/touchIndicator_4.png"
+              },
+              {
+                "name": "touchIndicator_5.png",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Indicator/touchIndicator_5.png"
+              }
+            ]
+          },
+          {
+            "name": "Materials",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials",
+            "children": [
+              {
+                "name": "Checkerboard_64x64.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/Checkerboard_64x64.mat"
+              },
+              {
+                "name": "DEV_UV_by_peterdackers.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/DEV_UV_by_peterdackers.mat"
+              },
+              {
+                "name": "blobShadow.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/blobShadow.mat"
+              },
+              {
+                "name": "checker-400x400.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/checker-400x400.mat"
+              },
+              {
+                "name": "checker-400x400_outline.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/checker-400x400_outline.mat"
+              },
+              {
+                "name": "pixel.mat",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Misc/Materials/pixel.mat"
+              }
+            ]
+          },
+          {
+            "name": "blobShadow.png",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/blobShadow.png"
+          },
+          {
+            "name": "box.png",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/box.png"
+          },
+          {
+            "name": "checker-400x400.jpg",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/checker-400x400.jpg"
+          },
+          {
+            "name": "pixel.png",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Misc/pixel.png"
+          }
+        ]
+      },
+      {
+        "name": "Prefabs",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Prefabs",
+        "children": [
+          {
+            "name": "AnimationActor.prefab",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Prefabs/AnimationActor.prefab"
+          },
+          {
+            "name": "Darius.prefab",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Prefabs/Darius.prefab"
+          },
+          {
+            "name": "Garen.prefab",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Prefabs/Garen.prefab"
+          },
+          {
+            "name": "MouseIndicator.prefab",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Prefabs/MouseIndicator.prefab"
+          },
+          {
+            "name": "Zed.prefab",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Prefabs/Zed.prefab"
+          }
+        ]
+      },
+      {
+        "name": "Scenes",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Scenes",
+        "children": [
+          {
+            "name": "test-animfsm.unity",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Scenes/test-animfsm.unity"
+          }
+        ]
+      },
+      {
+        "name": "Scripts",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Scripts",
+        "children": [
+          {
+            "name": "Actor",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor",
+            "children": [
+              {
+                "name": "Actor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Actor.cs"
+              },
+              {
+                "name": "ActorAI.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/ActorAI.cs"
+              },
+              {
+                "name": "ActorAnimEvent.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/ActorAnimEvent.cs"
+              },
+              {
+                "name": "AnimFSM.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/AnimFSM.cs"
+              },
+              {
+                "name": "AnimationActor.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/AnimationActor.cs"
+              },
+              {
+                "name": "Brain.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Brain.cs"
+              },
+              {
+                "name": "Commands.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Commands.cs"
+              },
+              {
+                "name": "PlayerInputListener.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/PlayerInputListener.cs"
+              },
+              {
+                "name": "SimpleAnimFSM.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/SimpleAnimFSM.cs"
+              },
+              {
+                "name": "Ticker",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Ticker",
+                "children": [
+                  {
+                    "name": "TickActorAI.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Ticker/TickActorAI.cs"
+                  },
+                  {
+                    "name": "TickActorMove.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Actor/Ticker/TickActorMove.cs"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Basic",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic",
+            "children": [
+              {
+                "name": "Audio",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Audio",
+                "children": [
+                  {
+                    "name": "exAudioPool.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Audio/exAudioPool.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Editor",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Editor",
+                "children": [
+                  {
+                    "name": "exAutoPoolDrawer.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Editor/exAutoPoolDrawer.cs"
+                  },
+                  {
+                    "name": "exPoolDrawer.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Editor/exPoolDrawer.cs"
+                  },
+                  {
+                    "name": "exTimebasedCurveEditor.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/Editor/exTimebasedCurveEditor.cs"
+                  }
+                ]
+              },
+              {
+                "name": "exAutoPool.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exAutoPool.cs"
+              },
+              {
+                "name": "exGameUtility.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exGameUtility.cs"
+              },
+              {
+                "name": "exPool.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exPool.cs"
+              },
+              {
+                "name": "exProbability.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exProbability.cs"
+              },
+              {
+                "name": "exSimpleFX.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exSimpleFX.cs"
+              },
+              {
+                "name": "exTimebasedCurveInfo.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exTimebasedCurveInfo.cs"
+              },
+              {
+                "name": "exTimer.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Basic/exTimer.cs"
+              }
+            ]
+          },
+          {
+            "name": "Camera",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Camera",
+            "children": [
+              {
+                "name": "CameraCtrl.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Camera/CameraCtrl.cs"
+              },
+              {
+                "name": "CameraMng.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Camera/CameraMng.cs"
+              },
+              {
+                "name": "FreeMoveCameraCtrl.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Camera/FreeMoveCameraCtrl.cs"
+              },
+              {
+                "name": "OrbitFollowCameraCtrl.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Camera/OrbitFollowCameraCtrl.cs"
+              }
+            ]
+          },
+          {
+            "name": "Charactor",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Charactor",
+            "children": [
+              {
+                "name": "Darius.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Charactor/Darius.cs"
+              },
+              {
+                "name": "Garen.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Charactor/Garen.cs"
+              },
+              {
+                "name": "Zed.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Charactor/Zed.cs"
+              }
+            ]
+          },
+          {
+            "name": "Core",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Core",
+            "children": [
+              {
+                "name": "Event",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Core/Event",
+                "children": [
+                  {
+                    "name": "exEvent.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Core/Event/exEvent.cs"
+                  },
+                  {
+                    "name": "exEventMng.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Core/Event/exEventMng.cs"
+                  }
+                ]
+              },
+              {
+                "name": "exNode.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Core/exNode.cs"
+              }
+            ]
+          },
+          {
+            "name": "Skill",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Skill",
+            "children": [
+              {
+                "name": "Editor",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Skill/Editor",
+                "children": [
+                  {
+                    "name": "Menu.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/Scripts/Skill/Editor/Menu.cs"
+                  }
+                ]
+              },
+              {
+                "name": "SkillInfo.cs",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Scripts/Skill/SkillInfo.cs"
+              }
+            ]
+          },
+          {
+            "name": "Stage.cs",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Scripts/Stage.cs"
+          }
+        ]
+      },
+      {
+        "name": "Shaders",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Shaders",
+        "children": [
+          {
+            "name": "Outlined-Diffuse.shader",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Shaders/Outlined-Diffuse.shader"
+          },
+          {
+            "name": "Outlined-EmissionDiffuse.shader",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Shaders/Outlined-EmissionDiffuse.shader"
+          },
+          {
+            "name": "Outlined-Illumin-VertexLit.shader",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/Shaders/Outlined-Illumin-VertexLit.shader"
+          }
+        ]
+      },
+      {
+        "name": "Skills",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/Skills",
+        "children": [
+          {
+            "name": "darius",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Skills/darius",
+            "children": [
+              {
+                "name": "darius_attack.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/darius/darius_attack.asset"
+              },
+              {
+                "name": "darius_skill1.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/darius/darius_skill1.asset"
+              },
+              {
+                "name": "darius_skill2.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/darius/darius_skill2.asset"
+              },
+              {
+                "name": "darius_skill3.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/darius/darius_skill3.asset"
+              },
+              {
+                "name": "darius_skill4.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/darius/darius_skill4.asset"
+              }
+            ]
+          },
+          {
+            "name": "garen",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/Skills/garen",
+            "children": [
+              {
+                "name": "garen_attack.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/garen/garen_attack.asset"
+              },
+              {
+                "name": "garen_spell_1.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/garen/garen_spell_1.asset"
+              },
+              {
+                "name": "garen_spell_2.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/garen/garen_spell_2.asset"
+              },
+              {
+                "name": "garen_spell_3.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/garen/garen_spell_3.asset"
+              },
+              {
+                "name": "garen_spell_4.asset",
+                "isDirectory": false,
+                "path": "/Users/johnny/exdev/zed/Assets/Skills/garen/garen_spell_4.asset"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ex-unity",
+        "isDirectory": true,
+        "path": "/Users/johnny/exdev/zed/Assets/ex-unity",
+        "children": [
+          {
+            "name": "LICENSE",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/ex-unity/LICENSE"
+          },
+          {
+            "name": "README.md",
+            "isDirectory": false,
+            "path": "/Users/johnny/exdev/zed/Assets/ex-unity/README.md"
+          },
+          {
+            "name": "scripts",
+            "isDirectory": true,
+            "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts",
+            "children": [
+              {
+                "name": "Debugger",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger",
+                "children": [
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger/Editor",
+                    "children": [
+                      {
+                        "name": "exAnimationDebugger.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger/Editor/exAnimationDebugger.cs"
+                      },
+                      {
+                        "name": "exDebugHelperEditor.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger/Editor/exDebugHelperEditor.cs"
+                      },
+                      {
+                        "name": "exGenericComponentDebugger.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger/Editor/exGenericComponentDebugger.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "exDebugHelper.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Debugger/exDebugHelper.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Editor",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Editor",
+                "children": [
+                  {
+                    "name": "exGenericAssetUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Editor/exGenericAssetUtility.cs"
+                  }
+                ]
+              },
+              {
+                "name": "FSM",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM",
+                "children": [
+                  {
+                    "name": "AnimState.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/AnimState.cs"
+                  },
+                  {
+                    "name": "Editor",
+                    "isDirectory": true,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/Editor",
+                    "children": [
+                      {
+                        "name": "exFSMDebugger.cs",
+                        "isDirectory": false,
+                        "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/Editor/exFSMDebugger.cs"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Event.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/Event.cs"
+                  },
+                  {
+                    "name": "FSMBase.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/FSMBase.cs"
+                  },
+                  {
+                    "name": "Machine.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/Machine.cs"
+                  },
+                  {
+                    "name": "State.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/State.cs"
+                  },
+                  {
+                    "name": "Transition.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/FSM/Transition.cs"
+                  }
+                ]
+              },
+              {
+                "name": "Utilities",
+                "isDirectory": true,
+                "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities",
+                "children": [
+                  {
+                    "name": "exEase.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities/exEase.cs"
+                  },
+                  {
+                    "name": "exGeometryUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities/exGeometryUtility.cs"
+                  },
+                  {
+                    "name": "exList.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities/exList.cs"
+                  },
+                  {
+                    "name": "exMath.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities/exMath.cs"
+                  },
+                  {
+                    "name": "exUtility.cs",
+                    "isDirectory": false,
+                    "path": "/Users/johnny/exdev/zed/Assets/ex-unity/scripts/Utilities/exUtility.cs"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "zed.exvim",
+        "isDirectory": false,
+        "path": "/Users/johnny/exdev/zed/Assets/zed.exvim"
+      }
+    ]
+  }
+]

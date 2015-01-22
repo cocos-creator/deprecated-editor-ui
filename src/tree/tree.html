@@ -1,3 +1,13 @@
+<style>
+    html /deep/ fire-ui-ti>fire-ui-ti {
+        margin-left: 12px;
+    }
+
+    html /deep/ fire-ui-tree[focused] fire-ui-ti[selected]::shadow #bar {
+        background-color: #059
+    }
+</style>
+
 <link rel="import" href="item/item.html">
 
 <polymer-element
@@ -7,11 +17,14 @@
     on-focusout="{{focusoutAction}}"
     on-scroll="{{scrollAction}}"
     on-keydown="{{keydownAction}}"
+    on-mousedown="{{mousedownAction}}"
+    on-selecting="{{selectingAction}}"
+    on-select="{{selectAction}}"
     >
     <template>
         <link rel="stylesheet" href="tree.css">
 
-        <div id="content" class="content">
+        <div id="content">
             <content></content>
             <div id="highlightBorder" class="highlight"></div>
             <div id="insertLine" class="insert"></div>
