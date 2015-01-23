@@ -19,6 +19,8 @@ Polymer({
         this.name = '';
         this.userId = '';
 
+        this.hasIcon = false;
+
         this._renaming = false;
     },
 
@@ -34,6 +36,8 @@ Polymer({
 
     setIcon: function ( icon ) {
         if (icon) {
+            this.hasIcon = true;
+
             if ( icon instanceof Image ) {
                 icon.setAttribute('draggable','false'); // this will prevent item dragging
                 this.$.typeIcon.appendChild(icon);
@@ -42,19 +46,19 @@ Polymer({
                 this.$.typeIcon.className = "type-icon " + icon;
             }
             this.$.typeIcon.removeAttribute('hidden');
-            this.$.rename.setAttribute('icon','');
         }
         else {
+            this.hasIcon = false;
+
             this.$.typeIcon.setAttribute('hidden', '');
-            this.$.rename.removeAttribute('icon');
         }
     },
 
     rename: function () {
-        this.$.rename.style.display = '';
-        this.$.rename.value = this.name;
-        this.$.rename.focus();
-        this.$.rename.select();
+        this.$.nameInput.style.display = '';
+        this.$.nameInput.value = this.name;
+        this.$.nameInput.focus();
+        this.$.nameInput.select();
 
         this._renaming = true;
     },
@@ -129,9 +133,6 @@ Polymer({
             toggle: toggle,
             shift: shift,
         } );
-
-        event.stopPropagation();
-
     },
 
     mouseenterAction: function ( event ) {
@@ -149,16 +150,6 @@ Polymer({
 
     foldAction: function ( event ) {
         this.folded = !this.folded;
-        event.stopPropagation();
-    },
-
-    renameConfirmAction: function ( event ) {
-        this.$.rename.style.display = 'none';
-        this._renaming = false;
-
-        if ( this.$.rename.value !== this.name ) {
-            this.fire('namechanged', { name: this.$.rename.value } );
-        }
         event.stopPropagation();
     },
 });

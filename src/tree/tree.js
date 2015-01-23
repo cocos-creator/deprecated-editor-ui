@@ -17,10 +17,12 @@ Polymer({
         this.idToItem = {};
         this.curSelection = [];
         this.activeElement = null;
+        this.shiftStartElement = null;
     },
 
     ready: function () {
         this.tabIndex = EditorUI.getParentTabIndex(this) + 1;
+        this.$.nameInput.addEventListener('confirm', this.renameConfirmAction.bind(this));
     },
 
     initItem: function ( item, name, id, parent ) {
@@ -187,26 +189,82 @@ Polymer({
         return resultELs;
     },
 
+    rename: function ( element ) {
+        if ( element.hasIcon ) {
+            this.$.nameInput.setAttribute('icon','');
+        }
+        else {
+            this.$.nameInput.removeAttribute('icon');
+        }
+
+        element._renaming = true;
+        element.$.wrapper.appendChild(this.$.nameInput);
+
+        this.$.nameInput.renamingEL = element;
+        this.$.nameInput.style.display = '';
+        this.$.nameInput.value = element.name;
+        this.$.nameInput.focus();
+        window.requestAnimationFrame( function () {
+            this.$.nameInput.select();
+        }.bind(this));
+    },
+
     select: function ( element ) {
         this.clearSelect();
         this.curSelection.push(element);
         element.selected = true;
     },
 
-    clearSelect: function ( event ) {
+    clearSelect: function () {
         this.curSelection.forEach ( function (item) {
             item.selected = false;
         } );
         this.curSelection = [];
         this.activeElement = null;
+        this.shiftStartElement = null;
     },
 
     selectingAction: function ( event ) {
+        event.stopPropagation();
+
         this.focus();
 
         if ( event.detail.shift ) {
+            var shiftStartEL = this.shiftStartElement;
+
+            if ( shiftStartEL === null ) {
+                shiftStartEL = this.activeElement;
+            }
+
+            var activeEL = this.activeElement;
+            this.clearSelect();
+            this.shiftStartElement = shiftStartEL;
+            this.activeElement = activeEL;
+
+            var el = this.shiftStartElement;
+
+            if ( shiftStartEL !== event.target ) {
+                if ( this.shiftStartElement.offsetTop < event.target.offsetTop ) {
+                    while ( el !== event.target ) {
+                        this.curSelection.push(el);
+                        el.selected = true;
+                        el = this.nextItem(el);
+                    }
+                }
+                else {
+                    while ( el !== event.target ) {
+                        this.curSelection.push(el);
+                        el.selected = true;
+                        el = this.prevItem(el);
+                    }
+                }
+            }
+            this.curSelection.push(event.target);
+            event.target.selected = true;
         }
-        if ( event.detail.toggle ) {
+        else if ( event.detail.toggle ) {
+            this.shiftStartElement = null;
+
             var idx = this.curSelection.indexOf( event.target );
             if ( idx === -1 ) {
                 this.curSelection.push(event.target);
@@ -218,12 +276,37 @@ Polymer({
             }
         }
         else {
+            this.shiftStartElement = null;
+
             this.select(event.target);
         }
     },
 
     selectAction: function ( event ) {
+        event.stopPropagation();
+
         this.activeElement = event.target;
+    },
+
+    renameConfirmAction: function ( event ) {
+        event.stopPropagation();
+
+        var renamingEL = this.$.nameInput.renamingEL;
+
+        this.$.nameInput.style.display = 'none';
+        this.$.content.appendChild(this.$.nameInput);
+        this.$.nameInput.renamingEL = null;
+
+        // NOTE: the rename confirm will invoke focusoutAction
+        window.requestAnimationFrame( function () {
+            this.focus();
+        }.bind(this));
+
+        renamingEL._renaming = false;
+
+        if ( renamingEL.name !== event.target.value ) {
+            renamingEL.name = event.target.value;
+        }
     },
 
     keydownAction: function (event) {
@@ -231,7 +314,7 @@ Polymer({
             // Enter
             case 13:
                 if ( Fire.isDarwin && this.activeElement ) {
-                    this.activeElement.rename();
+                    this.rename(this.activeElement);
                     event.stopPropagation();
                 }
             break;
@@ -239,7 +322,7 @@ Polymer({
             // F2
             case 113:
                 if ( this.activeElement ) {
-                    this.activeElement.rename();
+                    this.rename(this.activeElement);
                     event.stopPropagation();
                 }
             break;
@@ -273,9 +356,11 @@ Polymer({
                             this.select(prev);
                             this.activeElement = prev;
 
-                            if ( prev.offsetTop <= this.scrollTop ) {
-                                this.scrollTop = prev.offsetTop;
-                            }
+                            window.requestAnimationFrame( function() {
+                                if ( prev.offsetTop <= this.scrollTop ) {
+                                    this.scrollTop = prev.offsetTop - 2; // 1 for padding, 1 for border
+                                }
+                            }.bind(this));
                         }
                     }
                 }
@@ -292,11 +377,13 @@ Polymer({
                             this.select(next);
                             this.activeElement = next;
 
-                            var headerHeight = next.$.header.offsetHeight + 1;
-                            var contentHeight = this.offsetHeight - 2; // 2 for border
-                            if ( next.offsetTop + headerHeight >= this.scrollTop + contentHeight ) {
-                                this.scrollTop = next.offsetTop + headerHeight - contentHeight;
-                            }
+                            window.requestAnimationFrame( function() {
+                                var headerHeight = next.$.header.offsetHeight;
+                                var contentHeight = this.offsetHeight - 3; // 2 for border, 1 for padding
+                                if ( next.offsetTop + headerHeight >= this.scrollTop + contentHeight ) {
+                                    this.scrollTop = next.offsetTop + headerHeight - contentHeight;
+                                }
+                            }.bind(this));
                         }
                     }
                 }
@@ -313,5 +400,4 @@ Polymer({
             this.clearSelect();
         }
     },
-
 });

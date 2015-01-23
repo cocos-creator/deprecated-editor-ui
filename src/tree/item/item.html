@@ -13,7 +13,7 @@
             on-mouseup="{{mouseupAction}}"
             >
             <div id="bar"></div>
-            <div class="wrapper">
+            <div id="wrapper">
                 <i id="foldIcon"
                    class="fa {{folded ? 'fa-caret-right' : 'fa-caret-down'}}"
                    on-click="{{foldAction}}"
@@ -22,12 +22,6 @@
                 <i id="typeIcon" hidden></i>
                 <span id="name" class="{{name === '' ? 'no-name' : ''}}">{{name === '' ? 'No Name' : name}}</span>
             </div>
-
-            <!-- <fire-ui-text-input id="rename"          -->
-            <!--     style="display: none"                -->
-            <!--     on-confirm="{{renameConfirmAction}}" -->
-            <!-- >                                        -->
-            <!-- </fire-ui-text-input>                    -->
         </div>
         <div id="content">
             <content />

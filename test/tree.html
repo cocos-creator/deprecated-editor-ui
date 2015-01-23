@@ -64,14 +64,14 @@
             <fire-ui-button on-click="{{hintAction}}">Hint</fire-ui-button>
             <span class="space"></span>
 
-            <fire-ui-label>tree: {{timeForTree1}} ms</fire-ui-label>
+            <fire-ui-label>tree: {{timeForTree}} ms</fire-ui-label>
             <span class="space"></span>
         </template>
 
         <script>
             Polymer({
                 created: function () {
-                    this.timeForTree1 = 0;
+                    this.timeForTree = 0;
                 },
 
                 ready: function () {
@@ -97,7 +97,7 @@
                         // var newEL = this.newEntryRecursively2(entry,this.$.tree);
                     }.bind(this));
                     var d2 = new Date();
-                    this.timeForTree1 = (d2-d1);
+                    this.timeForTree = (d2-d1);
                     console.timeEnd('tree');
                 },
 
