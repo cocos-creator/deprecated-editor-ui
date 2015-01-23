@@ -18,15 +18,9 @@ Polymer({
     created: function () {
         this.name = '';
         this.userId = '';
-
         this.hasIcon = false;
 
         this._renaming = false;
-    },
-
-    domReady: function () {
-        // HACK: to make this.$.rename.select() works
-        // this.$.rename.value = this.name;
     },
 
     get expanded() {

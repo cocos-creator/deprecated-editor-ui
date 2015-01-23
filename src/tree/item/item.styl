@@ -3,27 +3,33 @@
 
     font-size: 12px
     margin-left: 0px // NOTE: will be setup in editor.styl
-    margin-top: 1px
 }
 
 :host([folded]) #content {
     display: none
 }
 
+#header {
+    position: relative
+    padding-bottom: 1px
+}
+
 #bar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 16px;
+    position: absolute
+    left: 0
+    right: 0
+    height: 16px
 }
 
 :host([selected]) #bar {
     background-color: #555
 }
 
-#wrapper {
-    position: relative
+.inline-block-wrapper {
+    display: inline-block
+}
 
+.flex-wrapper {
     display: flex
     flex-direction: row
     flex-wrap: nowrap

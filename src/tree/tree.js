@@ -32,6 +32,7 @@ Polymer({
         }
         item.name = name;
         item.foldable = false;
+        item.folded = true;
         parent = parent || this;
         parent.addChild(item);
     },
@@ -198,7 +199,7 @@ Polymer({
         }
 
         element._renaming = true;
-        element.$.wrapper.appendChild(this.$.nameInput);
+        element.$.header.appendChild(this.$.nameInput);
 
         this.$.nameInput.renamingEL = element;
         this.$.nameInput.style.display = '';
