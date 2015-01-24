@@ -14,57 +14,57 @@ color-text = #aaa
     min-width: 60px
     border: 1px solid color-outter-border
 
-    #focus:focus {
-        outline: none
-    }
-
     &(:hover) {
         border-color: color-outter-border + 10%
-
-        .border {
-            background-color: color-bg + 10%
-            border-color: color-inner-border + 10%
-
-            i {
-                opacity: 1.0
-            }
-        }
     }
 
     &([focused]) {
         border-color: color-outter-border-focus
-        .border {
-            border-color: #171717
-        }
     }
+}
 
-    .border {
-        position: relative
-        border: 1px solid color-inner-border
-        width: 100%
+#focus:focus {
+    outline: none
+}
 
-        padding: 3px 4px
-        font-family: Helvetica,Arial,sans-serif
-        color: color-text
+.border {
+    position: relative
+    border: 1px solid color-inner-border
+    width: 100%
 
-        background-color: color-bg
+    padding: 3px 4px
+    font-family: Helvetica,Arial,sans-serif
+    color: color-text
 
+    background-color: color-bg
+
+    cursor: pointer
+    & * {
         cursor: pointer
-        & * {
-            cursor: pointer
-        }
-
-        i {
-            margin-top: 2px
-
-            opacity: 0.5
-        }
     }
+}
 
-    .text {
-        overflow-x: hidden
-        margin-right: 5px
-    }
+:host(:hover) .border {
+    background-color: color-bg + 10%
+    border-color: color-inner-border + 10%
+}
+
+:host([focused]) .border {
+    border-color: #171717
+}
+
+i {
+    margin-top: 2px
+    opacity: 0.5
+}
+
+:host(:hover) i {
+    opacity: 1.0
+}
+
+.text {
+    overflow-x: hidden
+    margin-right: 5px
 }
 
 :host-context([disabled]), :host([disabled]) {

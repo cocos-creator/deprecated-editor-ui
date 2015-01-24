@@ -4,29 +4,22 @@
     name="fire-ui-sortable-list"
     constructor="FireSortableList"
     >
-<template>
-<link rel="stylesheet" href="sortable-list.css">
+    <template>
+        <link rel="stylesheet" href="sortable-list.css">
 
-<div class="border" id="focus"
-    on-focusin="{{focusinAction}}"
-    on-focusout="{{focusoutAction}}"
-    on-click="{{clickAction}}"
-    >
-    <div id="list" class="inner">
-        <!-- <template repeat="{{item, itemIndex in value}}">                        -->
-        <!--     <fire-ui-li index="{{itemIndex}}" on-changed="{{changedAction}}">   -->
-        <!--         <fire-ui-field flex-2 value="{{item}}"></fire-ui-field>         -->
-        <!--     </fire-ui-li>                                                       -->
-        <!-- </template>                                                             -->
-    </div>
-</div>
+        <div class="border" id="focus"
+            on-focusin="{{focusinAction}}"
+            on-focusout="{{focusoutAction}}"
+            on-click="{{clickAction}}"
+            >
+            <div id="list" class="inner"></div>
+        </div>
+        <div class="btn-add">
+            <div class="btn-border">
+                <i class="fa fa-plus"></i>
+            </div>
+        </div>
+    </template>
 
-<div class="btn-add">
-    <div class="btn-border">
-        <i class="fa fa-plus"></i>
-    </div>
-</div>
-</template>
-
-<script type="text/javascript" src="sortable-list.js"></script>
+    <script type="text/javascript" src="sortable-list.js"></script>
 </polymer-element>

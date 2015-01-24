@@ -4,24 +4,23 @@
     on-focusout="{{focusoutAction}}"
     tabIndex="1"
     >
-<template>
-<link rel="stylesheet" href="option.css">
+    <template>
+        <link rel="stylesheet" href="option.css">
 
-<div class="border" flex-col flex-stretch>
-    <fire-ui-text-input class="search-bar" placeholder="search" value="{{searchValue}}" inputValue="{{searchValue}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
-    <div class="options" flex-auto>
-        <template repeat="{{item in options | applyFilter(searchValue)}}">
-            <div class="item {{ item.value == value ? 'selected':'' }}"
-                index="{{item.index}}"
-                on-click="{{clickAction}}"
-                >
-                {{item.name}}
+        <div class="border" flex-col flex-stretch>
+            <fire-ui-text-input class="search-bar" placeholder="search" value="{{searchValue}}" inputValue="{{searchValue}}" on-blur="{{inputBlur}}"></fire-ui-text-input>
+            <div class="options" flex-auto>
+                <template repeat="{{item in options | applyFilter(searchValue)}}">
+                    <div class="item {{ item.value == value ? 'selected':'' }}"
+                        index="{{item.index}}"
+                        on-click="{{clickAction}}"
+                        >
+                        {{item.name}}
+                    </div>
+                </template>
             </div>
-        </template>
-    </div>
-</div>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="option.js"></script>
+    <script type="text/javascript" src="option.js"></script>
 </polymer-element>

@@ -1,6 +1,8 @@
-color-track = black 
-color-nubbin = #949494 
+color-track = black
+color-nubbin = #949494
 color-nubbin-focus = #0c70a6
+color-track-disabled = #474747
+color-nubbin-disabled = #4d4d4d
 
 :host {
     display: inline-block
@@ -10,47 +12,44 @@ color-nubbin-focus = #0c70a6
     padding-left: 5px
     padding-right: 5px
     min-width: 120px
+}
 
-    #focus {
-        position: relative
-        padding-top: 10px
-        cursor: pointer
+#focus {
+    position: relative
+    padding-top: 10px
+    cursor: pointer
 
-        &:focus {
-            outline: none
-        }
-    }
-
-    .track {
-        height: 2px
-
-        cursor: inherit
-        background: color-track
-    }
-
-    .nubbin {
-        display: inline-block
-        position: relative
-        width: 10px
-        height: 10px
-        margin-top: -6px
-        margin-left: -5px
-
-        cursor: inherit
-        box-shadow:
-            0 1px 3px -1px #fff inset,
-            0 1px 1px 0 rgba(0,0,0,0.9)
-        border-radius: 100%
-        background: color-nubbin
-    }
-
-    &([focused]) .nubbin {
-        background: color-nubbin-focus
+    &:focus {
+        outline: none
     }
 }
 
-color-track-disabled = #474747
-color-nubbin-disabled = #4d4d4d
+.track {
+    height: 2px
+
+    cursor: inherit
+    background: color-track
+}
+
+.nubbin {
+    display: inline-block
+    position: relative
+    width: 10px
+    height: 10px
+    margin-top: -6px
+    margin-left: -5px
+
+    cursor: inherit
+    box-shadow:
+        0 1px 3px -1px #fff inset,
+        0 1px 1px 0 rgba(0,0,0,0.9)
+    border-radius: 100%
+    background: color-nubbin
+}
+
+:host([focused]) .nubbin {
+    background: color-nubbin-focus
+}
 
 :host-context([disabled]), :host([disabled]) {
     * {

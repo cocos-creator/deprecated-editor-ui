@@ -2,47 +2,45 @@
     name="fire-ui-unit-input"
     constructor="FireUnitInput"
     >
-<template>
-<link rel="stylesheet" href="unit-input.css">
-<style>
+    <template>
+        <link rel="stylesheet" href="unit-input.css">
 
-</style>
-<div class="border" flex-row>
-    <input id="input" class="input"
-        type="text"
-        placeholder="-"
-        on-focus="{{focusAction}}"
-        on-blur="{{blurAction}}"
-        on-input="{{inputAction}}"
-        on-keydown="{{inputKeydownAction}}"
-        ></input>
-    <span class="unit"
-        tabindex="-1"
-        on-click="{{unitClickAction}}"
-        >{{unit}}</span>
-    <div class="unit-buttons">
-        <div class="button"
-            tabindex="-1"
-            on-click="{{increaseAction}}"
-            on-mousedown="{{increaseHoldAction}}"
-            on-mouseup="{{mouseupAction}}"
-            on-mouseout="{{mouseoutAction}}"
-            >
-            <i class="fa fa-caret-up"></i>
+        <div class="border" flex-row>
+            <input id="input" class="input"
+                type="text"
+                placeholder="-"
+                on-focus="{{focusAction}}"
+                on-blur="{{blurAction}}"
+                on-input="{{inputAction}}"
+                on-keydown="{{inputKeydownAction}}"
+                ></input>
+            <span class="unit"
+                tabindex="-1"
+                on-click="{{unitClickAction}}"
+                >{{unit}}</span>
+            <div class="unit-buttons">
+                <div class="button"
+                    tabindex="-1"
+                    on-click="{{increaseAction}}"
+                    on-mousedown="{{increaseHoldAction}}"
+                    on-mouseup="{{mouseupAction}}"
+                    on-mouseout="{{mouseoutAction}}"
+                    >
+                    <i class="fa fa-caret-up"></i>
+                </div>
+                <span class="sep"></span>
+                <div class="button"
+                    tabindex="-1"
+                    on-click="{{decreaseAction}}"
+                    on-mousedown="{{decreaseHoldAction}}"
+                    on-mouseup="{{mouseupAction}}"
+                    on-mouseout="{{mouseoutAction}}"
+                    >
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
         </div>
-        <span class="sep"></span>
-        <div class="button"
-            tabindex="-1"
-            on-click="{{decreaseAction}}"
-            on-mousedown="{{decreaseHoldAction}}"
-            on-mouseup="{{mouseupAction}}"
-            on-mouseout="{{mouseoutAction}}"
-            >
-            <i class="fa fa-caret-down"></i>
-        </div>
-    </div>
-</div>
-</template>
+    </template>
 
-<script type="text/javascript" src="unit-input.js"></script>
+    <script type="text/javascript" src="unit-input.js"></script>
 </polymer-element>

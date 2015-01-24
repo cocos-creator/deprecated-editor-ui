@@ -2,23 +2,22 @@
     name="fire-ui-text-input"
     constructor="FireTextInput"
     >
-<template>
-<link rel="stylesheet" href="text-input.css">
+    <template>
+        <link rel="stylesheet" href="text-input.css">
 
-<div class="border">
-    <input id="inputArea" class="input-area"
-        type="text"
-        placeholder="{{placeholder}}"
-        on-focus="{{focusAction}}"
-        on-blur="{{blurAction}}"
-        on-input="{{inputAction}}"
-        on-mousedown="{{inputMouseDownAction}}"
-        on-keydown="{{inputKeyDownAction}}"
-        >
-    </input>
-</div>
+        <div class="border">
+            <input id="inputArea" class="input-area"
+                type="text"
+                placeholder="{{placeholder}}"
+                on-focus="{{focusAction}}"
+                on-blur="{{blurAction}}"
+                on-input="{{inputAction}}"
+                on-mousedown="{{inputMouseDownAction}}"
+                on-keydown="{{inputKeyDownAction}}"
+                >
+            </input>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="text-input.js"></script>
+    <script type="text/javascript" src="text-input.js"></script>
 </polymer-element>

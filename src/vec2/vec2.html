@@ -1,31 +1,30 @@
-<polymer-element 
-    name="fire-ui-vec2" 
+<polymer-element
+    name="fire-ui-vec2"
     constructor="FireVec2"
     >
-<template>
-<link rel="stylesheet" href="vec2.css">
+    <template>
+        <link rel="stylesheet" href="vec2.css">
 
-<div flex-1 flex-row>
-    <fire-ui-unit-input flex-1 
-        id="x"
-        value="{{value.x}}" 
-        type="float" 
-        unit="x"
-        on-changed="{{changedAction}}"
-        >
-    </fire-ui-unit-input>
-    <span class="space"></span>                                     
-    <fire-ui-unit-input flex-1 
-        id="y"
-        value="{{value.y}}" 
-        type="float" 
-        unit="y"
-        on-changed="{{changedAction}}"
-        >
-    </fire-ui-unit-input>
-</div>
+        <div flex-1 flex-row>
+            <fire-ui-unit-input flex-1
+                id="x"
+                value="{{value.x}}"
+                type="float"
+                unit="x"
+                on-changed="{{changedAction}}"
+                >
+            </fire-ui-unit-input>
+            <span class="space"></span>
+            <fire-ui-unit-input flex-1
+                id="y"
+                value="{{value.y}}"
+                type="float"
+                unit="y"
+                on-changed="{{changedAction}}"
+                >
+            </fire-ui-unit-input>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="vec2.js"></script>
+    <script type="text/javascript" src="vec2.js"></script>
 </polymer-element>

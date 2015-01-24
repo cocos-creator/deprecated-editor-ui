@@ -1,21 +1,20 @@
-<polymer-element 
-    name="fire-ui-tab" 
+<polymer-element
+    name="fire-ui-tab"
     constructor="FireTab"
     on-dragstart="dragstartAction"
     >
-<template>
-<link rel="stylesheet" href="tab.css">
+    <template>
+        <link rel="stylesheet" href="tab.css">
 
-<span class="left-tab-border"></span>
-<div class="border">
-    <div class="title">
-        <div id="icon"></div>
-        <content/>
-    </div>
-</div>
-<span class="right-tab-border"></span>
+        <span class="left-tab-border"></span>
+        <div class="border">
+            <div class="title">
+                <div id="icon"></div>
+                <content/>
+            </div>
+        </div>
+        <span class="right-tab-border"></span>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="tab.js"></script>
+    <script type="text/javascript" src="tab.js"></script>
 </polymer-element>

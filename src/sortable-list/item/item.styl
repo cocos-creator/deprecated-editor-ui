@@ -1,67 +1,66 @@
 :host {
     display: flex
     min-height: 21px
+}
 
-    #focus:focus {
-        outline: none
+#focus {
+    width: 100%
+    font-size: 12px
+    white-space: nowrap
+    padding: 3px 2px 3px 5px
+    border-bottom: 1px solid black
+
+    background-color: #404040
+    font-family: Helvetica,Arial,sans-serif
+    cursor: default
+    color: #bdbdbd
+
+    &:hover {
+        background-color: #404040 + 10%
+    }
+}
+
+#focus:focus {
+    outline: none
+}
+
+:host([selected]) #focus {
+    background-color: #005
+
+    &:hover {
+        background-color: #005 + 10%
+    }
+}
+
+.content {
+    margin-right: 5px
+}
+
+.del {
+    margin-left: 5px
+    padding: 2px 4px
+    cursor: pointer
+
+    &:hover {
+        background-color: #222
     }
 
-    #focus {
-        width: 100%
-        font-size: 12px
-        white-space: nowrap
-        padding: 3px 2px 3px 5px
-        border-bottom: 1px solid black
-
-        background-color: #404040
-        font-family: Helvetica,Arial,sans-serif
-        cursor: default 
-        color: #bdbdbd
-
-        &:hover {
-            background-color: #404040 + 10%
-        }
+    &:active {
+        background-color: #222 + 40%
     }
+}
 
-    &([selected]) {
-        #focus {
-            background-color: #005
+i {
+    font-size: 10px
 
-            &:hover {
-                background-color: #005 + 10%
-            }
-        }
-    }
-
-    .content {
+    &.fa-bars {
         margin-right: 5px
+        color: #777
+        text-shadow: 0px 1px 0 #000
     }
 
-    .del {
-        margin-left: 5px
-        padding: 2px 4px
+    &.fa-close {
+        color: #aaa
         cursor: pointer
-
-        &:hover {
-            background-color: #222
-        }
-        &:active {
-            background-color: #222 + 40%
-        }
-    }
-
-    i {
-        font-size: 10px
-
-        &.fa-bars {
-            margin-right: 5px
-            color: #777
-            text-shadow: 0px 1px 0 #000
-        }
-
-        &.fa-close {
-            color: #aaa
-            cursor: pointer
-        }
     }
 }

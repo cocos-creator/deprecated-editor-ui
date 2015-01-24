@@ -5,19 +5,19 @@
     constructor="FireSelect"
     on-select="{{selectAction}}"
     >
-<template>
-<link rel="stylesheet" href="select.css">
+    <template>
+        <link rel="stylesheet" href="select.css">
 
-<div class="border" id="focus" flex-row
-    on-focus="{{_focusAction}}"
-    on-blur="{{blurAction}}"
-    on-click="{{clickAction}}"
-    on-keydown="{{keydownAction}}"
-    >
-    <span class="text" flex-1>{{valueName}}</span>
-    <i class="fa fa-caret-down"></i>
-</div>
-</template>
+        <div class="border" id="focus" flex-row
+            on-focus="{{_focusAction}}"
+            on-blur="{{blurAction}}"
+            on-click="{{clickAction}}"
+            on-keydown="{{keydownAction}}"
+            >
+            <span class="text" flex-1>{{valueName}}</span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+    </template>
 
-<script type="text/javascript" src="select.js"></script>
+    <script type="text/javascript" src="select.js"></script>
 </polymer-element>

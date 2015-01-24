@@ -5,6 +5,7 @@ color-bg = #232323
 color-input = #aaa
 color-unit = #ddd
 color-button = #474747
+color-bg-disabled = #3a3a3a
 
 :host {
     display: flex
@@ -25,47 +26,41 @@ color-button = #474747
     &([focused]) {
         border: 1px solid color-outter-border-focus
     }
-
-    .border {
-        border: 1px solid color-inner-border
-        width: 100%
-    }
-
-    .input-area {
-        display: block
-        padding: 2px 4px
-        border: 0
-        margin: 0
-        font-size: 12px
-        width: 100%
-        white-space: nowrap
-
-        font-family: Helvetica,Arial,sans-serif
-        background: transparent
-        color: color-input
-
-        pointer-events: auto
-        user-select: auto
-        cursor: auto
-        resize: none
-
-        &::-webkit-input-placeholder {
-            font-style: italic
-            color: #666
-            text-shadow: none
-        }
-
-        &:focus {
-            outline: none
-        }
-
-        // &::-webkit-resizer {
-        //     border: 1px solid rgba(255,0,0,1)
-        // }
-    }
 }
 
-color-bg-disabled = #3a3a3a
+.border {
+    border: 1px solid color-inner-border
+    width: 100%
+}
+
+.input-area {
+    display: block
+    padding: 2px 4px
+    border: 0
+    margin: 0
+    font-size: 12px
+    width: 100%
+    white-space: nowrap
+
+    font-family: Helvetica,Arial,sans-serif
+    background: transparent
+    color: color-input
+
+    pointer-events: auto
+    user-select: auto
+    cursor: auto
+    resize: none
+
+    &::-webkit-input-placeholder {
+        font-style: italic
+        color: #666
+        text-shadow: none
+    }
+
+    &:focus {
+        outline: none
+    }
+}
 
 :host-context([disabled]), :host([disabled]) {
     * {

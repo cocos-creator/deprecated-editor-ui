@@ -19,73 +19,71 @@ color-text = #aaa
         outline: none
     }
 
-    .border {
-        position: relative
-        box-sizing: border-box
-        padding: 4px
-        width: 100%
-
-        font-family: Helvetica,Arial,sans-serif
-        color: color-text
-        background-color: color-bg
-        opacity: 1.0
-
-        .options {
-            overflow-y: auto
-        }
-
-        .item {
-            padding: 3px 7px
-
-            &.selected {
-                background-color: color-bg-selected
-
-                &:hover {
-                    background-color: color-bg-selected + 20%
-                }
-            }
-
-            &:hover {
-                background-color: color-bg + 10%
-            }
-        }
-    }
-
     // by default options show below fire-ui-select
     border-top: 0px
     border-left: 1px solid color-outter-border-focus
     border-right: 1px solid color-outter-border-focus
     border-bottom: 1px solid color-outter-border-focus
 
-    .border {
-        border-top: 0px
-        border-left: 1px solid color-inner-border
-        border-right: 1px solid color-inner-border
-        border-bottom: 1px solid color-inner-border
-    }
-
     &([above]) {
         border-top: 1px solid color-outter-border-focus
         border-left: 1px solid color-outter-border-focus
         border-right: 1px solid color-outter-border-focus
         border-bottom: 0px
+    }
+}
 
-        .border {
-            border-top: 1px solid color-inner-border
-            border-left: 1px solid color-inner-border
-            border-right: 1px solid color-inner-border
-            border-bottom: 0px
+.border {
+    position: relative
+    box-sizing: border-box
+    padding: 4px
+    width: 100%
+
+    font-family: Helvetica,Arial,sans-serif
+    color: color-text
+    background-color: color-bg
+    opacity: 1.0
+
+    border-top: 0px
+    border-left: 1px solid color-inner-border
+    border-right: 1px solid color-inner-border
+    border-bottom: 1px solid color-inner-border
+}
+
+:host([above]) .border {
+    border-top: 1px solid color-inner-border
+    border-left: 1px solid color-inner-border
+    border-right: 1px solid color-inner-border
+    border-bottom: 0px
+}
+
+.options {
+    overflow-y: auto
+}
+
+.item {
+    padding: 3px 7px
+
+    &.selected {
+        background-color: color-bg-selected
+
+        &:hover {
+            background-color: color-bg-selected + 20%
         }
     }
 
-    .search-bar {
-        width: auto
-        min-height: 22px
-        margin-bottom: 5px
-        display: none
+    &:hover {
+        background-color: color-bg + 10%
     }
+}
 
-    &([searchable]) .search-bar {
-        display: flex
-    }
+.search-bar {
+    width: auto
+    min-height: 22px
+    margin-bottom: 5px
+    display: none
+}
+
+:host([searchable]) .search-bar {
+    display: flex
 }

@@ -5,6 +5,7 @@ color-bg = #232323
 color-input = #aaa
 color-unit = #ddd
 color-button = #474747
+color-bg-disabled = #3a3a3a
 
 :host {
     display: flex
@@ -29,126 +30,123 @@ color-button = #474747
     &([focused]) {
         border: 1px solid color-outter-border-focus
     }
+}
 
-    .border {
-        border: 1px solid color-inner-border
-        width: 100%
+.border {
+    border: 1px solid color-inner-border
+    width: 100%
+}
+
+.input {
+    flex: auto
+
+    display: block
+    padding: 2px 4px
+    border: 0
+    margin: 0
+    font-size: 12px
+
+    font-family: Helvetica,Arial,sans-serif
+    background: transparent
+    color: color-input
+
+    pointer-events: auto
+    user-select: auto
+    cursor: auto
+
+    /* // Note: A webkit bug that input::selection didn't works   */
+    /* &::selection {                                             */
+    /*     background: #f00                                       */
+    /* }                                                          */
+    /* &::-webkit-input-placeholder {                             */
+    /*     font-style: italic                                     */
+    /* }                                                          */
+
+    &:focus {
+        outline: none
+    }
+}
+
+.unit {
+    flex: 0 0 auto
+
+    margin-right: 4px
+    text-align: center
+    font-size: 9px
+
+    font-family: Helvetica,Arial,sans-serif
+    text-transform: uppercase
+    color: color-unit
+    opacity: .7
+
+    &:focus {
+        outline: none
+    }
+}
+
+.unit-buttons {
+    flex: 0 0 9px
+    align-self: stretch
+
+    display: flex
+    flex-direction: column
+
+    border-left: 1px solid color-inner-border
+}
+
+.button {
+    flex: 1 1 auto
+
+    display: block
+    border: 0
+    margin: 0
+    padding: 0
+
+    text-align: center
+    background-color: color-button
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset
+    cursor: pointer
+
+    &:focus {
+        outline: none
     }
 
-    .input {
-        flex: auto
-
-        display: block
-        padding: 2px 4px
-        border: 0
-        margin: 0
-        font-size: 12px
-
-        font-family: Helvetica,Arial,sans-serif
-        background: transparent
-        color: color-input
-
-        pointer-events: auto
-        user-select: auto
-        cursor: auto
-
-        /* // Note: A webkit bug that input::selection didn't works   */
-        /* &::selection {                                             */
-        /*     background: #f00                                       */
-        /* }                                                          */
-        /* &::-webkit-input-placeholder {                             */
-        /*     font-style: italic                                     */
-        /* }                                                          */
-
-        &:focus {
-            outline: none
-        }
-    }
-
-    .unit {
-        flex: 0 0 auto
-
-        margin-right: 4px
-        text-align: center
+    i {
         font-size: 9px
 
-        font-family: Helvetica,Arial,sans-serif
-        text-transform: uppercase
-        color: color-unit
-        opacity: .7
+        color: white
+        opacity: .5
+        cursor: inherit
+    }
 
-        &:focus {
-            outline: none
+    &:hover {
+        background-color: color-button + 20%
+        i {
+            opacity: 1.0
         }
     }
 
-    .unit-buttons {
-        flex: 0 0 9px
-        align-self: stretch
-
-        display: flex
-        flex-direction: column
-
-        border-left: 1px solid color-inner-border
-
-        .button {
-            flex: 1 1 auto
-
-            display: block
-            border: 0
-            margin: 0
-            padding: 0
-
-            text-align: center
-            background-color: color-button
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset
-            cursor: pointer
-
-            i {
-                font-size: 9px
-
-                color: white
-                opacity: .5
-                cursor: inherit
-            }
-
-            &:focus {
-                outline: none
-            }
-
-            &:hover {
-                background-color: color-button + 20%
-                i {
-                    opacity: 1.0
-                }
-            }
-
-            &:active {
-                background-color: color-button - 20%
-                i {
-                    opacity: 0.3
-                }
-            }
-        }
-
-        .sep {
-            flex: 0 0 1px
-            height: 1px
-            display: block
-
-            background-color: color-inner-border
+    &:active {
+        background-color: color-button - 20%
+        i {
+            opacity: 0.3
         }
     }
 }
 
+.sep {
+    flex: 0 0 1px
+    height: 1px
+    display: block
 
-color-bg-disabled = #3a3a3a
+    background-color: color-inner-border
+}
 
 :host-context([disabled]), :host([disabled]) {
     * {
         pointer-events: none
     }
-    
+
     background: color-bg-disabled
 
     .input {
@@ -159,18 +157,18 @@ color-bg-disabled = #3a3a3a
         color: color-unit - 50%
     }
 
-    .unit-buttons {
-        .button {
+    .button {
+        background-color: color-bg-disabled
+        cursor: auto
+
+        i {
+            opacity: 0.1
+        }
+
+        &:hover {
             background-color: color-bg-disabled
-            cursor: auto
             i {
                 opacity: 0.1
-            }
-            &:hover {
-                background-color: color-bg-disabled
-                i {
-                    opacity: 0.1
-                }
             }
         }
     }

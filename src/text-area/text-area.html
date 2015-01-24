@@ -1,23 +1,22 @@
-<polymer-element 
-    name="fire-ui-text-area" 
+<polymer-element
+    name="fire-ui-text-area"
     constructor="FireTextArea"
     >
-<template>
-<link rel="stylesheet" href="text-area.css">
+    <template>
+        <link rel="stylesheet" href="text-area.css">
 
-<div class="border">
-    <textarea id="inputArea"
-        class="input-area"
-        placeholder=""
-        on-focus="{{focusAction}}"
-        on-blur="{{blurAction}}"
-        on-input="{{inputAction}}"
-        on-keydown="{{inputKeyDownAction}}"
-        >
-    </textarea>
-</div>
+        <div class="border">
+            <textarea id="inputArea"
+                class="input-area"
+                placeholder=""
+                on-focus="{{focusAction}}"
+                on-blur="{{blurAction}}"
+                on-input="{{inputAction}}"
+                on-keydown="{{inputKeyDownAction}}"
+                >
+            </textarea>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="text-area.js"></script>
+    <script type="text/javascript" src="text-area.js"></script>
 </polymer-element>

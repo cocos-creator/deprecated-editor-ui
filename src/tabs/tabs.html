@@ -9,20 +9,19 @@
     on-drop-area-accept="{{dropAreaAcceptAction}}"
     on-dragover="{{dragoverAction}}"
     >
-<template>
-<link rel="stylesheet" href="tabs.css">
+    <template>
+        <link rel="stylesheet" href="tabs.css">
 
-<div flex-row class="border">
-    <div flex-1 flex-row flex-stretch class="tabs">
-        <content></content>
-        <div id="insertLine" class="insert"></div>
-    </div>
-    <div class="menu">
-        <i class="fa fa-bars"></i>
-    </div>
-</div>
+        <div flex-row class="border">
+            <div flex-1 flex-row flex-stretch class="tabs">
+                <content></content>
+                <div id="insertLine" class="insert"></div>
+            </div>
+            <div class="menu">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="tabs.js"></script>
+    <script type="text/javascript" src="tabs.js"></script>
 </polymer-element>
