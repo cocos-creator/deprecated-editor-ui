@@ -16,63 +16,61 @@ hover-color = rgb(12,112,200)
     margin-right: 0px
     width: auto
     height: size
+}
+
+.bar {
+    position: absolute
+    top: 4px
+    left: 0px
+    height: 3px
+    width: 100%
+}
+
+:host([active]) .bar {
+    background-color: hover-color
+}
+
+:host([vertical]) {
+    margin-top: 0px
+    margin-bottom: 0px
+    margin-left: blank-size
+    margin-right: blank-size
+    width: size
+    height: auto
 
     .bar {
         position: absolute
-        top: 4px
-        left: 0px
-        height: 3px
-        width: 100%
+        top: 0px
+        left: 4px
+        width: 3px
+        height: 100%
     }
+}
 
-    &([vertical]) {
-        margin-top: 0px
-        margin-bottom: 0px
-        margin-left: blank-size
-        margin-right: blank-size
-        width: size
-        height: auto
-
-        .bar {
-            position: absolute
-            top: 0px
-            left: 4px
-            width: 3px
-            height: 100%
-        }
-    }
-
-    &(:hover) {
+:host(:hover) {
+    cursor: row-resize
+    .bar {
         cursor: row-resize
-        .bar {
-            cursor: row-resize
-        }
     }
+}
 
-    &([vertical]:hover) {
+:host([vertical]:hover) {
+    cursor: col-resize
+    .bar {
         cursor: col-resize
-        .bar {
-            cursor: col-resize
-        }
     }
+}
 
-    &(.platform-win:hover) {
+:host(.platform-win:hover) {
+    cursor: ns-resize
+    .bar {
         cursor: ns-resize
-        .bar {
-            cursor: ns-resize
-        }
     }
+}
 
-    &(.platform-win[vertical]:hover) {
+:host(.platform-win[vertical]:hover) {
+    cursor: ew-resize
+    .bar {
         cursor: ew-resize
-        .bar {
-            cursor: ew-resize
-        }
-    }
-
-    &([active]) {
-        .bar {
-            background-color: hover-color
-        }
     }
 }

@@ -1,34 +1,32 @@
-<polymer-element 
-    name="fire-ui-fobject" 
+<polymer-element
+    name="fire-ui-fobject"
     constructor="FireFObject"
     on-drop-area-enter="{{dropAreaEnterAction}}"
     on-drop-area-leave="{{dropAreaLeaveAction}}"
     on-drop-area-accept="{{dropAreaAcceptAction}}"
     >
-<template>
-<link rel="stylesheet" href="fobject.css">
+    <template>
+        <link rel="stylesheet" href="fobject.css">
 
-<div id="focus" class="wrapper" 
-    on-focus="{{_focusAction}}"
-    on-blur="{{blurAction}}"
-    flex-row
-    >
-    <div id="dropArea" class="border" flex-1
-        on-click="{{borderClickAction}}"
-        > 
-        <div class="content"
+        <div id="focus" class="wrapper"
+            on-focus="{{_focusAction}}"
+            on-blur="{{blurAction}}"
+            flex-row
             >
-            {{value ? value.name : "None"}} 
-            <span class="type">({{type|typeToName()}})</span>
+            <div id="dropArea" class="border" flex-1
+                on-click="{{borderClickAction}}"
+                >
+                <div class="content">
+                    {{value ? value.name : "None"}}
+                    <span class="type">({{type|typeToName()}})</span>
+                </div>
+            </div>
+            <div class="icon"
+                on-click="{{browseClickAction}}">
+                <i class="fa fa-share-square-o"></i>
+            </div>
         </div>
-    </div>
-    <div class="icon"
-        on-click="{{browseClickAction}}">
-        <i class="fa fa-share-square-o"></i>
-    </div>
-</div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="fobject.js"></script>
+    <script type="text/javascript" src="fobject.js"></script>
 </polymer-element>

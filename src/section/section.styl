@@ -14,51 +14,48 @@ color-body-top-line = #555
 
     box-sizing: border-box
     border: 1px solid color-border
+}
 
-    .title {
-        padding: 3px 2px 3px 4px
-        font-size: 12px
-        font-weight: 700
+.title {
+    padding: 3px 2px 3px 4px
+    font-size: 12px
+    font-weight: 700
 
-        font-family: Helvetica,Arial,sans-serif
-        color: color-title
-        background: color-title-bg
-        cursor: pointer
+    font-family: Helvetica,Arial,sans-serif
+    color: color-title
+    background: color-title-bg
+    cursor: pointer
 
-        i {
-            display: inline-block
-            font-size: 14px
-            width: 10px
-            margin-right: 5px
-
-            text-align: center
-            cursor: pointer
-        }
-
-        &:focus {
-            outline: none
-        }
+    &:focus {
+        outline: none
     }
+}
 
-    .body {
-        display: block
-        position: relative
-        padding: 0px 2px 0px 4px
-        min-height: 10px
-        border-top: 1px solid color-body-top-line
+:host([focused]) .title {
+    color: color-title-focus
+}
 
-        background-color: color-body-bg
+i {
+    display: inline-block
+    font-size: 14px
+    width: 10px
+    margin-right: 5px
 
-        &.hidden {
-            display: none
-        }
-    }
+    text-align: center
+    cursor: pointer
+}
 
-    &([focused]) {
-        // border: 1px solid color-border-focus
-        .title {
-            color: color-title-focus
-        }
+.body {
+    display: block
+    position: relative
+    padding: 0px 2px 0px 4px
+    min-height: 10px
+    border-top: 1px solid color-body-top-line
+
+    background-color: color-body-bg
+
+    &.hidden {
+        display: none
     }
 }
 

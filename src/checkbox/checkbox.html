@@ -3,16 +3,17 @@
     constructor="FireCheckbox"
     on-click="{{clickAction}}"
     >
-<template>
-<link rel="stylesheet" href="checkbox.css">
-<div id="focus" class="box"
-    on-focus="{{_focusAction}}"
-    on-blur="{{_blurAction}}"
-    >
-    <i class="fa fa-check {{value ? '':'hidden'}}"></i>
-</div>
-<content></content>
-</template>
+    <template>
+        <link rel="stylesheet" href="checkbox.css">
 
-<script type="text/javascript" src="checkbox.js"></script>
+        <div id="focus" class="box"
+            on-focus="{{_focusAction}}"
+            on-blur="{{_blurAction}}"
+            >
+            <i class="fa fa-check {{value ? '':'hidden'}}"></i>
+        </div>
+        <content/>
+    </template>
+
+    <script type="text/javascript" src="checkbox.js"></script>
 </polymer-element>

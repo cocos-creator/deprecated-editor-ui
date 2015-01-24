@@ -2,26 +2,20 @@
     name="fire-ui-custom-prop"
     constructor="FireCustomProp"
     >
-<template>
-<link rel="stylesheet" href="custom-prop.css">
+    <template>
+        <link rel="stylesheet" href="custom-prop.css">
 
-<div id="focus"
-    on-focusin="{{focusinAction}}"
-    on-focusout="{{focusoutAction}}"
-    on-mousedown="{{mousedownAction}}"
-    >
-    <fire-ui-label flex-1
-        id="label"
-        >
-    {{name}}
-    </fire-ui-label>
-    <span class="space"></span>
-    <div id="field" flex-row flex-2>
-        <content/>
-    </div>
-</div>
+        <div id="focus"
+            on-focusin="{{focusinAction}}"
+            on-focusout="{{focusoutAction}}"
+            on-mousedown="{{mousedownAction}}"
+            >
+            <fire-ui-label id="label" flex-1>{{name}}</fire-ui-label>
+            <div id="field" flex-row flex-2>
+                <content/>
+            </div>
+        </div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="custom-prop.js"></script>
+    <script type="text/javascript" src="custom-prop.js"></script>
 </polymer-element>

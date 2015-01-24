@@ -4,23 +4,23 @@
 	name="fire-ui-search"
 	constructor="FireSearch"
 	>
-<template>
-	<link rel="stylesheet" href="search.css">
+    <template>
+        <link rel="stylesheet" href="search.css">
 
-<div class="border" flex-row>
-    <input id="inputArea" class="input-area"
-        flex-1
-        type="text"
-        placeholder="{{placeholder}}"
-        on-focus="{{focusAction}}"
-        on-blur="{{blurAction}}"
-        on-input="{{inputAction}}"
-        on-keydown="{{inputKeyDownAction}}"
-        >
-    </input>
-    <span class="icon" on-mousedown="{{iconClickAction}}"><i class="fa fa-search"></i></span>
-</div>
+        <div class="border" flex-row>
+            <input id="inputArea" class="input-area"
+                flex-1
+                type="text"
+                placeholder="{{placeholder}}"
+                on-focus="{{focusAction}}"
+                on-blur="{{blurAction}}"
+                on-input="{{inputAction}}"
+                on-keydown="{{inputKeyDownAction}}"
+                >
+            </input>
+            <span class="icon" on-mousedown="{{iconClickAction}}"><i class="fa fa-search"></i></span>
+        </div>
+    </template>
 
-</template>
-<script type="text/javascript" src="search.js"></script>
+    <script type="text/javascript" src="search.js"></script>
 </polymer-element>

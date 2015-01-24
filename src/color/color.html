@@ -2,23 +2,23 @@
     name="fire-ui-color"
     constructor="FireColor"
     >
-<template>
-<link rel="stylesheet" href="color.css">
+    <template>
+        <link rel="stylesheet" href="color.css">
 
-<div class="border" id="focus"
-    on-focus="{{_focusAction}}"
-    on-blur="{{blurAction}}"
-    on-click="{{clickAction}}"
-    on-keydown="{{keydownAction}}"
-    >
-    <div class="rgb-wrapper">
-        <div id="previewRGB" class="rgb" fit></div>
-        <i id="iconDown" class="fa fa-caret-down"></i>
-    </div>
-    <div id="previewA" class="alpha"></div>
-    <div class="mask" fit></div>
-</div>
-</template>
+        <div class="border" id="focus"
+            on-focus="{{_focusAction}}"
+            on-blur="{{blurAction}}"
+            on-click="{{clickAction}}"
+            on-keydown="{{keydownAction}}"
+            >
+            <div class="rgb-wrapper">
+                <div id="previewRGB" class="rgb" fit></div>
+                <i id="iconDown" class="fa fa-caret-down"></i>
+            </div>
+            <div id="previewA" class="alpha"></div>
+            <div class="mask" fit></div>
+        </div>
+    </template>
 
-<script type="text/javascript" src="color.js"></script>
+    <script type="text/javascript" src="color.js"></script>
 </polymer-element>

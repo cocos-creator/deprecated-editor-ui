@@ -10,39 +10,6 @@ color-active = #00aaff
 
     color: #aaa
 
-    .vertical-center {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .border {
-        display: inline-block
-        box-sizing: border-box
-        height: 22px
-
-        padding: 4px 8px
-        background-color: color-button-bg
-        overflow: hidden
-
-        &:hover {
-            background-color: color-button-bg + 20%
-        }
-    }
-
-    &([active]) {
-        .border {
-            background-color: color-button-bg - 40%
-            color: color-active
-        }
-    }
-
-    &(:active) {
-        .border {
-            background-color: color-button-bg - 40%
-        }
-    }
-
     &(:first-child) {
         border-left: 0px
         border-top-left-radius: 2px
@@ -53,6 +20,35 @@ color-active = #00aaff
         border-top-right-radius: 2px
         border-bottom-right-radius: 2px
     }
+}
+
+.vertical-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.border {
+    display: inline-block
+    box-sizing: border-box
+    height: 22px
+
+    padding: 4px 8px
+    background-color: color-button-bg
+    overflow: hidden
+
+    &:hover {
+        background-color: color-button-bg + 20%
+    }
+}
+
+:host([active]) .border {
+    background-color: color-button-bg - 40%
+    color: color-active
+}
+
+:host(:active) .border {
+    background-color: color-button-bg - 40%
 }
 
 :host-context([active]) {

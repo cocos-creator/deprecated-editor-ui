@@ -3,6 +3,7 @@ color-outter-border-focus = #0c70a6
 color-inner-border = black
 color-bg = #232323
 rgbHeight = 16px
+color-bg-disabled = #3a3a3a
 
 :host {
     display: flex
@@ -22,58 +23,56 @@ rgbHeight = 16px
     &([focused]) {
         border: 1px solid color-outter-border-focus
     }
+}
 
-    .border {
-        position: relative
-        border: 1px solid color-inner-border
-        width: 100%
+.border {
+    position: relative
+    border: 1px solid color-inner-border
+    width: 100%
 
-        &:focus {
-            outline: none
-        }
-    }
-
-    .rgb-wrapper {
-        position: relative
-        display: block
-        height: rgbHeight
-
-        background-image: url('../img/transparent-bg.png')
-
-        .rgb {
-            cursor: pointer 
-            background-color: white
-        }
-
-        i {
-            font-size: 8px
-            position: absolute
-            right: 2px
-            bottom: 2px
-
-            cursor: pointer 
-            color: black
-        }
-    }
-
-    .alpha {
-        display: block
-        height: 3px
-        background: transparent
-        background-color: white
-
-        cursor: pointer 
-    }
-
-    .mask {
-        display: none
-
-        background-image: url('../img/transparent-bg.png')
-        opacity: 0.8
+    &:focus {
+        outline: none
     }
 }
 
-color-bg-disabled = #3a3a3a
+.rgb-wrapper {
+    position: relative
+    display: block
+    height: rgbHeight
+
+    background-image: url('../img/transparent-bg.png')
+
+    i {
+        font-size: 8px
+        position: absolute
+        right: 2px
+        bottom: 2px
+
+        cursor: pointer
+        color: black
+    }
+}
+
+.rgb {
+    cursor: pointer
+    background-color: white
+}
+
+.alpha {
+    display: block
+    height: 3px
+    background: transparent
+    background-color: white
+
+    cursor: pointer
+}
+
+.mask {
+    display: none
+
+    background-image: url('../img/transparent-bg.png')
+    opacity: 0.8
+}
 
 :host-context([disabled]), :host([disabled]) {
     * {

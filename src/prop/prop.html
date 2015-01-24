@@ -2,44 +2,42 @@
     name="fire-ui-prop"
     constructor="FireProp"
     >
-<template>
-<link rel="stylesheet" href="prop.css">
+    <template>
+        <link rel="stylesheet" href="prop.css">
 
-<div id="focus"
-    on-focusin="{{focusinAction}}"
-    on-focusout="{{focusoutAction}}"
-    on-mousedown="{{mousedownAction}}"
-    >
-    <i id="fold" class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"
-       on-click="{{foldAction}}"></i>
-    <fire-ui-label id="label" flex-1>{{name}}</fire-ui-label>
-    <span class="space"></span>
-    <fire-ui-field id="field" flex-2
-        value="{{value}}"
-        type="{{type}}"
-        enumType="{{enumType}}"
-        enumList="{{enumList}}"
-        textMode="{{textMode}}"
-        >
-    </fire-ui-field>
-</div>
-<div class="children">
-    <template if="{{foldable}}">
-        <template repeat="{{prop, index in value}}">
-            <fire-ui-prop
-                name="{{index}}"
-                value="{{prop}}"
+        <div id="focus"
+            on-focusin="{{focusinAction}}"
+            on-focusout="{{focusoutAction}}"
+            on-mousedown="{{mousedownAction}}"
+            >
+            <i id="fold" class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"
+               on-click="{{foldAction}}"></i>
+            <fire-ui-label id="label" flex-1>{{name}}</fire-ui-label>
+            <fire-ui-field id="field" flex-2
+                value="{{value}}"
                 type="{{type}}"
                 enumType="{{enumType}}"
                 enumList="{{enumList}}"
                 textMode="{{textMode}}"
-            >
-            </fire-ui-prop>
-        </template>
+                >
+            </fire-ui-field>
+        </div>
+        <div class="children">
+            <template if="{{foldable}}">
+                <template repeat="{{prop, index in value}}">
+                    <fire-ui-prop
+                        name="{{index}}"
+                        value="{{prop}}"
+                        type="{{type}}"
+                        enumType="{{enumType}}"
+                        enumList="{{enumList}}"
+                        textMode="{{textMode}}"
+                    >
+                    </fire-ui-prop>
+                </template>
+            </template>
+        </div>
     </template>
-</div>
 
-</template>
-
-<script type="text/javascript" src="prop.js"></script>
+    <script type="text/javascript" src="prop.js"></script>
 </polymer-element>

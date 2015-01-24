@@ -21,16 +21,14 @@
     &(:hover[selected]) {
         background: rgb(0,85,153) + 10%
     }
+}
 
-    img {
-        display: none
-        height: 12px
-        vertical-align: text-top
-    }
+img {
+    display: none
+    height: 12px
+    vertical-align: text-top
+}
 
-    &([icon]) {
-        img {
-            display: inline-block
-        }
-    }
+:host([icon]) img {
+    display: inline-block
 }

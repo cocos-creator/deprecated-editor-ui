@@ -7,6 +7,7 @@ color-asset-name = #999
 color-type = #770
 color-highlight-valid = green
 color-highlight-invalid = red
+color-bg-disabled = #3a3a3a
 
 :host {
     display: flex
@@ -15,91 +16,83 @@ color-highlight-invalid = red
     box-sizing: border-box
     width: 120px
     min-width: 50px
+}
 
-    .wrapper {
-        width: 100%
+.wrapper {
+    width: 100%
 
-        &:focus {
-            outline: none
-        }
-    }
-
-    .border {
-        border: 1px solid color-outter-border
-
-        color: color-asset-name
-        background: color-bg
-
-        cursor: pointer
-        & * {
-            cursor: pointer
-        }
-
-        .content {                         
-            display: block
-            padding: 3px 4px
-            font-size: 12px
-            border: 1px solid color-inner-border
-
-            white-space: nowrap
-            overflow: hidden
-
-            .type {
-                font-size: 10px
-                color: color-type
-            }
-        }
-
-        &:hover {
-            border: 1px solid color-outter-border + 30%
-        }
-    }
-
-    &([focused]) {                         
-        .border {
-            border: 1px solid color-outter-border-focus
-        }
-    }
-
-    &([highlighted]) {                         
-        .border {
-            border: 1px solid color-highlight-valid
-            background: color-highlight-valid - 50%
-
-            .content {                         
-                border: 1px solid color-highlight-valid
-            }
-        }
-    }
-
-    &([highlighted][invalid]) {                         
-        .border {
-            border: 1px solid color-highlight-invalid
-            background: color-highlight-invalid - 50%
-
-            .content {                         
-                border: 1px solid color-highlight-invalid
-            }
-        }
-    }
-
-    .icon {
-        margin-left: 5px
-        font-size: 14px
-
-        color: color-browse
-
-        &:hover {
-            color: color-browse + 50%
-        }
-
-        &:active {
-            color: color-browse - 30%
-        }
+    &:focus {
+        outline: none
     }
 }
 
-color-bg-disabled = #3a3a3a
+.border {
+    border: 1px solid color-outter-border
+
+    color: color-asset-name
+    background: color-bg
+
+    cursor: pointer
+    & * {
+        cursor: pointer
+    }
+
+    &:hover {
+        border: 1px solid color-outter-border + 30%
+    }
+}
+
+:host([focused]) .border {
+    border: 1px solid color-outter-border-focus
+}
+
+.content {
+    display: block
+    padding: 3px 4px
+    font-size: 12px
+    border: 1px solid color-inner-border
+
+    white-space: nowrap
+    overflow: hidden
+}
+
+:host([highlighted]) .border {
+    border: 1px solid color-highlight-valid
+    background: color-highlight-valid - 50%
+
+    .content {
+        border: 1px solid color-highlight-valid
+    }
+}
+
+:host([highlighted][invalid]) .border {
+    border: 1px solid color-highlight-invalid
+    background: color-highlight-invalid - 50%
+
+    .content {
+        border: 1px solid color-highlight-invalid
+    }
+}
+
+.type {
+    font-size: 10px
+    color: color-type
+}
+
+.icon {
+    margin-left: 5px
+    font-size: 14px
+
+    color: color-browse
+
+    &:hover {
+        color: color-browse + 50%
+    }
+
+    &:active {
+        color: color-browse - 30%
+    }
+}
 
 :host-context([disabled]), :host([disabled]) {
     * {
@@ -109,12 +102,10 @@ color-bg-disabled = #3a3a3a
     .border {
         color: color-asset-name - 50%
         background: color-bg-disabled
+    }
 
-        .content {                         
-            .type {
-                color: color-asset-name - 50%
-            }
-        }
+    .type {
+        color: color-asset-name - 50%
     }
 
     .icon {

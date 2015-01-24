@@ -9,23 +9,21 @@
     font-family: Helvetica,Arial,sans-serif
 
     color: #ddd
+}
 
-    .content {
-        position: relative;
+.content {
+    position: relative;
 
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: stretch;
-        flex-direction: column;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: column;
 
-        &:focus {
-            outline: none
-        }
+    &:focus {
+        outline: none
     }
+}
 
-    &([row]) {
-        .content {
-            flex-direction: row
-        }
-    }
+:host([row]) .content {
+    flex-direction: row
 }

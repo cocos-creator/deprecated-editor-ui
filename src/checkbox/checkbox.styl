@@ -18,44 +18,45 @@ color-checked = #0c90e6
 
     color: color-text
 
-    .box {
-        display: inline-block
-        box-sizing: border-box
-        width: 13px
-        height: 13px
-        min-width: 13px
-        min-height: 13px
-        margin-right: 4px
-        border: 1px solid color-border-normal
-
-        background: color-box-bg
-        cursor: pointer
-
-        &:hover {
-            border-color: color-border-normal + 50%
-        }
-
-        &:focus {
-            outline: none
-        }
-
-        i {
-            font-size: 11px
-
-            color: color-checked
-            cursor: inherit
-
-            &.hidden {
-                visibility: hidden
-            }
-        }
-    }
-
     &([focused]) {
         color: color-text-focus
-        .box {
-            border-color: color-border-focus
-        }
+    }
+}
+
+.box {
+    display: inline-block
+    box-sizing: border-box
+    width: 13px
+    height: 13px
+    min-width: 13px
+    min-height: 13px
+    margin-right: 4px
+    border: 1px solid color-border-normal
+
+    background: color-box-bg
+    cursor: pointer
+
+    &:hover {
+        border-color: color-border-normal + 50%
+    }
+
+    &:focus {
+        outline: none
+    }
+}
+
+:host([focused]) .box {
+    border-color: color-border-focus
+}
+
+i {
+    font-size: 11px
+
+    color: color-checked
+    cursor: inherit
+
+    &.hidden {
+        visibility: hidden
     }
 }
 
@@ -70,8 +71,9 @@ color-checked = #0c90e6
         cursor: auto
         border: 1px solid color-border-normal - 30%
         background: color-box-bg-disabled
-        i {
-            color: color-box-bg-disabled + 20%
-        }
+    }
+
+    i {
+        color: color-box-bg-disabled + 20%
     }
 }

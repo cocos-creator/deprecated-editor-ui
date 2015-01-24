@@ -2,20 +2,19 @@
     name="fire-ui-section"
     constructor="FireSection"
     >
-<template>
-<link rel="stylesheet" href="section.css">
+    <template>
+        <link rel="stylesheet" href="section.css">
 
-<div id="title"
-    class="title"
-    on-click="{{clickAction}}"
-    on-focus="{{_focusAction}}"
-    on-blur="{{_blurAction}}"
-    >
-    <i class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>{{name}}
-</div>
-<div id="body" class="body {{folded ? 'hidden':''}}"><content/></div>
+        <div id="title"
+            class="title"
+            on-click="{{clickAction}}"
+            on-focus="{{_focusAction}}"
+            on-blur="{{_blurAction}}"
+            >
+            <i class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>{{name}}
+        </div>
+        <div id="body" class="body {{folded ? 'hidden':''}}"><content/></div>
+    </template>
 
-</template>
-
-<script type="text/javascript" src="section.js"></script>
+    <script type="text/javascript" src="section.js"></script>
 </polymer-element>
