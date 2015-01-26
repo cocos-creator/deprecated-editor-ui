@@ -210,6 +210,10 @@ Polymer({
         }.bind(this));
     },
 
+    active: function ( element ) {
+        this.activeElement = element;
+    },
+
     select: function ( element ) {
         this.clearSelect();
         this.curSelection.push(element);
@@ -286,7 +290,7 @@ Polymer({
     selectAction: function ( event ) {
         event.stopPropagation();
 
-        this.activeElement = event.target;
+        this.active(event.target);
     },
 
     renameConfirmAction: function ( event ) {
@@ -355,7 +359,7 @@ Polymer({
                     if ( prev ) {
                         if (prev !== this.activeElement) {
                             this.select(prev);
-                            this.activeElement = prev;
+                            this.active(prev);
 
                             window.requestAnimationFrame( function() {
                                 if ( prev.offsetTop <= this.scrollTop ) {
@@ -376,7 +380,7 @@ Polymer({
                     if ( next ) {
                         if ( next !== this.activeElement ) {
                             this.select(next);
-                            this.activeElement = next;
+                            this.active(next);
 
                             window.requestAnimationFrame( function() {
                                 var headerHeight = next.$.header.offsetHeight;

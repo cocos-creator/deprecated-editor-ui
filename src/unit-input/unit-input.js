@@ -185,7 +185,7 @@ Polymer(EditorUI.mixin({
         this.timeoutID = setTimeout( function () {
             this.holdingID = setInterval( function () {
                 this._increase();
-            }.bind(this), 100);
+            }.bind(this), 50);
         }.bind(this), 500 );
     },
 
