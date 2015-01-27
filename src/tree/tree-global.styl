@@ -7,22 +7,20 @@ html /deep/ {
         background-color: #059
     }
 
-    fire-ui-ti::shadow {
-        fire-ui-text-input {
-            position: absolute
-            left: 9px
-            top: -1px
-            height: 18px
-            width: calc(100% - 9px)
+    fire-ui-ti::shadow fire-ui-text-input {
+        position: absolute
+        left: 9px
+        top: -1px
+        height: 18px
+        width: calc(100% - 9px)
 
-            &[icon] {
-                left: 27px
-                width: calc(100% - 27px)
-            }
+        &[icon] {
+            left: 27px
+            width: calc(100% - 27px)
+        }
 
-            &::shadow .input-area {
-                padding: 0px 1px
-            }
+        &::shadow .input-area {
+            padding: 0px 1px
         }
     }
 }

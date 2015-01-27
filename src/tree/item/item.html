@@ -2,17 +2,14 @@
     name="fire-ui-ti"
     constructor="FireTreeItem"
     on-dblclick="{{dblclickAction}}"
+    on-mousedown="{{mousedownAction}}"
+    on-mouseup="{{mouseupAction}}"
     >
     <template>
         <link rel="stylesheet" href="item.css">
 
         <div id="bar"></div>
-        <div id="header"
-            on-mouseenter="{{mouseenterAction}}"
-            on-mouseleave="{{mouseleaveAction}}"
-            on-mousedown="{{mousedownAction}}"
-            on-mouseup="{{mouseupAction}}"
-            >
+        <div id="header">
             <div class="inline-block-wrapper">
                 <div class="flex-wrapper">
                     <i id="foldIcon"

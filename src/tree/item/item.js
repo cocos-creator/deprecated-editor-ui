@@ -129,14 +129,6 @@ Polymer({
         } );
     },
 
-    mouseenterAction: function ( event ) {
-        event.stopPropagation();
-    },
-
-    mouseleaveAction: function ( event ) {
-        event.stopPropagation();
-    },
-
     dblclickAction: function ( event ) {
         this.fire('open');
         event.stopPropagation();
