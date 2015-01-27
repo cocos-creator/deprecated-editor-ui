@@ -107,11 +107,11 @@ Polymer({
         if ( event.which !== 1 )
             return;
 
+        event.stopPropagation();
+
         if ( this._renaming || event.target === this.$.foldIcon ) {
             return;
         }
-
-        event.stopPropagation();
 
         var shift = false;
         var toggle = false;
