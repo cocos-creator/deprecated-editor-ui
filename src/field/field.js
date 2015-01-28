@@ -137,11 +137,13 @@ Polymer({
             case "int":
                 fieldEL = new FireUnitInput();
                 fieldEL.type = 'int';
+                fieldEL.updateMinMax();
                 break;
 
             case "float":
                 fieldEL = new FireUnitInput();
                 fieldEL.type = 'float';
+                fieldEL.updateMinMax();
                 break;
 
             case "string":
