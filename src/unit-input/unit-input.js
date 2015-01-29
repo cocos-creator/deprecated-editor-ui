@@ -2,11 +2,11 @@ Polymer(EditorUI.mixin({
     publish: {
         value: null,
         unit: '',
-        type: 'int', // int, float
-        precision: 2,
-        interval: null,
+        type: 'float', // int, float
         min: null,
         max: null,
+        interval: null,
+        precision: 2,
     },
 
     created: function () {
@@ -16,10 +16,16 @@ Polymer(EditorUI.mixin({
 
     ready: function() {
         this._initFocusable(this.$.input);
-        this.updateMinMax();
+        this._updateMinMax();
     },
 
-    updateMinMax: function () {
+    setRange: function ( min, max ) {
+        this.min = min;
+        this.max = max;
+        this._updateMinMax();
+    },
+
+    _updateMinMax: function () {
         switch ( this.type ) {
             case 'int':
                 this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
@@ -85,11 +91,11 @@ Polymer(EditorUI.mixin({
     },
 
     minChanged: function () {
-        this.updateMinMax();
+        this._updateMinMax();
     },
 
     maxChanged: function () {
-        this.updateMinMax();
+        this._updateMinMax();
     },
 
     focusAction: function (event) {

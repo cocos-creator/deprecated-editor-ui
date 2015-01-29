@@ -2,6 +2,8 @@ Polymer(EditorUI.mixin({
     publish: {
         name: '',
         value: null,
+        min: null,
+        max: null,
         type: null,
         enumType: null,
         enumList: null,

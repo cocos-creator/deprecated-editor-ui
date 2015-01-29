@@ -5,18 +5,26 @@ color-track-disabled = #474747
 color-nubbin-disabled = #4d4d4d
 
 :host {
-    display: inline-block
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    align-items: flex-start
 
     box-sizing: border-box
     min-height: 21px
-    padding-left: 5px
-    padding-right: 5px
     min-width: 120px
+}
+
+fire-ui-unit-input {
+    width: 20px
+    margin-left: 5px
 }
 
 #focus {
     position: relative
     padding-top: 10px
+    padding-left: 5px
+    padding-right: 5px
     cursor: pointer
 
     &:focus {

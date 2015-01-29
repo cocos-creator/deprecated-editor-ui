@@ -35,6 +35,8 @@ function getDefaultType ( typename, additionalType ) {
 Polymer({
     publish: {
         value: null,
+        min: null,
+        max: null,
         type: null,
         enumType: null,
         enumList: null,
@@ -137,13 +139,22 @@ Polymer({
             case "int":
                 fieldEL = new FireUnitInput();
                 fieldEL.type = 'int';
-                fieldEL.updateMinMax();
+                fieldEL.setRange( this.min, this.max );
                 break;
 
             case "float":
-                fieldEL = new FireUnitInput();
-                fieldEL.type = 'float';
-                fieldEL.updateMinMax();
+                if ( this.min !== null && this.max !== null ) {
+                    fieldEL = new FireSlider();
+                    fieldEL.type = 'float';
+                    fieldEL.setRange( this.min, this.max );
+                }
+                else {
+                    fieldEL = new FireUnitInput();
+                    fieldEL.type = 'float';
+                    fieldEL.min = this.min;
+                    fieldEL.max = this.max;
+                    fieldEL.updateMinMax();
+                }
                 break;
 
             case "string":

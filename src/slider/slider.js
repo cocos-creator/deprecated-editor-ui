@@ -3,24 +3,62 @@ Polymer(EditorUI.mixin({
 
     publish: {
         value: 0.0,
+        type: 'float', // int, float // TODO: not implemented
         min: 0.0,
         max: 1.0,
+        interval: null, // TODO: not implemented
     },
 
     observe: {
-        'value': 'update',
+        'value': 'updateValue',
+        'min': '_updateMinMax',
+        'max': '_updateMinMax',
     },
 
     ready: function () {
         this._initFocusable(this.$.focus);
+
+        this._ready = true;
+        this._updateMinMax();
     },
 
-    update: function () {
+    setRange: function ( min, max ) {
+        this.min = min;
+        this.max = max;
+        this._updateMinMax();
+    },
+
+    _updateMinMax: function () {
+        switch ( this.type ) {
+            case 'int':
+                this._min = (this.min!==null) ? parseInt(this.min) : Number.NEGATIVE_INFINITY;
+                this._max = (this.max!==null) ? parseInt(this.max) : Number.POSITIVE_INFINITY;
+                break;
+
+            case 'float':
+                this._min = (this.min!==null) ? parseFloat(this.min) : -Number.MAX_VALUE;
+                this._max = (this.max!==null) ? parseFloat(this.max) : Number.MAX_VALUE;
+                break;
+        }
+
+        this.$.input.setRange( this.min, this.max );
+        this.updateValue();
+    },
+
+    updateValue: function () {
         if ( this._editing )
             return;
 
-        var ratio = this.value/(this.max-this.min);
+        this.value = Math.clamp(this.value, this._min, this._max);
+        var ratio = (this.value-this._min)/(this._max-this._min);
         this.$.nubbin.style.left = ratio * 100 + "%";
+
+        this.$.input.value = this.value;
+    },
+
+    inputChangedAction: function ( event ) {
+        event.stopPropagation();
+        this.value = event.target.value;
     },
 
     mousedownAction: function (event) {
@@ -36,7 +74,8 @@ Polymer(EditorUI.mixin({
 
             offsetX = Math.max( Math.min( offsetX, 1.0 ), 0.0 );
             this.$.nubbin.style.left = offsetX * 100 + "%";
-            this.value = this.min + offsetX * (this.max-this.min);
+            this.value = this._min + offsetX * (this._max-this._min);
+            this.$.input.value = this.value;
             this.fire('changed');
 
             event.stopPropagation();
