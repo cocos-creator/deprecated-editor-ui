@@ -151,9 +151,7 @@ Polymer({
                 else {
                     fieldEL = new FireUnitInput();
                     fieldEL.type = 'float';
-                    fieldEL.min = this.min;
-                    fieldEL.max = this.max;
-                    fieldEL.updateMinMax();
+                    fieldEL.setRange( this.min, this.max );
                 }
                 break;
 
