@@ -3,7 +3,8 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-var uglify = require('gulp-uglify');
+var compiler = require('gulp-closure-compiler');
+var tap = require('gulp-tap');
 var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
 var del = require('del');
@@ -62,9 +63,25 @@ gulp.task('js', function() {
     .pipe(wrapScope())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
-    .pipe(uglify())
-    .pipe(gulp.dest('bin'))
-    ;
+    .pipe(tap(function (file) {
+        var filename = file.path;
+        var globname = path.relative(__dirname, filename);
+        return gulp.src(globname)
+                    .pipe(compiler({
+                        compilerPath: path.normalize('../../compiler/compiler.jar'),
+                        compilerFlags: {
+                            language_in: 'ECMASCRIPT6',
+                            language_out: 'ECMASCRIPT5',
+                            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+                            jscomp_off: 'globalThis',
+                        },
+                        fileName: path.relative(path.join(__dirname, 'src'), globname),
+                        continueWithWarnings: true
+                    }))
+                    .pipe(gulp.dest('bin'));
+
+    }));
+    // .pipe(gulp.dest('bin'))
 });
 gulp.task('js-no-uglify', function() {
     return gulp.src(paths.js, {base: 'src'})
