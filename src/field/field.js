@@ -1,4 +1,4 @@
-var defaultValues = {
+var defaultCtor = {
     'undefined': undefined,
     'enum': -1,
     'int': 0,
@@ -6,28 +6,24 @@ var defaultValues = {
     'string': '',
     'boolean': false,
     'fobject': null,
-    'Fire.Color': new Fire.Color(0,0,0,1),
-    'Fire.Vec2': new Fire.Vec2(0,0),
+    'Fire.Color': function () { return new Fire.Color(0,0,0,1); },
+    'Fire.Vec2': function () { return new Fire.Vec2(0,0); },
 };
 
-function getDefaultType ( typename, additionalType ) {
+function getDefaultValue ( typename, ctor ) {
     var result;
 
-    if ( typename === 'array' ) {
-        // proctect array with array
-        if ( additionalType === 'array' )
-            return null;
+    //
+    result = defaultCtor[typename];
+    if ( result === undefined ) {
+        if ( typename === 'object' && ctor )
+            return ctor();
 
-        result = defaultValues[additionalType];
-        if ( result === undefined )
-            return null;
-
-        return result;
+        return null;
     }
 
-    result = defaultValues[typename];
-    if ( result === undefined )
-        return null;
+    if ( typeof result === 'function' )
+        return result();
 
     return result;
 }
@@ -41,9 +37,8 @@ Polymer({
         enumType: null,
         enumList: null,
         textMode: 'single',
+        ctor: null,
     },
-
-    _defaultType: null, // used in array resize, confirm when type detected
 
     domReady: function () {
         var fieldEL = this.createFieldElement();
@@ -52,12 +47,21 @@ Polymer({
             return;
         }
 
+        this._appendFieldElement(fieldEL);
+    },
+
+    _appendFieldElement: function ( fieldEL ) {
         fieldEL.setAttribute('flex-auto','');
         if ( Array.isArray(this.value) ) {
             fieldEL.bind( 'value', new PathObserver(this,'value.length') );
             fieldEL.addEventListener( 'changed', function ( event ) {
                 if ( this.value.length > 0 ) {
-                    Fire.arrayFillUndefined( this.value, this._defaultType );
+                    for ( var i = 0; i < this.value.length; ++i ) {
+                        if ( this.value[i] !== undefined )
+                            continue;
+
+                        this.value[i] = getDefaultValue( this.type, this.ctor );
+                    }
                 }
             }.bind(this));
         }
@@ -65,6 +69,7 @@ Polymer({
             fieldEL.bind( 'value', new PathObserver(this,'value') );
         }
         this.shadowRoot.appendChild(fieldEL);
+        this._fieldEL = fieldEL;
     },
 
     createFieldElement: function () {
@@ -94,22 +99,39 @@ Polymer({
             break;
 
         case "object":
-            var classDef = Fire.getClassByName(typename);
-
             if ( Array.isArray(this.value) ) {
                 typename = 'array';
             }
-            else if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
-                typename = 'fobject';
-            }
             else {
-                typename = Fire.getClassName(this.value);
+                var classDef = Fire.getClassByName(typename);
+                if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
+                    typename = 'fobject';
+                }
+                else {
+                    typename = Fire.getClassName(this.value);
+                    if ( [
+                        "Fire.Vec2",
+                        "Fire.Color",
+                    ].indexOf(typename) === -1 ) {
+                        typename = 'object';
+                    }
+                }
             }
             break;
 
         default:
             typename = 'unknown';
             break;
+        }
+
+        // check if this is a null field
+        if ( (this.value === null || this.value === undefined) &&
+             typename !== 'fobject' )
+        {
+            fieldEL = new FireNull();
+            fieldEL.type = this.type;
+            fieldEL.ctor = this.ctor;
+            return fieldEL;
         }
 
         // process typename
@@ -173,13 +195,6 @@ Polymer({
                 fieldEL.type = this.type ? this.type : "Fire.FObject";
                 break;
 
-            case "array":
-                fieldEL = new FireUnitInput();
-                fieldEL.type = 'int';
-                fieldEL.min = 0;
-                fieldEL.unit = 'size';
-                break;
-
             case "Fire.Color":
                 fieldEL = new FireColor();
                 break;
@@ -187,9 +202,36 @@ Polymer({
             case "Fire.Vec2":
                 fieldEL = new FireVec2();
                 break;
+
+            case "array":
+                fieldEL = new FireUnitInput();
+                fieldEL.type = 'int';
+                fieldEL.min = 0;
+                fieldEL.unit = 'size';
+                break;
+
+            case "object":
+                // fieldEL = new FireUnitInput();
+                break;
+        }
+        return fieldEL;
+    },
+
+    recreateFieldAction: function ( event ) {
+        event.stopPropagation();
+
+        if ( this._fieldEL ) {
+            this._fieldEL.remove();
+            this._fieldEL = null;
         }
 
-        this._defaultType = getDefaultType(typename,this.type);
-        return fieldEL;
+        //
+        var fieldEL = this.createFieldElement();
+        if ( fieldEL === null ) {
+            Fire.error("Failed to create field");
+            return;
+        }
+
+        this._appendFieldElement(fieldEL);
     },
 });

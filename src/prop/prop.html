@@ -18,6 +18,7 @@
                 min="{{min}}"
                 max="{{max}}"
                 type="{{type}}"
+                ctor="{{ctor}}"
                 enumType="{{enumType}}"
                 enumList="{{enumList}}"
                 textMode="{{textMode}}"
@@ -25,20 +26,22 @@
             </fire-ui-field>
         </div>
         <div class="children">
-            <template if="{{foldable}}">
-                <template repeat="{{prop, index in value}}">
-                    <fire-ui-prop
-                        name="{{index}}"
-                        value="{{prop}}"
-                        min="{{min}}"
-                        max="{{max}}"
-                        type="{{type}}"
-                        enumType="{{enumType}}"
-                        enumList="{{enumList}}"
-                        textMode="{{textMode}}"
-                    >
-                    </fire-ui-prop>
-                </template>
+            <template if="{{compoundType=='array'}}">
+                <fire-ui-array-prop
+                    value="{{value}}"
+                    min="{{min}}"
+                    max="{{max}}"
+                    type="{{type}}"
+                    ctor="{{ctor}}"
+                    enumType="{{enumType}}"
+                    enumList="{{enumList}}"
+                    textMode="{{textMode}}"
+                >
+                </fire-ui-array-prop>
+            </template>
+
+            <template if="{{compoundType=='object'}}">
+                <fire-ui-object-prop value="{{value}}"></fire-ui-object-prop>
             </template>
         </div>
     </template>

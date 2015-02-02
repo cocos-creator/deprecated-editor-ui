@@ -1,3 +1,12 @@
+function _getTypeName ( attrs ) {
+    var type = attrs.type;
+    if ( type === 'object' ) {
+        type = Fire.getClassName( attrs.ctor );
+    }
+    type = type || '';
+    return type;
+}
+
 Polymer(EditorUI.mixin({
     publish: {
         name: '',
@@ -5,6 +14,7 @@ Polymer(EditorUI.mixin({
         min: null,
         max: null,
         type: null,
+        ctor: null,
         enumType: null,
         enumList: null,
         textMode: 'single',
@@ -27,6 +37,7 @@ Polymer(EditorUI.mixin({
         //       make sure the tabIndex initialize after all elements are ready.
         this.onFieldCreated = null;
         this.folded = true;
+        this.compoundType = 'none';
     },
 
     ready: function () {
@@ -44,11 +55,110 @@ Polymer(EditorUI.mixin({
             this.$.label.setAttribute('flex-self-start','');
         }
 
-        this.foldable = Array.isArray(this.value);
+        this.foldable = this.isCompoundField();
+        if ( this.foldable ) {
+            if ( Array.isArray(this.value) )
+                this.compoundType = 'array';
+            else
+                this.compoundType = 'object';
+        }
+        else {
+            this.compoundType = 'none';
+        }
 
         if ( this.onFieldCreated ) {
             this.onFieldCreated();
         }
+    },
+
+    initWithAttrs: function ( obj, propName, attrs ) {
+        this.id = propName;
+
+        //
+        this.bind( 'value', new Fire._PathObserver( obj, propName ) );
+
+        //
+        this.ctor = attrs.ctor;
+        this.type = _getTypeName(attrs);
+        if ( this.type ) {
+            if ( this.type === 'enum' ) {
+                this.enumList = attrs.enumList;
+            }
+        }
+
+        //
+        if ( attrs.displayName ) {
+            this.name = attrs.displayName;
+        }
+        else {
+            this.name = EditorUI.camelCaseToHuman(propName);
+        }
+
+        if ( attrs.textMode ) {
+            this.textMode = attrs.textMode;
+        }
+
+        // NOTE: min, max can be null
+        if ( attrs.min !== undefined )
+            this.min = attrs.min;
+
+        if ( attrs.max !== undefined )
+            this.max = attrs.max;
+
+        //
+        if ( attrs.watch && attrs.watchCallback ) {
+            if ( attrs.watch.length > 0 ) {
+                var observer = new CompoundObserver();
+                for ( var i = 0; i < attrs.watch.length; ++i ) {
+                    observer.addObserver( new Fire._PathObserver( obj, attrs.watch[i] ) );
+                }
+                var watcher = function () {
+                    attrs.watchCallback( obj, this );
+                };
+                observer.open(watcher);
+
+                // NOTE: we need to invoke it once to make sure our this intialize correctly
+                this.onFieldCreated = watcher;
+            }
+        }
+        else {
+            this.onFieldCreated = function () {
+                if ( attrs.readOnly || (attrs.hasGetter && !attrs.hasSetter) ) {
+                    this.disabled = true;
+                }
+            };
+        }
+    },
+
+    isCompoundField: function () {
+        if (  typeof this.value === "object"  ) {
+            if ( Array.isArray(this.value) ) {
+                return true;
+            }
+            else {
+                var classDef = Fire.getClassByName(this.type);
+                if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
+                    return false;
+                }
+                else {
+                    if ( this.value === null || this.value === undefined )
+                        return false;
+
+                    var typename = this.type;
+                    if ( !typename )
+                        typename = Fire.getClassName(this.value);
+
+                    if ( [
+                        "Fire.Vec2",
+                        "Fire.Color",
+                    ].indexOf(typename) === -1 ) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     },
 
     focusinAction: function ( event ) {

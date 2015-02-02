@@ -1,0 +1,31 @@
+color-text = #888
+
+:host {
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    align-items: center
+
+    box-sizing: border-box
+    min-height: 21px
+    min-width: 120px
+
+    font-size: 12px
+    white-space: nowrap
+
+    overflow: hidden
+
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+    cursor: default
+    text-align: left
+    color: color-text
+}
+
+:host-context([disabled]), :host([disabled]) {
+    * {
+        pointer-events: none
+    }
+
+    color: color-text - 50%
+    text-shadow: 1px 1px 0 black + 15%
+}

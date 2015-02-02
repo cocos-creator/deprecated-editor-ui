@@ -129,6 +129,12 @@
         <span class="space"></span>
 
         <div flex-row>
+            <fire-ui-null value="{{myNull}}" type="Fire.Vec2"></fire-ui-null>
+            <span class="space"></span>
+        </div>
+        <span class="space"></span>
+
+        <div flex-row>
             <fire-ui-text-area flex-3 value="{{myMultiText}}" multiline="true"></fire-ui-text-area>
             <span class="space"></span>
             <fire-ui-button on-click="{{myMultiTextClick}}">Change</fire-ui-button>
@@ -173,6 +179,7 @@
                 <fire-ui-prop value="{{myMultiText}}" textMode="multi"></fire-ui-prop>
                 <fire-ui-prop value="{{myAtlas}}" type="Fire.Atlas"></fire-ui-prop>
                 <fire-ui-prop value="{{myArray}}" type="{{myArrayType}}"></fire-ui-prop>
+                <fire-ui-prop value="{{myNull}}" ctor="{{myCtor}}"></fire-ui-prop>
             </fire-ui-section>
         </div>
 
@@ -433,7 +440,11 @@
             { text: 'Foo 04', icon: 'test/img/assets-html.png', value: 4 },
             { text: 'Foo 05', icon: 'test/img/assets-txt.png', value: 5 },
             { text: 'Foo 06', icon: 'test/img/assets-ts.png', value: 6 },
-        ]
+        ],
+
+        //
+        myNull: null,
+        myCtor: Fire.Vec2,
     });
 </script>
 </polymer-element>

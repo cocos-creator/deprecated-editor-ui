@@ -1,0 +1,24 @@
+<polymer-element
+    name="fire-ui-array-prop"
+    constructor="FireArrayProp"
+    >
+    <template>
+        <link rel="stylesheet" href="array-prop.css">
+
+        <template repeat="{{prop, index in value}}">
+            <fire-ui-prop
+                name="{{index}}"
+                value="{{prop}}"
+                min="{{min}}"
+                max="{{max}}"
+                type="{{type}}"
+                enumType="{{enumType}}"
+                enumList="{{enumList}}"
+                textMode="{{textMode}}"
+            >
+            </fire-ui-prop>
+        </template>
+    </template>
+
+    <script type="text/javascript" src="array-prop.js"></script>
+</polymer-element>
