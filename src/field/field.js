@@ -16,8 +16,12 @@ function getDefaultValue ( typename, ctor ) {
     //
     result = defaultCtor[typename];
     if ( result === undefined ) {
-        if ( typename === 'object' && ctor )
-            return ctor();
+        if ( typename === 'object' &&
+             !Fire.isChildClassOf(ctor, Fire.FObject) &&
+             ctor )
+        {
+            return new ctor();
+        }
 
         return null;
     }
@@ -34,10 +38,10 @@ Polymer({
         min: null,
         max: null,
         type: null,
+        ctor: null,
         enumType: null,
         enumList: null,
         textMode: 'single',
-        ctor: null,
     },
 
     domReady: function () {
@@ -73,60 +77,9 @@ Polymer({
     },
 
     createFieldElement: function () {
-        // do dom transform
-        var fieldEL = null;
-        var enumTypeDef = null;
-
-        // get typename
-        var typename = this.type;
-        switch ( typeof this.value ) {
-        case "undefined":
-            typename = 'undefined';
-            break;
-
-        case "number":
-            if ( !typename ) {
-                typename = 'float';
-            }
-            break;
-
-        case "boolean":
-            typename = 'boolean';
-            break;
-
-        case "string":
-            typename = 'string';
-            break;
-
-        case "object":
-            if ( Array.isArray(this.value) ) {
-                typename = 'array';
-            }
-            else {
-                var classDef = Fire.getClassByName(typename);
-                if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
-                    typename = 'fobject';
-                }
-                else {
-                    typename = Fire.getClassName(this.value);
-                    if ( [
-                        "Fire.Vec2",
-                        "Fire.Color",
-                    ].indexOf(typename) === -1 ) {
-                        typename = 'object';
-                    }
-                }
-            }
-            break;
-
-        default:
-            typename = 'unknown';
-            break;
-        }
-
         // check if this is a null field
         if ( (this.value === null || this.value === undefined) &&
-             typename !== 'fobject' )
+             !Fire.isChildClassOf(this.ctor, Fire.FObject) )
         {
             fieldEL = new FireNull();
             fieldEL.type = this.type;
@@ -134,7 +87,61 @@ Polymer({
             return fieldEL;
         }
 
-        // process typename
+        // init type
+        var typename = null;
+        var classname = null;
+
+        //
+        switch ( typeof this.value ) {
+        case "undefined":
+            typename = "undefined";
+            break;
+
+        case "string":
+            typename = this.type || "string";
+            break;
+
+        case "boolean":
+            typename = this.type || "boolean";
+            break;
+
+        case "number":
+            typename = this.type || "float";
+            break;
+
+        case "object":
+            if ( Array.isArray(this.value) ) {
+                typename = 'array';
+            }
+            else {
+                var ctor = this.ctor;
+                if ( !ctor ) {
+                    ctor = this.value.constructor;
+                }
+                classname = Fire.getClassName(ctor);
+                typename = 'object';
+
+                if ( Fire.isChildClassOf(ctor, Fire.FObject) ) {
+                    typename = 'fobject';
+                }
+                else {
+                    if ( [
+                        "Fire.Vec2",
+                        "Fire.Color",
+                    ].indexOf(classname) !== -1 ) {
+                        typename = classname;
+                    }
+                }
+            }
+            break;
+
+        default:
+            Fire.error( "Unknown type " + (typeof this.value) );
+            break;
+        }
+
+        // create fieldEL by typename
+        var fieldEL = null;
         switch ( typename ) {
             case "undefined":
                 fieldEL = new FireLabel();
@@ -144,7 +151,7 @@ Polymer({
 
             case "enum":
                 if ( this.enumType !== null ) {
-                    enumTypeDef = Fire.getVarFrom(window,this.enumType);
+                    var enumTypeDef = Fire.getVarFrom(window,this.enumType);
                     this.finalEnumList = Fire.getEnumList(enumTypeDef);
                 }
                 else {
@@ -192,15 +199,7 @@ Polymer({
 
             case "fobject":
                 fieldEL = new FireFObject();
-                fieldEL.type = this.type ? this.type : "Fire.FObject";
-                break;
-
-            case "Fire.Color":
-                fieldEL = new FireColor();
-                break;
-
-            case "Fire.Vec2":
-                fieldEL = new FireVec2();
+                fieldEL.type = classname;
                 break;
 
             case "array":
@@ -212,13 +211,20 @@ Polymer({
 
             case "object":
                 fieldEL = new FireLabel();
-                var classname = Fire.getClassName(this.value);
-                if ( !classname ) {
+                if ( !classname || classname === 'Function' ) {
                     classname = 'annoyance';
                 }
 
                 fieldEL.innerText = '(' + classname + ')';
                 fieldEL.disabled = true;
+                break;
+
+            case "Fire.Color":
+                fieldEL = new FireColor();
+                break;
+
+            case "Fire.Vec2":
+                fieldEL = new FireVec2();
                 break;
         }
         return fieldEL;

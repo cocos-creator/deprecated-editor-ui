@@ -1,11 +1,11 @@
-function _getTypeName ( attrs ) {
-    var type = attrs.type;
-    if ( type === 'object' ) {
-        type = Fire.getClassName( attrs.ctor );
-    }
-    type = type || '';
-    return type;
-}
+// function _getTypeName ( attrs ) {
+//     var type = attrs.type;
+//     if ( type === 'object' ) {
+//         type = Fire.getClassName( attrs.ctor );
+//     }
+//     type = type || '';
+//     return type;
+// }
 
 Polymer(EditorUI.mixin({
     publish: {
@@ -70,7 +70,7 @@ Polymer(EditorUI.mixin({
 
         //
         this.ctor = attrs.ctor;
-        this.type = _getTypeName(attrs);
+        this.type = attrs.type;
         if ( this.type ) {
             if ( this.type === 'enum' ) {
                 this.enumList = attrs.enumList;
@@ -122,27 +122,29 @@ Polymer(EditorUI.mixin({
     },
 
     isCompoundField: function () {
-        if (  typeof this.value === "object"  ) {
+        if ( this.value === null || this.value === undefined ) {
+            return false;
+        }
+
+        if ( typeof this.value === "object" ) {
             if ( Array.isArray(this.value) ) {
                 return true;
             }
             else {
-                var classDef = Fire.getClassByName(this.type);
-                if ( Fire.isChildClassOf(classDef, Fire.FObject) ) {
+                var ctor = this.ctor;
+                if ( !ctor ) {
+                    ctor = this.value.constructor;
+                }
+                var classname = Fire.getClassName(ctor);
+
+                if ( Fire.isChildClassOf(ctor, Fire.FObject) ) {
                     return false;
                 }
                 else {
-                    if ( this.value === null || this.value === undefined )
-                        return false;
-
-                    var typename = this.type;
-                    if ( !typename )
-                        typename = Fire.getClassName(this.value);
-
                     if ( [
                         "Fire.Vec2",
                         "Fire.Color",
-                    ].indexOf(typename) === -1 ) {
+                    ].indexOf(classname) === -1 ) {
                         return true;
                     }
                 }

@@ -37,8 +37,4 @@ Polymer({
             }
         }
     },
-
-    valueChanged: function () {
-        console.log("hello");
-    },
 });
