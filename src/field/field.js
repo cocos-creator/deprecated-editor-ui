@@ -211,15 +211,20 @@ Polymer({
                 break;
 
             case "object":
-                // fieldEL = new FireUnitInput();
+                fieldEL = new FireLabel();
+                var classname = Fire.getClassName(this.value);
+                if ( !classname ) {
+                    classname = 'annoyance';
+                }
+
+                fieldEL.innerText = '(' + classname + ')';
+                fieldEL.disabled = true;
                 break;
         }
         return fieldEL;
     },
 
-    recreateFieldAction: function ( event ) {
-        event.stopPropagation();
-
+    recreateFieldElement: function () {
         if ( this._fieldEL ) {
             this._fieldEL.remove();
             this._fieldEL = null;
@@ -233,5 +238,18 @@ Polymer({
         }
 
         this._appendFieldElement(fieldEL);
+    },
+
+    valueChanged: function ( oldValue, newValue ) {
+        if ( newValue === null ) {
+            if ( oldValue !== null && !(oldValue instanceof Fire.FObject) ) {
+                this.recreateFieldElement();
+            }
+        }
+    },
+
+    recreateFieldAction: function ( event ) {
+        // NOTE: do not stopPropagation
+        this.recreateFieldElement();
     },
 });

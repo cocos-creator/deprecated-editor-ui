@@ -7,7 +7,7 @@
 
         <template repeat="{{prop, index in value}}">
             <fire-ui-prop
-                name="{{index}}"
+                name="{{index|indexName}}"
                 value="{{prop}}"
                 min="{{min}}"
                 max="{{max}}"

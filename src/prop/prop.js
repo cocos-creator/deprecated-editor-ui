@@ -55,16 +55,7 @@ Polymer(EditorUI.mixin({
             this.$.label.setAttribute('flex-self-start','');
         }
 
-        this.foldable = this.isCompoundField();
-        if ( this.foldable ) {
-            if ( Array.isArray(this.value) )
-                this.compoundType = 'array';
-            else
-                this.compoundType = 'object';
-        }
-        else {
-            this.compoundType = 'none';
-        }
+        this.updateCompound();
 
         if ( this.onFieldCreated ) {
             this.onFieldCreated();
@@ -161,6 +152,27 @@ Polymer(EditorUI.mixin({
         return false;
     },
 
+    updateCompound: function () {
+        this.foldable = this.isCompoundField();
+        if ( this.foldable ) {
+            if ( Array.isArray(this.value) )
+                this.compoundType = 'array';
+            else
+                this.compoundType = 'object';
+        }
+        else {
+            this.compoundType = 'none';
+        }
+    },
+
+    valueChanged: function ( oldValue, newValue ) {
+        if ( newValue === null ) {
+            if ( oldValue !== null && !(oldValue instanceof Fire.FObject) ) {
+                this.updateCompound();
+            }
+        }
+    },
+
     focusinAction: function ( event ) {
         this._focusAction();
         this.$.label.focused = true;
@@ -193,8 +205,13 @@ Polymer(EditorUI.mixin({
     },
 
     foldAction: function ( event ) {
-        this.folded = !this.folded;
         event.stopPropagation();
+
+        this.folded = !this.folded;
+    },
+
+    nullChangedAction: function ( event ) {
+        this.updateCompound();
     },
 
 }, EditorUI.focusable));

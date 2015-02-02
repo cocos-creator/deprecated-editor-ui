@@ -9,4 +9,8 @@ Polymer({
         enumList: null,
         textMode: 'single',
     },
+
+    indexName: function ( index ) {
+        return "[" + index + "]";
+    },
 });
