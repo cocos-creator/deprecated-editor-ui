@@ -3,10 +3,11 @@ Polymer(EditorUI.mixin({
         value: null,
     },
 
-    observe: {
-        'value.r value.g value.b': '_updateColor',
-        'value.a': '_updateAlpha',
-    },
+    // DISABLE: use valueChanged since we don't allow change single value
+    // observe: {
+    //     'value.r value.g value.b': '_updateColor',
+    //     'value.a': '_updateAlpha',
+    // },
 
     created: function () {
         this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
@@ -23,6 +24,11 @@ Polymer(EditorUI.mixin({
     setColor: function ( r, g, b, a ) {
         this.value = new Fire.Color( r, g, b, a );
         this.fire("changed");
+    },
+
+    valueChanged: function () {
+        this._updateColor();
+        this._updateAlpha();
     },
 
     _updateColor: function () {
@@ -51,7 +57,7 @@ Polymer(EditorUI.mixin({
 
             document.body.appendChild(this.colorPicker);
             this.colorPicker.style.display = "";
-            this.colorPicker.value = this.value.clone(); // NOTE: one-way binding
+            this.colorPicker.setColor(this.value.clone()); // NOTE: one-way binding
             EditorUI.addHitGhost('cursor', '998', function () {
                 this.showColorPicker(false);
                 this.focus();

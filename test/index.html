@@ -267,7 +267,7 @@
             </div>
             <span class="space"></span>
 
-            <fire-ui-color-picker value="{{myColor}}"></fire-ui-color-picker>
+            <fire-ui-color-picker value="{{myColor2}}"></fire-ui-color-picker>
             <span class="space"></span>
 
             <fire-ui-list value="{{myList}}" icon></fire-ui-list>
@@ -378,11 +378,16 @@
         // myColor
         myColor: new Fire.Color( 1.0, 0.0, 0.0, 1.0 ),
         myColorClick: function () {
-            this.myColor.r = rangeRandom( 0.0, 1.0 );
-            this.myColor.g = rangeRandom( 0.0, 1.0 );
-            this.myColor.b = rangeRandom( 0.0, 1.0 );
-            this.myColor.a = rangeRandom( 0.0, 1.0 );
+            this.myColor = new Fire.Color(
+                rangeRandom( 0.0, 1.0 ),
+                rangeRandom( 0.0, 1.0 ),
+                rangeRandom( 0.0, 1.0 ),
+                rangeRandom( 0.0, 1.0 )
+            );
         },
+
+        //
+        myColor2: new Fire.Color( 1.0, 1.0, 0.0, 1.0 ),
 
         // myVec2
         myVec2: new Fire.Vec2( 1.0, 1.0 ),

@@ -5,10 +5,11 @@
     <template>
         <link rel="stylesheet" href="array-prop.css">
 
-        <template repeat="{{prop, index in value}}">
+        <template repeat="{{prop,index in cloneList}}">
             <fire-ui-prop
+                index="{{index}}"
                 name="{{index|indexName}}"
-                value="{{prop}}"
+                value="{{prop.value}}"
                 min="{{min}}"
                 max="{{max}}"
                 type="{{type}}"
@@ -16,6 +17,7 @@
                 enumType="{{enumType}}"
                 enumList="{{enumList}}"
                 textMode="{{textMode}}"
+                on-changed="{{itemChangedAction}}"
             >
             </fire-ui-prop>
         </template>

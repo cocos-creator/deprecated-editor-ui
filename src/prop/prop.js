@@ -1,12 +1,3 @@
-// function _getTypeName ( attrs ) {
-//     var type = attrs.type;
-//     if ( type === 'object' ) {
-//         type = Fire.getClassName( attrs.ctor );
-//     }
-//     type = type || '';
-//     return type;
-// }
-
 Polymer(EditorUI.mixin({
     publish: {
         name: '',
@@ -27,7 +18,9 @@ Polymer(EditorUI.mixin({
         folded: {
             value: false,
             reflect: true,
-        }
+        },
+
+        index: -1, // used in array-prop
     },
 
     created: function () {
@@ -71,10 +64,8 @@ Polymer(EditorUI.mixin({
         //
         this.ctor = attrs.ctor;
         this.type = attrs.type;
-        if ( this.type ) {
-            if ( this.type === 'enum' ) {
-                this.enumList = attrs.enumList;
-            }
+        if ( this.type === 'enum' ) {
+            this.enumList = attrs.enumList;
         }
 
         //

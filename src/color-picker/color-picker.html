@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div flex-col flex-stretch>
+        <div flex-col flex-stretch on-changed="{{inputCtrlAction}}">
             <div class="input" flex-row>
                 <fire-ui-unit-input flex-1 value="{{value.r|toInt}}" type="int" unit="r" min="0" max="255"></fire-ui-unitinput>
             </div>

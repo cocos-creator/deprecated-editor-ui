@@ -3,27 +3,13 @@ Polymer({
         value: new Fire.Color( 1.0, 1.0, 1.0, 1.0 ),
     },
 
-    observe: {
-        'value.r value.g value.b': 'colorChanged',
-        'value.a': '_updateColor',
-    },
-
     created: function () {
         this.tabIndex = EditorUI.getParentTabIndex(this) + 1;
         this.value = new Fire.Color( 1.0, 1.0, 1.0, 1.0 );
     },
 
-    ready: function() {
-        this.hsv = this.value.toHSV();
-        this._editingHSV = false;
-        this._updateColor();
-    },
-
-    colorChanged: function ( oldValue, newValue ) {
-        if ( this._editingHSV === false ) {
-            this.hsv = Fire.rgb2hsv(this.value.r, this.value.g, this.value.b);
-            this._updateColor();
-        }
+    ready: function () {
+        this.setColor(this.value);
     },
 
     toInt: {
@@ -35,7 +21,13 @@ Polymer({
         }
     },
 
-    _updateColor: function () {
+    setColor: function ( value ) {
+        this.value = value;
+        this.hsv = this.value.toHSV();
+        this.repaint();
+    },
+
+    repaint: function () {
         var cssRGB = Fire.hsv2rgb( this.hsv.h, 1, 1 );
         cssRGB = "rgb("+ (cssRGB.r*255|0) + "," + (cssRGB.g*255|0) + "," + (cssRGB.b*255|0) + ")";
         this.$.colorCtrl.style.backgroundColor = cssRGB;
@@ -44,6 +36,10 @@ Polymer({
         this.$.hueHandle.style.top = (1.0-this.hsv.h)*100 + "%";
         this.$.colorHandle.style.left = this.hsv.s*100 + "%";
         this.$.colorHandle.style.top = (1.0-this.hsv.v)*100 + "%";
+    },
+
+    _updateColor: function () {
+        this.repaint();
 
         if ( this.owner && this.owner.setColor ) {
             this.owner.setColor( this.value.r, this.value.g, this.value.b, this.value.a );
@@ -158,6 +154,13 @@ Polymer({
         document.addEventListener ( 'mouseup', mouseUpHandle );
 
         event.stopPropagation();
+    },
+
+    inputCtrlAction: function ( event ) {
+        event.stopPropagation();
+
+        this.hsv = this.value.toHSV();
+        this._updateColor();
     },
 
     focusoutAction: function ( event ) {
