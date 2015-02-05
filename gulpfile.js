@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
 var del = require('del');
@@ -57,15 +56,32 @@ gulp.task('cp-html', function() {
 });
 
 // js
-gulp.task('js', function() {
-    return gulp.src(paths.js, {base: 'src'})
-    .pipe(wrapScope())
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
-    .pipe(uglify())
-    .pipe(gulp.dest('bin'))
-    ;
+gulp.task('js', function(callback) {
+    var uglify = require('gulp-uglifyjs');
+    var gulpSrcFiles = require('gulp-src-files');
+    var files = gulpSrcFiles(paths.js, {base: 'src'});
+    var count = files.length;
+    var streams = files.map(function (file) {
+        var globpath = path.relative(__dirname, file);
+        var destfile = path.relative(path.join(__dirname, 'src'), file);
+        var stream = gulp.src(globpath)
+            .pipe(wrapScope())
+            .pipe(jshint())
+            .pipe(jshint.reporter(stylish))
+            .pipe(uglify(destfile, {
+                compress: {
+                    dead_code: false,
+                    unused: false
+                }
+            }))
+            .pipe(gulp.dest('bin'));
+        stream.on('end', function () {
+            if (--count <= 0) callback();
+        });
+        return stream;
+    });
 });
+
 gulp.task('js-no-uglify', function() {
     return gulp.src(paths.js, {base: 'src'})
     .pipe(wrapScope())
@@ -85,12 +101,17 @@ gulp.task('css', function() {
 });
 
 // html
-gulp.task('build-html', ['cp-html', 'css', 'js-no-uglify'], function() {
+gulp.task('build-html', ['cp-html', 'css', 'js'], function() {
+    var htmlmin = require('gulp-htmlmin');
     return gulp.src('bin/editor-ui.html')
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
-        strip: true,
+        strip: true
+    }))
+    .pipe(htmlmin({
+        removeComments: true,
+        collapseWhitespace: true
     }))
     .pipe(gulp.dest('bin'))
     ;
@@ -100,13 +121,13 @@ gulp.task('build-html-dev', ['cp-html', 'css', 'js-no-uglify'], function() {
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
-        strip: false,
+        strip: false
     }))
     .pipe(gulp.dest('bin'))
     ;
 });
 
-// NOTE: low-level version webkit don't support vulcanize's css strip option. such as background:transparent -> background:0 0  
+// NOTE: low-level version webkit don't support vulcanize's css strip option. such as background:transparent -> background:0 0
 gulp.task('build-html-polyfill', ['cp-html', 'css', 'js'], function() {
     return gulp.src('bin/editor-ui.html')
     .pipe(vulcanize({
