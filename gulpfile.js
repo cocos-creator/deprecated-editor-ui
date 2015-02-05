@@ -102,11 +102,16 @@ gulp.task('css', function() {
 
 // html
 gulp.task('build-html', ['cp-html', 'css', 'js'], function() {
+    var htmlmin = require('gulp-htmlmin');
     return gulp.src('bin/editor-ui.html')
     .pipe(vulcanize({
         dest: 'bin',
         inline: true,
         strip: true
+    }))
+    .pipe(htmlmin({
+        removeComments: true,
+        collapseWhitespace: true
     }))
     .pipe(gulp.dest('bin'))
     ;
