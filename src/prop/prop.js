@@ -96,7 +96,7 @@ Polymer(EditorUI.mixin({
                 }
                 var watcher = function () {
                     attrs.watchCallback( obj, this );
-                };
+                }.bind(this);
                 observer.open(watcher);
 
                 // NOTE: we need to invoke it once to make sure our this intialize correctly
