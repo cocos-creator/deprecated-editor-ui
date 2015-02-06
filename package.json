@@ -14,6 +14,9 @@
       "jshint-stylish": "",
       "gulp-stylus": "",
       "gulp-vulcanize": "",
+      "gulp-uglifyjs": "",
+      "gulp-src-files": "",
+      "gulp-htmlmin": "",
       "express": "",
       "del": ""
     }
