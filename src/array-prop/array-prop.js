@@ -25,6 +25,11 @@ Polymer({
     },
 
     valueChanged: function ( oldValue, newValue ) {
+        if ( !this.value || !Array.isArray(this.value) ) {
+            this.cloneList = [];
+            return;
+        }
+
         if ( this.value.length != this.cloneList.length ) {
             this.clone();
             return;
