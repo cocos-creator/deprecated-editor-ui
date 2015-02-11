@@ -77,6 +77,8 @@ Polymer(EditorUI.mixin({
         var dragItems = event.detail.dragItems;
         var dragType = event.detail.dragType;
 
+        var entity, value;
+
         //
         var classDef = Fire.getClassByName(this.type);
         if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
@@ -93,14 +95,21 @@ Polymer(EditorUI.mixin({
             }.bind(this) );
         }
         else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
-            // TODO
+            value = Fire._getInstanceById(dragItems[0]);
+            if (value) {
+                this._curDragObject = value;
+            }
             this.highlighted = true;
-            this.invalid = true;
+            this.invalid = !value;
         }
         else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
-            // TODO
+            entity = Fire._getInstanceById(dragItems[0]);
+            value = entity && entity.getComponent(classDef)
+            if (value) {
+                this._curDragObject = value;
+            }
             this.highlighted = true;
-            this.invalid = true;
+            this.invalid = !value;
         }
         else {
             this.highlighted = true;

@@ -103,6 +103,20 @@ Polymer({
         this.idToItem = {};
     },
 
+    hintItem: function ( id ) {
+        var itemEL = this.idToItem[id];
+        if (itemEL) {
+            this.scrollToItem(itemEL);
+            itemEL.hint();
+        }
+    },
+
+    scrollToItem: function ( el ) {
+        window.requestAnimationFrame( function () {
+            this.scrollTop = el.offsetTop + 16 - this.offsetHeight/2;
+        }.bind(this));
+    },
+
     nextItem: function ( curItem, skipChildren ) {
         if ( !skipChildren && curItem.expanded ) {
             return curItem.firstElementChild;
