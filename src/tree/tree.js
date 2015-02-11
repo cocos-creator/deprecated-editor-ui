@@ -40,7 +40,7 @@ Polymer({
     deleteItem: function (item) {
         var parentItem = item.parentElement;
         item.remove();
-        if (parentItem !== this) {
+        if (parentItem && parentItem !== this) {
             parentItem.foldable = parentItem.hasChildNodes();
         }
 
