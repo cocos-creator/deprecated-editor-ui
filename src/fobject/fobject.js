@@ -104,7 +104,7 @@ Polymer(EditorUI.mixin({
         }
         else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
             entity = Fire._getInstanceById(dragItems[0]);
-            value = entity && entity.getComponent(classDef)
+            value = entity && entity.getComponent(classDef);
             if (value) {
                 this._curDragObject = value;
             }
