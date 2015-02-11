@@ -12,11 +12,11 @@
       "gulp-util": "",
       "gulp-jshint": "",
       "jshint-stylish": "",
-      "gulp-stylus": "",
-      "gulp-vulcanize": "",
+      "gulp-stylus": "2.0.0",
+      "gulp-vulcanize": "5.0.0",
       "gulp-uglifyjs": "",
       "gulp-src-files": "",
-      "gulp-htmlmin": "",
+      "gulp-htmlmin": "1.0.0",
       "express": "",
       "del": ""
     }
