@@ -14,7 +14,7 @@ Polymer(EditorUI.mixin({
         if ( !this.focused )
             this.$.focus.focus();
 
-        this.fire('changed');
+        EditorUI.fireChanged(this);
     },
 
 }, EditorUI.focusable));

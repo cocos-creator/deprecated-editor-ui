@@ -33,7 +33,7 @@ Polymer(EditorUI.mixin({
     setAsset: function ( uuid ) {
         Fire.AssetLibrary.loadAsset( uuid, function (asset) {
             this.value = asset;
-            this.fire("changed");
+            EditorUI.fireChanged(this);
         }.bind(this) );
     },
 
@@ -128,7 +128,7 @@ Polymer(EditorUI.mixin({
 
         if ( !this.invalid ) {
             this.value = this._curDragObject;
-            this.fire("changed");
+            EditorUI.fireChanged(this);
         }
 
         this.resetDragState();

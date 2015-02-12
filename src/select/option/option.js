@@ -22,8 +22,8 @@ Polymer({
         var entry = this.options[idx];
         if ( this.value !== entry.value ) {
             this.value = entry.value;
-            if ( this.owner )
-                this.owner.fire('changed');
+            if ( this.owner && this.owner.setValue )
+                this.owner.setValue(this.value);
         }
 
         if ( this.owner ) {

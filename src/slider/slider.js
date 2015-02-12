@@ -76,7 +76,7 @@ Polymer(EditorUI.mixin({
             this.$.nubbin.style.left = offsetX * 100 + "%";
             this.value = this._min + offsetX * (this._max-this._min);
             this.$.input.value = this.value;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
 
             event.stopPropagation();
         };

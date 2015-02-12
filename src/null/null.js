@@ -12,7 +12,7 @@ Polymer(EditorUI.mixin({
     createAction: function () {
         if ( this.ctor ) {
             this.value = new this.ctor();
-            this.fire('changed');
+            EditorUI.fireChanged(this);
             this.fire('null-changed');
         }
     },

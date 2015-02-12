@@ -42,6 +42,6 @@ Polymer(EditorUI.mixin({
     changedAction: function ( event ) {
         this.value = new Fire.Vec2(this.$.x.value, this.$.y.value);
         event.stopPropagation();
-        this.fire("changed");
+        EditorUI.fireChanged(this);
     },
 }, EditorUI.focusable));

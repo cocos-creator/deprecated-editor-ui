@@ -66,7 +66,7 @@ Polymer(EditorUI.mixin({
         var val = this._convert(this.value + this._interval);
         if ( this.value != val ) {
             this.value = val;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
         }
     },
 
@@ -74,7 +74,7 @@ Polymer(EditorUI.mixin({
         var val = this._convert(this.value - this._interval);
         if ( this.value != val ) {
             this.value = val;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
         }
     },
 
@@ -115,7 +115,7 @@ Polymer(EditorUI.mixin({
         var val = this._convert(this.$.input.value);
         if ( this.value !== val ) {
             this.value = val;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
         }
         // NOTE: we set the input.value because this.value may not changed after invalid inputs
         this.$.input.value = val;
@@ -139,7 +139,7 @@ Polymer(EditorUI.mixin({
         var val = this._convert(event.target.value);
         if ( this.value !== val ) {
             this.value = val;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
         }
 
         event.stopPropagation();
@@ -158,7 +158,7 @@ Polymer(EditorUI.mixin({
                 this.$.input.value = this.lastVal;
                 if ( this.value !== this.lastVal ) {
                     this.value = this.lastVal;
-                    this.fire('changed');
+                    EditorUI.fireChanged(this);
                 }
                 this.$.input.blur();
             break;

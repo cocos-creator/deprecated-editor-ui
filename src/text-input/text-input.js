@@ -75,7 +75,7 @@ Polymer(EditorUI.mixin({
         //
         if ( this.value !== this.$.inputArea.value ) {
             this.value = this.$.inputArea.value;
-            this.fire('changed');
+            EditorUI.fireChanged(this);
         }
 
         this.fire('confirm');
@@ -85,7 +85,7 @@ Polymer(EditorUI.mixin({
         // DISABLE 1: this will prevent Chinese input
         // if ( this.value != event.target.value ) {
         //     this.value = event.target.value;
-        //     this.fire('changed');
+        //     EditorUI.fireChanged(this);
         // }
 
         // DISABLE 2:
@@ -114,7 +114,7 @@ Polymer(EditorUI.mixin({
             case 13:
                 if ( this.value != event.target.value ) {
                     this.value = event.target.value;
-                    this.fire('changed');
+                    EditorUI.fireChanged(this);
                 }
                 this.$.inputArea.blur();
             break;
@@ -125,7 +125,7 @@ Polymer(EditorUI.mixin({
                 this.inputValue = this.lastVal;
                 if ( this.value != this.lastVal ) {
                     this.value = this.lastVal;
-                    this.fire('changed');
+                    EditorUI.fireChanged(this);
                 }
                 this.$.inputArea.blur();
             break;

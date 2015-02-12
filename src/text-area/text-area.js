@@ -41,7 +41,7 @@ Polymer(EditorUI.mixin({
 
     inputAction: function (event) {
         this.value = event.target.value;
-        this.fire('changed');
+        EditorUI.fireChanged(this);
 
         event.stopPropagation();
     },

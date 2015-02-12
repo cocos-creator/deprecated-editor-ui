@@ -216,5 +216,10 @@ var EditorUI = (function () {
         return obj;
     };
 
+    //
+    EditorUI.fireChanged = function ( element ) {
+        element.fire("changed", element.value);
+    };
+
     return EditorUI;
 })();

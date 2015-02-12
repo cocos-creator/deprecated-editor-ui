@@ -59,40 +59,6 @@ Polymer(EditorUI.mixin({
         }
     },
 
-    clickAction: function (event) {
-        this.showOption( !this._showMenu );
-        event.stopPropagation();
-    },
-
-    blurAction: function (event) {
-        if ( this.focused === false ) {
-            return;
-        }
-
-        if ( this.menu && this.menu === event.relatedTarget ) {
-            return;
-        }
-
-        this._blurAction();
-        this.showOption(false);
-    },
-
-    keydownAction: function (event) {
-        switch ( event.which ) {
-            // esc
-            case 27:
-                this.showOption(false);
-                event.stopPropagation();
-            break;
-        }
-    },
-
-    selectAction: function (event) {
-        event.stopPropagation();
-
-        this.showOption(false);
-    },
-
     updateMenu: function () {
         window.requestAnimationFrame ( function () {
             if ( !this.menu || !this._showMenu )
@@ -132,5 +98,44 @@ Polymer(EditorUI.mixin({
                 break;
             }
         }
+    },
+
+    setValue: function ( val ) {
+        this.value = val;
+        EditorUI.fireChanged(this);
+    },
+
+    clickAction: function (event) {
+        this.showOption( !this._showMenu );
+        event.stopPropagation();
+    },
+
+    blurAction: function (event) {
+        if ( this.focused === false ) {
+            return;
+        }
+
+        if ( this.menu && this.menu === event.relatedTarget ) {
+            return;
+        }
+
+        this._blurAction();
+        this.showOption(false);
+    },
+
+    keydownAction: function (event) {
+        switch ( event.which ) {
+            // esc
+            case 27:
+                this.showOption(false);
+                event.stopPropagation();
+            break;
+        }
+    },
+
+    selectAction: function (event) {
+        event.stopPropagation();
+
+        this.showOption(false);
     },
 }, EditorUI.focusable));

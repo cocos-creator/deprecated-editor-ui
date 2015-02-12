@@ -23,7 +23,7 @@ Polymer(EditorUI.mixin({
 
     setColor: function ( r, g, b, a ) {
         this.value = new Fire.Color( r, g, b, a );
-        this.fire("changed");
+        EditorUI.fireChanged(this);
     },
 
     valueChanged: function () {

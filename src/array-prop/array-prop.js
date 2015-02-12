@@ -49,6 +49,6 @@ Polymer({
         this.value[idx] = event.target.value;
         this.cloneList[idx].value = event.target.value;
 
-        this.fire('changed');
+        EditorUI.fireChanged(this);
     },
 });
