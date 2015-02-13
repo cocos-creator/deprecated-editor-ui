@@ -59,6 +59,7 @@ Polymer(EditorUI.mixin({
     inputChangedAction: function ( event ) {
         event.stopPropagation();
         this.value = event.target.value;
+        EditorUI.fireChanged(this);
     },
 
     mousedownAction: function (event) {
