@@ -5,6 +5,10 @@ Polymer(EditorUI.mixin({
             value: false,
             reflect: true
         },
+        closable: {
+            value: false,
+            reflect: true
+        }
     },
 
     created: function () {
@@ -15,7 +19,14 @@ Polymer(EditorUI.mixin({
     },
 
     clickAction: function (event) {
-        this.folded = !this.folded;
         event.stopPropagation();
+
+        this.folded = !this.folded;
+    },
+
+    closeAction: function (event) {
+        event.stopPropagation();
+
+        this.fire('close');
     },
 }, EditorUI.focusable));

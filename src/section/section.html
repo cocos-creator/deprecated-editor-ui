@@ -12,6 +12,9 @@
             on-blur="{{_blurAction}}"
             >
             <i class="fa {{folded ? 'fa-caret-right': 'fa-caret-down' }}"></i>{{name}}
+            <template if="{{closable}}">
+                <i class="fa fa-close close-btn" on-click="{{closeAction}}"></i>
+            </template>
         </div>
         <div id="body" class="body {{folded ? 'hidden':''}}"><content/></div>
     </template>
