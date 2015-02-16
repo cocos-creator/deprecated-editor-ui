@@ -1,6 +1,6 @@
 # Intro
 
-Fireball-x Editor UI components （Fireball-x Editor UI构建）
+Fireball Editor UI components （Fireball Editor UI构建）
 
 ## Install
 
