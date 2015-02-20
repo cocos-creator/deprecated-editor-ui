@@ -31,7 +31,7 @@ Polymer(EditorUI.mixin({
     },
 
     setAsset: function ( uuid ) {
-        Fire.AssetLibrary.loadAsset( uuid, function (asset) {
+        Fire.AssetLibrary.loadAsset( uuid, function (err, asset) {
             this.value = asset;
             EditorUI.fireChanged(this);
         }.bind(this) );
@@ -82,7 +82,7 @@ Polymer(EditorUI.mixin({
         //
         var classDef = Fire.getClassByName(this.type);
         if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
-            Fire.AssetLibrary.loadAsset( dragItems[0], function (asset) {
+            Fire.AssetLibrary.loadAsset( dragItems[0], function (err, asset) {
                 if ( asset instanceof classDef ) {
                     this._curDragObject = asset;
                     this.highlighted = true;
