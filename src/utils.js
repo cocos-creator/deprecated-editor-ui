@@ -204,7 +204,7 @@ var EditorUI = (function () {
                      name === 'observe' ||
                      name === 'eventDelegates' )
                 {
-                    obj[name] = Fire.addon( obj[name], source[name] );
+                    obj[name] = Fire.JS.addon( obj[name], source[name] );
                 }
                 else {
                     if ( obj[name] === undefined ) {

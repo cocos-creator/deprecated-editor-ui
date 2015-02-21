@@ -59,7 +59,7 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
 
         if ( Fire.browseObject ) {
-            Fire.browseObject( Fire.getClassByName(this.type), this );
+            Fire.browseObject( Fire.JS.getClassByName(this.type), this );
         }
     },
 
@@ -80,7 +80,7 @@ Polymer(EditorUI.mixin({
         var entity, value;
 
         //
-        var classDef = Fire.getClassByName(this.type);
+        var classDef = Fire.JS.getClassByName(this.type);
         if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
             Fire.AssetLibrary.loadAsset( dragItems[0], function (err, asset) {
                 if ( asset instanceof classDef ) {

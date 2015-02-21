@@ -126,7 +126,7 @@ Polymer(EditorUI.mixin({
                 if ( !ctor ) {
                     ctor = this.value.constructor;
                 }
-                var classname = Fire.getClassName(ctor);
+                var classname = Fire.JS.getClassName(ctor);
 
                 if ( Fire.isChildClassOf(ctor, Fire.FObject) ) {
                     return false;

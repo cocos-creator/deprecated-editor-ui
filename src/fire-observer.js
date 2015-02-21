@@ -20,7 +20,7 @@ function _fireEquals(left, right) {
 function _FirePathObserver ( object, path ) {
     PathObserver.call(this, object, path);
 }
-Fire.extend( _FirePathObserver, PathObserver );
+Fire.JS.extend( _FirePathObserver, PathObserver );
 _FirePathObserver.prototype.check_ = function(changeRecords, skipChanges) {
     var oldValue = this.value_;
     this.value_ = this.path_.getValueFrom(this.object_);

@@ -118,7 +118,7 @@ Polymer({
                 if ( !ctor ) {
                     ctor = this.value.constructor;
                 }
-                classname = Fire.getClassName(ctor);
+                classname = Fire.JS.getClassName(ctor);
                 typename = 'object';
 
                 if ( Fire.isChildClassOf(ctor, Fire.FObject) ) {
