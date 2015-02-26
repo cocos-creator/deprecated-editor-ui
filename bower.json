@@ -17,12 +17,12 @@
         "tests"
     ],
     "dependencies": {
-        "polymer": "Polymer/polymer#~0.5.4",
+        "polymer": "Polymer/polymer#~0.5.5",
         "svg.js": ""
     },
     "devDependencies": {
         "fontawesome": "4.3.0",
-        "webcomponentsjs": "Polymer/webcomponentsjs#~0.5.4",
+        "webcomponentsjs": "Polymer/webcomponentsjs#~0.5.5",
         "d3": "",
         "snap.svg": ""
     }
