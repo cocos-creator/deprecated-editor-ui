@@ -1,5 +1,22 @@
 var EditorUI = (function () {
     var EditorUI = {};
+
+    EditorUI.index = function ( element ) {
+        var parent = element.parentElement;
+        var curChildEL = parent.firstElementChild;
+
+        var idx = 0;
+        while ( curChildEL ) {
+            if ( curChildEL === element )
+                return idx;
+
+            ++idx;
+            curChildEL = curChildEL.nextElementSibling;
+        }
+
+        return -1;
+    };
+
     EditorUI.isFlex = function ( element ) {
         if ( element.getAttribute("flex-1") !== null ) return true;
         if ( element.getAttribute("flex-2") !== null ) return true;

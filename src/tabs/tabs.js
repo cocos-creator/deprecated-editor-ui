@@ -24,6 +24,17 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
     },
 
+    insert: function ( tabEL, insertBeforeTabEL ) {
+        if ( insertBeforeTabEL ) {
+            this.insertBefore(tabEL, insertBeforeTabEL);
+        }
+        else {
+            this.appendChild(tabEL);
+        }
+
+        return tabEL;
+    },
+
     add: function ( name ) {
         var tabEL = new FireTab();
         tabEL.innerHTML = name;
@@ -124,7 +135,7 @@ Polymer(EditorUI.mixin({
         var style = this.$.insertLine.style;
         if ( event.target instanceof FireTab ) {
             style.left = event.target.offsetLeft + "px";
-            this._curInsertTab = this.target;
+            this._curInsertTab = event.target;
         }
         else {
             var el = this.lastElementChild;

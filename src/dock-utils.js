@@ -67,7 +67,7 @@ EditorUI.DockUtils = (function () {
         _updateMask ( 'tab', rect.left, rect.top, rect.width, rect.height+4 );
     };
 
-    DockUtils.dropTab = function ( target, insertTab ) {
+    DockUtils.dropTab = function ( target, insertBeforeTabEL ) {
         var contentEL = _draggingTab.content;
         var panelEL = _draggingTab.parentElement.panel;
 
@@ -77,7 +77,7 @@ EditorUI.DockUtils = (function () {
 
         //
         var newPanel = target.panel;
-        var idx = newPanel.add(contentEL,insertTab); // TODO
+        var idx = newPanel.insert( _draggingTab, contentEL, insertBeforeTabEL );
         newPanel.select(idx);
 
         // reset internal states

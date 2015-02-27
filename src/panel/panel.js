@@ -40,6 +40,26 @@ Polymer({
         tabs.select(tab);
     },
 
+    insert: function ( tabEL, contentEL, insertBeforeTabEL ) {
+        var tabs = this.$.tabs;
+
+        var name = contentEL.getAttribute("name");
+        tabs.insert(tabEL, insertBeforeTabEL);
+        tabEL.setAttribute("draggable", "true");
+
+        // NOTE: if we just move tabs, we must not hide contentEL
+        if ( tabEL.parentElement !== tabs ) {
+            contentEL.style.display = "none";
+        }
+        tabEL.content = contentEL;
+
+        tabEL.setIcon( contentEL.icon ); // TEMP HACK
+
+        this.appendChild(contentEL);
+
+        return EditorUI.index(tabEL);
+    },
+
     add: function ( contentEL ) {
         var tabs = this.$.tabs;
 
@@ -54,7 +74,7 @@ Polymer({
 
         this.appendChild(contentEL);
 
-        return this.children.length-1;
+        return this.children.length - 1;
     },
 
     closeNoCollapse: function ( tabEL ) {
