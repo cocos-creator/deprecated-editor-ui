@@ -22,6 +22,9 @@ function _FirePathObserver ( object, path ) {
 }
 Fire.JS.extend( _FirePathObserver, PathObserver );
 _FirePathObserver.prototype.check_ = function(changeRecords, skipChanges) {
+    if (!Fire.isValid(this.object_))
+        return false;
+
     var oldValue = this.value_;
     this.value_ = this.path_.getValueFrom(this.object_);
     if (skipChanges || _fireEquals(this.value_, oldValue))
