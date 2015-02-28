@@ -12,6 +12,7 @@ Polymer(EditorUI.mixin({
     created: function () {
         this.holdingID = null;
         this.timeoutID = null;
+        this._editing = false;
     },
 
     ready: function() {
@@ -64,18 +65,28 @@ Polymer(EditorUI.mixin({
 
     _increase: function () {
         var val = this._convert(this.value + this._interval);
+
         if ( this.value != val ) {
             this.value = val;
             EditorUI.fireChanged(this);
         }
+
+        // NOTE: we have to manually call this,
+        // because this._editing is true when this function invoked.
+        this.$.input.value = val;
     },
 
     _decrease: function () {
         var val = this._convert(this.value - this._interval);
+
         if ( this.value != val ) {
             this.value = val;
             EditorUI.fireChanged(this);
         }
+
+        // NOTE: we have to manually call this,
+        // because this._editing is true when this function invoked.
+        this.$.input.value = val;
     },
 
     _clearHover: function () {
@@ -87,6 +98,9 @@ Polymer(EditorUI.mixin({
     },
 
     valueChanged: function () {
+        if ( this._editing )
+            return;
+
         this.$.input.value = this._convert(this.value);
     },
 
@@ -101,6 +115,7 @@ Polymer(EditorUI.mixin({
     focusAction: function (event) {
         this._focusAction();
         this.lastVal = this._convert(this.value);
+        this._editing = true;
     },
 
     blurAction: function (event, detail, sender) {
@@ -111,6 +126,7 @@ Polymer(EditorUI.mixin({
             return;
 
         this._blurAction();
+        this._editing = false;
 
         var val = this._convert(this.$.input.value);
         if ( this.value !== val ) {
@@ -124,18 +140,6 @@ Polymer(EditorUI.mixin({
     },
 
     inputAction: function (event) {
-        if ( event.target.value === "-" ) {
-            return;
-        }
-        if ( event.target.value === "." ) {
-            event.target.value = "0.";
-            return;
-        }
-        if ( event.target.value === "-." ) {
-            event.target.value = "-0.";
-            return;
-        }
-
         var val = this._convert(event.target.value);
         if ( this.value !== val ) {
             this.value = val;
