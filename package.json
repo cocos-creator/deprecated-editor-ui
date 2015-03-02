@@ -18,6 +18,6 @@
       "gulp-src-files": "",
       "gulp-htmlmin": "1.0.0",
       "express": "",
-      "del": ""
+      "del": "1.1.1"
     }
 }
