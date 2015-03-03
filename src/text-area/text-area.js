@@ -3,11 +3,16 @@ Polymer(EditorUI.mixin({
         value: '',
     },
 
+    _editing: false,
+
     ready: function() {
         this._initFocusable(this.$.inputArea);
     },
 
     valueChanged: function () {
+        if ( this._editing )
+            return;
+
         this.$.inputArea.value = this.value;
         this._adjust();
     },
@@ -30,6 +35,7 @@ Polymer(EditorUI.mixin({
     focusAction: function (event) {
         this.lastVal = this.value;
         this._focusAction();
+        this._editing = true;
     },
 
     blurAction: function (event, detail, sender) {
@@ -37,10 +43,11 @@ Polymer(EditorUI.mixin({
             return;
 
         this._blurAction();
+        this._editing = false;
     },
 
     inputAction: function (event) {
-        this.value = event.target.value;
+        this.value = event.target.value.replace(/\s/g, " ");
         EditorUI.fireChanged(this);
 
         event.stopPropagation();
