@@ -49,7 +49,6 @@ Polymer(EditorUI.mixin({
     },
 
     inputAction: function (event) {
-        // this.value = event.target.value.replace(/\s/g, " ");
         this.value = event.target.value;
         EditorUI.fireChanged(this);
 
