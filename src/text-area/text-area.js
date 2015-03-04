@@ -10,8 +10,10 @@ Polymer(EditorUI.mixin({
     },
 
     valueChanged: function () {
-        if ( this._editing )
+        if ( this._editing ) {
+            this._adjust();
             return;
+        }
 
         this.$.inputArea.value = this.value;
         this._adjust();
@@ -47,7 +49,8 @@ Polymer(EditorUI.mixin({
     },
 
     inputAction: function (event) {
-        this.value = event.target.value.replace(/\s/g, " ");
+        // this.value = event.target.value.replace(/\s/g, " ");
+        this.value = event.target.value;
         EditorUI.fireChanged(this);
 
         event.stopPropagation();
