@@ -102,16 +102,12 @@ Polymer({
         } );
     },
 
-    mouseupAction: function ( event ) {
+    clickAction: function ( event ) {
         // if this is not the mouse-left-button
         if ( event.which !== 1 )
             return;
 
         event.stopPropagation();
-
-        if ( this._renaming || event.target === this.$.foldIcon ) {
-            return;
-        }
 
         var shift = false;
         var toggle = false;

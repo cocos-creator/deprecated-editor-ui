@@ -1,9 +1,9 @@
 <polymer-element
     name="fire-ui-ti"
     constructor="FireTreeItem"
-    on-dblclick="{{dblclickAction}}"
     on-mousedown="{{mousedownAction}}"
-    on-mouseup="{{mouseupAction}}"
+    on-click="{{clickAction}}"
+    on-dblclick="{{dblclickAction}}"
     >
     <template>
         <link rel="stylesheet" href="item.css">
@@ -14,9 +14,8 @@
                 <div class="flex-wrapper">
                     <i id="foldIcon"
                        class="fa {{folded ? 'fa-caret-right' : 'fa-caret-down'}}"
-                       on-click="{{foldAction}}"
                        on-mousedown="{{mousedownAction}}"
-                       on-mouseup="{{mouseupAction}}"
+                       on-click="{{foldAction}}"
                        >
                     </i>
                     <i id="typeIcon" hidden></i>
