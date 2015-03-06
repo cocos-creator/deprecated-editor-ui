@@ -1,23 +1,22 @@
 {
-    "name": "fireball-editor-ui",
-    "version": "0.1.4",
-    "description": "Fireball Editor UI",
-    "homepage": "http://github.com/fireball-x/editor-ui",
-    "license": "MIT",
-    "licenseUrl": "http://opensource.org/licenses/MIT",
-    "dependencies": {
-    },
-    "devDependencies": {
-      "gulp": "",
-      "gulp-util": "",
-      "gulp-jshint": "",
-      "jshint-stylish": "",
-      "gulp-stylus": "2.0.0",
-      "gulp-vulcanize": "5.0.0",
-      "gulp-uglifyjs": "",
-      "gulp-src-files": "",
-      "gulp-htmlmin": "1.0.0",
-      "express": "",
-      "del": "1.1.1"
-    }
+  "name": "fireball-editor-ui",
+  "version": "0.1.5",
+  "description": "Fireball Editor UI",
+  "homepage": "http://github.com/fireball-x/editor-ui",
+  "license": "MIT",
+  "licenseUrl": "http://opensource.org/licenses/MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "",
+    "gulp-util": "",
+    "gulp-jshint": "",
+    "jshint-stylish": "",
+    "gulp-stylus": "2.0.0",
+    "gulp-vulcanize": "5.0.0",
+    "gulp-uglifyjs": "",
+    "gulp-src-files": "",
+    "gulp-htmlmin": "1.0.0",
+    "express": "",
+    "del": "1.1.1"
+  }
 }
