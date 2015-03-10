@@ -31,10 +31,16 @@ Polymer(EditorUI.mixin({
     },
 
     setAsset: function ( uuid ) {
-        Fire.AssetLibrary.loadAsset( uuid, function (err, asset) {
-            this.value = asset;
+        if ( !uuid ) {
+            this.value = null;
             EditorUI.fireChanged(this);
-        }.bind(this) );
+        }
+        else {
+            Fire.AssetLibrary.loadAsset( uuid, function (err, asset) {
+                this.value = asset;
+                EditorUI.fireChanged(this);
+            }.bind(this) );
+        }
     },
 
     blurAction: function (event) {

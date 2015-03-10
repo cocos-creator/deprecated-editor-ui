@@ -17,7 +17,9 @@
                 on-click="{{borderClickAction}}"
                 >
                 <div class="content">
+                    <span class="{{value ? '' : 'null'}}">
                     {{value ? value.name : "None"}}
+                    </span>
                     <span class="type">({{type|typeToName()}})</span>
                 </div>
             </div>
