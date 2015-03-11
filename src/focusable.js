@@ -53,6 +53,9 @@ EditorUI.focusable = (function () {
         },
 
         _initTabIndex: function () {
+            if ( !this.focusEls )
+                return;
+
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
                 el.tabIndex = EditorUI.getParentTabIndex(this) + 1;
@@ -60,6 +63,9 @@ EditorUI.focusable = (function () {
         },
 
         _removeTabIndex: function () {
+            if ( !this.focusEls )
+                return;
+
             for ( var i = 0; i < this.focusEls.length; ++i ) {
                 var el = this.focusEls[i];
                 // NOTE: this is better than el.removeAttribute('tabindex'),
