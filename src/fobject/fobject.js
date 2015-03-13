@@ -30,6 +30,21 @@ Polymer(EditorUI.mixin({
         return name;
     },
 
+    toFObjectName: function ( val ) {
+        var classDef = Fire.JS.getClassByName(this.type);
+        if ( Fire.isChildClassOf( classDef, Fire.Asset ) ) {
+            return val ? val.name : "None";
+        }
+        else if ( Fire.isChildClassOf( classDef, Fire.Entity ) ) {
+            return val ? val.name : "None";
+        }
+        else if ( Fire.isChildClassOf( classDef, Fire.Component ) ) {
+            return val ? val.entity.name : "None";
+        }
+
+        return val ? val.name : "None";
+    },
+
     setAsset: function ( uuid ) {
         if ( !uuid ) {
             this.value = null;

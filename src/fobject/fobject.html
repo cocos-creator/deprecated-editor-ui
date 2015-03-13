@@ -18,7 +18,7 @@
                 >
                 <div class="content">
                     <span class="{{value ? '' : 'null'}}">
-                    {{value ? value.name : "None"}}
+                    {{value | toFObjectName }}
                     </span>
                     <span class="type">({{type|typeToName()}})</span>
                 </div>
