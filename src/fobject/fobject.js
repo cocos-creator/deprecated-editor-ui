@@ -95,8 +95,23 @@ Polymer(EditorUI.mixin({
                     this.invalid = false;
                 }
                 else {
-                    this.highlighted = true;
-                    this.invalid = true;
+                    // check sub-asset
+                    var metaJson = Fire.AssetDB.loadMetaJson(dragItems[0]);
+                    Fire.AssetLibrary.loadMeta(metaJson, function ( err, meta ) {
+                        if ( meta.subRawData && meta.subRawData.length > 0 ) {
+                            var subInfo = meta.subRawData[0];
+                            if ( subInfo.asset instanceof classDef ) {
+                                this._curDragObject = subInfo.asset;
+                                this.highlighted = true;
+                                this.invalid = false;
+
+                                return;
+                            }
+                        }
+
+                        this.highlighted = true;
+                        this.invalid = true;
+                    }.bind(this));
                 }
             }.bind(this) );
         }
