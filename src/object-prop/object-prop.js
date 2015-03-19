@@ -29,6 +29,8 @@ Polymer({
                     continue;
                 }
 
+                // NOTE: known-issue, PathObserver can not take name with dash,
+                // for example PathObserver( obj, 'foo-bar' ); will failed to get its value
                 propEL = new FireProp();
                 propEL.name = EditorUI.camelCaseToHuman(p);
                 propEL.bind( 'value', new Fire._PathObserver( this.value, p ) );
