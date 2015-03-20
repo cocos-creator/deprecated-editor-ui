@@ -17,8 +17,13 @@ EditorUI.droppable = (function () {
             dropAreaElement.addEventListener( "dragenter", function (event) {
                 event.stopPropagation();
                 ++this._dragenterCnt;
+
                 if ( this._dragenterCnt === 1 ) {
-                    this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
+                    this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
+                        if ( !droppable ) {
+                            return;
+                        }
+
                         this.fire('drop-area-enter', {
                             dragType: dragType,
                             dragItems: dragItems,
@@ -31,8 +36,13 @@ EditorUI.droppable = (function () {
             dropAreaElement.addEventListener( "dragleave", function (event) {
                 event.stopPropagation();
                 --this._dragenterCnt;
+
                 if ( this._dragenterCnt === 0 ) {
-                    this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
+                    this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
+                        if ( !droppable ) {
+                            return;
+                        }
+
                         this.fire('drop-area-leave', {
                             dragType: dragType,
                             dragItems: dragItems,
@@ -43,16 +53,35 @@ EditorUI.droppable = (function () {
             }.bind(this));
 
             dropAreaElement.addEventListener( "drop", function (event) {
+                event.preventDefault(); // Necessary. Allows us to control the drop
                 event.stopPropagation();
+
+                EditorUI.DragDrop.end();
                 this._dragenterCnt = 0;
 
-                this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    EditorUI.DragDrop.end();
+                this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
+                    if ( !droppable ) {
+                        return;
+                    }
 
                     this.fire('drop-area-accept', {
+                        dragType: dragType,
+                        dragItems: dragItems,
+                        dataTransfer: event.dataTransfer
+                    });
+                });
+            }.bind(this));
+
+            dropAreaElement.addEventListener( "dragover", function (event) {
+                event.preventDefault(); // Necessary. Allows us to control the drop.
+                event.stopPropagation();
+
+                this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
+                    if ( !droppable ) {
+                        return;
+                    }
+
+                    this.fire('drop-area-dragover', {
                         dragType: dragType,
                         dragItems: dragItems,
                         dataTransfer: event.dataTransfer
@@ -73,14 +102,18 @@ EditorUI.droppable = (function () {
                 }
             }
 
-            if ( !found )
+            if ( !found ) {
+                fn.call( this, false, dragType, dragItems );
                 return;
+            }
 
             var dragItems = EditorUI.DragDrop.items(dataTransfer);
-            if ( this['single-drop'] && dragItems.length > 1 )
+            if ( this['single-drop'] && dragItems.length > 1 ) {
+                fn.call( this, false, dragType, dragItems );
                 return;
+            }
 
-            fn.call( this, dragType, dragItems );
+            fn.call( this, true, dragType, dragItems );
         },
     };
 
