@@ -15,6 +15,7 @@ EditorUI.droppable = (function () {
             this._dragenterCnt = 0;
 
             dropAreaElement.addEventListener( "dragenter", function (event) {
+                event.stopPropagation();
                 ++this._dragenterCnt;
                 if ( this._dragenterCnt === 1 ) {
                     this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
@@ -25,9 +26,10 @@ EditorUI.droppable = (function () {
                         });
                     });
                 }
-            }.bind(this), true);
+            }.bind(this));
 
             dropAreaElement.addEventListener( "dragleave", function (event) {
+                event.stopPropagation();
                 --this._dragenterCnt;
                 if ( this._dragenterCnt === 0 ) {
                     this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
@@ -38,13 +40,12 @@ EditorUI.droppable = (function () {
                         });
                     });
                 }
-            }.bind(this), true);
+            }.bind(this));
 
             dropAreaElement.addEventListener( "drop", function (event) {
+                event.stopPropagation();
                 this._dragenterCnt = 0;
-            }.bind(this), true);
 
-            dropAreaElement.addEventListener( "drop", function (event) {
                 this.checkIfDroppable( event.dataTransfer, function ( dragType, dragItems ) {
                     event.preventDefault();
                     event.stopPropagation();
