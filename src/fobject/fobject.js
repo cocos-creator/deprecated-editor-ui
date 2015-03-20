@@ -18,6 +18,8 @@ Polymer(EditorUI.mixin({
 
     ready: function () {
         this._curDragObject = null;
+        this._inDropArea = false;
+
         this._initFocusable(this.$.focus);
         this._initDroppable(this.$.dropArea);
     },
@@ -86,6 +88,7 @@ Polymer(EditorUI.mixin({
 
     resetDragState: function () {
         this._curDragObject = null;
+        this._inDropArea = false;
         this.highlighted = false;
         this.invalid = false;
     },
@@ -94,6 +97,7 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
 
         this.invalid = true;
+        this._inDropArea = true;
 
         var dragItems = event.detail.dragItems;
         var dragType = event.detail.dragType;
@@ -104,6 +108,10 @@ Polymer(EditorUI.mixin({
         var classDef = Fire.JS.getClassByName(this.type);
         if ( dragType === "asset" && Fire.isChildClassOf( classDef, Fire.Asset ) ) {
             Fire.AssetLibrary.loadAssetInEditor( dragItems[0], function (err, asset) {
+                if ( !this._inDropArea ) {
+                    return;
+                }
+
                 if ( asset instanceof classDef ) {
                     this._curDragObject = asset;
                     this.highlighted = true;
@@ -113,6 +121,10 @@ Polymer(EditorUI.mixin({
                     // check sub-asset
                     var metaJson = Fire.AssetDB.loadMetaJson(dragItems[0]);
                     Fire.AssetLibrary.loadMeta(metaJson, function ( err, meta ) {
+                        if ( !this._inDropArea ) {
+                            return;
+                        }
+
                         if ( meta.subRawData && meta.subRawData.length > 0 ) {
                             var subInfo = meta.subRawData[0];
                             if ( subInfo.asset instanceof classDef ) {
@@ -169,5 +181,18 @@ Polymer(EditorUI.mixin({
 
         this.resetDragState();
     },
+
+    // DISABLE:
+    // dropAreaDragoverAction: function (event) {
+    //     event.stopPropagation();
+
+    //     if ( !this.invalid ) {
+    //         EditorUI.DragDrop.allowDrop( event.detail.dataTransfer, true );
+    //         EditorUI.DragDrop.updateDropEffect(event.detail.dataTransfer, "copy");
+    //     }
+    //     else {
+    //         EditorUI.DragDrop.allowDrop( event.detail.dataTransfer, false );
+    //     }
+    // },
 
 }, EditorUI.focusable, EditorUI.droppable));

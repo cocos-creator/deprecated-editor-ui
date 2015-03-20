@@ -72,22 +72,22 @@ EditorUI.droppable = (function () {
                 });
             }.bind(this));
 
-            dropAreaElement.addEventListener( "dragover", function (event) {
-                event.preventDefault(); // Necessary. Allows us to control the drop.
-                event.stopPropagation();
+            // dropAreaElement.addEventListener( "dragover", function (event) {
+            //     event.preventDefault(); // Necessary. Allows us to control the drop.
+            //     event.stopPropagation();
 
-                this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
-                    if ( !droppable ) {
-                        return;
-                    }
+            //     this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
+            //         if ( !droppable ) {
+            //             return;
+            //         }
 
-                    this.fire('drop-area-dragover', {
-                        dragType: dragType,
-                        dragItems: dragItems,
-                        dataTransfer: event.dataTransfer
-                    });
-                });
-            }.bind(this));
+            //         this.fire('drop-area-dragover', {
+            //             dragType: dragType,
+            //             dragItems: dragItems,
+            //             dataTransfer: event.dataTransfer
+            //         });
+            //     });
+            // }.bind(this));
         },
 
         checkIfDroppable: function ( dataTransfer, fn ) {
