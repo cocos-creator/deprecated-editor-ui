@@ -126,8 +126,13 @@ Polymer({
     },
 
     dblclickAction: function ( event ) {
-        this.fire('open');
         event.stopPropagation();
+
+        if ( event.target === this.$.foldIcon ) {
+            return;
+        }
+
+        this.fire('open');
     },
 
     foldAction: function ( event ) {

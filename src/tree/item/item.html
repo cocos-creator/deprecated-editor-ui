@@ -14,8 +14,9 @@
                 <div class="flex-wrapper">
                     <i id="foldIcon"
                        class="fa {{folded ? 'fa-caret-right' : 'fa-caret-down'}}"
-                       on-mousedown="{{mousedownAction}}"
                        on-click="{{foldAction}}"
+                       on-dblclick="{{dblclickAction}}"
+                       on-mousedown="{{mousedownAction}}"
                        >
                     </i>
                     <i id="typeIcon" hidden></i>
