@@ -27,8 +27,17 @@ Polymer(EditorUI.mixin({
     typeToName: function (val) {
         var name = val;
         if ( name.substr(0,5) === "Fire." ) {
-            return name.substr(5);
+            name = name.substr(5);
         }
+
+        var classDef = Fire.JS.getClassByName(this.type);
+        if ( Fire.isChildClassOf( classDef, Fire.Asset ) ) {
+            name = 'Asset/' + name;
+        }
+        else if ( Fire.isChildClassOf( classDef, Fire.Component ) ) {
+            name = 'Component/' + name;
+        }
+
         return name;
     },
 

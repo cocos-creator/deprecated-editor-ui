@@ -1,0 +1,35 @@
+<polymer-element
+    name="fire-ui-script-uuid"
+    constructor="FireScriptUuid"
+    on-drop-area-enter="{{dropAreaEnterAction}}"
+    on-drop-area-leave="{{dropAreaLeaveAction}}"
+    on-drop-area-accept="{{dropAreaAcceptAction}}"
+    on-drop-area-dragover="{{dropAreaDragoverAction}}"
+    >
+    <template>
+        <link rel="stylesheet" href="script-uuid.css">
+
+        <div id="focus" class="wrapper"
+            on-focus="{{_focusAction}}"
+            on-blur="{{blurAction}}"
+            flex-row
+            >
+            <div id="dropArea" class="border" flex-1
+                on-click="{{borderClickAction}}"
+                >
+                <div class="content">
+                    <span class="{{value ? '' : 'null'}}">
+                    {{value | toClassName }}
+                    </span>
+                    <span class="type">(Script)</span>
+                </div>
+            </div>
+            <!-- <div class="icon"                        -->
+            <!--     on-click="{{browseClickAction}}">    -->
+            <!--     <i class="fa fa-share-square-o"></i> -->
+            <!-- </div>                                   -->
+        </div>
+    </template>
+
+    <script type="text/javascript" src="script-uuid.js"></script>
+</polymer-element>

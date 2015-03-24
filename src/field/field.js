@@ -197,6 +197,10 @@ Polymer({
                 fieldEL = new FireCheckbox();
                 break;
 
+            case "uuid":
+                fieldEL = new FireScriptUuid();
+                break;
+
             case "fobject":
                 fieldEL = new FireFObject();
                 fieldEL.type = classname;
