@@ -17,7 +17,7 @@ Polymer(EditorUI.mixin({
         if ( this.name === '' ) {
             var varName = this.attributes.value.value;
             varName = varName.replace( /{{(.*)}}/, "$1" );
-            this.name = EditorUI.camelCaseToHuman(varName);
+            this.name = EditorUI.toHumanText(varName);
         }
     },
 

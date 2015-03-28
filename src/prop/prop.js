@@ -41,7 +41,7 @@ Polymer(EditorUI.mixin({
         if ( this.name === '' ) {
             var varName = this.attributes.value.value;
             varName = varName.replace( /{{(.*)}}/, "$1" );
-            this.name = EditorUI.camelCaseToHuman(varName);
+            this.name = EditorUI.toHumanText(varName);
         }
 
         if ( this.textMode === 'multi') {
@@ -73,7 +73,7 @@ Polymer(EditorUI.mixin({
             this.name = attrs.displayName;
         }
         else {
-            this.name = EditorUI.camelCaseToHuman(propName);
+            this.name = EditorUI.toHumanText(propName);
         }
 
         if ( attrs.textMode ) {
