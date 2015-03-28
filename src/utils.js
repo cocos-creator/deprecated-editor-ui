@@ -190,10 +190,10 @@ var EditorUI = (function () {
 
     // string utils
     EditorUI.camelCaseToHuman = function ( text ) {
-        var result = text.replace(/([A-Z])/g, ' $1');
+        var result = text.replace(/([A-Z])/g, ' $1').replace(/[-_]/g, ' ');
 
         // remove first white-space
-        if ( result.charAt(0) == ' ' ) {
+        if ( result.charAt(0) === ' ' ) {
             result.slice(1);
         }
 
