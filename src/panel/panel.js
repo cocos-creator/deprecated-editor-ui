@@ -5,26 +5,67 @@ Polymer({
         var tabs = this.$.tabs;
         tabs.panel = this;
 
+
         for ( var i = 0; i < this.children.length; ++i ) {
             var el = this.children[i];
 
             if ( el instanceof FireDockResizer )
                 continue;
 
-            var name = el.getAttribute("name");
-            var tabEL = tabs.add(name);
-            tabEL.setAttribute("draggable", "true");
+            //
+            this._applyViewSize(el, i === 0);
 
-            el.style.display = "none";
-            tabEL.content = el;
+            //
+            var name = el.getAttribute('name');
+            var tabEL = tabs.add(name);
+            tabEL.setAttribute('draggable', 'true');
+
+            el.style.display = 'none';
+            tabEL.viewEL = el;
 
             tabEL.setIcon( el.icon ); // TEMP HACK
         }
 
+        // re-init the size of the panel
+        this.initSize();
+
+        //
         tabs.select(0);
     },
 
     _reflow: function () {
+    },
+
+    _applyViewSize: function ( viewEL, applyWidthHeight ) {
+        // confirm the min, max size of the panel by its children views
+        var minWidth = parseInt(viewEL.getAttribute('min-width'));
+        if ( minWidth && minWidth > this['min-width'] ) {
+            this['min-width'] = minWidth;
+        }
+        var minHeight = parseInt(viewEL.getAttribute('min-height'));
+        if ( minHeight && minHeight > this['min-height'] ) {
+            this['min-height'] = minHeight;
+        }
+        var maxWidth = parseInt(viewEL.getAttribute('max-width'));
+        if ( maxWidth && maxWidth > this['max-width'] ) {
+            this['max-width'] = maxWidth;
+        }
+        var maxHeight = parseInt(viewEL.getAttribute('max-height'));
+        if ( maxHeight && maxHeight > this['max-height'] ) {
+            this['max-height'] = maxHeight;
+        }
+
+        // use first child's width, height for the panel
+        if ( applyWidthHeight ) {
+            var width = parseInt(viewEL.getAttribute('width'));
+            if ( width ) {
+                this.width = width;
+            }
+            var height = parseInt(viewEL.getAttribute('height'));
+            if ( height ) {
+                this.height = height;
+            }
+        }
     },
 
     get activeTab () {
@@ -40,40 +81,42 @@ Polymer({
         tabs.select(tab);
     },
 
-    insert: function ( tabEL, contentEL, insertBeforeTabEL ) {
+    insert: function ( tabEL, viewEL, insertBeforeTabEL ) {
         var tabs = this.$.tabs;
 
-        var name = contentEL.getAttribute("name");
+        var name = viewEL.getAttribute('name');
         tabs.insert(tabEL, insertBeforeTabEL);
-        tabEL.setAttribute("draggable", "true");
+        tabEL.setAttribute('draggable', 'true');
 
-        // NOTE: if we just move tabs, we must not hide contentEL
+        // NOTE: if we just move tabs, we must not hide viewEL
         if ( tabEL.parentElement !== tabs ) {
-            contentEL.style.display = "none";
+            viewEL.style.display = 'none';
         }
-        tabEL.content = contentEL;
+        tabEL.viewEL = viewEL;
 
-        tabEL.setIcon( contentEL.icon ); // TEMP HACK
+        tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
-        this.appendChild(contentEL);
+        this.appendChild(viewEL);
 
+        this._applyViewSize( viewEL, this.children.length === 1 );
         return EditorUI.index(tabEL);
     },
 
-    add: function ( contentEL ) {
+    add: function ( viewEL ) {
         var tabs = this.$.tabs;
 
-        var name = contentEL.getAttribute("name");
+        var name = viewEL.getAttribute('name');
         var tabEL = tabs.add(name);
-        tabEL.setAttribute("draggable", "true");
+        tabEL.setAttribute('draggable', 'true');
 
-        contentEL.style.display = "none";
-        tabEL.content = contentEL;
+        viewEL.style.display = 'none';
+        tabEL.viewEL = viewEL;
 
-        tabEL.setIcon( contentEL.icon ); // TEMP HACK
+        tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
-        this.appendChild(contentEL);
+        this.appendChild(viewEL);
 
+        this._applyViewSize( viewEL, this.children.length === 1 );
         return this.children.length - 1;
     },
 
@@ -82,9 +125,9 @@ Polymer({
 
         //
         tabs.remove(tabEL);
-        if ( tabEL.content ) {
-            tabEL.content.remove();
-            tabEL.content = null;
+        if ( tabEL.viewEL ) {
+            tabEL.viewEL.remove();
+            tabEL.viewEL = null;
         }
     },
 
@@ -105,12 +148,12 @@ Polymer({
     tabsChangedAction: function ( event ) {
         var detail = event.detail;
         if ( detail.old !== null ) {
-            detail.old.content.style.display = "none";
-            detail.old.content.dispatchEvent( new CustomEvent('hide') );
+            detail.old.viewEL.style.display = 'none';
+            detail.old.viewEL.dispatchEvent( new CustomEvent('hide') );
         }
         if ( detail.new !== null ) {
-            detail.new.content.style.display = "";
-            detail.new.content.dispatchEvent( new CustomEvent('show') );
+            detail.new.viewEL.style.display = '';
+            detail.new.viewEL.dispatchEvent( new CustomEvent('show') );
         }
 
         event.stopPropagation();

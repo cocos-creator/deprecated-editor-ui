@@ -22,10 +22,10 @@ Polymer({
                 element = elements[i];
                 element._autoLayout = false;
                 if ( this.vertical ) {
-                    size = element.computedWidth;
+                    size = element.width;
                 }
                 else {
-                    size = element.computedHeight;
+                    size = element.height;
                 }
 
                 if ( size !== -1 && !element['auto-layout'] ) {

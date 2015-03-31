@@ -1,7 +1,6 @@
 <polymer-element
-        name="simple-block"
-        extends="fire-ui-dock"
-        constructor="SimpleBlock"
+        name="simple-life"
+        constructor="SimpleLife"
         >
 <template>
         <style>
@@ -13,6 +12,9 @@
                 outline: none;
 
                 border: 1px solid black;
+
+                min-width: 200px;
+                min-height: 200px;
             }
 
             :host .border {
@@ -37,21 +39,17 @@
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: stretch;
-                flex-direction: column;
+                flex-direction: row;
             }
 
             :host .border .content:focus {
                 outline: 1px solid #09f;
             }
-
-            :host .border .content.row {
-                flex-direction: row;
-            }
         </style>
 
         <div class="border" flex-col flex-stretch fit>
             <div class="title">{{name}}</div>
-            <div id="content" class="content {{row ? 'row' : ''}}" flex-1>
+            <div id="content" class="content" flex-1>
                 <content/>
             </div>
         </div>
@@ -60,12 +58,22 @@
     Polymer({
         publish: {
             name: "Unknown",
-            row: {
-                value: false,
-                reflect: true
-            },
-            'min-width': 100,
-            'min-height': 100,
+        },
+
+        created: function () {
+            console.log( '%s created.', this.name );
+        },
+
+        ready: function () {
+            console.log( '%s ready.', this.name );
+        },
+
+        domReady: function () {
+            console.log( '%s dom-ready.', this.name );
+        },
+
+        attached: function () {
+            console.log( '%s attached.', this.name );
         },
     });
 </script>

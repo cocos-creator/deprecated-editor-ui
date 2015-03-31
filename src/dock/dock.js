@@ -54,17 +54,16 @@ Polymer(EditorUI.mixin({
             element.style.flex = "auto";
             element._autoLayout = true;
             autoLayoutElements.push(element);
-            element._notifyResize();
         }
         else {
             for ( i = 0; i < this.children.length; i += 2 ) {
                 element = this.children[i];
                 element._autoLayout = false;
                 if ( this.row ) {
-                    size = element.computedWidth;
+                    size = element.width;
                 }
                 else {
-                    size = element.computedHeight;
+                    size = element.height;
                 }
 
                 if ( size !== -1 && !element['auto-layout'] ) {
@@ -83,10 +82,12 @@ Polymer(EditorUI.mixin({
                     autoLayoutElements.push(element);
                 }
             }
-            for ( i = 0; i < this.children.length; i += 2 ) {
-                element = this.children[i];
-                element._notifyResize();
-            }
+        }
+
+        //
+        for ( i = 0; i < this.children.length; i += 2 ) {
+            element = this.children[i];
+            element._notifyResize();
         }
     },
 

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
 
 <script src="/ext/webcomponentsjs/webcomponents.js"></script>
-<script src="/ext/fire-core/core.dev.js"></script>
+<script src="/ext/fire-core/dev/core.js"></script>
 
 <link rel="import" href="/ext/polymer/polymer.html">
 <link rel="import" href="/bin/editor-ui.html">
@@ -34,19 +34,19 @@
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
     <fire-ui-dock flex-1>
-        <fire-ui-dock height="300" min-height="200" row>
-            <fire-ui-panel width="200">
-                <div name="foobar 01" fit></div>
-                <div name="foobar 01" fit></div>
-                <div name="foobar 01" fit></div>
-                <div name="foobar 01" fit></div>
+        <fire-ui-dock row>
+            <fire-ui-panel>
+                <div name="300x400" width="300" height="400" fit></div>
+                <div name="300x400" width="300" height="400" fit></div>
+                <div name="300x400" width="300" height="400" fit></div>
+                <div name="300x400" width="300" height="400" fit></div>
             </fire-ui-panel>
-            <fire-ui-panel width="200">
-                <div name="foobar 02" fit></div>
+            <fire-ui-panel>
+                <div name="200x300" width="200" height="300" fit></div>
             </fire-ui-panel>
         </fire-ui-dock>
-        <fire-ui-panel width="200">
-            <div name="foobar 03" fit></div>
+        <fire-ui-panel>
+            <div name="400x300" width="400" height="300" fit></div>
         </fire-ui-panel>
     </fire-ui-dock>
 

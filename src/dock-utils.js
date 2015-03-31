@@ -68,7 +68,7 @@ EditorUI.DockUtils = (function () {
     };
 
     DockUtils.dropTab = function ( target, insertBeforeTabEL ) {
-        var contentEL = _draggingTab.content;
+        var viewEL = _draggingTab.viewEL;
         var panelEL = _draggingTab.parentElement.panel;
 
         if ( panelEL !== target.panel ) {
@@ -77,8 +77,11 @@ EditorUI.DockUtils = (function () {
 
         //
         var newPanel = target.panel;
-        var idx = newPanel.insert( _draggingTab, contentEL, insertBeforeTabEL );
+        var idx = newPanel.insert( _draggingTab, viewEL, insertBeforeTabEL );
         newPanel.select(idx);
+
+        // manually fire resize event for the inserted view element
+        viewEL.dispatchEvent( new CustomEvent('resize') );
 
         // reset internal states
         _reset();
@@ -213,7 +216,7 @@ EditorUI.DockUtils = (function () {
         event.preventDefault();
         event.stopPropagation();
 
-        var contentEL = _draggingTab.content;
+        var viewEL = _draggingTab.viewEL;
         var panelEL = _draggingTab.parentElement.panel;
 
         //
@@ -221,7 +224,7 @@ EditorUI.DockUtils = (function () {
 
         //
         var newPanel = new FirePanel();
-        newPanel.add(contentEL);
+        newPanel.add(viewEL);
         newPanel.select(0);
 
         //
