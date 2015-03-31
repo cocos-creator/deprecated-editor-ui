@@ -388,7 +388,7 @@ var getBindPointForSamplerType = function(gl, type) {
  *
  * @param {WebGLProgram} program the program to create setters
  *        for.
- * @returns {Setters} an object with a setter for each uniform
+ * @return {Setters} an object with a setter for each uniform
  *        by name.
  */
 var createUniformSetters = function(gl, program) {
@@ -399,7 +399,7 @@ var createUniformSetters = function(gl, program) {
    * location embedded in the setter.
    * @param {WebGLProgram} program
    * @param {WebGLUniformInfo} uniformInfo
-   * @returns {function} the created setter.
+   * @return {function} the created setter.
    */
   var createUniformSetter = function(program, uniformInfo) {
     var location = gl.getUniformLocation(program, uniformInfo.name);
@@ -542,7 +542,7 @@ var setUniforms = function(setters, values) {
  *
  * @param {WebGLProgram} program the program to create setters
  *        for.
- * @returns {Setters} an object with a setter for each uniform
+ * @return {Setters} an object with a setter for each uniform
  *        by name.
  */
 var createAttributeSetters = function(gl, program) {
