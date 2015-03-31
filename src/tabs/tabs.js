@@ -2,7 +2,7 @@ Polymer(EditorUI.mixin({
     publish: {
         // droppable
         droppable: 'tab',
-        "single-drop": true,
+        'single-drop': true,
     },
 
     created: function () {
@@ -46,7 +46,7 @@ Polymer(EditorUI.mixin({
 
     remove: function ( tab ) {
         var tabEL = null;
-        if ( typeof tab === "number" ) {
+        if ( typeof tab === 'number' ) {
             if ( tab < this.children.length ) {
                 tabEL = this.children[tab];
             }
@@ -75,7 +75,7 @@ Polymer(EditorUI.mixin({
     select: function ( tab ) {
         var tabEL = null;
 
-        if ( typeof tab === "number" ) {
+        if ( typeof tab === 'number' ) {
             if ( tab < this.children.length ) {
                 tabEL = this.children[tab];
             }
@@ -102,25 +102,27 @@ Polymer(EditorUI.mixin({
     dropAreaEnterAction: function ( event ) {
         event.stopPropagation();
 
-        this.$.insertLine.style.display = "block";
+        this.$.insertLine.style.display = 'block';
     },
 
     dropAreaLeaveAction: function ( event ) {
         event.stopPropagation();
 
-        this.$.insertLine.style.display = "";
+        this.$.insertLine.style.display = '';
     },
 
     dropAreaAcceptAction: function ( event ) {
         event.stopPropagation();
 
         EditorUI.DockUtils.dropTab(this, this._curInsertTab);
-        this.$.insertLine.style.display = "";
+        this.$.insertLine.style.display = '';
     },
 
     dragoverAction: function ( event ) {
+        // NOTE: in web, there is a problem:
+        // http://stackoverflow.com/questions/11974077/datatransfer-setdata-of-dragdrop-doesnt-work-in-chrome
         var type = event.dataTransfer.getData('fire/type');
-        if ( type !== "tab" )
+        if ( type !== 'tab' )
             return;
 
         EditorUI.DockUtils.dragoverTab( this );
@@ -134,12 +136,12 @@ Polymer(EditorUI.mixin({
         this._curInsertTab = null;
         var style = this.$.insertLine.style;
         if ( event.target instanceof FireTab ) {
-            style.left = event.target.offsetLeft + "px";
+            style.left = event.target.offsetLeft + 'px';
             this._curInsertTab = event.target;
         }
         else {
             var el = this.lastElementChild;
-            style.left = (el.offsetLeft + el.offsetWidth) + "px";
+            style.left = (el.offsetLeft + el.offsetWidth) + 'px';
         }
     },
 }, EditorUI.droppable));

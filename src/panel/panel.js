@@ -1,16 +1,15 @@
 Polymer({
     ready: function () {
-        this.super();
+        this._initFocusable(this.$.content);
+        this._initResizable();
 
+        //
         var tabs = this.$.tabs;
         tabs.panel = this;
 
-
+        //
         for ( var i = 0; i < this.children.length; ++i ) {
             var el = this.children[i];
-
-            if ( el instanceof FireDockResizer )
-                continue;
 
             //
             this._applyViewSize(el, i === 0);
@@ -31,6 +30,9 @@ Polymer({
 
         //
         tabs.select(0);
+    },
+
+    _finalizeSize: function () {
     },
 
     _reflow: function () {
@@ -99,6 +101,7 @@ Polymer({
         this.appendChild(viewEL);
 
         this._applyViewSize( viewEL, this.children.length === 1 );
+        this.initSize();
         return EditorUI.index(tabEL);
     },
 
@@ -117,6 +120,7 @@ Polymer({
         this.appendChild(viewEL);
 
         this._applyViewSize( viewEL, this.children.length === 1 );
+        this.initSize();
         return this.children.length - 1;
     },
 
@@ -129,6 +133,25 @@ Polymer({
             tabEL.viewEL.remove();
             tabEL.viewEL = null;
         }
+
+        // reload min-max
+        var minWidth = parseInt(this.getAttribute('min-width'));
+        this['min-width'] = minWidth >= 0 ? minWidth : -1;
+
+        var maxWidth = parseInt(this.getAttribute('max-width'));
+        this['max-width'] = maxWidth >= 0 ? maxWidth : -1;
+
+        var minHeight = parseInt(this.getAttribute('min-height'));
+        this['min-height'] = minHeight >= 0 ? minHeight : -1;
+
+        var maxHeight = parseInt(this.getAttribute('max-height'));
+        this['max-height'] = maxHeight >= 0 ? maxHeight : -1;
+
+        for ( var i = 0; i < this.children.length; ++i ) {
+            var el = this.children[i];
+            this._applyViewSize(el, false);
+        }
+        this.initSize();
     },
 
     close: function ( tabEL ) {

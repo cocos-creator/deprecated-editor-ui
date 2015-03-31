@@ -38,7 +38,28 @@ Polymer(EditorUI.mixin({
     },
 
     domReady: function () {
+        var isRootDock = !(this.parentElement instanceof FireDock);
+        if ( isRootDock ) {
+            this._finalizeSize();
+        }
+
         this._reflow();
+    },
+
+    // depth first calculate the min, max width and height
+    _finalizeSize: function () {
+        var elements = [];
+
+        //
+        for ( i = 0; i < this.children.length; i += 2 ) {
+            var el = this.children[i];
+            el._finalizeSize();
+
+            elements.push(el);
+        }
+
+        //
+        this.finalize(elements, this.row);
     },
 
     _reflow: function () {
@@ -119,7 +140,6 @@ Polymer(EditorUI.mixin({
             if ( needNewDock ) {
                 // new FireDock
                 newDock = new FireDock();
-                newDock.copyResizable(this);
 
                 if ( position === 'left' ||
                      position === 'right' )
@@ -143,9 +163,11 @@ Polymer(EditorUI.mixin({
                     newDock.appendChild(element);
                 }
                 newDock.ready();
+                newDock._finalizeSize();
                 newDock._reflow();
 
                 //
+                parentEL._finalizeSize();
                 parentEL._reflow();
             }
             else {
@@ -172,6 +194,7 @@ Polymer(EditorUI.mixin({
                     }
                 }
 
+                parentEL._finalizeSize();
                 parentEL._reflow();
             }
         }
@@ -191,7 +214,6 @@ Polymer(EditorUI.mixin({
             if ( needNewDock ) {
                 // new FireDock
                 newDock = new FireDock();
-                newDock.copyResizable(this);
 
                 newDock.row = this.row;
                 if ( position === 'left' ||
@@ -218,10 +240,12 @@ Polymer(EditorUI.mixin({
                 }
 
                 //
+                newDock._finalizeSize();
                 newDock._reflow();
 
                 //
                 this.ready();
+                this._finalizeSize();
                 this._reflow();
             }
             else {
@@ -248,6 +272,7 @@ Polymer(EditorUI.mixin({
                     }
                 }
 
+                this._finalizeSize();
                 this._reflow();
             }
         }
@@ -278,6 +303,7 @@ Polymer(EditorUI.mixin({
             return;
         }
 
+        this._finalizeSize();
         this._reflow();
     },
 
@@ -311,6 +337,7 @@ Polymer(EditorUI.mixin({
                     childEL.collapse();
                 }
 
+                parentEL._finalizeSize();
                 parentEL._reflow();
             }
             else {
@@ -331,10 +358,14 @@ Polymer(EditorUI.mixin({
                 parentEL.insertBefore( this.children[0], this );
             }
             this.remove();
+
+            parentEL._finalizeSize();
             parentEL._reflow();
 
             return true;
         }
+
+        return false;
     },
 
     dragoverAction: function ( event ) {

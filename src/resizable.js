@@ -51,24 +51,6 @@ EditorUI.resizable = (function () {
             return height;
         },
 
-        copyResizable: function ( element ) {
-            this.width = element.width;
-            this['min-width'] = element['min-width'];
-            this['max-width'] = element['max-width'];
-
-            this.height = element.height;
-            this['min-height'] = element['min-height'];
-            this['max-height'] = element['max-height'];
-
-            if ( element.width !== -1 ) this.setAttribute('width', element.width);
-            if ( element['min-width'] !== -1 ) this.setAttribute('min-width', element['min-width']);
-            if ( element['max-width'] !== -1 ) this.setAttribute('max-width', element['max-width']);
-
-            if ( element.height !== -1 ) this.setAttribute('height', element.height);
-            if ( element['min-height'] !== -1 ) this.setAttribute('min-height', element['min-height']);
-            if ( element['max-height'] !== -1 ) this.setAttribute('max-height', element['max-height']);
-        },
-
         initSize: function () {
             // initialize min, max width and height in self level
             var minWidth = this['min-width'];
@@ -131,6 +113,139 @@ EditorUI.resizable = (function () {
             this.computedMaxHeight = maxHeight;
             if ( this.computedMaxHeight >= 0 ) {
                 this.style.maxHeight = this.computedMaxHeight + 'px';
+            }
+
+            // DEBUG
+            // console.trace( 'init size %d, %d',
+            //               this.computedMinWidth,
+            //               this.computedMinHeight,
+            //               this );
+        },
+
+        finalize: function ( elements, row ) {
+            var i, el, infWidth = false, infHeight = false;
+
+            this.computedMinWidth = 0;
+            this.computedMinHeight = 0;
+            this.computedMaxWidth = this['max-width'];
+            this.computedMaxHeight = this['max-height'];
+
+            if ( row ) {
+                for ( i = 0; i < elements.length; ++i ) {
+                    el = elements[i];
+
+                    console.log( 'finalize-child size %d, %d',
+                                  el.computedMinWidth,
+                                  el.computedMinHeight,
+                                  el );
+
+                    // min-width
+                    if ( el.computedMinWidth >= 0 ) {
+                        this.computedMinWidth += el.computedMinWidth;
+                    }
+
+                    // min-height
+                    if ( el.computedMinHeight >= 0 &&
+                         this.computedMinHeight < el.computedMinHeight ) {
+                        this.computedMinHeight = el.computedMinHeight;
+                    }
+
+                    // max-width
+                    if ( infWidth || el.computedMaxWidth < 0 ) {
+                        infWidth = true;
+                        this.computedMaxWidth = -1;
+                    }
+                    else {
+                        this.computedMaxWidth += el.computedMaxWidth;
+                    }
+
+                    // max-height
+                    if ( infHeight || el.computedMaxHeight < 0 ) {
+                        infHeight = true;
+                        this.computedMaxHeight = -1;
+                    }
+                    else {
+                        if ( this.computedMaxHeight < el.computedMaxHeight ) {
+                            this.computedMaxHeight = el.computedMaxHeight;
+                        }
+                    }
+                }
+            }
+            else {
+                for ( i = 0; i < elements.length; ++i ) {
+                    el = elements[i];
+
+                    console.log( 'finalize-child size %d, %d',
+                                  el.computedMinWidth,
+                                  el.computedMinHeight,
+                                  el );
+
+                    // min-width
+                    if ( el.computedMinWidth >= 0 &&
+                         this.computedMinWidth < el.computedMinWidth ) {
+                        this.computedMinWidth = el.computedMinWidth;
+                    }
+
+                    // min-height
+                    if ( el.computedMinHeight >= 0 ) {
+                        this.computedMinHeight += el.computedMinHeight;
+                    }
+
+                    // max-width
+                    if ( infWidth || el.computedMaxWidth < 0 ) {
+                        infWidth = true;
+                        this.computedMaxWidth = -1;
+                    }
+                    else {
+                        if ( this.computedMaxWidth < el.computedMaxWidth ) {
+                            this.computedMaxWidth = el.computedMaxWidth;
+                        }
+                    }
+
+                    // max-height
+                    if ( infHeight || el.computedMaxHeight < 0 ) {
+                        infHeight = true;
+                        this.computedMaxHeight = -1;
+                    }
+                    else {
+                        this.computedMaxHeight += el.computedMaxHeight;
+                    }
+                }
+            }
+
+            console.trace( 'finalize size %d, %d',
+                          this.computedMinWidth,
+                          this.computedMinHeight,
+                          this,
+                          elements );
+
+            //
+            if ( this.computedMinWidth >= 0 ) {
+                this.style.minWidth = this.computedMinWidth + 'px';
+            }
+            else {
+                this.style.minWidth = 'auto';
+            }
+
+            if ( this.computedMaxWidth >= 0 ) {
+                this.style.maxWidth = this.computedMaxWidth + 'px';
+            }
+            else {
+                this.style.maxWidth = 'auto';
+            }
+
+            if ( this.computedMinHeight >= 0 ) {
+                this.style.minHeight = this.computedMinHeight + 'px';
+            }
+            else {
+                this.style.minHeight = 'auto';
+            }
+
+            if ( this.computedMaxHeight >= 0 ) {
+                this.style.maxHeight = this.computedMaxHeight + 'px';
+            }
+            else {
+                this.style.maxHeight = 'auto';
             }
         },
 

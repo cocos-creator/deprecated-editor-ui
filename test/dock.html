@@ -33,20 +33,20 @@
 <body flex-col flex-stretch>
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
-    <fire-ui-dock flex-1>
+    <fire-ui-dock flex-1 no-collapse>
         <fire-ui-dock row>
             <fire-ui-panel>
-                <div name="300x400" width="300" height="400" fit></div>
-                <div name="300x400" width="300" height="400" fit></div>
-                <div name="300x400" width="300" height="400" fit></div>
-                <div name="300x400" width="300" height="400" fit></div>
+                <div name="200x300" min-width="200" min-height="300" fit></div>
+                <div name="220x350" min-width="220" min-height="350" fit></div>
+                <div name="240x400" min-width="240" min-height="400" fit></div>
+                <div name="260x450" min-width="260" min-height="450" fit></div>
             </fire-ui-panel>
             <fire-ui-panel>
-                <div name="200x300" width="200" height="300" fit></div>
+                <div name="200x300" min-width="200" min-height="300" fit></div>
             </fire-ui-panel>
         </fire-ui-dock>
         <fire-ui-panel>
-            <div name="400x300" width="400" height="300" fit></div>
+            <div name="300x400" min-width="300" min-height="400" fit></div>
         </fire-ui-panel>
     </fire-ui-dock>
 
