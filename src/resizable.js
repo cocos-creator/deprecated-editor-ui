@@ -134,10 +134,11 @@ EditorUI.resizable = (function () {
                 for ( i = 0; i < elements.length; ++i ) {
                     el = elements[i];
 
-                    console.log( 'finalize-child size %d, %d',
-                                  el.computedMinWidth,
-                                  el.computedMinHeight,
-                                  el );
+                    // DEBUG:
+                    // console.log( 'finalize-child size %d, %d',
+                    //               el.computedMinWidth,
+                    //               el.computedMinHeight,
+                    //               el );
 
                     // min-width
                     if ( el.computedMinWidth >= 0 ) {

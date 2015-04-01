@@ -53,16 +53,17 @@ EditorUI.droppable = (function () {
             }.bind(this));
 
             dropAreaElement.addEventListener( "drop", function (event) {
-                event.preventDefault(); // Necessary. Allows us to control the drop
-                event.stopPropagation();
-
-                EditorUI.DragDrop.end();
                 this._dragenterCnt = 0;
 
                 this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
                     if ( !droppable ) {
                         return;
                     }
+
+                    event.preventDefault(); // Necessary. Allows us to control the drop
+                    event.stopPropagation();
+
+                    EditorUI.DragDrop.end();
 
                     this.fire('drop-area-accept', {
                         dragType: dragType,
