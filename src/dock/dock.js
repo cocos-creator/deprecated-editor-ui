@@ -40,6 +40,7 @@ Polymer(EditorUI.mixin({
     domReady: function () {
         var isRootDock = !(this.parentElement instanceof FireDock);
         if ( isRootDock ) {
+            EditorUI.DockUtils.root = this;
             this._finalizeSize();
         }
 
@@ -51,7 +52,7 @@ Polymer(EditorUI.mixin({
         var elements = [];
 
         //
-        for ( i = 0; i < this.children.length; i += 2 ) {
+        for ( var i = 0; i < this.children.length; i += 2 ) {
             var el = this.children[i];
             el._finalizeSize();
 
@@ -163,12 +164,10 @@ Polymer(EditorUI.mixin({
                     newDock.appendChild(element);
                 }
                 newDock.ready();
-                newDock._finalizeSize();
-                newDock._reflow();
+                // newDock._reflow();
 
                 //
-                parentEL._finalizeSize();
-                parentEL._reflow();
+                // parentEL._reflow();
             }
             else {
                 // new resizer
@@ -194,8 +193,7 @@ Polymer(EditorUI.mixin({
                     }
                 }
 
-                parentEL._finalizeSize();
-                parentEL._reflow();
+                // parentEL._reflow();
             }
         }
         else {
@@ -240,13 +238,11 @@ Polymer(EditorUI.mixin({
                 }
 
                 //
-                newDock._finalizeSize();
-                newDock._reflow();
+                // newDock._reflow();
 
                 //
                 this.ready();
-                this._finalizeSize();
-                this._reflow();
+                // this._reflow();
             }
             else {
                 // new resizer
@@ -272,8 +268,7 @@ Polymer(EditorUI.mixin({
                     }
                 }
 
-                this._finalizeSize();
-                this._reflow();
+                // this._reflow();
             }
         }
     },
@@ -303,8 +298,7 @@ Polymer(EditorUI.mixin({
             return;
         }
 
-        this._finalizeSize();
-        this._reflow();
+        // this._reflow();
     },
 
     collapse: function () {
@@ -337,8 +331,7 @@ Polymer(EditorUI.mixin({
                     childEL.collapse();
                 }
 
-                parentEL._finalizeSize();
-                parentEL._reflow();
+                // parentEL._reflow();
             }
             else {
                 parentEL.insertBefore( childEL, this );
@@ -359,8 +352,7 @@ Polymer(EditorUI.mixin({
             }
             this.remove();
 
-            parentEL._finalizeSize();
-            parentEL._reflow();
+            // parentEL._reflow();
 
             return true;
         }

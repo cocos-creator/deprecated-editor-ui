@@ -1,0 +1,47 @@
+<polymer-element
+        name="simple-size"
+        constructor="SimpleSize"
+        on-resize="resizeAction"
+        >
+<template>
+        <style>
+            :host {
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                top: 0px;
+            }
+
+            .label {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 20px;
+            }
+        </style>
+
+        <div class="label">{{sizeText}}</div>
+</template>
+<script>
+    Polymer({
+        sizeText: "",
+
+        created: function () {
+        },
+
+        ready: function () {
+        },
+
+        domReady: function () {
+        },
+
+        resizeAction: function ( event ) {
+            event.stopPropagation();
+
+            var panel = this.parentElement;
+            var rect = panel.getBoundingClientRect();
+            this.sizeText = rect.width + " x " + rect.height;
+        },
+    });
+</script>
+</polymer-element>

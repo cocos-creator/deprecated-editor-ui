@@ -7,6 +7,10 @@ Polymer({
         var tabs = this.$.tabs;
         tabs.panel = this;
 
+        // reset the min width & height, so that view elements' min width & height can be overwrite on it.
+        this['min-width'] = -1;
+        this['min-height'] = -1;
+
         //
         for ( var i = 0; i < this.children.length; ++i ) {
             var el = this.children[i];
@@ -24,6 +28,10 @@ Polymer({
 
             tabEL.setIcon( el.icon ); // TEMP HACK
         }
+
+        // go back to default settings if no view elements apply its min width and height.
+        if ( this['min-width'] === -1 ) this['min-width'] = 200;
+        if ( this['min-height'] === -1 ) this['min-height'] = 200;
 
         // re-init the size of the panel
         this.initSize();
@@ -48,14 +56,15 @@ Polymer({
         if ( minHeight && minHeight > this['min-height'] ) {
             this['min-height'] = minHeight;
         }
-        var maxWidth = parseInt(viewEL.getAttribute('max-width'));
-        if ( maxWidth && maxWidth > this['max-width'] ) {
-            this['max-width'] = maxWidth;
-        }
-        var maxHeight = parseInt(viewEL.getAttribute('max-height'));
-        if ( maxHeight && maxHeight > this['max-height'] ) {
-            this['max-height'] = maxHeight;
-        }
+        // DISABLE: no need
+        // var maxWidth = parseInt(viewEL.getAttribute('max-width'));
+        // if ( maxWidth && maxWidth > this['max-width'] ) {
+        //     this['max-width'] = maxWidth;
+        // }
+        // var maxHeight = parseInt(viewEL.getAttribute('max-height'));
+        // if ( maxHeight && maxHeight > this['max-height'] ) {
+        //     this['max-height'] = maxHeight;
+        // }
 
         // use first child's width, height for the panel
         if ( applyWidthHeight ) {
@@ -134,23 +143,27 @@ Polymer({
             tabEL.viewEL = null;
         }
 
-        // reload min-max
-        var minWidth = parseInt(this.getAttribute('min-width'));
-        this['min-width'] = minWidth >= 0 ? minWidth : -1;
+        // reset the min width & height, so that view elements' min width & height can be overwrite on it.
+        this['min-width'] = -1;
+        this['min-height'] = -1;
 
-        var maxWidth = parseInt(this.getAttribute('max-width'));
-        this['max-width'] = maxWidth >= 0 ? maxWidth : -1;
-
-        var minHeight = parseInt(this.getAttribute('min-height'));
-        this['min-height'] = minHeight >= 0 ? minHeight : -1;
-
-        var maxHeight = parseInt(this.getAttribute('max-height'));
-        this['max-height'] = maxHeight >= 0 ? maxHeight : -1;
-
+        // apply
         for ( var i = 0; i < this.children.length; ++i ) {
             var el = this.children[i];
             this._applyViewSize(el, false);
         }
+
+        // go back to default settings if no view elements apply its min width and height.
+        if ( this['min-width'] === -1 ) {
+            var minWidth = parseInt(this.getAttribute('min-width'));
+            this['min-width'] = minWidth >= 0 ? minWidth : 200;
+        }
+
+        if ( this['min-height'] === -1 ) {
+            var minHeight = parseInt(this.getAttribute('min-height'));
+            this['min-height'] = minHeight >= 0 ? minHeight : 200;
+        }
+
         this.initSize();
     },
 

@@ -9,6 +9,7 @@
 
 <link rel="import" href="/ext/polymer/polymer.html">
 <link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="elements/simple-size.html">
 
 <style>
     body {
@@ -28,7 +29,6 @@
 </style>
 
 </head>
-<!-- <simple-block name="auto"></simple-block> -->
 
 <body flex-col flex-stretch>
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
@@ -36,17 +36,18 @@
     <fire-ui-dock flex-1 no-collapse>
         <fire-ui-dock row>
             <fire-ui-panel>
-                <div name="200x300" min-width="200" min-height="300" fit></div>
-                <div name="220x350" min-width="220" min-height="350" fit></div>
-                <div name="240x400" min-width="240" min-height="400" fit></div>
-                <div name="260x450" min-width="260" min-height="450" fit></div>
+                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
+                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
+                <simple-size name="200x200" min-width="200" min-height="200"></simple-size>
+                <simple-size name="300x300" min-width="300" min-height="300"></simple-size>
+                <simple-size name="400x400" min-width="400" min-height="400"></simple-size>
             </fire-ui-panel>
             <fire-ui-panel>
-                <div name="200x300" min-width="200" min-height="300" fit></div>
+                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
             </fire-ui-panel>
         </fire-ui-dock>
         <fire-ui-panel>
-            <div name="300x400" min-width="300" min-height="400" fit></div>
+            <simple-size name="300x300" min-width="300" min-height="300"></simple-size>
         </fire-ui-panel>
     </fire-ui-dock>
 

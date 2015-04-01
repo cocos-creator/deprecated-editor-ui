@@ -1,7 +1,8 @@
-function _resize ( elementList, sizeList,
+function _resize ( elementList, vertical, offset,
+                   sizeList, resizerIndex,
                    prevTotalSize, prevMinSize, prevMaxSize,
-                   nextTotalSize, nextMinSize, nextMaxSize,
-                   vertical, resizerIndex, offset ) {
+                   nextTotalSize, nextMinSize, nextMaxSize
+                   ) {
     var expectSize, newPrevSize, newNextSize;
     var prevOffset, nextOffset;
     var prevIndex, nextIndex;
@@ -127,15 +128,12 @@ Polymer({
         }
     },
 
-    mousedownAction: function ( event ) {
-        this.active = true;
-        var pressx = event.clientX;
-        var pressy = event.clientY;
+    _snapshot: function () {
         var parentEL = this.parentElement;
-        var i, resizerIndex = -1;
         var rect;
-        var totalSize = -1;
         var sizeList = [];
+        var i, resizerIndex = -1;
+        // var totalSize = -1;
 
         // get parent size
         if ( parentEL.$.content ) {
@@ -144,7 +142,7 @@ Polymer({
         else {
             rect = parentEL.getBoundingClientRect();
         }
-        totalSize = this.vertical ? rect.width : rect.height;
+        // totalSize = this.vertical ? rect.width : rect.height;
 
         // get element size
         for ( i = 0; i < parentEL.children.length; ++i ) {
@@ -154,7 +152,7 @@ Polymer({
             }
 
             rect = el.getBoundingClientRect();
-            sizeList.push( this.vertical ? rect.width : rect.height );
+            sizeList.push( Math.floor(this.vertical ? rect.width : rect.height) );
         }
 
         //
@@ -191,40 +189,91 @@ Polymer({
                 parentEL.children[i].computedMaxHeight;
         }
 
+        return {
+            sizeList: sizeList,
+            resizerIndex: resizerIndex,
+            prevTotalSize: prevTotalSize,
+            prevMinSize: prevMinSize,
+            prevMaxSize: prevMaxSize,
+            nextTotalSize: nextTotalSize,
+            nextMinSize: nextMinSize,
+            nextMaxSize: nextMaxSize,
+        };
+    },
+
+    mousedownAction: function ( event ) {
+        this.active = true;
+        // var pressx = event.clientX;
+        // var pressy = event.clientY;
+        var parentEL = this.parentElement;
+        var snapshot = this._snapshot();
+        var lastDir = 0;
+        var rect = this.getBoundingClientRect();
+        var centerx = Math.floor(rect.left + rect.width/2);
+        var centery = Math.floor(rect.top + rect.height/2);
+
         // mousemove
         var mousemoveHandle = function (event) {
+            event.stopPropagation();
+
             var expectSize, newPrevSize, newNextSize;
             var offset, prevOffset, nextOffset;
 
             // get offset
             if ( this.vertical ) {
-                offset = event.clientX - pressx;
+                offset = event.clientX - centerx;
             }
             else {
-                offset = event.clientY - pressy;
+                offset = event.clientY - centery;
             }
 
             //
             if ( offset !== 0 ) {
-                _resize( parentEL.children, sizeList,
-                        prevTotalSize, prevMinSize, prevMaxSize,
-                        nextTotalSize, nextMinSize, nextMaxSize,
-                        this.vertical, resizerIndex, offset );
-            }
+                rect = this.getBoundingClientRect();
+                var curx = Math.floor(rect.left + rect.width/2);
+                var cury = Math.floor(rect.top + rect.height/2);
+                var delta;
+                if ( this.vertical ) {
+                    delta = event.clientX - curx;
+                }
+                else {
+                    delta = event.clientY - cury;
+                }
+                var curDir = Math.sign(delta);
 
-            //
-            event.stopPropagation();
+                if ( lastDir !== 0 && lastDir !== curDir ) {
+                    snapshot = this._snapshot();
+                    centerx = curx;
+                    centery = cury;
+                    offset = delta;
+                }
+                lastDir = curDir;
+
+                _resize( this.parentElement.children,
+                         this.vertical,
+                         offset,
+                         snapshot.sizeList,
+                         snapshot.resizerIndex,
+                         snapshot.prevTotalSize,
+                         snapshot.prevMinSize,
+                         snapshot.prevMaxSize,
+                         snapshot.nextTotalSize,
+                         snapshot.nextMinSize,
+                         snapshot.nextMaxSize
+                         );
+            }
         }.bind(this);
 
         // mouseup
         var mouseupHandle = function(event) {
+            event.stopPropagation();
+
             document.removeEventListener('mousemove', mousemoveHandle);
             document.removeEventListener('mouseup', mouseupHandle);
             EditorUI.removeDragGhost();
 
 
             this.active = false;
-            event.stopPropagation();
         }.bind(this);
 
         // add drag-ghost

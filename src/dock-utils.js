@@ -46,6 +46,8 @@ EditorUI.DockUtils = (function () {
 
     var DockUtils = {};
 
+    DockUtils.root = null;
+
     DockUtils.dragstart = function ( dataTransfer, tabEL ) {
         _draggingTab = tabEL;
         dataTransfer.setData('fire/type', 'tab');
@@ -80,6 +82,9 @@ EditorUI.DockUtils = (function () {
         var idx = newPanel.insert( _draggingTab, viewEL, insertBeforeTabEL );
         newPanel.select(idx);
 
+        //
+        DockUtils.reflow();
+
         // manually fire resize event for the inserted view element
         viewEL.dispatchEvent( new CustomEvent('resize') );
 
@@ -92,6 +97,22 @@ EditorUI.DockUtils = (function () {
             return;
 
         _potentialDocks.push(target);
+    };
+
+    function _reflowRecursively ( dockEL ) {
+        dockEL._reflow();
+
+        for ( var i = 0; i < dockEL.children.length; ++i ) {
+            var el = dockEL.children[i];
+            if ( el instanceof FireDock ) {
+                _reflowRecursively(el);
+            }
+        }
+    }
+
+    DockUtils.reflow = function () {
+        this.root._finalizeSize();
+        _reflowRecursively(this.root);
     };
 
     document.addEventListener("dragover", function ( event ) {
@@ -232,6 +253,9 @@ EditorUI.DockUtils = (function () {
 
         //
         panelEL.collapse();
+
+        //
+        DockUtils.reflow();
 
         // reset internal states
         _reset();

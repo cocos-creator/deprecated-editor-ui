@@ -125,8 +125,8 @@ EditorUI.resizable = (function () {
         finalize: function ( elements, row ) {
             var i, el, infWidth = false, infHeight = false;
 
-            this.computedMinWidth = 0;
-            this.computedMinHeight = 0;
+            this.computedMinWidth = 3 * (elements.length-1); // preserve resizers' width
+            this.computedMinHeight = 3 * (elements.length-1); // preserve resizers' height
             this.computedMaxWidth = this['max-width'];
             this.computedMaxHeight = this['max-height'];
 
@@ -213,11 +213,12 @@ EditorUI.resizable = (function () {
                 }
             }
 
-            console.trace( 'finalize size %d, %d',
-                          this.computedMinWidth,
-                          this.computedMinHeight,
-                          this,
-                          elements );
+            // DEBUG
+            // console.trace( 'finalize size %d, %d',
+            //               this.computedMinWidth,
+            //               this.computedMinHeight,
+            //               this,
+            //               elements );
 
             //
             if ( this.computedMinWidth >= 0 ) {
