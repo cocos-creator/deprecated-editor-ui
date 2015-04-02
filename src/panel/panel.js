@@ -40,10 +40,10 @@ Polymer({
         tabs.select(0);
     },
 
-    _finalizeSize: function () {
+    _finalizeSizeRecursively: function () {
     },
 
-    _reflow: function () {
+    _finalizeStyleRecursively: function () {
     },
 
     _applyViewSize: function ( viewEL, applyWidthHeight ) {

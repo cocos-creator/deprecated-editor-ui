@@ -99,20 +99,10 @@ EditorUI.DockUtils = (function () {
         _potentialDocks.push(target);
     };
 
-    function _reflowRecursively ( dockEL ) {
-        dockEL._reflow();
-
-        for ( var i = 0; i < dockEL.children.length; ++i ) {
-            var el = dockEL.children[i];
-            if ( el instanceof FireDock ) {
-                _reflowRecursively(el);
-            }
-        }
-    }
-
     DockUtils.reflow = function () {
-        this.root._finalizeSize();
-        _reflowRecursively(this.root);
+        this.root._finalizeSizeRecursively();
+        this.root._finalizeStyleRecursively();
+        this.root._notifyResize();
     };
 
     document.addEventListener("dragover", function ( event ) {
@@ -245,6 +235,11 @@ EditorUI.DockUtils = (function () {
 
         //
         var newPanel = new FirePanel();
+        newPanel.width = panelEL.width;
+        newPanel.height = panelEL.height;
+        newPanel.computedWidth = panelEL.computedWidth;
+        newPanel.computedHeight = panelEL.computedHeight;
+
         newPanel.add(viewEL);
         newPanel.select(0);
 

@@ -22,7 +22,7 @@ function _resize ( elementList, vertical, offset,
     // prev
     var prevEL = elementList[prevIndex];
     var prevSize = sizeList[prevIndex];
-    if ( !prevEL._autoLayout ) {
+    // if ( !prevEL._autoLayout ) {
         expectSize = prevSize + prevOffset * dir;
         if ( vertical )
             newPrevSize = prevEL.calcWidth(expectSize);
@@ -30,14 +30,14 @@ function _resize ( elementList, vertical, offset,
             newPrevSize = prevEL.calcHeight(expectSize);
 
         prevOffset = (newPrevSize - prevSize) * dir;
-    }
+    // }
 
     // next
     var nextEL = elementList[nextIndex];
     var nextSize = sizeList[nextIndex];
 
     while (1) {
-        if ( !nextEL._autoLayout ) {
+        // if ( !nextEL._autoLayout ) {
             expectSize = nextSize - prevOffset * dir;
             if ( vertical )
                 newNextSize = nextEL.calcWidth(expectSize);
@@ -61,7 +61,7 @@ function _resize ( elementList, vertical, offset,
 
             //
             prevOffset += nextOffset;
-        }
+        // }
 
         //
         if ( dir > 0 ) {
@@ -96,12 +96,12 @@ function _resize ( elementList, vertical, offset,
     }
 
     //
-    if ( !prevEL._autoLayout ) {
+    // if ( !prevEL._autoLayout ) {
         prevEL.style.flex = "0 0 " + newPrevSize + "px";
-    }
-    else {
-        prevEL.style.flex = "1 1 auto";
-    }
+    // }
+    // else {
+    //     prevEL.style.flex = "1 1 auto";
+    // }
 
     for ( var i = 0; i < elementList.length; ++i ) {
         var el = elementList[i];
@@ -218,12 +218,12 @@ Polymer({
             if ( el instanceof FireDockResizer )
                 continue;
 
-            if ( !el._autoLayout ) {
+            // if ( !el._autoLayout ) {
                 el.style.flex = "0 0 " + snapshot.sizeList[i] + "px";
-            }
-            else {
-                el.style.flex = "1 1 auto";
-            }
+            // }
+            // else {
+            //     el.style.flex = "1 1 auto";
+            // }
         }
 
         // mousemove
@@ -310,6 +310,13 @@ Polymer({
 
                 var ratio = sizeList[i]/totalSize;
                 el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
+
+                if ( this.vertical ) {
+                    el.computedWidth = sizeList[i];
+                }
+                else {
+                    el.computedHeight = sizeList[i];
+                }
             }
         }.bind(this);
 

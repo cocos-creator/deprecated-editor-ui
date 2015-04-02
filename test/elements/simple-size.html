@@ -20,11 +20,13 @@
             }
         </style>
 
-        <div class="label">{{sizeText}}</div>
+        <div class="label">panel: {{panelExpect}}</div>
+        <div class="label">actual: {{sizeText}}</div>
 </template>
 <script>
     Polymer({
         sizeText: "",
+        panelExpect: "",
 
         created: function () {
         },
@@ -40,6 +42,8 @@
 
             var panel = this.parentElement;
             var rect = panel.getBoundingClientRect();
+
+            this.panelExpect = panel.width + " x " + panel.height;
             this.sizeText = rect.width + " x " + rect.height;
         },
     });

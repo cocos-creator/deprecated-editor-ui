@@ -2,8 +2,6 @@ var resizerSpace = 3;
 
 Polymer(EditorUI.mixin({
     publish: {
-        'width': 200,
-        'height': 200,
         'min-width': 200,
         'min-height': 200,
 
@@ -41,20 +39,20 @@ Polymer(EditorUI.mixin({
         var isRootDock = !(this.parentElement instanceof FireDock);
         if ( isRootDock ) {
             EditorUI.DockUtils.root = this;
-            this._finalizeSize();
+            this._finalizeSizeRecursively();
+            this._finalizeStyleRecursively();
+            this._notifyResize();
         }
-
-        this._reflow();
     },
 
     // depth first calculate the min, max width and height
-    _finalizeSize: function () {
+    _finalizeSizeRecursively: function () {
         var elements = [];
 
         //
         for ( var i = 0; i < this.children.length; i += 2 ) {
             var el = this.children[i];
-            el._finalizeSize();
+            el._finalizeSizeRecursively();
 
             elements.push(el);
         }
@@ -63,53 +61,86 @@ Polymer(EditorUI.mixin({
         this.finalize(elements, this.row);
     },
 
-    _reflow: function () {
-        var resizerCnt = (this.children.length - 1)/2;
-        var resizerSize = resizerCnt * resizerSpace;
+    _finalizeStyleRecursively: function () {
+        var elements = [];
 
-        var autoLayoutElements = [];
-        var i, element, size;
-
-        if ( this.children.length === 1 ) {
-            element = this.children[0];
-
-            element.style.flex = "1 1 auto";
-            element._autoLayout = true;
-            autoLayoutElements.push(element);
-        }
-        else {
-            for ( i = 0; i < this.children.length; i += 2 ) {
-                element = this.children[i];
-                element._autoLayout = false;
-                if ( this.row ) {
-                    size = element.width;
-                }
-                else {
-                    size = element.height;
-                }
-
-                if ( size !== -1 && !element['auto-layout'] ) {
-                    // if this is last element and we don't have auto-layout elements, give rest size to last element
-                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
-                        element.style.flex = "auto";
-                        element._autoLayout = true;
-                    }
-                    else {
-                        element.style.flex = "0 0 " + size + "px";
-                    }
-                }
-                else {
-                    element.style.flex = "1 1 auto";
-                    element._autoLayout = true;
-                    autoLayoutElements.push(element);
-                }
-            }
+        //
+        for ( var i = 0; i < this.children.length; i += 2 ) {
+            var el = this.children[i];
+            el._finalizeStyleRecursively();
         }
 
         //
-        for ( i = 0; i < this.children.length; i += 2 ) {
-            element = this.children[i];
-            element._notifyResize();
+        this.finalizeStyle();
+        this.reflow();
+    },
+
+    finalizeStyle: function () {
+        // var resizerCnt = (this.children.length - 1)/2;
+        // var resizerSize = resizerCnt * resizerSpace;
+
+        var autoLayoutElements = [];
+        var i, el, size;
+
+        if ( this.children.length === 1 ) {
+            el = this.children[0];
+
+            el.style.flex = "1 1 auto";
+            // el._autoLayout = true;
+            autoLayoutElements.push(el);
+        }
+        else {
+            for ( i = 0; i < this.children.length; i += 2 ) {
+                el = this.children[i];
+
+                // el._autoLayout = false;
+                if ( this.row ) {
+                    size = el.computedWidth;
+                }
+                else {
+                    size = el.computedHeight;
+                }
+
+                if ( size !== -1 ) {
+                    // if this is last el and we don't have auto-layout elements, give rest size to last el
+                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
+                        el.style.flex = "1 1 auto";
+                        // el._autoLayout = true;
+                    }
+                    else {
+                        el.style.flex = "0 0 " + size + "px";
+                    }
+                }
+                else {
+                    el.style.flex = "1 1 auto";
+                    // el._autoLayout = true;
+                    autoLayoutElements.push(el);
+                }
+            }
+        }
+    },
+
+    reflow: function () {
+        var i, rect, el;
+        var sizeList = [];
+        var totalSize = 0;
+
+        for ( i = 0; i < this.children.length; ++i ) {
+            el = this.children[i];
+
+            rect = el.getBoundingClientRect();
+            var size = Math.floor(this.row ? rect.width : rect.height);
+            sizeList.push(size);
+            totalSize += size;
+        }
+
+        for ( i = 0; i < this.children.length; ++i ) {
+            el = this.children[i];
+            if ( el instanceof FireDockResizer )
+                continue;
+
+            var ratio = sizeList[i]/totalSize;
+            el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
         }
     },
 
@@ -164,10 +195,6 @@ Polymer(EditorUI.mixin({
                     newDock.appendChild(element);
                 }
                 newDock.ready();
-                // newDock._reflow();
-
-                //
-                // parentEL._reflow();
             }
             else {
                 // new resizer
@@ -192,8 +219,6 @@ Polymer(EditorUI.mixin({
                         parentEL.insertBefore(element, nextEL);
                     }
                 }
-
-                // parentEL._reflow();
             }
         }
         else {
@@ -238,11 +263,7 @@ Polymer(EditorUI.mixin({
                 }
 
                 //
-                // newDock._reflow();
-
-                //
                 this.ready();
-                // this._reflow();
             }
             else {
                 // new resizer
@@ -267,8 +288,6 @@ Polymer(EditorUI.mixin({
                         this.insertBefore(element, nextEL);
                     }
                 }
-
-                // this._reflow();
             }
         }
     },
@@ -297,8 +316,6 @@ Polymer(EditorUI.mixin({
         if ( this.collapse() ) {
             return;
         }
-
-        // this._reflow();
     },
 
     collapse: function () {
@@ -323,23 +340,12 @@ Polymer(EditorUI.mixin({
         // if we only have one element in this panel
         if ( this.children.length === 1 ) {
             var childEL = this.children[0];
-            if ( parentEL instanceof FireDock ) {
-                parentEL.insertBefore( childEL, this );
-                this.remove();
 
-                if ( childEL instanceof FireDock ) {
-                    childEL.collapse();
-                }
+            parentEL.insertBefore( childEL, this );
+            this.remove();
 
-                // parentEL._reflow();
-            }
-            else {
-                parentEL.insertBefore( childEL, this );
-                this.remove();
-
-                if ( childEL instanceof FireDock ) {
-                    childEL.collapse();
-                }
+            if ( childEL instanceof FireDock ) {
+                childEL.collapse();
             }
 
             return true;
@@ -351,8 +357,6 @@ Polymer(EditorUI.mixin({
                 parentEL.insertBefore( this.children[0], this );
             }
             this.remove();
-
-            // parentEL._reflow();
 
             return true;
         }
