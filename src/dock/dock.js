@@ -73,7 +73,7 @@ Polymer(EditorUI.mixin({
         if ( this.children.length === 1 ) {
             element = this.children[0];
 
-            element.style.flex = "auto";
+            element.style.flex = "1 1 auto";
             element._autoLayout = true;
             autoLayoutElements.push(element);
         }
@@ -99,7 +99,7 @@ Polymer(EditorUI.mixin({
                     }
                 }
                 else {
-                    element.style.flex = "auto";
+                    element.style.flex = "1 1 auto";
                     element._autoLayout = true;
                     autoLayoutElements.push(element);
                 }

@@ -99,6 +99,9 @@ function _resize ( elementList, vertical, offset,
     if ( !prevEL._autoLayout ) {
         prevEL.style.flex = "0 0 " + newPrevSize + "px";
     }
+    else {
+        prevEL.style.flex = "1 1 auto";
+    }
 
     for ( var i = 0; i < elementList.length; ++i ) {
         var el = elementList[i];
@@ -203,14 +206,25 @@ Polymer({
 
     mousedownAction: function ( event ) {
         this.active = true;
-        // var pressx = event.clientX;
-        // var pressy = event.clientY;
         var parentEL = this.parentElement;
         var snapshot = this._snapshot();
         var lastDir = 0;
         var rect = this.getBoundingClientRect();
         var centerx = Math.floor(rect.left + rect.width/2);
         var centery = Math.floor(rect.top + rect.height/2);
+
+        for ( var i = 0; i < parentEL.children.length; ++i ) {
+            var el = parentEL.children[i];
+            if ( el instanceof FireDockResizer )
+                continue;
+
+            if ( !el._autoLayout ) {
+                el.style.flex = "0 0 " + snapshot.sizeList[i] + "px";
+            }
+            else {
+                el.style.flex = "1 1 auto";
+            }
+        }
 
         // mousemove
         var mousemoveHandle = function (event) {
@@ -272,8 +286,31 @@ Polymer({
             document.removeEventListener('mouseup', mouseupHandle);
             EditorUI.removeDragGhost();
 
-
             this.active = false;
+
+            // get elements' size
+            var i, rect, el;
+            var parentEL = this.parentElement;
+            var sizeList = [];
+            var totalSize = 0;
+
+            for ( i = 0; i < parentEL.children.length; ++i ) {
+                el = parentEL.children[i];
+
+                rect = el.getBoundingClientRect();
+                var size = Math.floor(this.vertical ? rect.width : rect.height);
+                sizeList.push(size);
+                totalSize += size;
+            }
+
+            for ( i = 0; i < parentEL.children.length; ++i ) {
+                el = parentEL.children[i];
+                if ( el instanceof FireDockResizer )
+                    continue;
+
+                var ratio = sizeList[i]/totalSize;
+                el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
+            }
         }.bind(this);
 
         // add drag-ghost

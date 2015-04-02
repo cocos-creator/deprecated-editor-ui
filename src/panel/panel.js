@@ -107,7 +107,27 @@ Polymer({
 
         tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
+        // a new panel
+        if ( this.children.length === 1 ) {
+            this['min-width'] = -1;
+            this['min-height'] = -1;
+        }
+
+        // apply
         this.appendChild(viewEL);
+
+        // go back to default settings if no view elements apply its min width and height.
+        if ( this.children.length === 1 ) {
+            if ( this['min-width'] === -1 ) {
+                var minWidth = parseInt(this.getAttribute('min-width'));
+                this['min-width'] = minWidth >= 0 ? minWidth : 200;
+            }
+
+            if ( this['min-height'] === -1 ) {
+                var minHeight = parseInt(this.getAttribute('min-height'));
+                this['min-height'] = minHeight >= 0 ? minHeight : 200;
+            }
+        }
 
         this._applyViewSize( viewEL, this.children.length === 1 );
         this.initSize();
@@ -128,7 +148,28 @@ Polymer({
 
         this.appendChild(viewEL);
 
+        // a new panel
+        if ( this.children.length === 1 ) {
+            this['min-width'] = -1;
+            this['min-height'] = -1;
+        }
+
+        // apply
         this._applyViewSize( viewEL, this.children.length === 1 );
+
+        // go back to default settings if no view elements apply its min width and height.
+        if ( this.children.length === 1 ) {
+            if ( this['min-width'] === -1 ) {
+                var minWidth = parseInt(this.getAttribute('min-width'));
+                this['min-width'] = minWidth >= 0 ? minWidth : 200;
+            }
+
+            if ( this['min-height'] === -1 ) {
+                var minHeight = parseInt(this.getAttribute('min-height'));
+                this['min-height'] = minHeight >= 0 ? minHeight : 200;
+            }
+        }
+
         this.initSize();
         return this.children.length - 1;
     },
