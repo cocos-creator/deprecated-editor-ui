@@ -22,46 +22,36 @@ function _resize ( elementList, vertical, offset,
     // prev
     var prevEL = elementList[prevIndex];
     var prevSize = sizeList[prevIndex];
-    // if ( !prevEL._autoLayout ) {
-        expectSize = prevSize + prevOffset * dir;
-        if ( vertical )
-            newPrevSize = prevEL.calcWidth(expectSize);
-        else
-            newPrevSize = prevEL.calcHeight(expectSize);
 
-        prevOffset = (newPrevSize - prevSize) * dir;
-    // }
+    expectSize = prevSize + prevOffset * dir;
+    if ( vertical )
+        newPrevSize = prevEL.calcWidth(expectSize);
+    else
+        newPrevSize = prevEL.calcHeight(expectSize);
+
+    prevOffset = (newPrevSize - prevSize) * dir;
 
     // next
     var nextEL = elementList[nextIndex];
     var nextSize = sizeList[nextIndex];
 
     while (1) {
-        // if ( !nextEL._autoLayout ) {
-            expectSize = nextSize - prevOffset * dir;
-            if ( vertical )
-                newNextSize = nextEL.calcWidth(expectSize);
-            else
-                newNextSize = nextEL.calcHeight(expectSize);
+        expectSize = nextSize - prevOffset * dir;
+        if ( vertical )
+            newNextSize = nextEL.calcWidth(expectSize);
+        else
+            newNextSize = nextEL.calcHeight(expectSize);
 
-            nextOffset = (newNextSize - nextSize) * dir;
+        nextOffset = (newNextSize - nextSize) * dir;
 
-            // // DEBUG:
-            // console.log("nextEL = " + nextEL.name +
-            //             ", newNextSize = " + newNextSize +
-            //             ", nextSize = " + nextSize +
-            //             ", prevOffset = " + prevOffset +
-            //             ", nextOffset = " + nextOffset
-            //            );
-            nextEL.style.flex = "0 0 " + newNextSize + "px";
+        nextEL.style.flex = "0 0 " + newNextSize + "px";
 
-            if ( newNextSize - expectSize === 0 ) {
-                break;
-            }
+        if ( newNextSize - expectSize === 0 ) {
+            break;
+        }
 
-            //
-            prevOffset += nextOffset;
-        // }
+        //
+        prevOffset += nextOffset;
 
         //
         if ( dir > 0 ) {
@@ -96,12 +86,7 @@ function _resize ( elementList, vertical, offset,
     }
 
     //
-    // if ( !prevEL._autoLayout ) {
-        prevEL.style.flex = "0 0 " + newPrevSize + "px";
-    // }
-    // else {
-    //     prevEL.style.flex = "1 1 auto";
-    // }
+    prevEL.style.flex = "0 0 " + newPrevSize + "px";
 
     for ( var i = 0; i < elementList.length; ++i ) {
         var el = elementList[i];
@@ -218,12 +203,7 @@ Polymer({
             if ( el instanceof FireDockResizer )
                 continue;
 
-            // if ( !el._autoLayout ) {
-                el.style.flex = "0 0 " + snapshot.sizeList[i] + "px";
-            // }
-            // else {
-            //     el.style.flex = "1 1 auto";
-            // }
+            el.style.flex = "0 0 " + snapshot.sizeList[i] + "px";
         }
 
         // mousemove
@@ -289,34 +269,16 @@ Polymer({
             this.active = false;
 
             // get elements' size
-            var i, rect, el;
             var parentEL = this.parentElement;
-            var sizeList = [];
-            var totalSize = 0;
+            parentEL._reflowRecursively();
 
-            for ( i = 0; i < parentEL.children.length; ++i ) {
-                el = parentEL.children[i];
-
-                rect = el.getBoundingClientRect();
-                var size = Math.floor(this.vertical ? rect.width : rect.height);
-                sizeList.push(size);
-                totalSize += size;
-            }
-
+            // notify resize
             for ( i = 0; i < parentEL.children.length; ++i ) {
                 el = parentEL.children[i];
                 if ( el instanceof FireDockResizer )
                     continue;
 
-                var ratio = sizeList[i]/totalSize;
-                el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
-
-                if ( this.vertical ) {
-                    el.computedWidth = sizeList[i];
-                }
-                else {
-                    el.computedHeight = sizeList[i];
-                }
+                el._notifyResize();
             }
         }.bind(this);
 

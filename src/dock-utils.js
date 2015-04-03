@@ -83,7 +83,7 @@ EditorUI.DockUtils = (function () {
         newPanel.select(idx);
 
         //
-        DockUtils.reflow();
+        DockUtils.flush();
 
         // manually fire resize event for the inserted view element
         viewEL.dispatchEvent( new CustomEvent('resize') );
@@ -101,6 +101,13 @@ EditorUI.DockUtils = (function () {
 
     DockUtils.reflow = function () {
         this.root._finalizeSizeRecursively();
+        this.root._finalizeMinMaxRecursively();
+        this.root._finalizeStyleRecursively();
+        this.root._notifyResize();
+    };
+
+    DockUtils.flush = function () {
+        this.root._finalizeMinMaxRecursively();
         this.root._finalizeStyleRecursively();
         this.root._notifyResize();
     };
@@ -235,6 +242,10 @@ EditorUI.DockUtils = (function () {
 
         //
         var newPanel = new FirePanel();
+        newPanel['min-width'] = panelEL['min-width'];
+        newPanel['max-width'] = panelEL['max-width'];
+        newPanel['min-height'] = panelEL['min-height'];
+        newPanel['max-height'] = panelEL['max-height'];
         newPanel.width = panelEL.width;
         newPanel.height = panelEL.height;
         newPanel.computedWidth = panelEL.computedWidth;
@@ -250,7 +261,7 @@ EditorUI.DockUtils = (function () {
         panelEL.collapse();
 
         //
-        DockUtils.reflow();
+        DockUtils.flush();
 
         // reset internal states
         _reset();

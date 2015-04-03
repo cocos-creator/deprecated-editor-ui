@@ -1,4 +1,11 @@
 Polymer({
+    publish: {
+        width: 200,
+        height: 200,
+        'min-width': 200,
+        'min-height': 200,
+    },
+
     ready: function () {
         this._initFocusable(this.$.content);
         this._initResizable();
@@ -7,16 +14,9 @@ Polymer({
         var tabs = this.$.tabs;
         tabs.panel = this;
 
-        // reset the min width & height, so that view elements' min width & height can be overwrite on it.
-        this['min-width'] = -1;
-        this['min-height'] = -1;
-
         //
         for ( var i = 0; i < this.children.length; ++i ) {
             var el = this.children[i];
-
-            //
-            this._applyViewSize(el, i === 0);
 
             //
             var name = el.getAttribute('name');
@@ -29,53 +29,153 @@ Polymer({
             tabEL.setIcon( el.icon ); // TEMP HACK
         }
 
-        // go back to default settings if no view elements apply its min width and height.
-        if ( this['min-width'] === -1 ) this['min-width'] = 200;
-        if ( this['min-height'] === -1 ) this['min-height'] = 200;
-
-        // re-init the size of the panel
-        this.initSize();
-
-        //
         tabs.select(0);
     },
 
     _finalizeSizeRecursively: function () {
+        this._applyViewSize();
+    },
+
+    _finalizeMinMaxRecursively: function () {
+        this._applyViewMinMax();
     },
 
     _finalizeStyleRecursively: function () {
+        this._applyStyle();
     },
 
-    _applyViewSize: function ( viewEL, applyWidthHeight ) {
-        // confirm the min, max size of the panel by its children views
-        var minWidth = parseInt(viewEL.getAttribute('min-width'));
-        if ( minWidth && minWidth > this['min-width'] ) {
-            this['min-width'] = minWidth;
-        }
-        var minHeight = parseInt(viewEL.getAttribute('min-height'));
-        if ( minHeight && minHeight > this['min-height'] ) {
-            this['min-height'] = minHeight;
-        }
-        // DISABLE: no need
-        // var maxWidth = parseInt(viewEL.getAttribute('max-width'));
-        // if ( maxWidth && maxWidth > this['max-width'] ) {
-        //     this['max-width'] = maxWidth;
-        // }
-        // var maxHeight = parseInt(viewEL.getAttribute('max-height'));
-        // if ( maxHeight && maxHeight > this['max-height'] ) {
-        //     this['max-height'] = maxHeight;
-        // }
+    _reflowRecursively: function () {
+    },
 
-        // use first child's width, height for the panel
-        if ( applyWidthHeight ) {
-            var width = parseInt(viewEL.getAttribute('width'));
-            if ( width ) {
-                this.width = width;
+    _applyViewSize: function () {
+        var autoWidth = false, autoHeight = false;
+
+        // reset width, height
+        this.computedWidth = this.width;
+        this.computedHeight = this.height;
+
+        for ( var i = 0; i < this.children.length; ++i ) {
+            var el = this.children[i];
+
+            // width
+            var elWidth = parseInt(el.getAttribute('width'));
+            elWidth = isNaN(elWidth) ? 'auto' : elWidth;
+
+            if ( autoWidth || elWidth === 'auto' ) {
+                autoWidth = true;
+                this.computedWidth = 'auto';
             }
-            var height = parseInt(viewEL.getAttribute('height'));
-            if ( height ) {
-                this.height = height;
+            else {
+                if ( this.width === 'auto' || elWidth > this.computedWidth ) {
+                    this.computedWidth = elWidth;
+                }
             }
+
+            // height
+            var elHeight = parseInt(el.getAttribute('height'));
+            elHeight = isNaN(elHeight) ? 'auto' : elHeight;
+
+            if ( autoHeight || elHeight === 'auto' ) {
+                autoHeight = true;
+                this.computedHeight = 'auto';
+            }
+            else {
+                if ( this.height === 'auto' || elHeight > this.computedHeight ) {
+                    this.computedHeight = elHeight;
+                }
+            }
+        }
+    },
+
+    _applyViewMinMax: function () {
+        var infWidth = false, infHeight = false;
+
+        for ( var i = 0; i < this.children.length; ++i ) {
+            var el = this.children[i];
+
+            // NOTE: parseInt('auto') will return NaN, it will return false in if check
+
+            // min-width
+            var minWidth = parseInt(el.getAttribute('min-width'));
+            if ( minWidth ) {
+                if ( this['min-width'] === 'auto' || minWidth > this['min-width'] ) {
+                    this.computedMinWidth = minWidth;
+                }
+            }
+
+            // min-height
+            var minHeight = parseInt(el.getAttribute('min-height'));
+            if ( minHeight ) {
+                if ( this['min-height'] === 'auto' || minHeight > this['min-height'] ) {
+                    this.computedMinHeight = minHeight;
+                }
+            }
+
+            // max-width
+            var maxWidth = parseInt(el.getAttribute('max-width'));
+            maxWidth = isNaN(maxWidth) ? 'auto' : maxWidth;
+            if ( infWidth || maxWidth === 'auto' ) {
+                infWidth = true;
+                this.computedMaxWidth = 'auto';
+            }
+            else {
+                if ( this['max-width'] === 'auto' ) {
+                    infWidth = true;
+                }
+                else if ( maxWidth && maxWidth > this['max-width'] ) {
+                    this.computedMaxWidth = maxWidth;
+                }
+            }
+
+            // max-height
+            var maxHeight = parseInt(el.getAttribute('max-height'));
+            maxHeight = isNaN(maxHeight) ? 'auto' : maxHeight;
+            if ( infHeight || maxHeight === 'auto' ) {
+                infHeight = true;
+                this.computedMaxHeight = 'auto';
+            }
+            else {
+                if ( this['max-height'] === 'auto' ) {
+                    infHeight = true;
+                }
+                else if ( maxHeight && maxHeight > this['max-height'] ) {
+                    this.computedMaxHeight = maxHeight;
+                }
+            }
+        }
+    },
+
+    _applyStyle: function () {
+        // min-width
+        if ( this.computedMinWidth !== 'auto' ) {
+            this.style.minWidth = this.computedMinWidth + 'px';
+        }
+        else {
+            this.style.minWidth = 'auto';
+        }
+
+        // max-width
+        if ( this.computedMaxWidth !== 'auto' ) {
+            this.style.maxWidth = this.computedMaxWidth + 'px';
+        }
+        else {
+            this.style.maxWidth = 'auto';
+        }
+
+        // min-height
+        if ( this.computedMinHeight !== 'auto' ) {
+            this.style.minHeight = this.computedMinHeight + 'px';
+        }
+        else {
+            this.style.minHeight = 'auto';
+        }
+
+        // max-height
+        if ( this.computedMaxHeight !== 'auto' ) {
+            this.style.maxHeight = this.computedMaxHeight + 'px';
+        }
+        else {
+            this.style.maxHeight = 'auto';
         }
     },
 
@@ -104,33 +204,16 @@ Polymer({
             viewEL.style.display = 'none';
         }
         tabEL.viewEL = viewEL;
-
         tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
-        // a new panel
-        if ( this.children.length === 1 ) {
-            this['min-width'] = -1;
-            this['min-height'] = -1;
-        }
-
-        // apply
+        //
         this.appendChild(viewEL);
 
-        // go back to default settings if no view elements apply its min width and height.
-        if ( this.children.length === 1 ) {
-            if ( this['min-width'] === -1 ) {
-                var minWidth = parseInt(this.getAttribute('min-width'));
-                this['min-width'] = minWidth >= 0 ? minWidth : 200;
-            }
+        //
+        this._applyViewSize();
+        this._applyViewMinMax();
+        this._applyStyle();
 
-            if ( this['min-height'] === -1 ) {
-                var minHeight = parseInt(this.getAttribute('min-height'));
-                this['min-height'] = minHeight >= 0 ? minHeight : 200;
-            }
-        }
-
-        this._applyViewSize( viewEL, this.children.length === 1 );
-        this.initSize();
         return EditorUI.index(tabEL);
     },
 
@@ -143,34 +226,16 @@ Polymer({
 
         viewEL.style.display = 'none';
         tabEL.viewEL = viewEL;
-
         tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
         this.appendChild(viewEL);
 
-        // a new panel
-        if ( this.children.length === 1 ) {
-            this['min-width'] = -1;
-            this['min-height'] = -1;
-        }
+        //
+        this._applyViewSize();
+        this._applyViewMinMax();
+        this._applyStyle();
 
-        // apply
-        this._applyViewSize( viewEL, this.children.length === 1 );
-
-        // go back to default settings if no view elements apply its min width and height.
-        if ( this.children.length === 1 ) {
-            if ( this['min-width'] === -1 ) {
-                var minWidth = parseInt(this.getAttribute('min-width'));
-                this['min-width'] = minWidth >= 0 ? minWidth : 200;
-            }
-
-            if ( this['min-height'] === -1 ) {
-                var minHeight = parseInt(this.getAttribute('min-height'));
-                this['min-height'] = minHeight >= 0 ? minHeight : 200;
-            }
-        }
-
-        this.initSize();
+        //
         return this.children.length - 1;
     },
 
@@ -184,28 +249,10 @@ Polymer({
             tabEL.viewEL = null;
         }
 
-        // reset the min width & height, so that view elements' min width & height can be overwrite on it.
-        this['min-width'] = -1;
-        this['min-height'] = -1;
-
-        // apply
-        for ( var i = 0; i < this.children.length; ++i ) {
-            var el = this.children[i];
-            this._applyViewSize(el, false);
-        }
-
-        // go back to default settings if no view elements apply its min width and height.
-        if ( this['min-width'] === -1 ) {
-            var minWidth = parseInt(this.getAttribute('min-width'));
-            this['min-width'] = minWidth >= 0 ? minWidth : 200;
-        }
-
-        if ( this['min-height'] === -1 ) {
-            var minHeight = parseInt(this.getAttribute('min-height'));
-            this['min-height'] = minHeight >= 0 ? minHeight : 200;
-        }
-
-        this.initSize();
+        //
+        this._applyViewSize();
+        this._applyViewMinMax();
+        this._applyStyle();
     },
 
     close: function ( tabEL ) {

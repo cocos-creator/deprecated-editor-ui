@@ -13,26 +13,21 @@ EditorUI.resizable = (function () {
 
     var resizable = {
         publish: {
-            'width': -1, // initial width
-            'min-width': -1,
-            'max-width': -1,
+            'width': 'auto',
+            'min-width': 'auto',
+            'max-width': 'auto',
 
-            'height': -1, // initial height
-            'min-height': -1,
-            'max-height': -1,
-
-            'auto-layout': {
-                value: false,
-                reflect: true
-            },
+            'height': 'auto',
+            'min-height': 'auto',
+            'max-height': 'auto',
         },
 
         calcWidth: function ( width ) {
-            if ( this.computedMinWidth >= 0 && width < this.computedMinWidth ) {
+            if ( this.computedMinWidth !== 'auto' && width < this.computedMinWidth ) {
                 return this.computedMinWidth;
             }
 
-            if ( this.computedMaxWidth >= 0 && width > this.computedMaxWidth ) {
+            if ( this.computedMaxWidth !== 'auto' && width > this.computedMaxWidth ) {
                 return this.computedMaxWidth;
             }
 
@@ -40,114 +35,160 @@ EditorUI.resizable = (function () {
         },
 
         calcHeight: function ( height ) {
-            if ( this.computedMinHeight >= 0 && height < this.computedMinHeight ) {
+            if ( this.computedMinHeight !== 'auto' && height < this.computedMinHeight ) {
                 return this.computedMinHeight;
             }
 
-            if ( this.computedMaxHeight >= 0 && height > this.computedMaxHeight ) {
+            if ( this.computedMaxHeight !== 'auto' && height > this.computedMaxHeight ) {
                 return this.computedMaxHeight;
             }
 
             return height;
         },
 
+        // init size from its own attributes
         initSize: function () {
-            // initialize min, max width and height in self level
             var minWidth = this['min-width'];
             var maxWidth = this['max-width'];
-            if ( maxWidth >= 0 ) {
-                if ( minWidth >= 0 && maxWidth < minWidth ) {
-                    this['max-width'] = maxWidth = minWidth;
-                }
+            if ( maxWidth !== 'auto' &&
+                 minWidth !== 'auto' &&
+                 maxWidth < minWidth )
+            {
+                this['max-width'] = maxWidth = minWidth;
             }
 
             var minHeight = this['min-height'];
             var maxHeight = this['max-height'];
-            if ( maxHeight >= 0 ) {
-                if ( minHeight >= 0 && maxHeight < minHeight ) {
-                    this['max-height'] = maxHeight = minHeight;
-                }
+            if ( maxHeight !== 'auto' &&
+                 minHeight !== 'auto' &&
+                 maxHeight < minHeight )
+            {
+                this['max-height'] = maxHeight = minHeight;
             }
 
-            // simple init computed width, height
+            // width
             this.computedWidth = this.width;
+
+            // height
             this.computedHeight = this.height;
 
             // min-width
             this.computedMinWidth = minWidth;
-            if ( this.computedMinWidth >= 0 ) {
+            if ( this.computedMinWidth !== 'auto' ) {
                 this.style.minWidth = this.computedMinWidth + 'px';
+            }
+            else {
+                this.style.minWidth = 'auto';
             }
 
             // max-width
             this.computedMaxWidth = maxWidth;
-            if ( this.computedMaxWidth >= 0 ) {
+            if ( this.computedMaxWidth !== 'auto' ) {
                 this.style.maxWidth = this.computedMaxWidth + 'px';
+            }
+            else {
+                this.style.maxWidth = 'auto';
             }
 
             // min-height
             this.computedMinHeight = minHeight;
-            if ( this.computedMinHeight >= 0 ) {
+            if ( this.computedMinHeight !== 'auto' ) {
                 this.style.minHeight = this.computedMinHeight + 'px';
+            }
+            else {
+                this.style.minHeight = 'auto';
             }
 
             // max-height
             this.computedMaxHeight = maxHeight;
-            if ( this.computedMaxHeight >= 0 ) {
+            if ( this.computedMaxHeight !== 'auto' ) {
                 this.style.maxHeight = this.computedMaxHeight + 'px';
+            }
+            else {
+                this.style.maxHeight = 'auto';
             }
         },
 
-        finalize: function ( elements, row ) {
-            var i, el, infWidth = false, infHeight = false;
+        // init and finalize min,max depends on children
+        finalizeSize: function ( elements ) {
+            var autoWidth = false, autoHeight = false;
+
+            // reset width, height
+            this.computedWidth = this.width;
+            this.computedHeight = this.height;
+
+            for ( var i = 0; i < elements.length; ++i ) {
+                var el = elements[i];
+
+                // width
+                if ( autoWidth || el.computedWidth === 'auto' ) {
+                    autoWidth = true;
+                    this.computedWidth = 'auto';
+                }
+                else {
+                    if ( this.width === 'auto' || el.computedWidth > this.computedWidth ) {
+                        this.computedWidth = el.computedWidth;
+                    }
+                }
+
+                // height
+                if ( autoHeight || el.computedHeight === 'auto' ) {
+                    autoHeight = true;
+                    this.computedHeight = 'auto';
+                }
+                else {
+                    if ( this.height === 'auto' || el.computedHeight > this.computedHeight ) {
+                        this.computedHeight = el.computedHeight;
+                    }
+                }
+            }
+        },
+
+        // init and finalize min,max depends on children
+        finalizeMinMax: function ( elements, row ) {
+            var i, el;
+            var infWidth = false, infHeight = false;
 
             this.computedMinWidth = 3 * (elements.length-1); // preserve resizers' width
             this.computedMinHeight = 3 * (elements.length-1); // preserve resizers' height
             this.computedMaxWidth = this['max-width'];
             this.computedMaxHeight = this['max-height'];
 
+            // collect child elements' size
+
             if ( row ) {
                 for ( i = 0; i < elements.length; ++i ) {
                     el = elements[i];
 
                     // min-width
-                    if ( el.computedMinWidth >= 0 ) {
+                    if ( el.computedMinWidth !== 'auto' ) {
                         this.computedMinWidth += el.computedMinWidth;
                     }
 
                     // min-height
-                    if ( el.computedMinHeight >= 0 &&
+                    if ( el.computedMinHeight !== 'auto' &&
                          this.computedMinHeight < el.computedMinHeight ) {
                         this.computedMinHeight = el.computedMinHeight;
                     }
 
                     // max-width
-                    if ( infWidth || el.computedMaxWidth < 0 ) {
+                    if ( infWidth || el.computedMaxWidth === 'auto' ) {
                         infWidth = true;
-                        this.computedMaxWidth = -1;
+                        this.computedMaxWidth = 'auto';
                     }
                     else {
                         this.computedMaxWidth += el.computedMaxWidth;
                     }
 
                     // max-height
-                    if ( infHeight || el.computedMaxHeight < 0 ) {
+                    if ( infHeight || el.computedMaxHeight === 'auto' ) {
                         infHeight = true;
-                        this.computedMaxHeight = -1;
+                        this.computedMaxHeight = 'auto';
                     }
                     else {
                         if ( this.computedMaxHeight < el.computedMaxHeight ) {
                             this.computedMaxHeight = el.computedMaxHeight;
                         }
-                    }
-
-                    // width, height
-                    if ( el.computedWidth !== -1 && el.computedWidth > this.computedWidth ) {
-                        this.computedWidth = el.computedWidth;
-                    }
-
-                    if ( el.computedHeight !== -1 && el.computedHeight > this.computedHeight ) {
-                        this.computedHeight = el.computedHeight;
                     }
                 }
             }
@@ -156,20 +197,20 @@ EditorUI.resizable = (function () {
                     el = elements[i];
 
                     // min-width
-                    if ( el.computedMinWidth >= 0 &&
+                    if ( el.computedMinWidth !== 'auto' &&
                          this.computedMinWidth < el.computedMinWidth ) {
                         this.computedMinWidth = el.computedMinWidth;
                     }
 
                     // min-height
-                    if ( el.computedMinHeight >= 0 ) {
+                    if ( el.computedMinHeight !== 'auto' ) {
                         this.computedMinHeight += el.computedMinHeight;
                     }
 
                     // max-width
-                    if ( infWidth || el.computedMaxWidth < 0 ) {
+                    if ( infWidth || el.computedMaxWidth === 'auto' ) {
                         infWidth = true;
-                        this.computedMaxWidth = -1;
+                        this.computedMaxWidth = 'auto';
                     }
                     else {
                         if ( this.computedMaxWidth < el.computedMaxWidth ) {
@@ -178,48 +219,44 @@ EditorUI.resizable = (function () {
                     }
 
                     // max-height
-                    if ( infHeight || el.computedMaxHeight < 0 ) {
+                    if ( infHeight || el.computedMaxHeight === 'auto' ) {
                         infHeight = true;
-                        this.computedMaxHeight = -1;
+                        this.computedMaxHeight = 'auto';
                     }
                     else {
                         this.computedMaxHeight += el.computedMaxHeight;
                     }
-
-                    // width, height
-                    if ( el.computedWidth !== -1 && el.computedWidth > this.computedWidth ) {
-                        this.computedWidth = el.computedWidth;
-                    }
-
-                    if ( el.computedHeight !== -1 && el.computedHeight > this.computedHeight ) {
-                        this.computedHeight = el.computedHeight;
-                    }
                 }
             }
 
-            //
-            if ( this.computedMinWidth >= 0 ) {
+            // final decision
+
+            // min-width
+            if ( this.computedMinWidth !== 'auto' ) {
                 this.style.minWidth = this.computedMinWidth + 'px';
             }
             else {
                 this.style.minWidth = 'auto';
             }
 
-            if ( this.computedMaxWidth >= 0 ) {
+            // max-width
+            if ( this.computedMaxWidth !== 'auto' ) {
                 this.style.maxWidth = this.computedMaxWidth + 'px';
             }
             else {
                 this.style.maxWidth = 'auto';
             }
 
-            if ( this.computedMinHeight >= 0 ) {
+            // min-height
+            if ( this.computedMinHeight !== 'auto' ) {
                 this.style.minHeight = this.computedMinHeight + 'px';
             }
             else {
                 this.style.minHeight = 'auto';
             }
 
-            if ( this.computedMaxHeight >= 0 ) {
+            // max-height
+            if ( this.computedMaxHeight !== 'auto' ) {
                 this.style.maxHeight = this.computedMaxHeight + 'px';
             }
             else {

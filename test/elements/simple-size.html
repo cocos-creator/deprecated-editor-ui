@@ -11,23 +11,31 @@
                 right: 0px;
                 bottom: 0px;
                 top: 0px;
+
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center
             }
 
-            .label {
-                text-align: center;
+            #text {
+                text-align: left;
                 margin-top: 30px;
-                font-size: 20px;
+                font-size: 12px;
+                white-space: pre;
+            }
+
+            #text span {
+                color: #0a0;
             }
         </style>
 
-        <div class="label">panel: {{panelExpect}}</div>
-        <div class="label">actual: {{sizeText}}</div>
+        <div flex-1></div>
+        <p id="text"></p>
+        <div flex-1></div>
 </template>
 <script>
     Polymer({
-        sizeText: "",
-        panelExpect: "",
-
         created: function () {
         },
 
@@ -43,8 +51,25 @@
             var panel = this.parentElement;
             var rect = panel.getBoundingClientRect();
 
-            this.panelExpect = panel.width + " x " + panel.height;
-            this.sizeText = rect.width + " x " + rect.height;
+            var html = "";
+            html = 'size: <span>' + rect.width.toFixed(2) + '</span>';
+            html += ', <span>' + rect.height.toFixed(2) + '</span>\n';
+            html += '\npanel: \n';
+            html += '  size:  <span>' + panel.computedWidth + '</span>';
+            html += ', <span>' + panel.computedHeight + '</span>\n';
+            html += '  min:  <span>' + panel.computedMinWidth + '</span>';
+            html += ', <span>' + panel.computedMinHeight + '</span>\n';
+            html += '  max:  <span>' + panel.computedMaxWidth + '</span>';
+            html += ', <span>' + panel.computedMaxHeight + '</span>\n';
+            html += '\nview: \n';
+            html += '  size:  <span>' + this.getAttribute('width') + '</span>';
+            html += ', <span>' + this.getAttribute('height') + '</span>\n';
+            html += '  min:  <span>' + this.getAttribute('min-width') + '</span>';
+            html += ', <span>' + this.getAttribute('min-height') + '</span>\n';
+            html += '  max:  <span>' + this.getAttribute('max-width') + '</span>';
+            html += ', <span>' + this.getAttribute('max-height') + '</span>\n';
+
+            this.$.text.innerHTML = html;
         },
     });
 </script>

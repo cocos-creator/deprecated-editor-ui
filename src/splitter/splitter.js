@@ -10,43 +10,70 @@ Polymer({
         }
     },
 
+    // NOTE: previousElementSibling & nextElementSibling must be resizable mixins
     domReady: function () {
-        this._reflow();
+        if ( this.previousElementSibling && this.nextElementSibling ) {
+            this.finalizeStyle();
+            this.reflow();
+        }
     },
 
-    _reflow: function () {
-        if ( this.previousElementSibling && this.nextElementSibling ) {
-            var elements = [this.previousElementSibling, this.nextElementSibling];
-            var i, element, size, hasAutoLayout = false;
-            for ( i = 0; i < elements.length; ++i ) {
-                element = elements[i];
-                element._autoLayout = false;
-                if ( this.vertical ) {
-                    size = element.width;
-                }
-                else {
-                    size = element.height;
-                }
+    finalizeStyle: function () {
+        var elements = [this.previousElementSibling, this.nextElementSibling];
+        var i, el, size;
+        var hasAutoLayout = false;
 
-                if ( size !== -1 && !element['auto-layout'] ) {
-                    // if this is last element and we don't have auto-layout elements, give rest size to last element
-                    if ( i === (elements.length-1) && !hasAutoLayout ) {
-                        element.style.flex = "auto";
-                        element._autoLayout = true;
-                    }
-                    else {
-                        element.style.flex = "0 0 " + size + "px";
-                    }
-                }
-                else {
-                    element.style.flex = "auto";
-                    element._autoLayout = true;
-                    hasAutoLayout = true;
-                }
+        for ( i = 0; i < elements.length; ++i ) {
+            el = elements[i];
+
+            if ( this.vertical ) {
+                size = el.computedWidth;
+            }
+            else {
+                size = el.computedHeight;
             }
 
-            this.previousElementSibling.fire('resize');
-            this.nextElementSibling.fire('resize');
+            if ( size === 'auto' ) {
+                hasAutoLayout = true;
+                el.style.flex = "1 1 auto";
+            }
+            else {
+                // if this is last el and we don't have auto-layout elements, give rest size to last el
+                if ( i === (elements.length-1) && !hasAutoLayout ) {
+                    el.style.flex = "1 1 auto";
+                }
+                else {
+                    el.style.flex = "0 0 " + size + "px";
+                }
+            }
+        }
+
+        this.previousElementSibling._notifyResize();
+        this.nextElementSibling._notifyResize();
+    },
+
+    reflow: function () {
+        var elements = [this.previousElementSibling, this, this.nextElementSibling];
+        var i, rect, el;
+        var sizeList = [];
+        var totalSize = 0;
+
+        for ( i = 0; i < elements.length; ++i ) {
+            el = elements[i];
+
+            rect = el.getBoundingClientRect();
+            var size = Math.floor(this.vertical ? rect.width : rect.height);
+            sizeList.push(size);
+            totalSize += size;
+        }
+
+        for ( i = 0; i < elements.length; ++i ) {
+            el = elements[i];
+            if ( el === this )
+                continue;
+
+            var ratio = sizeList[i]/totalSize;
+            el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
         }
     },
 
@@ -86,41 +113,39 @@ Polymer({
                 this.nextElementSibling.computedMinHeight
                 ;
 
-            if ( !this.previousElementSibling._autoLayout ) {
-                if ( this.vertical ) {
-                    size = prevRect.width + offsetX;
-                }
-                else {
-                    size = prevRect.height + offsetY;
-                }
-                if ( size < minPrevSize ) {
-                    size = minPrevSize;
-                }
-                if ( totalSize - size < minNextSize ) {
-                    size = totalSize - minNextSize;
-                }
-                this.previousElementSibling.style.flex = "0 0 " + size + "px";
+            // prev
+            if ( this.vertical ) {
+                size = prevRect.width + offsetX;
             }
-
-            if ( !this.nextElementSibling._autoLayout ) {
-                if ( this.vertical ) {
-                    size = nextRect.width - offsetX;
-                }
-                else {
-                    size = nextRect.height - offsetY;
-                }
-                if ( size < minNextSize ) {
-                    size = minNextSize;
-                }
-                if ( totalSize - size < minPrevSize ) {
-                    size = totalSize - minPrevSize;
-                }
-                this.nextElementSibling.style.flex = "0 0 " + size + "px";
+            else {
+                size = prevRect.height + offsetY;
             }
+            if ( size < minPrevSize ) {
+                size = minPrevSize;
+            }
+            if ( totalSize - size < minNextSize ) {
+                size = totalSize - minNextSize;
+            }
+            this.previousElementSibling.style.flex = "0 0 " + size + "px";
 
+            // next
+            if ( this.vertical ) {
+                size = nextRect.width - offsetX;
+            }
+            else {
+                size = nextRect.height - offsetY;
+            }
+            if ( size < minNextSize ) {
+                size = minNextSize;
+            }
+            if ( totalSize - size < minPrevSize ) {
+                size = totalSize - minPrevSize;
+            }
+            this.nextElementSibling.style.flex = "0 0 " + size + "px";
 
-            this.previousElementSibling.fire('resize');
-            this.nextElementSibling.fire('resize');
+            //
+            this.previousElementSibling.dispatchEvent( new CustomEvent('resize') );
+            this.nextElementSibling.dispatchEvent( new CustomEvent('resize') );
         }.bind(this);
 
         var mouseupHandle = function (event) {

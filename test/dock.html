@@ -33,22 +33,50 @@
 <body flex-col flex-stretch>
     <h2 style="text-align: center; color: #ccc;">Test Dock</h2>
 
-    <fire-ui-dock flex-1 no-collapse>
-        <fire-ui-dock row>
-            <fire-ui-panel width="500">
-                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
-                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
-                <simple-size name="200x200" min-width="200" min-height="200"></simple-size>
-                <simple-size name="300x300" min-width="300" min-height="300"></simple-size>
-                <simple-size name="400x400" min-width="400" min-height="400"></simple-size>
+    <!-- Test Case: Simple -->
+    <!-- <fire-ui-dock flex-1 no-collapse>                                                                   -->
+    <!--     <fire-ui-dock row>                                                                              -->
+    <!--         <fire-ui-panel width="500">                                                                 -->
+    <!--             <simple-size name="100x100" min-width="100" min-height="100"></simple-size>             -->
+    <!--             <simple-size name="100x100" min-width="100" min-height="100"></simple-size>             -->
+    <!--             <simple-size name="200x200" min-width="200" min-height="200"></simple-size>             -->
+    <!--             <simple-size name="300x300" min-width="300" min-height="300"></simple-size>             -->
+    <!--             <simple-size name="400x400" min-width="400" min-height="400"></simple-size>             -->
+    <!--         </fire-ui-panel>                                                                            -->
+    <!--         <fire-ui-panel>                                                                             -->
+    <!--             <simple-size name="100x100" width="100" min-width="100" min-height="100"></simple-size> -->
+    <!--         </fire-ui-panel>                                                                            -->
+    <!--     </fire-ui-dock>                                                                                 -->
+    <!--     <fire-ui-panel>                                                                                 -->
+    <!--         <simple-size name="300x300" height="300" min-width="300" min-height="300"></simple-size>    -->
+    <!--     </fire-ui-panel>                                                                                -->
+    <!-- </fire-ui-dock>                                                                                     -->
+
+    <!-- Test Case: Main Window -->
+    <fire-ui-dock flex-1 row no-collapse>
+        <fire-ui-dock>
+            <fire-ui-panel>
+                <simple-size name="hierarchy" width="200"></simple-size>
             </fire-ui-panel>
             <fire-ui-panel>
-                <simple-size name="100x100" min-width="100" min-height="100"></simple-size>
+                <simple-size name="assets" width="200"></simple-size>
             </fire-ui-panel>
         </fire-ui-dock>
+
         <fire-ui-panel>
-            <simple-size name="300x300" height="300" min-width="300" min-height="300"></simple-size>
+            <simple-size name="inspector" width="300" min-width="240"></simple-size>
         </fire-ui-panel>
+
+        <fire-ui-dock>
+            <fire-ui-panel>
+                <simple-size name="Scene" width="auto" height="auto"></simple-size>
+                <simple-size name="Game" width="auto" height="auto"></simple-size>
+            </fire-ui-panel>
+
+            <fire-ui-panel>
+                <simple-size name="Console" height="300"></simple-size>
+            </fire-ui-panel>
+        </fire-ui-dock>
     </fire-ui-dock>
 
 </body>

@@ -2,9 +2,6 @@ var resizerSpace = 3;
 
 Polymer(EditorUI.mixin({
     publish: {
-        'min-width': 200,
-        'min-height': 200,
-
         row: {
             value: false,
             reflect: true
@@ -40,12 +37,13 @@ Polymer(EditorUI.mixin({
         if ( isRootDock ) {
             EditorUI.DockUtils.root = this;
             this._finalizeSizeRecursively();
+            this._finalizeMinMaxRecursively();
             this._finalizeStyleRecursively();
             this._notifyResize();
         }
     },
 
-    // depth first calculate the min, max width and height
+    // depth first calculate the width and height
     _finalizeSizeRecursively: function () {
         var elements = [];
 
@@ -58,7 +56,23 @@ Polymer(EditorUI.mixin({
         }
 
         //
-        this.finalize(elements, this.row);
+        this.finalizeSize(elements);
+    },
+
+    // depth first calculate the min max width and height
+    _finalizeMinMaxRecursively: function () {
+        var elements = [];
+
+        //
+        for ( var i = 0; i < this.children.length; i += 2 ) {
+            var el = this.children[i];
+            el._finalizeMinMaxRecursively();
+
+            elements.push(el);
+        }
+
+        //
+        this.finalizeMinMax(elements, this.row);
     },
 
     _finalizeStyleRecursively: function () {
@@ -75,25 +89,31 @@ Polymer(EditorUI.mixin({
         this.reflow();
     },
 
+    _reflowRecursively: function () {
+        this.reflow();
+        for ( var i = 0; i < this.children.length; i += 2 ) {
+            var el = this.children[i];
+            el._reflowRecursively();
+        }
+    },
+
     finalizeStyle: function () {
         // var resizerCnt = (this.children.length - 1)/2;
         // var resizerSize = resizerCnt * resizerSpace;
 
-        var autoLayoutElements = [];
         var i, el, size;
+        var hasAutoLayout = false;
 
         if ( this.children.length === 1 ) {
             el = this.children[0];
 
             el.style.flex = "1 1 auto";
-            // el._autoLayout = true;
-            autoLayoutElements.push(el);
+            hasAutoLayout = true;
         }
         else {
             for ( i = 0; i < this.children.length; i += 2 ) {
                 el = this.children[i];
 
-                // el._autoLayout = false;
                 if ( this.row ) {
                     size = el.computedWidth;
                 }
@@ -101,20 +121,18 @@ Polymer(EditorUI.mixin({
                     size = el.computedHeight;
                 }
 
-                if ( size !== -1 ) {
+                if ( size === 'auto' ) {
+                    hasAutoLayout = true;
+                    el.style.flex = "1 1 auto";
+                }
+                else {
                     // if this is last el and we don't have auto-layout elements, give rest size to last el
-                    if ( i === (this.children.length-1) && autoLayoutElements.length === 0 ) {
+                    if ( i === (this.children.length-1) && !hasAutoLayout ) {
                         el.style.flex = "1 1 auto";
-                        // el._autoLayout = true;
                     }
                     else {
                         el.style.flex = "0 0 " + size + "px";
                     }
-                }
-                else {
-                    el.style.flex = "1 1 auto";
-                    // el._autoLayout = true;
-                    autoLayoutElements.push(el);
                 }
             }
         }
@@ -141,6 +159,13 @@ Polymer(EditorUI.mixin({
 
             var ratio = sizeList[i]/totalSize;
             el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
+
+            if ( this.row ) {
+                el.computedWidth = sizeList[i];
+            }
+            else {
+                el.computedHeight = sizeList[i];
+            }
         }
     },
 
@@ -340,6 +365,8 @@ Polymer(EditorUI.mixin({
         // if we only have one element in this panel
         if ( this.children.length === 1 ) {
             var childEL = this.children[0];
+            childEL.computedWidth = this.computedWidth;
+            childEL.computedHeight = this.computedHeight;
 
             parentEL.insertBefore( childEL, this );
             this.remove();
@@ -354,6 +381,9 @@ Polymer(EditorUI.mixin({
         // if the parent dock direction is same as this panel
         if ( parentEL instanceof FireDock && parentEL.row === this.row ) {
             while ( this.children.length > 0 ) {
+                this.children[0].computedWidth = this.computedWidth;
+                this.children[0].computedHeight = this.computedHeight;
+
                 parentEL.insertBefore( this.children[0], this );
             }
             this.remove();
