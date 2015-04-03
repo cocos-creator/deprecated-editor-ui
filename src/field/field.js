@@ -197,7 +197,7 @@ Polymer({
                 fieldEL = new FireCheckbox();
                 break;
 
-            case "uuid":
+            case "script-uuid":
                 fieldEL = new FireScriptUuid();
                 break;
 
