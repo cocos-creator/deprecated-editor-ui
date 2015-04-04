@@ -248,7 +248,8 @@ EditorUI.DockUtils = (function () {
         var viewEL = _draggingTab.viewEL;
         var panelEL = _draggingTab.parentElement.panel;
 
-        var rect = panelEL.getBoundingClientRect();
+        var panelRect = panelEL.getBoundingClientRect();
+        var parentDock = panelEL.parentElement;
 
         //
         panelEL.closeNoCollapse(_draggingTab);
@@ -271,10 +272,8 @@ EditorUI.DockUtils = (function () {
         elHeight = isNaN(elHeight) ? 'auto' : elHeight;
         newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelEL.computedHeight;
 
-        // newPanel.curWidth = panelEL.curWidth === 'auto' ? panelEL.computedWidth : panelEL.curWidth;
-        // newPanel.curHeight = panelEL.curHeight === 'auto' ? panelEL.computedHeight : panelEL.curHeight;
-        newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : rect.width;
-        newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : rect.height;
+        newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelRect.width;
+        newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelRect.height;
 
         newPanel.add(viewEL);
         newPanel.select(0);
@@ -283,7 +282,42 @@ EditorUI.DockUtils = (function () {
         _resultDock.target.addDock( _resultDock.position, newPanel );
 
         //
+        var totallyRemoved = panelEL.children.length === 0;
         panelEL.collapse();
+
+        // if we totally remove the panelEL, check if targetDock has the ancient as panelEL does
+        // if that is true, add parentEL's size to targetDock's flex style size
+        if ( totallyRemoved ) {
+            var hasSameAncient = false;
+
+            var sibling = newPanel;
+            var newParent = newPanel.parentElement;
+            while ( newParent && newParent instanceof FireDock ) {
+                if ( newParent === parentDock ) {
+                    hasSameAncient = true;
+                    break;
+                }
+
+                sibling = newParent;
+                newParent = newParent.parentElement;
+            }
+
+            if ( hasSameAncient ) {
+                var size = 0;
+                if ( parentDock.row ) {
+                    // 3 is resizer size
+                    size = sibling.curWidth + 3 + panelEL.curWidth;
+                    sibling.curWidth = size;
+                }
+                else {
+                    // 3 is resizer size
+                    size = sibling.curHeight + 3 + panelEL.curHeight;
+                    sibling.curHeight = size;
+                }
+
+                sibling.style.flex = '0 0 '  + size + 'px';
+            }
+        }
 
         //
         DockUtils.flush();

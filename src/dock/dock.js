@@ -346,7 +346,7 @@ Polymer(EditorUI.mixin({
 
     removeDock: function ( childEL ) {
         if ( !this.contains(childEL) )
-            return;
+            return false;
 
         if ( this.firstElementChild === childEL ) {
             if ( childEL.nextElementSibling &&
@@ -364,10 +364,8 @@ Polymer(EditorUI.mixin({
         }
         childEL.remove();
 
-        // if dock can be collapsed
-        if ( this.collapse() ) {
-            return;
-        }
+        // return if dock can be collapsed
+        return this.collapse();
     },
 
     collapse: function () {

@@ -265,9 +265,11 @@ Polymer({
         // remove from dock;
         if ( this.$.tabs.children.length === 0 ) {
             if ( this.parentElement instanceof FireDock ) {
-                this.parentElement.removeDock(this);
+                return this.parentElement.removeDock(this);
             }
         }
+
+        return false;
     },
 
     tabsChangedAction: function ( event ) {
