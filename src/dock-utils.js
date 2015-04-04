@@ -183,7 +183,12 @@ EditorUI.DockUtils = (function () {
             var rect = _resultDock.target.getBoundingClientRect();
             var maskRect = null;
             var hintWidth = panelEL.computedWidth === 'auto' ? rect.width/2 : panelEL.curWidth;
+            hintWidth = Math.max( hintWidth, 200 );
+            hintWidth = Math.min( hintWidth, rect.width/2 );
+
             var hintHeight = panelEL.computedHeight === 'auto' ? rect.height/2 : panelEL.curHeight;
+            hintHeight = Math.max( hintHeight, 200 );
+            hintHeight = Math.min( hintHeight, rect.width/2 );
 
             if ( _resultDock.position === 'top' ) {
                 maskRect = {
@@ -293,32 +298,36 @@ EditorUI.DockUtils = (function () {
         if ( totallyRemoved ) {
             var hasSameAncient = false;
 
-            var sibling = newPanel;
-            var newParent = newPanel.parentElement;
-            while ( newParent && newParent instanceof FireDock ) {
-                if ( newParent === parentDock ) {
-                    hasSameAncient = true;
-                    break;
+            // if newPanel and oldPanel have the same parent, don't do the calculation.
+            // it means newPanel just move under the same parent dock in same direction.
+            if ( newPanel.parentElement !== parentDock ) {
+                var sibling = newPanel;
+                var newParent = newPanel.parentElement;
+                while ( newParent && newParent instanceof FireDock ) {
+                    if ( newParent === parentDock ) {
+                        hasSameAncient = true;
+                        break;
+                    }
+
+                    sibling = newParent;
+                    newParent = newParent.parentElement;
                 }
 
-                sibling = newParent;
-                newParent = newParent.parentElement;
-            }
+                if ( hasSameAncient ) {
+                    var size = 0;
+                    if ( parentDock.row ) {
+                        // 3 is resizer size
+                        size = sibling.curWidth + 3 + panelEL.curWidth;
+                        sibling.curWidth = size;
+                    }
+                    else {
+                        // 3 is resizer size
+                        size = sibling.curHeight + 3 + panelEL.curHeight;
+                        sibling.curHeight = size;
+                    }
 
-            if ( hasSameAncient ) {
-                var size = 0;
-                if ( parentDock.row ) {
-                    // 3 is resizer size
-                    size = sibling.curWidth + 3 + panelEL.curWidth;
-                    sibling.curWidth = size;
+                    sibling.style.flex = '0 0 '  + size + 'px';
                 }
-                else {
-                    // 3 is resizer size
-                    size = sibling.curHeight + 3 + panelEL.curHeight;
-                    sibling.curHeight = size;
-                }
-
-                sibling.style.flex = '0 0 '  + size + 'px';
             }
         }
 
