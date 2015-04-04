@@ -130,6 +130,7 @@ EditorUI.DockUtils = (function () {
         event.dataTransfer.dropEffect = 'move';
         event.preventDefault();
 
+        var panelEL = _draggingTab.parentElement.panel;
         var minDistance = null;
         _resultDock = null;
 
@@ -181,36 +182,38 @@ EditorUI.DockUtils = (function () {
         if ( _resultDock ) {
             var rect = _resultDock.target.getBoundingClientRect();
             var maskRect = null;
+            var hintWidth = panelEL.computedWidth === 'auto' ? rect.width/2 : panelEL.curWidth;
+            var hintHeight = panelEL.computedHeight === 'auto' ? rect.height/2 : panelEL.curHeight;
 
             if ( _resultDock.position === 'top' ) {
                 maskRect = {
                     left: rect.left,
                     top: rect.top,
                     width: rect.width,
-                    height: rect.height/4
+                    height: hintHeight,
                 };
             }
             else if ( _resultDock.position === 'bottom' ) {
                 maskRect = {
                     left: rect.left,
-                    top: rect.bottom-rect.height/4,
+                    top: rect.bottom-hintHeight,
                     width: rect.width,
-                    height: rect.height/4
+                    height: hintHeight
                 };
             }
             else if ( _resultDock.position === 'left' ) {
                 maskRect = {
                     left: rect.left,
                     top: rect.top,
-                    width: rect.width/4,
+                    width: hintWidth,
                     height: rect.height
                 };
             }
             else if ( _resultDock.position === 'right' ) {
                 maskRect = {
-                    left: rect.right-rect.width/4,
+                    left: rect.right-hintWidth,
                     top: rect.top,
-                    width: rect.width/4,
+                    width: hintWidth,
                     height: rect.height
                 };
             }
