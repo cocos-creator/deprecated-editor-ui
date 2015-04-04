@@ -16,20 +16,7 @@ Polymer(EditorUI.mixin({
     ready: function () {
         this._initFocusable(this.$.content);
         this._initResizable();
-
-        if ( this.children.length > 1 ) {
-            for ( var i = 0; i < this.children.length; ++i ) {
-                if ( i != this.children.length-1 ) {
-                    var el = this.children[i];
-
-                    var resizer = new FireDockResizer();
-                    resizer.vertical = this.row;
-
-                    this.insertBefore( resizer, el.nextElementSibling );
-                    i += 1;
-                }
-            }
-        }
+        this._initResizers();
     },
 
     domReady: function () {
@@ -41,6 +28,22 @@ Polymer(EditorUI.mixin({
                 this._finalizeMinMaxRecursively();
                 this._finalizeStyleRecursively();
                 this._notifyResize();
+            }
+        }
+    },
+
+    _initResizers: function () {
+        if ( this.children.length > 1 ) {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                if ( i != this.children.length-1 ) {
+                    var el = this.children[i];
+
+                    var resizer = new FireDockResizer();
+                    resizer.vertical = this.row;
+
+                    this.insertBefore( resizer, el.nextElementSibling );
+                    i += 1;
+                }
             }
         }
     },
@@ -92,11 +95,11 @@ Polymer(EditorUI.mixin({
     },
 
     _reflowRecursively: function () {
-        this.reflow();
         for ( var i = 0; i < this.children.length; i += 2 ) {
             var el = this.children[i];
             el._reflowRecursively();
         }
+        this.reflow();
     },
 
     finalizeStyle: function () {
@@ -163,10 +166,10 @@ Polymer(EditorUI.mixin({
             el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
 
             if ( this.row ) {
-                el.computedWidth = sizeList[i];
+                el.computedWidth = el.computedWidth === 'auto' ? 'auto' : sizeList[i];
             }
             else {
-                el.computedHeight = sizeList[i];
+                el.computedHeight = el.computedHeight === 'auto' ? 'auto' : sizeList[i];
             }
         }
     },
@@ -221,7 +224,9 @@ Polymer(EditorUI.mixin({
                 }
 
                 //
-                newDock.ready();
+                newDock._initResizers();
+                newDock.computedWidth = this.computedWidth;
+                newDock.computedHeight = this.computedHeight;
             }
             else {
                 // new resizer
@@ -274,8 +279,11 @@ Polymer(EditorUI.mixin({
                 }
 
                 while ( this.children.length > 0 ) {
-                    newDock.appendChild( this.children[0] );
+                    newDock.appendChild(this.children[0]);
                 }
+
+                newDock.computedWidth = this.computedWidth;
+                newDock.computedHeight = this.computedHeight;
 
                 //
                 if ( position === 'left' || position === 'top' ) {
