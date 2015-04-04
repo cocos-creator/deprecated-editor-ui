@@ -55,7 +55,9 @@
             html = 'size: <span>' + rect.width.toFixed(2) + '</span>';
             html += ', <span>' + rect.height.toFixed(2) + '</span>\n';
             html += '\npanel: \n';
-            html += '  size:  <span>' + panel.computedWidth + '</span>';
+            html += '  current:  <span>' + panel.curWidth + '</span>';
+            html += ', <span>' + panel.curHeight + '</span>\n';
+            html += '  comped:  <span>' + panel.computedWidth + '</span>';
             html += ', <span>' + panel.computedHeight + '</span>\n';
             html += '  min:  <span>' + panel.computedMinWidth + '</span>';
             html += ', <span>' + panel.computedMinHeight + '</span>\n';

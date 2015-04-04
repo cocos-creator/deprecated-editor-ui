@@ -248,6 +248,8 @@ EditorUI.DockUtils = (function () {
         var viewEL = _draggingTab.viewEL;
         var panelEL = _draggingTab.parentElement.panel;
 
+        var rect = panelEL.getBoundingClientRect();
+
         //
         panelEL.closeNoCollapse(_draggingTab);
 
@@ -260,10 +262,22 @@ EditorUI.DockUtils = (function () {
         newPanel.width = panelEL.width;
         newPanel.height = panelEL.height;
 
+        // NOTE: here must use viewEL's width, height attribute to determine computed size
+        var elWidth = parseInt(viewEL.getAttribute('width'));
+        elWidth = isNaN(elWidth) ? 'auto' : elWidth;
+        newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelEL.computedWidth;
+
+        var elHeight = parseInt(viewEL.getAttribute('height'));
+        elHeight = isNaN(elHeight) ? 'auto' : elHeight;
+        newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelEL.computedHeight;
+
+        // newPanel.curWidth = panelEL.curWidth === 'auto' ? panelEL.computedWidth : panelEL.curWidth;
+        // newPanel.curHeight = panelEL.curHeight === 'auto' ? panelEL.computedHeight : panelEL.curHeight;
+        newPanel.curWidth = rect.width;
+        newPanel.curHeight = rect.height;
+
         newPanel.add(viewEL);
         newPanel.select(0);
-
-        newPanel._applyViewSize();
 
         //
         _resultDock.target.addDock( _resultDock.position, newPanel );

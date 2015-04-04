@@ -67,10 +67,10 @@ EditorUI.resizable = (function () {
             }
 
             // width
-            this.computedWidth = this.width;
+            this.curWidth = this.computedWidth = this.width;
 
             // height
-            this.computedHeight = this.height;
+            this.curHeight = this.computedHeight = this.height;
 
             // min-width
             this.computedMinWidth = minWidth;
@@ -142,6 +142,9 @@ EditorUI.resizable = (function () {
                     }
                 }
             }
+
+            this.curWidth = this.computedWidth;
+            this.curHeight = this.computedHeight;
         },
 
         // init and finalize min,max depends on children

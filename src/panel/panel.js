@@ -85,6 +85,10 @@ Polymer({
                 }
             }
         }
+
+        //
+        this.curWidth = this.computedWidth;
+        this.curHeight = this.computedHeight;
     },
 
     _applyViewMinMax: function () {
