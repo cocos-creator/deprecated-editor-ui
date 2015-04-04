@@ -72,9 +72,10 @@ EditorUI.DockUtils = (function () {
     DockUtils.dropTab = function ( target, insertBeforeTabEL ) {
         var viewEL = _draggingTab.viewEL;
         var panelEL = _draggingTab.parentElement.panel;
+        var needCollapse = panelEL !== target.panel;
 
-        if ( panelEL !== target.panel ) {
-            panelEL.close(_draggingTab);
+        if ( needCollapse ) {
+            panelEL.closeNoCollapse(_draggingTab);
         }
 
         //
@@ -82,11 +83,12 @@ EditorUI.DockUtils = (function () {
         var idx = newPanel.insert( _draggingTab, viewEL, insertBeforeTabEL );
         newPanel.select(idx);
 
+        if ( needCollapse ) {
+            panelEL.collapse();
+        }
+
         //
         DockUtils.flush();
-
-        // manually fire resize event for the inserted view element
-        viewEL.dispatchEvent( new CustomEvent('resize') );
 
         // reset internal states
         _reset();
@@ -99,7 +101,7 @@ EditorUI.DockUtils = (function () {
         _potentialDocks.push(target);
     };
 
-    DockUtils.reflow = function () {
+    DockUtils.reset = function () {
         this.root._finalizeSizeRecursively();
         this.root._finalizeMinMaxRecursively();
         this.root._finalizeStyleRecursively();
@@ -111,6 +113,15 @@ EditorUI.DockUtils = (function () {
         this.root._finalizeStyleRecursively();
         this.root._notifyResize();
     };
+
+    DockUtils.reflow = function () {
+        DockUtils.root._reflowRecursively();
+        DockUtils.root._notifyResize();
+    };
+
+    window.addEventListener('resize', function() {
+        DockUtils.reflow();
+    });
 
     document.addEventListener("dragover", function ( event ) {
         if ( _draggingTab === null )
@@ -248,11 +259,11 @@ EditorUI.DockUtils = (function () {
         newPanel['max-height'] = panelEL['max-height'];
         newPanel.width = panelEL.width;
         newPanel.height = panelEL.height;
-        newPanel.computedWidth = panelEL.computedWidth;
-        newPanel.computedHeight = panelEL.computedHeight;
 
         newPanel.add(viewEL);
         newPanel.select(0);
+
+        newPanel._applyViewSize();
 
         //
         _resultDock.target.addDock( _resultDock.position, newPanel );

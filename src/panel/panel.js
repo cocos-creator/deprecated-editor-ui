@@ -210,7 +210,6 @@ Polymer({
         this.appendChild(viewEL);
 
         //
-        this._applyViewSize();
         this._applyViewMinMax();
         this._applyStyle();
 
@@ -231,7 +230,6 @@ Polymer({
         this.appendChild(viewEL);
 
         //
-        this._applyViewSize();
         this._applyViewMinMax();
         this._applyStyle();
 
@@ -250,7 +248,6 @@ Polymer({
         }
 
         //
-        this._applyViewSize();
         this._applyViewMinMax();
         this._applyStyle();
     },

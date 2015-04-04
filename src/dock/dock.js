@@ -33,13 +33,15 @@ Polymer(EditorUI.mixin({
     },
 
     domReady: function () {
-        var isRootDock = !(this.parentElement instanceof FireDock);
-        if ( isRootDock ) {
-            EditorUI.DockUtils.root = this;
-            this._finalizeSizeRecursively();
-            this._finalizeMinMaxRecursively();
-            this._finalizeStyleRecursively();
-            this._notifyResize();
+        if ( !EditorUI.DockUtils.root ) {
+            var isRootDock = this['no-collapse'] && !(this.parentElement instanceof FireDock);
+            if ( isRootDock ) {
+                EditorUI.DockUtils.root = this;
+                this._finalizeSizeRecursively();
+                this._finalizeMinMaxRecursively();
+                this._finalizeStyleRecursively();
+                this._notifyResize();
+            }
         }
     },
 
@@ -198,9 +200,7 @@ Polymer(EditorUI.mixin({
                 // new FireDock
                 newDock = new FireDock();
 
-                if ( position === 'left' ||
-                     position === 'right' )
-                {
+                if ( position === 'left' || position === 'right' ) {
                     newDock.row = true;
                 }
                 else {
@@ -219,6 +219,8 @@ Polymer(EditorUI.mixin({
                     newDock.appendChild(this);
                     newDock.appendChild(element);
                 }
+
+                //
                 newDock.ready();
             }
             else {
@@ -264,9 +266,7 @@ Polymer(EditorUI.mixin({
                 newDock = new FireDock();
 
                 newDock.row = this.row;
-                if ( position === 'left' ||
-                     position === 'right' )
-                {
+                if ( position === 'left' || position === 'right' ) {
                     this.row = true;
                 }
                 else {
