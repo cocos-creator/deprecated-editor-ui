@@ -183,12 +183,10 @@ EditorUI.DockUtils = (function () {
             var rect = _resultDock.target.getBoundingClientRect();
             var maskRect = null;
             var hintWidth = panelEL.computedWidth === 'auto' ? rect.width/2 : panelEL.curWidth;
-            hintWidth = Math.max( hintWidth, 200 );
-            hintWidth = Math.min( hintWidth, rect.width/2 );
+            hintWidth = Math.min( hintWidth, Math.min( rect.width/2, 200 ) );
 
             var hintHeight = panelEL.computedHeight === 'auto' ? rect.height/2 : panelEL.curHeight;
-            hintHeight = Math.max( hintHeight, 200 );
-            hintHeight = Math.min( hintHeight, rect.width/2 );
+            hintHeight = Math.min( hintHeight, Math.min( rect.height/2, 200 ) );
 
             if ( _resultDock.position === 'top' ) {
                 maskRect = {
