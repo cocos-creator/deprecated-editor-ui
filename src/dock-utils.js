@@ -273,8 +273,8 @@ EditorUI.DockUtils = (function () {
 
         // newPanel.curWidth = panelEL.curWidth === 'auto' ? panelEL.computedWidth : panelEL.curWidth;
         // newPanel.curHeight = panelEL.curHeight === 'auto' ? panelEL.computedHeight : panelEL.curHeight;
-        newPanel.curWidth = rect.width;
-        newPanel.curHeight = rect.height;
+        newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : rect.width;
+        newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : rect.height;
 
         newPanel.add(viewEL);
         newPanel.select(0);
