@@ -15,6 +15,9 @@ Polymer({
         if ( this.previousElementSibling && this.nextElementSibling ) {
             this.finalizeStyle();
             this.reflow();
+
+            this.previousElementSibling.dispatchEvent( new CustomEvent('resize') );
+            this.nextElementSibling.dispatchEvent( new CustomEvent('resize') );
         }
     },
 
@@ -27,10 +30,10 @@ Polymer({
             el = elements[i];
 
             if ( this.vertical ) {
-                size = el.computedWidth;
+                size = el.curWidth;
             }
             else {
-                size = el.computedHeight;
+                size = el.curHeight;
             }
 
             if ( size === 'auto' ) {
@@ -47,9 +50,6 @@ Polymer({
                 }
             }
         }
-
-        this.previousElementSibling._notifyResize();
-        this.nextElementSibling._notifyResize();
     },
 
     reflow: function () {
@@ -74,6 +74,13 @@ Polymer({
 
             var ratio = sizeList[i]/totalSize;
             el.style.flex = ratio + " " + ratio + " " + sizeList[i] + "px";
+
+            if ( this.vertical ) {
+                el.curWidth = sizeList[i];
+            }
+            else {
+                el.curHeight = sizeList[i];
+            }
         }
     },
 
@@ -153,19 +160,10 @@ Polymer({
             document.removeEventListener('mouseup', mouseupHandle);
             EditorUI.removeDragGhost();
 
-            prevRect = this.previousElementSibling.getBoundingClientRect();
-            nextRect = this.nextElementSibling.getBoundingClientRect();
-            var ratio = 1;
-            if ( this.vertical ) {
-                ratio = nextRect.width / prevRect.width;
-                this.previousElementSibling.style.flex = "1 1 " + prevRect.width + "px";
-                this.nextElementSibling.style.flex = ratio + " " + ratio + " " + nextRect.width + "px";
-            }
-            else {
-                ratio = nextRect.height / prevRect.height;
-                this.previousElementSibling.style.flex = "1 1 " + prevRect.height + "px";
-                this.nextElementSibling.style.flex = ratio + " " + ratio + " " + nextRect.height + "px";
-            }
+            this.reflow();
+
+            this.previousElementSibling.dispatchEvent( new CustomEvent('resize') );
+            this.nextElementSibling.dispatchEvent( new CustomEvent('resize') );
 
         }.bind(this);
 
