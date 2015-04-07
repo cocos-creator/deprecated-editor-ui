@@ -263,6 +263,7 @@ Polymer(EditorUI.mixin({
             if ( this._applyViewSize )
                 this._applyViewSize();
         }
+        // if this is root panel
         else {
             if ( position === 'left' || position === 'right' ) {
                 if ( !this.row ) {
