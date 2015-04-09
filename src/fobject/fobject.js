@@ -82,16 +82,16 @@ Polymer(EditorUI.mixin({
     borderClickAction: function (event) {
         event.stopPropagation();
 
-        if ( Fire.hintObject ) {
-            Fire.hintObject(this.value);
+        if ( Editor.hintObject ) {
+            Editor.hintObject(this.value);
         }
     },
 
     browseClickAction: function (event) {
         event.stopPropagation();
 
-        if ( Fire.browseObject ) {
-            Fire.browseObject( Fire.JS.getClassByName(this.type), this );
+        if ( Editor.browseObject ) {
+            Editor.browseObject( Fire.JS.getClassByName(this.type), this );
         }
     },
 
@@ -128,7 +128,7 @@ Polymer(EditorUI.mixin({
                 }
                 else {
                     // check sub-asset
-                    var metaJson = Fire.AssetDB.loadMetaJson(dragItems[0]);
+                    var metaJson = Editor.AssetDB.loadMetaJson(dragItems[0]);
                     Fire.AssetLibrary.loadMeta(metaJson, function ( err, meta ) {
                         if ( !this._inDropArea ) {
                             return;
@@ -152,7 +152,7 @@ Polymer(EditorUI.mixin({
             }.bind(this) );
         }
         else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Entity ) ) {
-            value = Fire._getInstanceById(dragItems[0]);
+            value = Editor.getInstanceById(dragItems[0]);
             if (value) {
                 this._curDragObject = value;
             }
@@ -160,7 +160,7 @@ Polymer(EditorUI.mixin({
             this.invalid = !value;
         }
         else if ( dragType === "entity" && Fire.isChildClassOf( classDef, Fire.Component ) ) {
-            entity = Fire._getInstanceById(dragItems[0]);
+            entity = Editor.getInstanceById(dragItems[0]);
             value = entity && entity.getComponent(classDef);
             if (value) {
                 this._curDragObject = value;
