@@ -87,6 +87,14 @@ Polymer(EditorUI.mixin({
         }
     },
 
+    borderDblClickAction: function (event) {
+        event.stopPropagation();
+
+        if ( Editor.openObject ) {
+            Editor.openObject(this.value);
+        }
+    },
+
     browseClickAction: function (event) {
         event.stopPropagation();
 

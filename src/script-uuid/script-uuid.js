@@ -56,6 +56,14 @@ Polymer(EditorUI.mixin({
         }
     },
 
+    borderDblClickAction: function (event) {
+        event.stopPropagation();
+
+        if ( Editor.openObjectById ) {
+            Editor.openObjectById( Fire.ScriptAsset, this.value );
+        }
+    },
+
     browseClickAction: function (event) {
         event.stopPropagation();
 
