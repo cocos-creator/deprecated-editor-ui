@@ -1,0 +1,15 @@
+<polymer-element
+    name="fire-ui-curve"
+    constructor="FireCurve"
+    on-mousewheel="{{mousewheelAction}}"
+    on-dblclick="{{doubleClick}}"
+    >
+<template flex-col>
+<link rel="stylesheet" href="curve.css" >
+    <canvas class="canvas" height="996" width="1598" id="curvepanel"></canvas>
+    <svg style="position:absolute;top:0;left:0;width:800;height:500" id="svg">
+        <!-- <path d="M1,499 C150,0 300,500 500,0" fill="none" stroke="#e2e2e2" stroke-width="1.5"/> -->
+    <svg>
+</template>
+<script type="text/javascript" src="curve.js"></script>
+</polymer-element>

@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<title>Test Dock</title>
+<link rel="stylesheet" href="/ext/fontawesome/css/font-awesome.css">
+
+<script src="/ext/webcomponentsjs/webcomponents.js"></script>
+<script src="/ext/fire-core/dev/core.js"></script>
+
+<link rel="import" href="/ext/polymer/polymer.html">
+<link rel="import" href="/bin/editor-ui.html">
+<link rel="import" href="elements/simple-size.html">
+
+<style>
+    body {
+        position: relative;
+        background-color: #333;
+        padding: 0px 10px;
+        margin-top: 20px;
+        color: white;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    span.space {
+        height: 5px;
+        width: 5px;
+        display: block;
+    }
+</style>
+
+</head>
+
+<body flex-col flex-stretch scoll=no>
+<h2 style="text-align: center; color: #ccc;">Test Bezier Curve</h2>
+<polymer-element name="curve-test">
+    <template>
+        <fire-ui-curve scale="{{scale}}" drawScale="{{draw}}"></fire-ui-curve>
+        <fire-ui-label>scale: {{scale}},draw: {{draw}}</fire-ui-label>
+    </template>
+    <script>
+        Polymer({
+
+        });
+    </script>
+</polymer-element>
+<curve-test></curve-test>
+</body>
+</html>
