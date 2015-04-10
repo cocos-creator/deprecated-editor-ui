@@ -59,7 +59,7 @@ Polymer(EditorUI.mixin({
         this.id = propName;
 
         //
-        this.bind( 'value', new Fire._PathObserver( obj, propName ) );
+        this.bind( 'value', new Editor._PathObserver( obj, propName ) );
 
         //
         this.ctor = attrs.ctor;
@@ -92,7 +92,7 @@ Polymer(EditorUI.mixin({
             if ( attrs.watch.length > 0 ) {
                 var observer = new CompoundObserver();
                 for ( var i = 0; i < attrs.watch.length; ++i ) {
-                    observer.addObserver( new Fire._PathObserver( obj, attrs.watch[i] ) );
+                    observer.addObserver( new Editor._PathObserver( obj, attrs.watch[i] ) );
                 }
                 var watcher = function () {
                     attrs.watchCallback( obj, this );

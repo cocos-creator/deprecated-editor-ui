@@ -27,7 +27,7 @@ Polymer(EditorUI.mixin({
         if ( !val )
             return "None";
 
-        var classID = Fire.compressUuid(val);
+        var classID = Editor.compressUuid(val);
         var classDef = Fire.JS._getClassById(classID);
         var className = Fire.JS.getClassName(classDef);
         return className;
@@ -51,24 +51,24 @@ Polymer(EditorUI.mixin({
     borderClickAction: function (event) {
         event.stopPropagation();
 
-        if ( Fire.hintObjectById ) {
-            Fire.hintObjectById( Fire.ScriptAsset, this.value );
+        if ( Editor.hintObjectById ) {
+            Editor.hintObjectById( Fire.ScriptAsset, this.value );
         }
     },
 
     borderDblClickAction: function (event) {
         event.stopPropagation();
 
-        if ( Fire.openObjectById ) {
-            Fire.openObjectById( Fire.ScriptAsset, this.value );
+        if ( Editor.openObjectById ) {
+            Editor.openObjectById( Fire.ScriptAsset, this.value );
         }
     },
 
     browseClickAction: function (event) {
         event.stopPropagation();
 
-        if ( Fire.browseObject ) {
-            Fire.browseObject( Fire.JS.getClassByName(this.ScriptAsset), this );
+        if ( Editor.browseObject ) {
+            Editor.browseObject( Fire.JS.getClassByName(this.ScriptAsset), this );
         }
     },
 

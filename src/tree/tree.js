@@ -205,7 +205,7 @@ Polymer({
         for ( var i = 0; i < ids.length; ++i ) {
             elements[i] = this.idToItem[ids[i]];
         }
-        var resultELs = Fire.arrayCmpFilter ( elements, function ( elA, elB ) {
+        var resultELs = Editor.arrayCmpFilter ( elements, function ( elA, elB ) {
             if ( elA.contains(elB) ) {
                 return 1;
             }
