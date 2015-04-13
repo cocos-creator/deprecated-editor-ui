@@ -5,12 +5,12 @@ Polymer(EditorUI.mixin({
     },
     testScale: 1,
     curvePanel: null,
-    cubeCount: 10,
+    cubeCount: 30,
     retina: false,
     circles: [],
     svg: null,
-    
-    bezier: {M: [200, 300], C: [[350, 0], [300, 200], [800, 0]]},
+
+    bezier: {M: [0, 500], C: [[350, 0], [300, 200], [800, 0]]},
 
 
     domReady: function () {
@@ -19,16 +19,22 @@ Polymer(EditorUI.mixin({
         this.rect = this.curvePanel.getBoundingClientRect();
         this.context = this.curvePanel.getContext("2d");
         this.context.strokeStyle ='white';
+        this.context.lineWidth = 1;
         this.drawPanel();
         this.drawBezier();
     },
 
     drawPanel: function () {
-        this.context.clearRect(0, 0, this.rect.width * 2, this.rect.height * 2);
+        this.context.clearRect(0, 0, this.rect.width * 3, this.rect.height * 3);
         var panelWidth = this.rect.width * 2;
         var panelHeight = this.rect.height * 2;
 
         var size = panelWidth > panelHeight ?  panelWidth % 50 === 0 ? panelWidth / 50 : parseInt(panelWidth / 50) + 1 : panelHeight % 50 === 0 ? panelHeight / 50 : parseInt(panelHeight / 50) + 1;
+        var widthCount = Math.round((panelWidth/2/this.cubeCount/2).toFixed(1) + 1);
+        var heightCount = Math.round((panelHeight/2/this.cubeCount/2).toFixed(1) + 1);
+        console.log(widthCount);
+        console.log(heightCount);
+        var markNumber = 0;
 
         for (var i=0; i <= size;i++) {
             if (i === 0) {
@@ -36,13 +42,22 @@ Polymer(EditorUI.mixin({
             }
             else {
                 // TODO: 优化渐显示
-                if (this.drawScale >= 1 && this.drawScale <= 5) {
-                    this.context.globalAlpha = this.drawScale / 10 * 2;
+                if (this.drawScale >= 1 && this.drawScale <= 10) {
+                    this.context.globalAlpha = this.drawScale / 10 ;
                 }
+                else{
+                    this.context.globalAlpha = 1;
+                }
+
             }
 
-            this.context.lineWidth = 1;
             this.context.beginPath();
+
+            if (markNumber % 2 !== 0) {
+                this.context.strokeStyle='#6e6e6e';
+            }else {
+                this.context.strokeStyle ='white';
+            }
 
             var increment = panelWidth / this.cubeCount / 2 * this.drawScale * i;
 
@@ -51,6 +66,7 @@ Polymer(EditorUI.mixin({
 
             this.context.moveTo(panelWidth / 2 - increment,0);
             this.context.lineTo(panelWidth / 2 - increment,panelHeight);
+            // LEFT ++ ROW
 
             this.context.moveTo(0,panelHeight / 2 + increment);
             this.context.lineTo(panelWidth,panelHeight / 2 + increment);
@@ -60,14 +76,13 @@ Polymer(EditorUI.mixin({
 
             this.context.stroke();
             this.context.closePath();
+            markNumber ++;
         }
 
         var num = 0;
-
+        this.context.globalAlpha = 1;
+        this.context.strokeStyle='white';
         for (var i=0; i <= size;i++) {
-            this.context.strokeStyle='white';
-            this.context.globalAlpha = 1;
-            this.context.lineWidth = 1;
             this.context.beginPath();
 
             var increment = panelWidth / this.cubeCount * this.drawScale * i;
@@ -75,13 +90,14 @@ Polymer(EditorUI.mixin({
             this.context.font = "24px Courier New";
             this.context.fillStyle = "white";
 
-            num += 100;
+            num = 0.1;
 
-            this.context.fillText(num  , 10, panelHeight /2 - increment);
-            this.context.fillText(num , 10, panelHeight /2 + increment);
-
-            this.context.fillText(num, panelWidth /2 - increment,panelHeight - 10);
-            this.context.fillText(num, panelWidth /2 + increment,panelHeight - 10);
+            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 + num * i).toFixed(1), 10, panelHeight /2 - increment);
+            // // RIGHT ++ ROW
+            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 - num * i).toFixed(1), 10, panelHeight /2 + increment);
+            //
+            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 - num * i).toFixed(1), panelWidth /2 - increment+10,panelHeight - 20);
+            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 + num * i).toFixed(1), panelWidth /2 + increment+10,panelHeight - 20);
 
             this.context.stroke();
             this.context.closePath();
@@ -126,18 +142,14 @@ Polymer(EditorUI.mixin({
         this.circles.push({x:cx, y:cy});
 
         this.drawCircle();
-        console.log(cx);
-        for (var i=0; i < this.bezier.C.length; i++) {
-            // controlPoint += this.bezier.C[i];
-            // controlPoint += (i >= (this.bezier.C.length-1) ? " ": ",");
 
-            if (i !== this.bezier.C.length-1) {
-                if (cx > this.bezier.C[i][1] && cx < this.bezier.C[i+1][1]) {
-                    console.log(this.bezier.C[i]);
-                }
-            }
-        }
-        // for
+        // for (var i=0; i < this.bezier.C.length; i++) {
+        //     if (i !== this.bezier.C.length-1) {
+        //         if (cx > this.bezier.C[i][1] && cx < this.bezier.C[i+1][1]) {
+        //             console.log(this.bezier.C[i]);
+        //         }
+        //     }
+        // }
     },
 
     drawCircle: function () {
@@ -163,15 +175,15 @@ Polymer(EditorUI.mixin({
         var controlPoint = "C";
         for (var i=0;i < this.bezier.M.length; i ++) {
             dstart += this.bezier.M[i];
-            this.circles.push({x:this.bezier.M[i][0], y:this.bezier.M[i][1]});
-            this.drawCircle();
+            // this.circles.push({x:this.bezier.M[i][0], y:this.bezier.M[i][1]});
+            // this.drawCircle();
             dstart += (i >= (this.bezier.M.length-1) ? " ": ",");
         }
 
         for (var i=0; i < this.bezier.C.length; i++) {
             controlPoint += this.bezier.C[i];
-            this.circles.push({x:this.bezier.C[i][0], y:this.bezier.C[i][1]});
-            this.drawCircle();
+            // this.circles.push({x:this.bezier.C[i][0], y:this.bezier.C[i][1]});
+            // this.drawCircle();
             controlPoint += (i >= (this.bezier.C.length-1) ? " ": ",");
         }
 
