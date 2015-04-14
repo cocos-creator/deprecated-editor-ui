@@ -7,14 +7,12 @@ Polymer(EditorUI.mixin({
     curvePanel: null,
     cubeCount: 20,
     retina: false,
-    circles: [],
     svg: null,
 
     move: false,
 
-    // M(起始点)只允许存在一个, C(控制点) 只有3个参数 2个控制点 一个end 点,S(动态)
-    bezier: {M: [0, 500], C: [[125, 500], [125, 250],[250,250]],S:[[500,250],[500,0],[500,0]]},
-    // bezier: {M: [0, 250], C: [[125, 0], [125, 500], [375, 0]]},
+    // M(起始点)只允许存在一个, C(控制点) 只有3个参数 2个控制点 一个end 点
+    bezier: {M: [0, 500], C: [[125, 500], [375, 0],[500,0]]},
 
 
     domReady: function () {
@@ -104,11 +102,9 @@ Polymer(EditorUI.mixin({
             this.context.stroke();
             this.context.closePath();
         }
-        this.drawCircle();
     },
 
     mousewheelAction: function (event) {
-        return;
         var originScale = this.scale;
 
         originScale = Math.pow( 2, event.wheelDelta * 0.002) * originScale;
@@ -138,62 +134,61 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
     },
 
-    doubleClick: function (event) {
-        var targetRect = event.target.getBoundingClientRect();
-        var cx = (event.clientX - targetRect.left - 2);
-        var cy = (event.clientY - targetRect.top - 2);
-        this.circles.push({x:cx, y:cy});
-
-        this.drawCircle();
-
-        // for (var i=0; i < this.bezier.C.length; i++) {
-        //     if (i !== this.bezier.C.length-1) {
-        //         if (cx > this.bezier.C[i][1] && cx < this.bezier.C[i+1][1]) {
-        //             console.log(this.bezier.C[i]);
-        //         }
-        //     }
-        // }
-    },
-
-    drawCircle: function () {
-        var cricles = this.circles;
-        var panelWidth = this.rect.width * 2;
-        var panelHeight = this.rect.height * 2;
-        var increment = panelWidth / this.cubeCount * (this.scale - 1);
-
-        for (var i = 0; i < cricles.length; i ++) {
-            this.context.fillStyle="#FFFFFF";
-            this.context.beginPath();
-            this.context.arc( (cricles[i].x * 2) ,(cricles[i].y * 2) ,8,0,Math.PI*2,true);
-            this.context.closePath();
-            this.context.fill();
-        }
-    },
 
     drawBezier: function () {
         var svgns = "http://www.w3.org/2000/svg";
         var path = document.createElementNS(svgns,"path");
 
-        var dstart = "M";
-        var controlPoint = "C";
-        var sPoint = "Q";
-        for (var i=0;i < this.bezier.M.length; i ++) {
-            dstart += this.bezier.M[i];
-            dstart += (i >= (this.bezier.M.length-1) ? " ": ",");
-        }
+        var spoint = this.drawPoint(this.bezier.M[0],this.bezier.M[1]);
+        var epoint = this.drawPoint(this.bezier.C[2][0],this.bezier.C[2][1]);
 
-        for (var i=0; i < this.bezier.C.length; i++) {
-            controlPoint += this.bezier.C[i];
-            controlPoint += (i >= (this.bezier.C.length-1) ? " ": ",");
-            this.drawPoint(this.bezier.C[i][0],this.bezier.C[i][1],this.bezier);
-        }
+        var c1point = this.drawPoint(this.bezier.C[0][0],this.bezier.C[0][1]);
 
-        for (var i=0; i < this.bezier.S.length; i++) {
-            sPoint += this.bezier.S[i] + " ";
-            // sPoint += (i <= (this.bezier.S.length-1) ? " ": " ");
-        }
+        var c2point = this.drawPoint(this.bezier.C[1][0],this.bezier.C[1][1]);
 
-        var d = dstart + controlPoint + sPoint;
+        var line1 = this.drawLine(this.bezier.M[0],this.bezier.M[1],this.bezier.C[0][0],this.bezier.C[0][1]);
+        var line2 = this.drawLine(this.bezier.C[1][0],this.bezier.C[1][1],this.bezier.C[2][0],this.bezier.C[2][1]);
+
+
+        c1point.onmousedown = function () {
+            c1point.setAttribute("fill","green");
+            this.move = true;
+            this.onmousemove = function (event) {
+                if (this.move) {
+                    c1point.setAttribute("cx",event.offsetX);
+                    c1point.setAttribute("cy",event.offsetY);
+                    line1.setAttribute('x2',event.offsetX);
+                    line1.setAttribute('y2',event.offsetY);
+                    this.bezier.C[0][0] = event.offsetX;
+                    this.bezier.C[0][1] = event.offsetY;
+                    path.setAttribute("d", this.getPath(this.bezier.M,this.bezier.C));
+                }
+            };
+            this.onmouseup = function () {
+                this.move = false;
+            };
+        }.bind(this);
+
+        c2point.onmousedown = function () {
+            c2point.setAttribute("fill","green");
+            this.move = true;
+            this.onmousemove = function (event) {
+                if (this.move) {
+                    c2point.setAttribute("cx",event.offsetX);
+                    c2point.setAttribute("cy",event.offsetY);
+                    line2.setAttribute('x1',event.offsetX);
+                    line2.setAttribute('y1',event.offsetY);
+                    this.bezier.C[1][0] = event.offsetX;
+                    this.bezier.C[1][1] = event.offsetY;
+                    path.setAttribute("d", this.getPath(this.bezier.M,this.bezier.C));
+                }
+            };
+            this.onmouseup = function () {
+                this.move = false;
+            };
+        }.bind(this);
+
+        var d = this.getPath(this.bezier.M,this.bezier.C);
 
         path.setAttribute("d", d);
         path.setAttribute("fill", "none");
@@ -202,7 +197,24 @@ Polymer(EditorUI.mixin({
         this.svg.appendChild(path);
     },
 
-    drawPoint: function (cx,cy,parent) {
+    getPath: function (M,C)　{
+        var dstart = "M";
+        var controlPoint = "C";
+        for (var i=0;i < M.length; i ++) {
+            dstart += M[i];
+            dstart += (i >= (M.length-1) ? " ": ",");
+        }
+
+        for (var i=0; i < C.length; i++) {
+            controlPoint += C[i];
+            controlPoint += (i >= (C.length-1) ? " ": ",");
+        }
+
+        var p = dstart + controlPoint;
+        return p;
+    },
+
+    drawPoint: function (cx,cy) {
         var svgns = "http://www.w3.org/2000/svg";
         var point = document.createElementNS(svgns,"circle");
         point.setAttribute("cx",cx);
@@ -210,64 +222,21 @@ Polymer(EditorUI.mixin({
         point.setAttribute("r","6");
         point.setAttribute("fill","white");
         point.setAttribute("class","point");
-
-
-        // var startLinePoint = {
-        //     x1 : parent.M[0],
-        //     y1 : parent.M[1],
-        //     x2 : parent.C[0][0],
-        //     y2 : parent.C[0][1],
-        // };
-        //
-        // var endLinePoint = {
-        //     x1 : parent.C[2][0],
-        //     y1 : parent.C[2][1],
-        //     x2 : parent.C[1][0],
-        //     y2 : parent.C[1][1],
-        // };
-        //
-        // var startLine = document.createElementNS(svgns,"line");
-        // startLine.setAttribute("x1",startLinePoint.x1);
-        // startLine.setAttribute("x2",startLinePoint.x2);
-        // startLine.setAttribute("y1",startLinePoint.y1);
-        // startLine.setAttribute("y2",startLinePoint.y2);
-        // startLine.setAttribute("stroke","orange");
-        // startLine.setAttribute("fill","transparent");
-        // startLine.setAttribute("stroke-width","1");
-        //
-        // var endLine = document.createElementNS(svgns,"line");
-        // endLine.setAttribute("x1",endLinePoint.x1);
-        // endLine.setAttribute("x2",endLinePoint.x2);
-        // endLine.setAttribute("y1",endLinePoint.y1);
-        // endLine.setAttribute("y2",endLinePoint.y2);
-        // endLine.setAttribute("stroke","orange");
-        // endLine.setAttribute("fill","transparent");
-        // endLine.setAttribute("stroke-width","1");
-
-        point.onmouseover = function () {
-            point.setAttribute("fill","red");
-        };
-
-        point.onmousedown = function () {
-            point.setAttribute("fill","green");
-            this.move = true
-            this.onmousemove = function (event) {
-                if (this.move) {
-                    point.setAttribute("cx",event.offsetX);
-                    point.setAttribute("cy",event.offsetY);
-                    startLine.setAttribute("x1",parent.M[0]);
-                    startLine.setAttribute("y1",parent.M[1]);
-                    startLine.setAttribute("x2",event.offsetX);
-                    startLine.setAttribute("y2",event.offsetY);
-                }
-            };
-            this.onmouseup = function () {
-                this.move = false;
-            };
-        }.bind(this);
-
-        // this.svg.appendChild(startLine);
-        // this.svg.appendChild(endLine);
         this.svg.appendChild(point);
+        return point;
+    },
+
+    drawLine: function (x1,y1,x2,y2)　{
+        var svgns = "http://www.w3.org/2000/svg";
+        var line = document.createElementNS(svgns,"line");
+        line.setAttribute("x1",x1);
+        line.setAttribute("x2",x2);
+        line.setAttribute("y1",y1);
+        line.setAttribute("y2",y2);
+        line.setAttribute("stroke","orange");
+        line.setAttribute("fill","transparent");
+        line.setAttribute("stroke-width","1");
+        this.svg.appendChild(line);
+        return line;
     },
 }, EditorUI.focusable));
