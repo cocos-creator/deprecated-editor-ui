@@ -120,7 +120,11 @@ EditorUI.DockUtils = (function () {
     };
 
     window.addEventListener('resize', function() {
-        DockUtils.reflow();
+        if ( DockUtils.root instanceof FireDock ) {
+            DockUtils.reflow();
+        } else {
+            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        }
     });
 
     document.addEventListener("dragover", function ( event ) {
