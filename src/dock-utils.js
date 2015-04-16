@@ -102,29 +102,37 @@ EditorUI.DockUtils = (function () {
     };
 
     DockUtils.reset = function () {
-        this.root._finalizeSizeRecursively();
-        this.root._finalizeMinMaxRecursively();
-        this.root._finalizeStyleRecursively();
-        this.root._notifyResize();
-    };
-
-    DockUtils.flush = function () {
-        this.root._finalizeMinMaxRecursively();
-        this.root._finalizeStyleRecursively();
-        this.root._notifyResize();
-    };
-
-    DockUtils.reflow = function () {
-        DockUtils.root._reflowRecursively();
-        DockUtils.root._notifyResize();
-    };
-
-    window.addEventListener('resize', function() {
         if ( DockUtils.root instanceof FireDock ) {
-            DockUtils.reflow();
+            this.root._finalizeSizeRecursively();
+            this.root._finalizeMinMaxRecursively();
+            this.root._finalizeStyleRecursively();
+            this.root._notifyResize();
         } else {
             DockUtils.root.dispatchEvent( new CustomEvent('resize') );
         }
+    };
+
+    DockUtils.flush = function () {
+        if ( DockUtils.root instanceof FireDock ) {
+            this.root._finalizeMinMaxRecursively();
+            this.root._finalizeStyleRecursively();
+            this.root._notifyResize();
+        } else {
+            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        }
+    };
+
+    DockUtils.reflow = function () {
+        if ( DockUtils.root instanceof FireDock ) {
+            DockUtils.root._reflowRecursively();
+            DockUtils.root._notifyResize();
+        } else {
+            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        }
+    };
+
+    window.addEventListener('resize', function() {
+        DockUtils.reflow();
     });
 
     document.addEventListener("dragover", function ( event ) {
