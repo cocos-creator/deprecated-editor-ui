@@ -12,7 +12,8 @@ Polymer(EditorUI.mixin({
     move: false,
 
     // M(起始点)只允许存在一个, C(控制点) 只有3个参数 2个控制点 一个end 点
-    bezier: {M: [0, 500], C: [[125, 500], [375, 0],[500,0]]},
+    // bezier: {M: [0, 500], C: [[0, 250], [0, 250],[250,250]]},
+    bezier: {M: [0, 500], C: [[0, 250], [50, 150],[100,100]],S:[[280,500],[250,500]]},
 
 
     domReady: function () {
@@ -150,6 +151,7 @@ Polymer(EditorUI.mixin({
         var line2 = this.drawLine(this.bezier.C[1][0],this.bezier.C[1][1],this.bezier.C[2][0],this.bezier.C[2][1]);
 
 
+
         c1point.onmousedown = function () {
             c1point.setAttribute("fill","green");
             this.move = true;
@@ -159,8 +161,10 @@ Polymer(EditorUI.mixin({
                     c1point.setAttribute("cy",event.offsetY);
                     line1.setAttribute('x2',event.offsetX);
                     line1.setAttribute('y2',event.offsetY);
-                    this.bezier.C[0][0] = event.offsetX;
-                    this.bezier.C[0][1] = event.offsetY;
+                    this.bezier.C[1][0] = event.offsetX;
+                    this.bezier.C[1][1] = event.offsetY;
+                    this.bezier.C[2][0] = event.offsetX;
+                    this.bezier.C[2][1] = event.offsetY;
                     path.setAttribute("d", this.getPath(this.bezier.M,this.bezier.C));
                 }
             };
@@ -199,18 +203,21 @@ Polymer(EditorUI.mixin({
 
     getPath: function (M,C)　{
         var dstart = "M";
-        var controlPoint = "C";
+        var controlPoint = "Q";
         for (var i=0;i < M.length; i ++) {
             dstart += M[i];
             dstart += (i >= (M.length-1) ? " ": ",");
         }
 
-        for (var i=0; i < C.length; i++) {
+        for (var i=1; i < 3; i++) {
             controlPoint += C[i];
             controlPoint += (i >= (C.length-1) ? " ": ",");
         }
 
-        var p = dstart + controlPoint;
+        // var s = "T"+(500-C[1][0])+","+(500-C[1][1])+" 500,250";
+        var s = "T500,0";
+        var c = "";
+        var p = dstart +c+ controlPoint + s;
         return p;
     },
 
