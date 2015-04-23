@@ -103,20 +103,20 @@ Polymer({
         this.idToItem = {};
     },
 
-    expand: function ( id ) {
+    expand: function ( id, expand ) {
         var itemEL = this.idToItem[id];
         var parentEL = itemEL.parentElement;
         while ( parentEL ) {
             if ( parentEL === this )
                 break;
 
-            parentEL.folded = false;
+            parentEL.folded = !expand;
             parentEL = parentEL.parentElement;
         }
     },
 
     hintItem: function ( id ) {
-        this.expand(id);
+        this.expand(id,true);
         var itemEL = this.idToItem[id];
         if (itemEL) {
             this.scrollToItem(itemEL);
