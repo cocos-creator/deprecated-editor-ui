@@ -238,5 +238,71 @@ var EditorUI = (function () {
         element.fire("changed", element.value);
     };
 
+    //
+    function _createLayouts ( parentEL, infos, importList ) {
+        for ( var i = 0; i < infos.length; ++i ) {
+            var info = infos[i];
+
+            var el;
+
+            if ( info.type === 'dock' ) {
+                el = new FireDock();
+            }
+            else if ( info.type === 'panel' ) {
+                el = new FirePanel();
+            }
+
+            if ( !el ) continue;
+
+            if ( info.row !== undefined ) {
+                el.row = info.row;
+            }
+            if ( info.width !== undefined ) {
+                el.curWidth = info.width;
+            }
+            if ( info.height !== undefined ) {
+                el.curHeight = info.height;
+            }
+
+            if ( info.docks ) {
+                _createLayouts ( el, info.docks, importList );
+            }
+            else if ( info.panels ) {
+                for ( var j = 0; j < info.panels.length; ++j ) {
+                    importList.push( { dockEL: el, panelID: info.panels[j] } );
+                }
+            }
+
+            parentEL.appendChild(el);
+        }
+        parentEL._initResizers();
+    }
+
+    //
+    EditorUI.createLayout = function ( parentEL, layoutInfo ) {
+        var importList = [];
+
+        // if we have root, clear all children in it
+        var rootEL = EditorUI.DockUtils.root;
+        if ( rootEL ) {
+            rootEL.remove();
+            EditorUI.DockUtils.root = null;
+        }
+
+        rootEL = new FireDock();
+        rootEL.setAttribute('fit', '');
+        rootEL.setAttribute('no-collapse', '');
+
+        if ( layoutInfo ) {
+            if ( layoutInfo.row ) rootEL.setAttribute('row', '');
+            _createLayouts( rootEL, layoutInfo.docks, importList );
+        }
+
+        parentEL.appendChild(rootEL);
+        EditorUI.DockUtils.root = rootEL;
+
+        return importList;
+    };
+
     return EditorUI;
 })();
