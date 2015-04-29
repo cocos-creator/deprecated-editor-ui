@@ -1,0 +1,49 @@
+color-outter-border = #555
+color-outter-border-focus = #0c70a6
+color-inner-border = black
+color-bg = rgb(86,86,86)
+rgbHeight = 16px
+color-bg-disabled = #3a3a3a
+
+:host {
+    display: flex
+    position: relative
+
+    box-sizing: border-box
+    width: 500px
+    min-width: 60px
+    height: 500px
+    border: 1px solid color-outter-border
+
+    background: color-bg
+
+    &(:hover) {
+        border: 1px solid color-outter-border + 30%
+    }
+
+    &([focused]) {
+        border: 1px solid color-outter-border-focus
+    }
+}
+
+.border {
+    position: relative
+    border: 1px solid color-inner-border
+    width: 100%
+
+    &:focus {
+        outline: none
+    }
+}
+
+.point {
+    cursor: pointer
+}
+
+:host([focused]) .border {
+    border-color: color-border-focus
+}
+
+.canvas {
+    background: rgb(51,51,51)
+}
