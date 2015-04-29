@@ -24,6 +24,16 @@ Polymer(EditorUI.mixin({
         event.stopPropagation();
     },
 
+    find: function ( viewEL ) {
+        for ( var i = 0; i < this.children.length; ++i ) {
+            var tabEL = this.children[i];
+            if ( tabEL.viewEL === viewEL )
+                return tabEL;
+        }
+
+        return null;
+    },
+
     insert: function ( tabEL, insertBeforeTabEL ) {
         if ( insertBeforeTabEL ) {
             this.insertBefore(tabEL, insertBeforeTabEL);
