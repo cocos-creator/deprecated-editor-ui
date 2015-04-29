@@ -432,4 +432,31 @@ Polymer({
             this.clearSelect();
         }
     },
+
+    dumpCollapses: function () {
+        var _array = [];
+
+        for ( var obj in this.idToItem ) {
+            if ( this.idToItem[obj].foldable ) {
+                _array.push({
+                    userId: this.idToItem[obj].userId,
+                    folded: this.idToItem[obj].folded
+                });
+            }
+        }
+
+        return  _array;
+    },
+
+    restoreCollapses: function (array) {
+        for ( var obj in this.idToItem ) {
+            for ( var i = 0; i < array.length; i++ ) {
+                if (array[i].userId === this.idToItem[obj].userId) {
+                    this.idToItem[obj].folded = array[i].folded;
+                }
+            }
+        }
+
+    },
+
 });
