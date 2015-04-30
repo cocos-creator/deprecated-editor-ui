@@ -83,22 +83,22 @@ Polymer(EditorUI.mixin({
         var num = 0;
         this.context.globalAlpha = 1;
         this.context.strokeStyle='white';
-        for (var i=0; i <= size;i++) {
+        for (var j=0; j <= size;j++) {
             this.context.beginPath();
 
-            var increment = panelWidth / this.cubeCount * this.drawScale * i;
+            var incrementContext = panelWidth / this.cubeCount * this.drawScale * j;
 
             this.context.font = "24px Courier New";
             this.context.fillStyle = "white";
 
             num = 0.1;
 
-            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 + num * i).toFixed(1), 10, panelHeight /2 - increment);
+            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 + num * i).toFixed(1), 10, panelHeight /2 - incrementContext);
             // // RIGHT ++ ROW
-            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 - num * i).toFixed(1), 10, panelHeight /2 + increment);
+            // this.context.fillText((num * (parseInt(heightCount/4)+1)/2 - num * i).toFixed(1), 10, panelHeight /2 + incrementContext);
             //
-            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 - num * i).toFixed(1), panelWidth /2 - increment+10,panelHeight - 20);
-            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 + num * i).toFixed(1), panelWidth /2 + increment+10,panelHeight - 20);
+            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 - num * i).toFixed(1), panelWidth /2 - incrementContext+10,panelHeight - 20);
+            // this.context.fillText((num * (parseInt(widthCount/4)+1)/2 + num * i).toFixed(1), panelWidth /2 + incrementContext+10,panelHeight - 20);
 
             this.context.stroke();
             this.context.closePath();
@@ -112,8 +112,9 @@ Polymer(EditorUI.mixin({
         originScale = Math.max( 0.01, Math.min( originScale, 1000 ) );
         this.scale = originScale;
 
+        var num = 0;
         if (this.scale > 1) {
-            var num = 0;
+
             if (this.scale / 10 > 1) {
                 num = parseInt(this.scale / 10).toString().length+1;
             }else {
@@ -209,9 +210,9 @@ Polymer(EditorUI.mixin({
             dstart += (i >= (M.length-1) ? " ": ",");
         }
 
-        for (var i=1; i < 3; i++) {
-            controlPoint += C[i];
-            controlPoint += (i >= (C.length-1) ? " ": ",");
+        for (var j=1; j < 3; j++) {
+            controlPoint += C[j];
+            controlPoint += (j >= (C.length-1) ? " ": ",");
         }
 
         // var s = "T"+(500-C[1][0])+","+(500-C[1][1])+" 500,250";
