@@ -13,8 +13,6 @@ Polymer({
             value: false,
             reflect: true
         },
-
-        parent: null,
     },
 
     created: function () {
