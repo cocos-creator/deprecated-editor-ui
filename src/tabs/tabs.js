@@ -1,15 +1,11 @@
 Polymer(EditorUI.mixin({
     publish: {
-        // droppable
-        droppable: 'tab',
+        'droppable': 'tab',
         'single-drop': true,
     },
 
-    created: function () {
-        this.activeTab = null;
-    },
-
     ready: function () {
+        this.activeTab = null;
         this._initDroppable(this);
     },
 
@@ -19,12 +15,7 @@ Polymer(EditorUI.mixin({
         }
     },
 
-    clickAction: function ( event ) {
-        this.select(event.target);
-        event.stopPropagation();
-    },
-
-    find: function ( viewEL ) {
+    findTab: function ( viewEL ) {
         for ( var i = 0; i < this.children.length; ++i ) {
             var tabEL = this.children[i];
             if ( tabEL.viewEL === viewEL )
@@ -34,7 +25,10 @@ Polymer(EditorUI.mixin({
         return null;
     },
 
-    insert: function ( tabEL, insertBeforeTabEL ) {
+    insertTab: function ( tabEL, insertBeforeTabEL ) {
+        // do nothing if we insert to ourself
+        if ( tabEL === insertBeforeTabEL )
+            return tabEL;
         if ( insertBeforeTabEL ) {
             this.insertBefore(tabEL, insertBeforeTabEL);
         }
@@ -45,7 +39,7 @@ Polymer(EditorUI.mixin({
         return tabEL;
     },
 
-    add: function ( name ) {
+    addTab: function ( name ) {
         var tabEL = new FireTab();
         tabEL.innerHTML = name;
 
@@ -54,7 +48,7 @@ Polymer(EditorUI.mixin({
         return tabEL;
     },
 
-    remove: function ( tab ) {
+    removeTab: function ( tab ) {
         var tabEL = null;
         if ( typeof tab === 'number' ) {
             if ( tab < this.children.length ) {
@@ -97,41 +91,75 @@ Polymer(EditorUI.mixin({
         //
         if ( tabEL !== null ) {
             if ( tabEL !== this.activeTab ) {
-                this.fire( 'changed', { old: this.activeTab, new: tabEL  } );
+                var oldTabEL = this.activeTab;
 
                 if ( this.activeTab !== null ) {
                     this.activeTab.classList.remove('active');
                 }
                 this.activeTab = tabEL;
                 this.activeTab.classList.add('active');
-                tabEL.fire('active');
+
+                var panelID = tabEL.viewEL.getAttribute('id');
+                var panelInfo = Editor.Panel.getPanelInfo(panelID);
+                if ( panelInfo ) {
+                    this.$.popup.classList.toggle('hide', !panelInfo.popable);
+                }
+
+                this.fire( 'tab-changed', { old: oldTabEL, new: tabEL  } );
             }
         }
     },
 
-    dropAreaEnterAction: function ( event ) {
-        event.stopPropagation();
+    warn: function ( tab ) {
+        var tabEL = null;
 
-        this.$.insertLine.style.display = 'block';
+        if ( typeof tab === 'number' ) {
+            if ( tab < this.children.length ) {
+                tabEL = this.children[tab];
+            }
+        }
+        else if ( tab instanceof FireTab ) {
+            tabEL = tab;
+        }
+
+        //
+        if ( tabEL !== null ) {
+            tabEL.warn = true;
+        }
     },
 
-    dropAreaLeaveAction: function ( event ) {
+    _onClick: function ( event ) {
+        event.stopPropagation();
+        this.panelEL.focus();
+    },
+
+    _onTabClick: function ( event ) {
+        event.stopPropagation();
+        this.select(event.target);
+        this.panelEL.focus();
+    },
+
+    _onDropAreaEnter: function ( event ) {
+        event.stopPropagation();
+    },
+
+    _onDropAreaLeave: function ( event ) {
         event.stopPropagation();
 
         this.$.insertLine.style.display = '';
     },
 
-    dropAreaAcceptAction: function ( event ) {
+    _onDropAreaAccept: function ( event ) {
         event.stopPropagation();
 
         EditorUI.DockUtils.dropTab(this, this._curInsertTab);
         this.$.insertLine.style.display = '';
     },
 
-    dragoverAction: function ( event ) {
+    _onDragOver: function ( event ) {
         // NOTE: in web, there is a problem:
         // http://stackoverflow.com/questions/11974077/datatransfer-setdata-of-dragdrop-doesnt-work-in-chrome
-        var type = event.dataTransfer.getData('fire/type');
+        var type = event.dataTransfer.getData('editor/type');
         if ( type !== 'tab' )
             return;
 
@@ -145,6 +173,7 @@ Polymer(EditorUI.mixin({
         //
         this._curInsertTab = null;
         var style = this.$.insertLine.style;
+        style.display = 'block';
         if ( event.target instanceof FireTab ) {
             style.left = event.target.offsetLeft + 'px';
             this._curInsertTab = event.target;
@@ -153,5 +182,35 @@ Polymer(EditorUI.mixin({
             var el = this.lastElementChild;
             style.left = (el.offsetLeft + el.offsetWidth) + 'px';
         }
+    },
+
+    _onPopup: function ( event ) {
+        if ( this.activeTab ) {
+            var panelID = this.activeTab.viewEL.getAttribute('id','');
+            Editor.Panel.popup(panelID);
+        }
+    },
+
+    _onMenuPopup: function ( event ) {
+        var rect = this.$.menu.getBoundingClientRect();
+        var panelID = '';
+        if ( this.activeTab ) {
+            panelID = this.activeTab.viewEL.getAttribute('id','');
+        }
+
+        var panelInfo = Editor.Panel.getPanelInfo(panelID);
+        var popable = true;
+        if ( panelInfo ) {
+            popable = panelInfo.popable;
+        }
+
+        Editor.Menu.popup( rect.left + 5, rect.bottom + 5, [
+            { label: 'Maximize', message: 'panel:maximize', params: [panelID] },
+            { label: 'Pop Out', message: 'panel:popup', enabled: popable, params: [panelID] },
+            { label: 'Close', command: 'Editor.Panel.close', params: [panelID] },
+            { label: 'Add Tab', submenu: [
+                { label: 'TODO' },
+            ] },
+        ]);
     },
 }, EditorUI.droppable));

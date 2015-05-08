@@ -1,6 +1,24 @@
 Polymer({
+    viewEL: null,
+
+    publish: {
+        warn: { value: false, reflect: true, },
+    },
+
     ready: function () {
         this.setIcon(null);
+    },
+
+    _onDragStart: function ( event ) {
+        event.stopPropagation();
+
+        EditorUI.DockUtils.dragstart( event.dataTransfer, this );
+    },
+
+    _onClick: function ( event ) {
+        event.stopPropagation();
+
+        this.fire( 'tab-click', {} );
     },
 
     setIcon: function ( img ) {
@@ -18,11 +36,5 @@ Polymer({
                 this.$.icon.removeChild(this.$.icon.firstChild);
             }
         }
-    },
-
-    dragstartAction: function ( event ) {
-        event.stopPropagation();
-
-        EditorUI.DockUtils.dragstart( event.dataTransfer, this );
     },
 });

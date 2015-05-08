@@ -1,13 +1,16 @@
 <polymer-element
     name="fire-ui-panel"
-    extends="fire-ui-dock"
     constructor="FirePanel"
+    on-focus="{{_focusAction}}"
+    on-blur="{{_blurAction}}"
+    on-focusin="{{_focusInAction}}"
+    on-focusout="{{_focusOutAction}}"
     >
     <template>
         <link rel="stylesheet" href="panel.css">
 
         <fire-ui-tabs id="tabs"
-            on-changed="{{tabsChangedAction}}"
+            on-tab-changed="{{_onTabChanged}}"
             >
         </fire-ui-tabs>
         <div class="border" flex-1>

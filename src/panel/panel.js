@@ -1,4 +1,4 @@
-Polymer({
+Polymer(EditorUI.mixin({
     publish: {
         width: 200,
         height: 200,
@@ -7,12 +7,57 @@ Polymer({
     },
 
     ready: function () {
-        this._initFocusable(this.$.content);
+        this._initFocusable(null); // NOTE: panel's focus element is variable (a.k.a viewEL)
         this._initResizable();
+        this._initTabs();
 
+        var mousetrap = new Mousetrap(this);
+        mousetrap.bind(['command+shift+]','ctrl+tab'], function () {
+            var next = this.activeIndex+1;
+            if ( next >= this.tabCount )
+                next = 0;
+            this.select(next);
+            this.focus();
+        }.bind(this));
+        mousetrap.bind(['command+shift+[','ctrl+shift+tab'], function () {
+            var prev = this.activeIndex-1;
+            if ( prev < 0 )
+                prev = this.tabCount-1;
+            this.select(prev);
+            this.focus();
+        }.bind(this));
+
+        // grab mousedown in capture phase to make sure we focus on it
+        this.addEventListener('mousedown', function (event) {
+            if ( event.which === 1 ) {
+                this.focus();
+            }
+        }, true);
+    },
+
+    _onMouseDown: function ( event ) {
+        if ( event.which === 1 ) {
+            event.stopPropagation();
+            this.focus();
+        }
+    },
+
+    focus: function () {
+        if ( this.activeTab ) {
+            this.activeTab.viewEL.focus();
+        }
+    },
+
+    blur: function () {
+        if ( this.activeTab ) {
+            this.activeTab.viewEL.blur();
+        }
+    },
+
+    _initTabs: function () {
         //
         var tabs = this.$.tabs;
-        tabs.panel = this;
+        tabs.panelEL = this;
 
         //
         for ( var i = 0; i < this.children.length; ++i ) {
@@ -20,16 +65,19 @@ Polymer({
 
             //
             var name = el.getAttribute('name');
-            var tabEL = tabs.add(name);
+            var tabEL = tabs.addTab(name);
             tabEL.setAttribute('draggable', 'true');
 
             el.style.display = 'none';
             tabEL.viewEL = el;
-
-            tabEL.setIcon( el.icon ); // TEMP HACK
+            tabEL.setIcon( el.icon );
         }
 
         tabs.select(0);
+    },
+
+    _collapseRecursively: function () {
+        this.collapse();
     },
 
     _finalizeSizeRecursively: function () {
@@ -187,20 +235,49 @@ Polymer({
         return this.$.tabs.activeTab;
     },
 
+    get activeIndex () {
+        return EditorUI.index(this.$.tabs.activeTab);
+    },
+
     get tabCount () {
         return this.$.tabs.children.length;
     },
 
-    select: function ( tab ) {
+    warn: function ( idxOrViewEL ) {
         var tabs = this.$.tabs;
-        tabs.select(tab);
+        if ( typeof idxOrViewEL === 'number' ) {
+            tabs.warn(idxOrViewEL);
+        }
+        else {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                if ( idxOrViewEL === this.children[i] ) {
+                    tabs.warn(i);
+                    break;
+                }
+            }
+        }
+    },
+
+    select: function ( idxOrViewEL ) {
+        var tabs = this.$.tabs;
+        if ( typeof idxOrViewEL === 'number' ) {
+            tabs.select(idxOrViewEL);
+        }
+        else {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                if ( idxOrViewEL === this.children[i] ) {
+                    tabs.select(i);
+                    break;
+                }
+            }
+        }
     },
 
     insert: function ( tabEL, viewEL, insertBeforeTabEL ) {
         var tabs = this.$.tabs;
 
         var name = viewEL.getAttribute('name');
-        tabs.insert(tabEL, insertBeforeTabEL);
+        tabs.insertTab(tabEL, insertBeforeTabEL);
         tabEL.setAttribute('draggable', 'true');
 
         // NOTE: if we just move tabs, we must not hide viewEL
@@ -211,7 +288,12 @@ Polymer({
         tabEL.setIcon( viewEL.icon ); // TEMP HACK
 
         //
-        this.appendChild(viewEL);
+        if ( insertBeforeTabEL ) {
+            this.insertBefore(viewEL, insertBeforeTabEL.viewEL);
+        }
+        else {
+            this.appendChild(viewEL);
+        }
 
         //
         this._applyViewMinMax();
@@ -224,7 +306,7 @@ Polymer({
         var tabs = this.$.tabs;
 
         var name = viewEL.getAttribute('name');
-        var tabEL = tabs.add(name);
+        var tabEL = tabs.addTab(name);
         tabEL.setAttribute('draggable', 'true');
 
         viewEL.style.display = 'none';
@@ -245,7 +327,7 @@ Polymer({
         var tabs = this.$.tabs;
 
         //
-        tabs.remove(tabEL);
+        tabs.removeTab(tabEL);
         if ( tabEL.viewEL ) {
             tabEL.viewEL.remove();
             tabEL.viewEL = null;
@@ -264,7 +346,7 @@ Polymer({
     collapse: function () {
         // remove from dock;
         if ( this.$.tabs.children.length === 0 ) {
-            if ( this.parentElement instanceof FireDock ) {
+            if ( this.parentElement['ui-dockable'] ) {
                 return this.parentElement.removeDock(this);
             }
         }
@@ -272,17 +354,19 @@ Polymer({
         return false;
     },
 
-    tabsChangedAction: function ( event ) {
+    _onTabChanged: function ( event ) {
+        event.stopPropagation();
+
         var detail = event.detail;
         if ( detail.old !== null ) {
             detail.old.viewEL.style.display = 'none';
-            detail.old.viewEL.dispatchEvent( new CustomEvent('hide') );
+            detail.old.viewEL.dispatchEvent( new CustomEvent('panel-hide') );
         }
         if ( detail.new !== null ) {
             detail.new.viewEL.style.display = '';
-            detail.new.viewEL.dispatchEvent( new CustomEvent('show') );
+            detail.new.viewEL.dispatchEvent( new CustomEvent('panel-show') );
         }
 
-        event.stopPropagation();
+        Editor.saveLayout();
     },
-});
+}, EditorUI.resizable, EditorUI.focusable, EditorUI.dockable));

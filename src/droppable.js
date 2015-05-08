@@ -1,11 +1,15 @@
 EditorUI.droppable = (function () {
+
     var droppable = {
+        'ui-droppable': true,
+
         publish: {
             droppable: {
-                value: "file",
+                value: 'file',
                 reflect: true
             },
-            "single-drop": {
+
+            'single-drop': {
                 value: false,
                 reflect: true
             },
@@ -14,8 +18,10 @@ EditorUI.droppable = (function () {
         _initDroppable: function ( dropAreaElement ) {
             this._dragenterCnt = 0;
 
-            dropAreaElement.addEventListener( "dragenter", function (event) {
-                event.stopPropagation();
+            dropAreaElement.addEventListener( 'dragenter', function (event) {
+                // NOTE: do not stopPropagation, otherwise dock-utils can not catch the event
+                // event.stopPropagation();
+
                 ++this._dragenterCnt;
 
                 if ( this._dragenterCnt === 1 ) {
@@ -33,8 +39,10 @@ EditorUI.droppable = (function () {
                 }
             }.bind(this));
 
-            dropAreaElement.addEventListener( "dragleave", function (event) {
-                event.stopPropagation();
+            dropAreaElement.addEventListener( 'dragleave', function (event) {
+                // NOTE: do not stopPropagation, otherwise dock-utils can not catch the event
+                // event.stopPropagation();
+
                 --this._dragenterCnt;
 
                 if ( this._dragenterCnt === 0 ) {
@@ -52,7 +60,7 @@ EditorUI.droppable = (function () {
                 }
             }.bind(this));
 
-            dropAreaElement.addEventListener( "drop", function (event) {
+            dropAreaElement.addEventListener( 'drop', function (event) {
                 this._dragenterCnt = 0;
 
                 this.checkIfDroppable( event.dataTransfer, function ( droppable, dragType, dragItems ) {
@@ -73,7 +81,7 @@ EditorUI.droppable = (function () {
                 });
             }.bind(this));
 
-            // dropAreaElement.addEventListener( "dragover", function (event) {
+            // dropAreaElement.addEventListener( 'dragover', function (event) {
             //     event.preventDefault(); // Necessary. Allows us to control the drop.
             //     event.stopPropagation();
 

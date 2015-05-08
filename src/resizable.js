@@ -12,12 +12,14 @@ EditorUI.resizable = (function () {
     }
 
     var resizable = {
+        'ui-resizable': true,
+
         publish: {
-            'width': 'auto',
+            width: 'auto',
             'min-width': 'auto',
             'max-width': 'auto',
 
-            'height': 'auto',
+            height: 'auto',
             'min-height': 'auto',
             'max-height': 'auto',
         },
@@ -152,8 +154,8 @@ EditorUI.resizable = (function () {
             var i, el;
             var infWidth = false, infHeight = false;
 
-            this.computedMinWidth = 3 * (elements.length-1); // preserve resizers' width
-            this.computedMinHeight = 3 * (elements.length-1); // preserve resizers' height
+            this.computedMinWidth = elements.length > 0 ? 3 * (elements.length-1) : 0; // preserve resizers' width
+            this.computedMinHeight = elements.length > 0 ? 3 * (elements.length-1) : 0; // preserve resizers' height
             this.computedMaxWidth = this['max-width'];
             this.computedMaxHeight = this['max-height'];
 
@@ -232,6 +234,20 @@ EditorUI.resizable = (function () {
                 }
             }
 
+            if ( this['min-width'] !== 'auto' &&
+                 this.computedMinWidth !== 'auto' &&
+                 this['min-width'] > this.computedMinWidth )
+            {
+                this.computedMinWidth = this['min-width'];
+            }
+
+            if ( this['min-height'] !== 'auto' &&
+                 this.computedMinHeight !== 'auto' &&
+                 this['min-height'] > this.computedMinHeight )
+            {
+                this.computedMinHeight = this['min-height'];
+            }
+
             // final decision
 
             // min-width
@@ -272,6 +288,17 @@ EditorUI.resizable = (function () {
         },
 
         _initResizable: function () {
+            // parse properties
+            // NOTE: since we use String for size properties, we have to
+            //       parse them for the right type
+            [ 'width', 'height', 'minWidth', 'minHeight', 'maxWidth', 'maxHeight']
+            .forEach(function ( prop ) {
+                if ( this[prop] !== 'auto' )
+                    this[prop] = parseInt(this[prop]);
+                if ( isNaN(this[prop]) )
+                    this[prop] = 'auto';
+            }.bind(this));
+
             this.initSize();
         },
     };

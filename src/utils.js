@@ -269,7 +269,7 @@ var EditorUI = (function () {
             }
             else if ( info.panels ) {
                 for ( var j = 0; j < info.panels.length; ++j ) {
-                    importList.push( { dockEL: el, panelID: info.panels[j] } );
+                    importList.push( { dockEL: el, panelID: info.panels[j], active: j === info.active } );
                 }
             }
 
