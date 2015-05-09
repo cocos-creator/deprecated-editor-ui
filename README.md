@@ -1,6 +1,6 @@
 # Intro
 
-Fireball Editor UI components （Fireball Editor UI构建）
+This is the custom UI elements library built with [Polymer](https://www.polymer-project.org) for [Fireball Game Editor](https://github.com/fireball-x/fireball).
 
 ## Install
 
