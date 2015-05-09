@@ -3,23 +3,27 @@
 <polymer-element
     name="fire-ui-tabs"
     constructor="FireTabs"
-    on-click="{{clickAction}}"
-    on-drop-area-enter="{{dropAreaEnterAction}}"
-    on-drop-area-leave="{{dropAreaLeaveAction}}"
-    on-drop-area-accept="{{dropAreaAcceptAction}}"
-    on-dragover="{{dragoverAction}}"
+    on-click="{{_onClick}}"
+    on-tab-click="{{_onTabClick}}"
+    on-drop-area-enter="{{_onDropAreaEnter}}"
+    on-drop-area-leave="{{_onDropAreaLeave}}"
+    on-drop-area-accept="{{_onDropAreaAccept}}"
+    on-dragover="{{_onDragOver}}"
     >
     <template>
         <link rel="stylesheet" href="tabs.css">
 
         <div flex-row class="border">
-            <div flex-1 flex-row flex-stretch class="tabs">
+            <div id="tabList" class="tabs" flex-1 flex-row flex-stretch>
                 <content></content>
-                <div id="insertLine" class="insert"></div>
             </div>
-            <div class="menu">
+            <div id="popup" class="icon" on-click="{{_onPopup}}">
+                <i class="fa fa-share"></i>
+            </div>
+            <div id="menu" class="icon" on-click="{{_onMenuPopup}}">
                 <i class="fa fa-bars"></i>
             </div>
+            <div id="insertLine" class="insert"></div>
         </div>
     </template>
 

@@ -1,7 +1,8 @@
 <polymer-element
     name="fire-ui-tab"
     constructor="FireTab"
-    on-dragstart="dragstartAction"
+    on-dragstart="{{_onDragStart}}"
+    on-click="{{_onClick}}"
     >
     <template>
         <link rel="stylesheet" href="tab.css">

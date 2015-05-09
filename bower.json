@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
+    "mousetrap": "ccampbell/mousetrap#1.5.2",
     "polymer": "Polymer/polymer#~0.5.5",
     "svg.js": ""
   },

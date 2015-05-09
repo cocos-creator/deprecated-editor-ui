@@ -103,7 +103,6 @@ Polymer({
             value: false,
             reflect: true
         },
-        space: 3,
         active: {
             value: false,
             reflect: true
@@ -124,8 +123,9 @@ Polymer({
         // var totalSize = -1;
 
         // get parent size
-        if ( parentEL.$.content ) {
-            rect = parentEL.$.content.getBoundingClientRect();
+        var frameWrapper = parentEL.$['frame-wrapper'];
+        if ( frameWrapper ) {
+            rect = frameWrapper.getBoundingClientRect();
         }
         else {
             rect = parentEL.getBoundingClientRect();
@@ -190,14 +190,16 @@ Polymer({
     },
 
     mousedownAction: function ( event ) {
+        //
+        event.stopPropagation();
         this.active = true;
-        var parentEL = this.parentElement;
         var snapshot = this._snapshot();
         var lastDir = 0;
         var rect = this.getBoundingClientRect();
         var centerx = Math.floor(rect.left + rect.width/2);
         var centery = Math.floor(rect.top + rect.height/2);
 
+        var parentEL = this.parentElement;
         for ( var i = 0; i < parentEL.children.length; ++i ) {
             var el = parentEL.children[i];
             if ( el instanceof FireDockResizer )
@@ -280,6 +282,9 @@ Polymer({
 
                 el._notifyResize();
             }
+
+            //
+            Editor.saveLayout();
         }.bind(this);
 
         // add drag-ghost
@@ -291,8 +296,5 @@ Polymer({
         }
         document.addEventListener ( 'mousemove', mousemoveHandle );
         document.addEventListener ( 'mouseup', mouseupHandle );
-
-        //
-        event.stopPropagation();
     },
 });

@@ -13,8 +13,8 @@ EditorUI.DragDrop = (function () {
             } );
             dataTransfer.effectAllowed = effect;
             dataTransfer.dropEffect = 'none';
-            dataTransfer.setData('fire/type', type);
-            dataTransfer.setData('fire/items', ids.join());
+            dataTransfer.setData('editor/type', type);
+            dataTransfer.setData('editor/items', ids.join());
             var img = this.getDragIcon(items);
             dataTransfer.setDragImage(img, -10, 10);
         },
@@ -51,10 +51,10 @@ EditorUI.DragDrop = (function () {
         },
 
         type: function ( dataTransfer ) {
-            var type = dataTransfer.getData('fire/type');
+            var type = dataTransfer.getData('editor/type');
 
-            if ( type === "" && dataTransfer.files.length > 0 )
-                return "file";
+            if ( type === '' && dataTransfer.files.length > 0 )
+                return 'file';
 
             return type;
         },
@@ -63,7 +63,7 @@ EditorUI.DragDrop = (function () {
             var type = DragDrop.type(dataTransfer);
             var items;
 
-            if ( type === "file" ) {
+            if ( type === 'file' ) {
                 var files = dataTransfer.files;
                 items = [];
 
@@ -86,8 +86,8 @@ EditorUI.DragDrop = (function () {
                 }
             }
             else {
-                items = dataTransfer.getData('fire/items');
-                if ( items !== "" ) {
+                items = dataTransfer.getData('editor/items');
+                if ( items !== '' ) {
                     items = items.split(',');
                 }
                 else {
@@ -103,20 +103,20 @@ EditorUI.DragDrop = (function () {
             var icon = new Image();
             var canvas = document.createElement('canvas');
             var imgPanel = canvas.getContext('2d');
-            imgPanel.font = "normal 12px Arial";
-            imgPanel.fillStyle = "white";
+            imgPanel.font = 'normal 12px Arial';
+            imgPanel.fillStyle = 'white';
             var top = 0;
             for ( var i = 0; i < items.length; ++i ) {
                 var item = items[i];
                 if ( i <= 4 ) {
-                    icon.src = "uuid://" + item.id + "?thumb";
+                    icon.src = 'uuid://' + item.id + '?thumb';
                     imgPanel.drawImage(icon,0,top,16,16); // icon
                     imgPanel.fillText(item.name,20,top + 15); // text
                     top += 15;
                 }
                 else {
-                    imgPanel.fillStyle = "gray";
-                    imgPanel.fillText("[more.....]",20,top + 15);
+                    imgPanel.fillStyle = 'gray';
+                    imgPanel.fillText('[more.....]',20,top + 15);
                     break;
                 }
 

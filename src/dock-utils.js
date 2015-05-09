@@ -1,9 +1,24 @@
 EditorUI.DockUtils = (function () {
 
+    var _resizerSpace = 3; // 3 is resizer size
     var _resultDock = null;
     var _potentialDocks = [];
     var _dockMask = null;
-    var _draggingTab = null;
+
+    var _dragenterCnt = 0;
+    var _draggingInfo = null;
+
+    if ( Fire.isApp ) {
+        var Ipc = require('ipc');
+
+        Ipc.on( 'panel:dragstart', function ( info ) {
+            console.log('dragstart');
+            _draggingInfo = info;
+        });
+        Ipc.on( 'panel:dragend', function () {
+            _reset();
+        });
+    }
 
     var _updateMask = function ( type, x, y, w, h ) {
         if ( !_dockMask ) {
@@ -41,7 +56,8 @@ EditorUI.DockUtils = (function () {
         }
 
         _resultDock = null;
-        _draggingTab = null;
+        _dragenterCnt = 0;
+        _draggingInfo = null;
     };
 
     var DockUtils = {};
@@ -49,13 +65,43 @@ EditorUI.DockUtils = (function () {
     DockUtils.root = null;
 
     DockUtils.dragstart = function ( dataTransfer, tabEL ) {
-        _draggingTab = tabEL;
-        dataTransfer.setData('fire/type', 'tab');
+        dataTransfer.setData('editor/type', 'tab');
+
+        var frameEL = tabEL.frameEL;
+        var panelID = frameEL.getAttribute('id');
+        var panelEL = frameEL.parentElement;
+        var panelRect = panelEL.getBoundingClientRect();
+
+        _draggingInfo = {
+            panelID: panelID,
+            panelRectWidth: panelRect.width,
+            panelRectHeight: panelRect.height,
+
+            panelWidth: panelEL.width,
+            panelHeight: panelEL.height,
+            panelComputedWidth: panelEL.computedWidth,
+            panelComputedHeight: panelEL.computedHeight,
+            panelCurWidth: panelEL.curWidth,
+            panelCurHeight: panelEL.curHeight,
+
+            panelMinWidth: panelEL['min-width'],
+            panelMinHeight: panelEL['min-height'],
+            panelMaxWidth: panelEL['max-width'],
+            panelMaxHeight: panelEL['max-height'],
+
+            parentDockRow: panelEL.parentElement.row,
+        };
+
+        if ( Editor.sendToWindows ) {
+            Editor.sendToWindows('panel:dragstart', _draggingInfo, Editor.selfExcluded);
+        }
     };
 
     DockUtils.dragoverTab = function ( target ) {
-        if ( _draggingTab === null )
+        if ( !_draggingInfo )
             return;
+
+        Editor.Window.focus();
 
         // clear docks hints
         _potentialDocks = [];
@@ -70,64 +116,130 @@ EditorUI.DockUtils = (function () {
     };
 
     DockUtils.dropTab = function ( target, insertBeforeTabEL ) {
-        var viewEL = _draggingTab.viewEL;
-        var panelEL = _draggingTab.parentElement.panel;
-        var needCollapse = panelEL !== target.panel;
+        if ( !_draggingInfo )
+            return;
 
-        if ( needCollapse ) {
-            panelEL.closeNoCollapse(_draggingTab);
+        var panelID = _draggingInfo.panelID;
+        var frameEL = Editor.Panel.find(panelID);
+
+        if ( frameEL ) {
+            var panelEL = frameEL.parentElement;
+            var targetPanelEL = target.panelEL;
+
+            var needCollapse = panelEL !== targetPanelEL;
+            var currentTabEL = panelEL.$.tabs.findTab(frameEL);
+
+            if ( needCollapse ) {
+                panelEL.closeNoCollapse(currentTabEL);
+            }
+
+            //
+            var idx = targetPanelEL.insert( currentTabEL, frameEL, insertBeforeTabEL );
+            targetPanelEL.select(idx);
+
+            if ( needCollapse ) {
+                panelEL.collapse();
+            }
+
+            // reset internal states
+            _reset();
+
+            //
+            DockUtils.flush();
+            Editor.saveLayout();
+
+            // NOTE: you must focus after DockUtils flushed
+            // NOTE: do not use panelEL focus, the activeTab is still not assigned
+            frameEL.focus();
+            if ( Editor.Panel.isDirty(frameEL.getAttribute('id')) ) {
+                targetPanelEL.warn(frameEL);
+            }
         }
+        else {
+            Editor.Panel.close(panelID);
 
-        //
-        var newPanel = target.panel;
-        var idx = newPanel.insert( _draggingTab, viewEL, insertBeforeTabEL );
-        newPanel.select(idx);
+            Editor.Panel.load( panelID, function ( err, frameEL ) {
+                if ( err ) {
+                    return;
+                }
 
-        if ( needCollapse ) {
-            panelEL.collapse();
+                requestAnimationFrame ( function () {
+                    var targetPanelEL = target.panelEL;
+                    var newTabEL = new FireTab(frameEL.getAttribute('name'));
+                    var idx = targetPanelEL.insert( newTabEL, frameEL, insertBeforeTabEL );
+                    targetPanelEL.select(idx);
+
+                    // reset internal states
+                    _reset();
+
+                    //
+                    DockUtils.flush();
+                    Editor.saveLayout();
+
+                    // NOTE: you must focus after DockUtils flushed
+                    // NOTE: do not use panelEL focus, the activeTab is still not assigned
+                    frameEL.focus();
+                    if ( Editor.Panel.isDirty(frameEL.getAttribute('id')) ) {
+                        targetPanelEL.warn(frameEL);
+                    }
+                });
+            });
         }
-
-        //
-        DockUtils.flush();
-
-        // reset internal states
-        _reset();
     };
 
     DockUtils.dragoverDock = function ( target ) {
-        if ( _draggingTab === null )
+        if ( !_draggingInfo )
             return;
 
         _potentialDocks.push(target);
     };
 
     DockUtils.reset = function () {
-        if ( DockUtils.root instanceof FireDock ) {
-            this.root._finalizeSizeRecursively();
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if (DockUtils.root) {
+            if ( DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeSizeRecursively();
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 
     DockUtils.flush = function () {
-        if ( DockUtils.root instanceof FireDock ) {
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if (DockUtils.root) {
+            if (  DockUtils.root && DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
+        }
+    };
+
+    DockUtils.flushWithCollapse = function () {
+        this.root._collapseRecursively();
+        if (DockUtils.root) {
+            if (   DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 
     DockUtils.reflow = function () {
-        if ( DockUtils.root instanceof FireDock ) {
-            DockUtils.root._reflowRecursively();
-            DockUtils.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if (DockUtils.root) {
+            if (  DockUtils.root && DockUtils.root['ui-dockable'] ) {
+                DockUtils.root._reflowRecursively();
+                DockUtils.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }            
         }
     };
 
@@ -135,14 +247,37 @@ EditorUI.DockUtils = (function () {
         DockUtils.reflow();
     });
 
-    document.addEventListener("dragover", function ( event ) {
-        if ( _draggingTab === null )
+    document.addEventListener('dragenter', function ( event ) {
+        if ( !_draggingInfo )
+            return;
+
+        event.stopPropagation();
+        ++_dragenterCnt;
+    });
+
+    document.addEventListener('dragleave', function ( event ) {
+        if ( !_draggingInfo )
+            return;
+
+        event.stopPropagation();
+        --_dragenterCnt;
+
+        if ( _dragenterCnt === 0 ) {
+            if ( _dockMask ) {
+                _dockMask.remove();
+            }
+        }
+    });
+
+    document.addEventListener('dragover', function ( event ) {
+        if ( !_draggingInfo )
             return;
 
         event.dataTransfer.dropEffect = 'move';
         event.preventDefault();
 
-        var panelEL = _draggingTab.parentElement.panel;
+        Editor.Window.focus();
+
         var minDistance = null;
         _resultDock = null;
 
@@ -193,12 +328,17 @@ EditorUI.DockUtils = (function () {
 
         if ( _resultDock ) {
             var rect = _resultDock.target.getBoundingClientRect();
-            var panelRect = panelEL.getBoundingClientRect();
             var maskRect = null;
-            var hintWidth = panelEL.computedWidth === 'auto' ? rect.width/2 : panelRect.width;
+
+            var panelComputedWidth = _draggingInfo.panelComputedWidth;
+            var panelComputedHeight = _draggingInfo.panelComputedHeight;
+            var panelRectWidth = _draggingInfo.panelRectWidth;
+            var panelRectHeight = _draggingInfo.panelRectHeight;
+
+            var hintWidth = panelComputedWidth === 'auto' ? rect.width/2 : panelRectWidth;
             hintWidth = Math.min( hintWidth, Math.min( rect.width/2, 200 ) );
 
-            var hintHeight = panelEL.computedHeight === 'auto' ? rect.height/2 : panelRect.height;
+            var hintHeight = panelComputedHeight === 'auto' ? rect.height/2 : panelRectHeight;
             hintHeight = Math.min( hintHeight, Math.min( rect.height/2, 200 ) );
 
             if ( _resultDock.position === 'top' ) {
@@ -245,68 +385,154 @@ EditorUI.DockUtils = (function () {
         _potentialDocks = [];
     });
 
-    document.addEventListener("dragend", function ( event ) {
+    document.addEventListener('dragend', function ( event ) {
         // reset internal states
         _reset();
+        if ( Editor.sendToWindows ) {
+            Editor.sendToWindows( 'panel:dragend', Editor.selfExcluded );
+        }
     });
 
-    document.addEventListener("drop", function ( event ) {
+    document.addEventListener('drop', function ( event ) {
+        event.preventDefault();
+        event.stopPropagation();
+
         if ( _resultDock === null ) {
             return;
         }
 
-        if ( _resultDock.target === _draggingTab.parentElement.panel &&
-             _resultDock.target.tabCount === 1 )
+        var panelID = _draggingInfo.panelID;
+        var panelRectWidth = _draggingInfo.panelRectWidth;
+        var panelRectHeight = _draggingInfo.panelRectHeight;
+
+        var panelWidth = _draggingInfo.panelWidth;
+        var panelHeight = _draggingInfo.panelHeight;
+        var panelComputedWidth = _draggingInfo.panelComputedWidth;
+        var panelComputedHeight = _draggingInfo.panelComputedHeight;
+        var panelCurWidth = _draggingInfo.panelCurWidth;
+        var panelCurHeight = _draggingInfo.panelCurHeight;
+
+        var panelMinWidth = _draggingInfo.panelMinWidth;
+        var panelMinHeight = _draggingInfo.panelMinHeight;
+        var panelMaxWidth = _draggingInfo.panelMaxWidth;
+        var panelMaxHeight = _draggingInfo.panelMaxHeight;
+
+        var parentDockRow = _draggingInfo.parentDockRow;
+
+        var targetDockEL = _resultDock.target;
+        var dockPosition = _resultDock.position;
+
+        var frameEL = Editor.Panel.find(panelID);
+        if ( !frameEL ) {
+            Editor.Panel.close(panelID);
+
+            Editor.Panel.load( panelID, function ( err, frameEL ) {
+                if ( err ) {
+                    return;
+                }
+
+                requestAnimationFrame ( function () {
+                    var newPanel = new FirePanel();
+                    newPanel.width = panelWidth;
+                    newPanel.height = panelHeight;
+                    newPanel['min-width'] = panelMinWidth;
+                    newPanel['max-width'] = panelMaxWidth;
+                    newPanel['min-height'] = panelMinHeight;
+                    newPanel['max-height'] = panelMaxHeight;
+
+                    // NOTE: here must use frameEL's width, height attribute to determine computed size
+                    var elWidth = parseInt(frameEL.getAttribute('width'));
+                    elWidth = isNaN(elWidth) ? 'auto' : elWidth;
+                    newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelComputedWidth;
+
+                    var elHeight = parseInt(frameEL.getAttribute('height'));
+                    elHeight = isNaN(elHeight) ? 'auto' : elHeight;
+                    newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelComputedHeight;
+
+                    // if parent is row, the height will be ignore
+                    if ( parentDockRow ) {
+                        newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelRectWidth;
+                        newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelCurHeight;
+                    }
+                    // else if parent is column, the width will be ignore
+                    else {
+                        newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelCurWidth;
+                        newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelRectHeight;
+                    }
+
+                    newPanel.add(frameEL);
+                    newPanel.select(0);
+
+                    //
+                    targetDockEL.addDock( dockPosition, newPanel );
+
+                    // reset internal states
+                    _reset();
+
+                    //
+                    DockUtils.flush();
+                    Editor.saveLayout();
+
+                    // NOTE: you must focus after DockUtils flushed
+                    // NOTE: do not use panelEL focus, the activeTab is still not assigned
+                    frameEL.focus();
+                    if ( Editor.Panel.isDirty(frameEL.getAttribute('id')) ) {
+                        newPanel.warn(frameEL);
+                    }
+                });
+            });
+
+            return;
+        }
+
+        var panelEL = frameEL.parentElement;
+
+        if ( targetDockEL === panelEL &&
+             targetDockEL.tabCount === 1 )
         {
             return;
         }
 
-        event.preventDefault();
-        event.stopPropagation();
-
-        var viewEL = _draggingTab.viewEL;
-        var panelEL = _draggingTab.parentElement.panel;
-
-        var panelRect = panelEL.getBoundingClientRect();
         var parentDock = panelEL.parentElement;
 
         //
-        panelEL.closeNoCollapse(_draggingTab);
+        var currentTabEL = panelEL.$.tabs.findTab(frameEL);
+        panelEL.closeNoCollapse(currentTabEL);
 
         //
         var newPanel = new FirePanel();
-        newPanel['min-width'] = panelEL['min-width'];
-        newPanel['max-width'] = panelEL['max-width'];
-        newPanel['min-height'] = panelEL['min-height'];
-        newPanel['max-height'] = panelEL['max-height'];
-        newPanel.width = panelEL.width;
-        newPanel.height = panelEL.height;
+        newPanel.width = panelWidth;
+        newPanel.height = panelHeight;
+        newPanel['min-width'] = panelMinWidth;
+        newPanel['max-width'] = panelMaxWidth;
+        newPanel['min-height'] = panelMinHeight;
+        newPanel['max-height'] = panelMaxHeight;
 
-        // NOTE: here must use viewEL's width, height attribute to determine computed size
-        var elWidth = parseInt(viewEL.getAttribute('width'));
+        // NOTE: here must use frameEL's width, height attribute to determine computed size
+        var elWidth = parseInt(frameEL.getAttribute('width'));
         elWidth = isNaN(elWidth) ? 'auto' : elWidth;
-        newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelEL.computedWidth;
+        newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelComputedWidth;
 
-        var elHeight = parseInt(viewEL.getAttribute('height'));
+        var elHeight = parseInt(frameEL.getAttribute('height'));
         elHeight = isNaN(elHeight) ? 'auto' : elHeight;
-        newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelEL.computedHeight;
+        newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelComputedHeight;
 
         // if parent is row, the height will be ignore
         if ( parentDock.row ) {
-            newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelRect.width;
-            newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelEL.curHeight;
+            newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelRectWidth;
+            newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelCurHeight;
         }
         // else if parent is column, the width will be ignore
         else {
-            newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelEL.curWidth;
-            newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelRect.height;
+            newPanel.curWidth = newPanel.computedWidth === 'auto' ? 'auto' : panelCurWidth;
+            newPanel.curHeight = newPanel.computedHeight === 'auto' ? 'auto' : panelRectHeight;
         }
 
-        newPanel.add(viewEL);
+        newPanel.add(frameEL);
         newPanel.select(0);
 
         //
-        _resultDock.target.addDock( _resultDock.position, newPanel );
+        targetDockEL.addDock( dockPosition, newPanel );
 
         //
         var totallyRemoved = panelEL.children.length === 0;
@@ -322,7 +548,7 @@ EditorUI.DockUtils = (function () {
             if ( newPanel.parentElement !== parentDock ) {
                 var sibling = newPanel;
                 var newParent = newPanel.parentElement;
-                while ( newParent && newParent instanceof FireDock ) {
+                while ( newParent && newParent['ui-dockable'] ) {
                     if ( newParent === parentDock ) {
                         hasSameAncient = true;
                         break;
@@ -335,13 +561,11 @@ EditorUI.DockUtils = (function () {
                 if ( hasSameAncient ) {
                     var size = 0;
                     if ( parentDock.row ) {
-                        // 3 is resizer size
-                        size = sibling.curWidth + 3 + panelEL.curWidth;
+                        size = sibling.curWidth + _resizerSpace + panelCurWidth;
                         sibling.curWidth = size;
                     }
                     else {
-                        // 3 is resizer size
-                        size = sibling.curHeight + 3 + panelEL.curHeight;
+                        size = sibling.curHeight + _resizerSpace + panelCurHeight;
                         sibling.curHeight = size;
                     }
 
@@ -350,11 +574,19 @@ EditorUI.DockUtils = (function () {
             }
         }
 
-        //
-        DockUtils.flush();
-
         // reset internal states
         _reset();
+
+        //
+        DockUtils.flush();
+        Editor.saveLayout();
+
+        // NOTE: you must focus after DockUtils flushed
+        // NOTE: do not use panelEL focus, the activeTab is still not assigned
+        frameEL.focus();
+        if ( Editor.Panel.isDirty(frameEL.getAttribute('id')) ) {
+            newPanel.warn(frameEL);
+        }
     });
 
     return DockUtils;

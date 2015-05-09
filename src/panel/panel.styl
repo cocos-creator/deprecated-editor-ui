@@ -21,7 +21,7 @@
     border: 1px solid #212121
 }
 
-.content {
+#frame-wrapper {
     border-left: 1px solid rgba(255, 255, 255, 0.08)
     border-right: 1px solid rgba(255, 255, 255, 0.08)
     border-bottom: 1px solid rgba(255, 255, 255, 0.08)
@@ -32,4 +32,12 @@
     &:focus {
         outline: none
     }
+}
+
+:host([focused])::shadow fire-ui-tabs fire-ui-tab.active::shadow .border {
+    border-top: 1px solid #09f
+    border-left: 1px solid #09f
+    border-right: 1px solid #09f
+
+    background-color: #058
 }

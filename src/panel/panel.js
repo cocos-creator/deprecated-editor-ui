@@ -1,4 +1,4 @@
-Polymer({
+Polymer(EditorUI.mixin({
     publish: {
         width: 200,
         height: 200,
@@ -7,12 +7,59 @@ Polymer({
     },
 
     ready: function () {
-        this._initFocusable(this.$.content);
+        this._initFocusable(null); // NOTE: panel's focus element is variable (a.k.a frameEL)
         this._initResizable();
+        this._initTabs();
 
+        if ( window.Mousetrap ) {
+            var mousetrap = new Mousetrap(this);
+            mousetrap.bind(['command+shift+]','ctrl+tab'], function () {
+                var next = this.activeIndex+1;
+                if ( next >= this.tabCount )
+                    next = 0;
+                this.select(next);
+                this.focus();
+            }.bind(this));
+            mousetrap.bind(['command+shift+[','ctrl+shift+tab'], function () {
+                var prev = this.activeIndex-1;
+                if ( prev < 0 )
+                    prev = this.tabCount-1;
+                this.select(prev);
+                this.focus();
+            }.bind(this));
+        }
+
+        // grab mousedown in capture phase to make sure we focus on it
+        this.addEventListener('mousedown', function (event) {
+            if ( event.which === 1 ) {
+                this.focus();
+            }
+        }, true);
+    },
+
+    _onMouseDown: function ( event ) {
+        if ( event.which === 1 ) {
+            event.stopPropagation();
+            this.focus();
+        }
+    },
+
+    focus: function () {
+        if ( this.activeTab ) {
+            this.activeTab.frameEL.focus();
+        }
+    },
+
+    blur: function () {
+        if ( this.activeTab ) {
+            this.activeTab.frameEL.blur();
+        }
+    },
+
+    _initTabs: function () {
         //
         var tabs = this.$.tabs;
-        tabs.panel = this;
+        tabs.panelEL = this;
 
         //
         for ( var i = 0; i < this.children.length; ++i ) {
@@ -20,24 +67,27 @@ Polymer({
 
             //
             var name = el.getAttribute('name');
-            var tabEL = tabs.add(name);
+            var tabEL = tabs.addTab(name);
             tabEL.setAttribute('draggable', 'true');
 
             el.style.display = 'none';
-            tabEL.viewEL = el;
-
-            tabEL.setIcon( el.icon ); // TEMP HACK
+            tabEL.frameEL = el;
+            tabEL.setIcon( el.icon );
         }
 
         tabs.select(0);
     },
 
+    _collapseRecursively: function () {
+        this.collapse();
+    },
+
     _finalizeSizeRecursively: function () {
-        this._applyViewSize();
+        this._applyFrameSize();
     },
 
     _finalizeMinMaxRecursively: function () {
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
     },
 
     _finalizeStyleRecursively: function () {
@@ -47,7 +97,7 @@ Polymer({
     _reflowRecursively: function () {
     },
 
-    _applyViewSize: function () {
+    _applyFrameSize: function () {
         var autoWidth = false, autoHeight = false;
 
         // reset width, height
@@ -91,7 +141,7 @@ Polymer({
         this.curHeight = this.computedHeight;
     },
 
-    _applyViewMinMax: function () {
+    _applyFrameMinMax: function () {
         var infWidth = false, infHeight = false;
 
         for ( var i = 0; i < this.children.length; ++i ) {
@@ -187,54 +237,88 @@ Polymer({
         return this.$.tabs.activeTab;
     },
 
+    get activeIndex () {
+        return EditorUI.index(this.$.tabs.activeTab);
+    },
+
     get tabCount () {
         return this.$.tabs.children.length;
     },
 
-    select: function ( tab ) {
+    warn: function ( idxOrFrameEL ) {
         var tabs = this.$.tabs;
-        tabs.select(tab);
+        if ( typeof idxOrFrameEL === 'number' ) {
+            tabs.warn(idxOrFrameEL);
+        }
+        else {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                if ( idxOrFrameEL === this.children[i] ) {
+                    tabs.warn(i);
+                    break;
+                }
+            }
+        }
     },
 
-    insert: function ( tabEL, viewEL, insertBeforeTabEL ) {
+    select: function ( idxOrFrameEL ) {
+        var tabs = this.$.tabs;
+        if ( typeof idxOrFrameEL === 'number' ) {
+            tabs.select(idxOrFrameEL);
+        }
+        else {
+            for ( var i = 0; i < this.children.length; ++i ) {
+                if ( idxOrFrameEL === this.children[i] ) {
+                    tabs.select(i);
+                    break;
+                }
+            }
+        }
+    },
+
+    insert: function ( tabEL, frameEL, insertBeforeTabEL ) {
         var tabs = this.$.tabs;
 
-        var name = viewEL.getAttribute('name');
-        tabs.insert(tabEL, insertBeforeTabEL);
+        var name = frameEL.getAttribute('name');
+        tabs.insertTab(tabEL, insertBeforeTabEL);
         tabEL.setAttribute('draggable', 'true');
 
-        // NOTE: if we just move tabs, we must not hide viewEL
+        // NOTE: if we just move tabs, we must not hide frameEL
         if ( tabEL.parentElement !== tabs ) {
-            viewEL.style.display = 'none';
+            frameEL.style.display = 'none';
         }
-        tabEL.viewEL = viewEL;
-        tabEL.setIcon( viewEL.icon ); // TEMP HACK
+        tabEL.frameEL = frameEL;
+        tabEL.setIcon( frameEL.icon ); // TEMP HACK
 
         //
-        this.appendChild(viewEL);
+        if ( insertBeforeTabEL ) {
+            this.insertBefore(frameEL, insertBeforeTabEL.frameEL);
+        }
+        else {
+            this.appendChild(frameEL);
+        }
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
 
         return EditorUI.index(tabEL);
     },
 
-    add: function ( viewEL ) {
+    add: function ( frameEL ) {
         var tabs = this.$.tabs;
 
-        var name = viewEL.getAttribute('name');
-        var tabEL = tabs.add(name);
+        var name = frameEL.getAttribute('name');
+        var tabEL = tabs.addTab(name);
         tabEL.setAttribute('draggable', 'true');
 
-        viewEL.style.display = 'none';
-        tabEL.viewEL = viewEL;
-        tabEL.setIcon( viewEL.icon ); // TEMP HACK
+        frameEL.style.display = 'none';
+        tabEL.frameEL = frameEL;
+        tabEL.setIcon( frameEL.icon ); // TEMP HACK
 
-        this.appendChild(viewEL);
+        this.appendChild(frameEL);
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
 
         //
@@ -245,14 +329,14 @@ Polymer({
         var tabs = this.$.tabs;
 
         //
-        tabs.remove(tabEL);
-        if ( tabEL.viewEL ) {
-            tabEL.viewEL.remove();
-            tabEL.viewEL = null;
+        tabs.removeTab(tabEL);
+        if ( tabEL.frameEL ) {
+            tabEL.frameEL.remove();
+            tabEL.frameEL = null;
         }
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
     },
 
@@ -264,7 +348,7 @@ Polymer({
     collapse: function () {
         // remove from dock;
         if ( this.$.tabs.children.length === 0 ) {
-            if ( this.parentElement instanceof FireDock ) {
+            if ( this.parentElement['ui-dockable'] ) {
                 return this.parentElement.removeDock(this);
             }
         }
@@ -272,17 +356,20 @@ Polymer({
         return false;
     },
 
-    tabsChangedAction: function ( event ) {
+    _onTabChanged: function ( event ) {
+        event.stopPropagation();
+
         var detail = event.detail;
         if ( detail.old !== null ) {
-            detail.old.viewEL.style.display = 'none';
-            detail.old.viewEL.dispatchEvent( new CustomEvent('hide') );
+            detail.old.frameEL.style.display = 'none';
+            detail.old.frameEL.dispatchEvent( new CustomEvent('panel-hide') );
         }
         if ( detail.new !== null ) {
-            detail.new.viewEL.style.display = '';
-            detail.new.viewEL.dispatchEvent( new CustomEvent('show') );
+            detail.new.frameEL.style.display = '';
+            detail.new.frameEL.dispatchEvent( new CustomEvent('panel-show') );
         }
 
-        event.stopPropagation();
+        if ( window.Editor && Editor.saveLayout )
+            Editor.saveLayout();
     },
-});
+}, EditorUI.resizable, EditorUI.focusable, EditorUI.dockable));

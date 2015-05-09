@@ -2,9 +2,9 @@ EditorUI.focusable = (function () {
 
     //
     function _removeTabIndexRecursively ( el ) {
-        if ( el.focused !== undefined && el.initTabIndex !== undefined ) {
+        if ( el.focused !== undefined && el._initTabIndex !== undefined ) {
             el.focused = false;
-            el.removeTabIndex();
+            el._removeTabIndex();
         }
 
         for ( var i = 0; i < el.childElementCount; ++i ) {
@@ -13,9 +13,9 @@ EditorUI.focusable = (function () {
     }
 
     function _initTabIndexRecursively ( el ) {
-        if ( el.focused !== undefined && el.initTabIndex !== undefined ) {
+        if ( el.focused !== undefined && el._initTabIndex !== undefined ) {
             if ( el.disabled === false ) {
-                el.initTabIndex();
+                el._initTabIndex();
             }
         }
 
@@ -26,6 +26,8 @@ EditorUI.focusable = (function () {
 
 
     var focusable = {
+        'ui-focusable': true,
+
         publish: {
             focused: { value: false, reflect: true },
             disabled: { value: false, reflect: true },
@@ -105,6 +107,16 @@ EditorUI.focusable = (function () {
             }
         },
 
+        _focusInAction: function ( event ) {
+            event.stopPropagation();
+            this.focused = true;
+        },
+
+        _focusOutAction: function ( event ) {
+            event.stopPropagation();
+            this.focused = false;
+        },
+
         _focusAction: function ( event ) {
             this.focused = true;
         },
@@ -131,14 +143,6 @@ EditorUI.focusable = (function () {
                 this.focusEls[0].blur();
             }
             this.focused = false;
-        },
-
-        initTabIndex: function () {
-            this._initTabIndex();
-        },
-
-        removeTabIndex: function () {
-            this._removeTabIndex();
         },
     };
     return focusable;
