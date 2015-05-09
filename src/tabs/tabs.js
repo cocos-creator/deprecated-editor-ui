@@ -99,10 +99,12 @@ Polymer(EditorUI.mixin({
                 this.activeTab = tabEL;
                 this.activeTab.classList.add('active');
 
-                var panelID = tabEL.frameEL.getAttribute('id');
-                var panelInfo = Editor.Panel.getPanelInfo(panelID);
-                if ( panelInfo ) {
-                    this.$.popup.classList.toggle('hide', !panelInfo.popable);
+                if ( window.Editor ) {
+                    var panelID = tabEL.frameEL.getAttribute('id');
+                    var panelInfo = Editor.Panel.getPanelInfo(panelID);
+                    if ( panelInfo ) {
+                        this.$.popup.classList.toggle('hide', !panelInfo.popable);
+                    }
                 }
 
                 this.fire( 'tab-changed', { old: oldTabEL, new: tabEL  } );
@@ -198,19 +200,21 @@ Polymer(EditorUI.mixin({
             panelID = this.activeTab.frameEL.getAttribute('id','');
         }
 
-        var panelInfo = Editor.Panel.getPanelInfo(panelID);
-        var popable = true;
-        if ( panelInfo ) {
-            popable = panelInfo.popable;
-        }
+        if ( window.Editor ) {
+            var panelInfo = Editor.Panel.getPanelInfo(panelID);
+            var popable = true;
+            if ( panelInfo ) {
+                popable = panelInfo.popable;
+            }
 
-        Editor.Menu.popup( rect.left + 5, rect.bottom + 5, [
-            { label: 'Maximize', message: 'panel:maximize', params: [panelID] },
-            { label: 'Pop Out', message: 'panel:popup', enabled: popable, params: [panelID] },
-            { label: 'Close', command: 'Editor.Panel.close', params: [panelID] },
-            { label: 'Add Tab', submenu: [
-                { label: 'TODO' },
-            ] },
-        ]);
+            Editor.Menu.popup( rect.left + 5, rect.bottom + 5, [
+                { label: 'Maximize', message: 'panel:maximize', params: [panelID] },
+                { label: 'Pop Out', message: 'panel:popup', enabled: popable, params: [panelID] },
+                { label: 'Close', command: 'Editor.Panel.close', params: [panelID] },
+                { label: 'Add Tab', submenu: [
+                    { label: 'TODO' },
+                ] },
+            ]);
+        }
     },
 }, EditorUI.droppable));

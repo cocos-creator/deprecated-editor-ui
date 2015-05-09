@@ -11,21 +11,23 @@ Polymer(EditorUI.mixin({
         this._initResizable();
         this._initTabs();
 
-        var mousetrap = new Mousetrap(this);
-        mousetrap.bind(['command+shift+]','ctrl+tab'], function () {
-            var next = this.activeIndex+1;
-            if ( next >= this.tabCount )
-                next = 0;
-            this.select(next);
-            this.focus();
-        }.bind(this));
-        mousetrap.bind(['command+shift+[','ctrl+shift+tab'], function () {
-            var prev = this.activeIndex-1;
-            if ( prev < 0 )
-                prev = this.tabCount-1;
-            this.select(prev);
-            this.focus();
-        }.bind(this));
+        if ( window.Mousetrap ) {
+            var mousetrap = new Mousetrap(this);
+            mousetrap.bind(['command+shift+]','ctrl+tab'], function () {
+                var next = this.activeIndex+1;
+                if ( next >= this.tabCount )
+                    next = 0;
+                this.select(next);
+                this.focus();
+            }.bind(this));
+            mousetrap.bind(['command+shift+[','ctrl+shift+tab'], function () {
+                var prev = this.activeIndex-1;
+                if ( prev < 0 )
+                    prev = this.tabCount-1;
+                this.select(prev);
+                this.focus();
+            }.bind(this));
+        }
 
         // grab mousedown in capture phase to make sure we focus on it
         this.addEventListener('mousedown', function (event) {
@@ -367,6 +369,7 @@ Polymer(EditorUI.mixin({
             detail.new.frameEL.dispatchEvent( new CustomEvent('panel-show') );
         }
 
-        Editor.saveLayout();
+        if ( window.Editor )
+            Editor.saveLayout();
     },
 }, EditorUI.resizable, EditorUI.focusable, EditorUI.dockable));

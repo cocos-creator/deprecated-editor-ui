@@ -34,4 +34,4 @@ _FirePathObserver.prototype.check_ = function(changeRecords, skipChanges) {
     return true;
 };
 
-Editor._PathObserver = _FirePathObserver;
+EditorUI._PathObserver = _FirePathObserver;

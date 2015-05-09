@@ -33,7 +33,7 @@ Polymer({
                 // for example PathObserver( obj, 'foo-bar' ); will failed to get its value
                 propEL = new FireProp();
                 propEL.name = EditorUI.toHumanText(p);
-                propEL.bind( 'value', new Editor._PathObserver( this.value, p ) );
+                propEL.bind( 'value', new EditorUI._PathObserver( this.value, p ) );
 
                 this.shadowRoot.appendChild(propEL);
             }
