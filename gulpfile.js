@@ -7,7 +7,8 @@ var stylus = require('gulp-stylus');
 var vulcanize = require('gulp-vulcanize');
 var del = require('del');
 var es = require('event-stream');
-var path = require('path');
+var path = require('path')
+var gulpSequence = require('gulp-sequence');
 
 function wrapScope () {
     var header = new Buffer("(function () {\n");
@@ -44,6 +45,7 @@ gulp.task('cp-core', function() {
     .pipe(gulp.dest('ext/fire-core'))
     ;
 });
+
 gulp.task('cp-img', function() {
     return gulp.src(paths.img)
     .pipe(gulp.dest('bin/img'))
@@ -147,7 +149,70 @@ gulp.task('watch', function() {
     gulp.watch(paths.html, ['build-html-dev']).on( 'error', gutil.log );
 });
 
+// stand alone test run
+
+gulp.task('install-core', function(cb) {
+    var exec = require('child_process').exec;
+    var proc = exec('npm install fireball-x/core');
+    proc.stdout.on('data', function(data) {
+        console.log(data.toString());
+    });
+    proc.stderr.on('data', function(data) {
+        console.log(data.toString());
+    });
+    proc.on('exit', function() {
+        console.log('Gulp task dependency installed successful!');
+        cb();
+    });
+});
+
+gulp.task('build-core', function(cb) {
+    var spawn = require('child_process').spawn;
+    var cmd = process.platform === 'win32' ? 'gulp.cmd' : 'gulp';
+    var child = spawn(cmd, ['dev'], {
+        cwd: 'node_modules/fireball-core',
+        stdio: 'inherit'
+    });
+    child.on('exit', function() {
+        console.log('fireball-core built successfully!');
+        cb();
+    });
+});
+
+gulp.task('cp-core-local', function() {
+    return gulp.src('node_modules/fireball-core/bin/**/*.js')
+        .pipe(gulp.dest('ext/fire-core'))
+        ;
+});
+
+gulp.task('replace-scheme', function() {
+    var replace = require('gulp-replace');
+    return gulp.src('bin/editor-ui.html')
+        .pipe(replace(/fire:\/\//g,'/'))
+        .pipe(gulp.dest('bin'));
+});
+
+gulp.task('run-standalone', function() {
+    var exec = require('child_process').exec;
+    var proc = exec('node test/server.js');
+    proc.stdout.on('data', function(data) {
+        console.log(data.toString());
+    });
+    proc.stderr.on('data', function(data) {
+        console.log(data.toString());
+    });
+    proc.on('exit', function() {
+        console.log('Test server stopped.');
+    }); 
+    setTimeout(function() {
+        var cmd = process.platform === 'win32' ? 'start' : 'open';
+        exec(cmd + ' http://localhost:8082');
+    }, 1000);
+    return proc;
+});
+
 // tasks
 gulp.task('dev', [ 'cp-img', 'build-html-dev'] );
 gulp.task('polyfill', [ 'cp-img', 'build-html-polyfill'] );
 gulp.task('default', [ 'cp-img', 'build-html'] );
+gulp.task('standalone', gulpSequence('clean', 'install-core', 'build-core', 'cp-core-local', 'dev', 'replace-scheme', 'run-standalone') );
