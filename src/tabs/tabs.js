@@ -99,7 +99,7 @@ Polymer(EditorUI.mixin({
                 this.activeTab = tabEL;
                 this.activeTab.classList.add('active');
 
-                if ( window.Editor ) {
+                if ( window.Editor && Editor.Panel ) {
                     var panelID = tabEL.frameEL.getAttribute('id');
                     var panelInfo = Editor.Panel.getPanelInfo(panelID);
                     if ( panelInfo ) {
@@ -200,7 +200,7 @@ Polymer(EditorUI.mixin({
             panelID = this.activeTab.frameEL.getAttribute('id','');
         }
 
-        if ( window.Editor ) {
+        if ( window.Editor && Editor.Panel) {
             var panelInfo = Editor.Panel.getPanelInfo(panelID);
             var popable = true;
             if ( panelInfo ) {
