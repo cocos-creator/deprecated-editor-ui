@@ -204,45 +204,53 @@ EditorUI.DockUtils = (function () {
     };
 
     DockUtils.reset = function () {
-        if ( DockUtils.root['ui-dockable'] ) {
-            this.root._finalizeSizeRecursively(true);
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if ( DockUtils.root ) {
+            if ( DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeSizeRecursively(true);
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 
     DockUtils.flushWithCollapse = function () {
-        this.root._collapseRecursively();
+        if ( DockUtils.root ) {
+            this.root._collapseRecursively();
 
-        if ( DockUtils.root['ui-dockable'] ) {
-            this.root._finalizeSizeRecursively(false);
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            if ( DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeSizeRecursively(false);
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 
     DockUtils.flush = function () {
-        if ( DockUtils.root['ui-dockable'] ) {
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if ( DockUtils.root ) {
+            if ( DockUtils.root['ui-dockable'] ) {
+                this.root._finalizeMinMaxRecursively();
+                this.root._finalizeStyleRecursively();
+                this.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 
     DockUtils.reflow = function () {
-        if ( DockUtils.root['ui-dockable'] ) {
-            DockUtils.root._reflowRecursively();
-            DockUtils.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        if ( DockUtils.root ) {
+            if ( DockUtils.root['ui-dockable'] ) {
+                DockUtils.root._reflowRecursively();
+                DockUtils.root._notifyResize();
+            } else {
+                DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+            }
         }
     };
 

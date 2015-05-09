@@ -375,7 +375,7 @@ Polymer(EditorUI.mixin({
             detail.new.frameEL.dispatchEvent( new CustomEvent('panel-show') );
         }
 
-        if ( window.Editor )
+        if ( window.Editor && Editor.saveLayout )
             Editor.saveLayout();
     },
 }, EditorUI.resizable, EditorUI.focusable, EditorUI.dockable));

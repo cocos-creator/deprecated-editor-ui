@@ -1,47 +1,67 @@
 # Intro
 
-Fireball Editor UI components （Fireball Editor UI构建）
+This is the custom UI elements library built with [Polymer](https://www.polymer-project.org) for [Fireball Game Editor](https://github.com/fireball-x/fireball).
 
-## Install
+## Use Open Sourced Fireball Editor UI Library
+
+### Prerequisite
+
+You need to first get the following tools installed and working:
+
+- [Nodejs v0.12+](https://nodejs.org/), if you're using a Mac, we recommend install via [NVM](https://github.com/creationix/nvm).
+- [Bower](http://bower.io/), for installing Polymer and other front-end libraries.
+- [gulp](http://gulpjs.com/), for bootstrap, building and running this project.
+
+### Bootstrap
 
 ```bash
 npm install
 bower install
+gulp standalone
 ```
-## Build
+
+This series of commands will setting up the project by installing dependencies, building and run the kitchen sink app (which includes all the custom elements in the project).
+
+### Build
 
 ```bash
-gulp cp-core
-gulp
+gulp build
 ```
-## Test
+
+Build the project using Polymer's [vulcanize tool](https://github.com/Polymer/vulcanize).
+
+### Run Kitchen Sink
 
 ```bash
-gulp test
+gulp run
 ```
 
-##中文教程
+Start an web server to run the kitchen sink app and open it in your browser.
 
-### Install (安装依赖包)
+The content shows in kitchen sink test app is all contained in [test](/test) folder. Just check the source code and learn how to add custom elements.
+
+![kitchen sink](https://cloud.githubusercontent.com/assets/344547/7551035/83a32b70-f6ab-11e4-95c1-07720850c8f4.jpg)
+
+## For Fireball Editor Development
+
+If you are developing in Fireball dev environment. The tasks are a bit different:
+
+### Install
+
 ```bash
 npm install
 bower install
-```
-
-* 在当前项目的同一级目录下,Clone`fireball-ui-core` [editor-core](git@github.com:fireball-x/editor-core.git)
-
-### Build (生成项目)
-
-```bash
 gulp cp-core
-gulp
-bower install
 ```
-###Test
+
+### Build
 
 ```bash
-node test/server.js
+gulp
 ```
-###Preview (浏览器中预览)
 
-在浏览器中打开[http://127.0.0.1:8082/test/index.html](http://127.0.0.1:8082/test/index.html)
+### Run
+
+```bash
+gulp run-test
+```
