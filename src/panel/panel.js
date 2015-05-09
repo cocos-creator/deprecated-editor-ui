@@ -82,8 +82,8 @@ Polymer(EditorUI.mixin({
         this.collapse();
     },
 
-    _finalizeSizeRecursively: function () {
-        this._applyFrameSize();
+    _finalizeSizeRecursively: function ( reset ) {
+        this._applyFrameSize(reset);
     },
 
     _finalizeMinMaxRecursively: function () {
@@ -97,7 +97,7 @@ Polymer(EditorUI.mixin({
     _reflowRecursively: function () {
     },
 
-    _applyFrameSize: function () {
+    _applyFrameSize: function ( reset ) {
         var autoWidth = false, autoHeight = false;
 
         // reset width, height
@@ -108,9 +108,7 @@ Polymer(EditorUI.mixin({
             var el = this.children[i];
 
             // width
-            var elWidth = parseInt(el.getAttribute('width'));
-            elWidth = isNaN(elWidth) ? 'auto' : elWidth;
-
+            var elWidth = EditorUI.DockUtils.getFrameSize( el, 'width' );
             if ( autoWidth || elWidth === 'auto' ) {
                 autoWidth = true;
                 this.computedWidth = 'auto';
@@ -122,9 +120,7 @@ Polymer(EditorUI.mixin({
             }
 
             // height
-            var elHeight = parseInt(el.getAttribute('height'));
-            elHeight = isNaN(elHeight) ? 'auto' : elHeight;
-
+            var elHeight = EditorUI.DockUtils.getFrameSize( el, 'height' );
             if ( autoHeight || elHeight === 'auto' ) {
                 autoHeight = true;
                 this.computedHeight = 'auto';
@@ -136,9 +132,19 @@ Polymer(EditorUI.mixin({
             }
         }
 
-        //
-        this.curWidth = this.computedWidth;
-        this.curHeight = this.computedHeight;
+        if ( reset ) {
+            this.curWidth = this.computedWidth;
+            this.curHeight = this.computedHeight;
+        }
+        // if reset is false, we just reset the part that
+        else {
+            if ( this.parentElement.row ) {
+                this.curHeight = this.computedHeight;
+            }
+            else {
+                this.curWidth = this.computedWidth;
+            }
+        }
     },
 
     _applyFrameMinMax: function () {
@@ -313,7 +319,7 @@ Polymer(EditorUI.mixin({
 
         frameEL.style.display = 'none';
         tabEL.frameEL = frameEL;
-        tabEL.setIcon( frameEL.icon ); // TEMP HACK
+        tabEL.setIcon( frameEL.icon );
 
         this.appendChild(frameEL);
 

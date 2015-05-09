@@ -15,11 +15,11 @@ EditorUI.resizable = (function () {
         'ui-resizable': true,
 
         publish: {
-            width: 'auto',
+            width: '200',
             'min-width': 'auto',
             'max-width': 'auto',
 
-            height: 'auto',
+            height: '200',
             'min-height': 'auto',
             'max-height': 'auto',
         },
@@ -112,7 +112,7 @@ EditorUI.resizable = (function () {
         },
 
         // init and finalize min,max depends on children
-        finalizeSize: function ( elements ) {
+        finalizeSize: function ( elements, reset ) {
             var autoWidth = false, autoHeight = false;
 
             // reset width, height
@@ -145,8 +145,19 @@ EditorUI.resizable = (function () {
                 }
             }
 
-            this.curWidth = this.computedWidth;
-            this.curHeight = this.computedHeight;
+            if ( reset ) {
+                this.curWidth = this.computedWidth;
+                this.curHeight = this.computedHeight;
+            }
+            // if reset is false, we just reset the part that
+            else {
+                if ( this.parentElement.row ) {
+                    this.curHeight = this.computedHeight;
+                }
+                else {
+                    this.curWidth = this.computedWidth;
+                }
+            }
         },
 
         // init and finalize min,max depends on children

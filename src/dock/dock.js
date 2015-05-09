@@ -16,10 +16,7 @@ Polymer(EditorUI.mixin({
                 var isRootDock = this.noCollapse && !this.parentElement['ui-dockable'];
                 if ( isRootDock ) {
                     EditorUI.DockUtils.root = this;
-                    this._finalizeSizeRecursively();
-                    this._finalizeMinMaxRecursively();
-                    this._finalizeStyleRecursively();
-                    this._notifyResize();
+                    EditorUI.DockUtils.reset();
                 }
             }
         }.bind(this));
@@ -57,20 +54,20 @@ Polymer(EditorUI.mixin({
     },
 
     // depth first calculate the width and height
-    _finalizeSizeRecursively: function () {
+    _finalizeSizeRecursively: function ( reset ) {
         var elements = [];
 
         //
         for ( var i = 0; i < this.children.length; i += 2 ) {
             var el = this.children[i];
             if ( el['ui-dockable'] ) {
-                el._finalizeSizeRecursively();
+                el._finalizeSizeRecursively(reset);
                 elements.push(el);
             }
         }
 
         //
-        this.finalizeSize(elements);
+        this.finalizeSize(elements,reset);
     },
 
     // depth first calculate the min max width and height
@@ -189,10 +186,10 @@ Polymer(EditorUI.mixin({
 
             if ( this.row ) {
                 el.curWidth = sizeList[i];
-                el.curHeight = parentRect.height;
+                // el.curHeight = parentRect.height; // DISABLE, disable this can store the last used height
             }
             else {
-                el.curWidth = parentRect.width;
+                // el.curWidth = parentRect.width; // DISABLE, disable this can store the last used height
                 el.curHeight = sizeList[i];
             }
         }

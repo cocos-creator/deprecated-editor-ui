@@ -97,6 +97,15 @@ EditorUI.DockUtils = (function () {
         }
     };
 
+    DockUtils.getFrameSize = function ( frameEL, prop ) {
+        var sizeAttr = frameEL.getAttribute(prop);
+        if ( sizeAttr !== 'auto' ) {
+            sizeAttr = parseInt(sizeAttr);
+            sizeAttr = isNaN(sizeAttr) ? 200 : sizeAttr;
+        }
+        return sizeAttr;
+    };
+
     DockUtils.dragoverTab = function ( target ) {
         if ( !_draggingInfo )
             return;
@@ -196,17 +205,7 @@ EditorUI.DockUtils = (function () {
 
     DockUtils.reset = function () {
         if ( DockUtils.root['ui-dockable'] ) {
-            this.root._finalizeSizeRecursively();
-            this.root._finalizeMinMaxRecursively();
-            this.root._finalizeStyleRecursively();
-            this.root._notifyResize();
-        } else {
-            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
-        }
-    };
-
-    DockUtils.flush = function () {
-        if ( DockUtils.root['ui-dockable'] ) {
+            this.root._finalizeSizeRecursively(true);
             this.root._finalizeMinMaxRecursively();
             this.root._finalizeStyleRecursively();
             this.root._notifyResize();
@@ -218,6 +217,17 @@ EditorUI.DockUtils = (function () {
     DockUtils.flushWithCollapse = function () {
         this.root._collapseRecursively();
 
+        if ( DockUtils.root['ui-dockable'] ) {
+            this.root._finalizeSizeRecursively(false);
+            this.root._finalizeMinMaxRecursively();
+            this.root._finalizeStyleRecursively();
+            this.root._notifyResize();
+        } else {
+            DockUtils.root.dispatchEvent( new CustomEvent('resize') );
+        }
+    };
+
+    DockUtils.flush = function () {
         if ( DockUtils.root['ui-dockable'] ) {
             this.root._finalizeMinMaxRecursively();
             this.root._finalizeStyleRecursively();
@@ -434,12 +444,10 @@ EditorUI.DockUtils = (function () {
                     newPanel['max-height'] = panelMaxHeight;
 
                     // NOTE: here must use frameEL's width, height attribute to determine computed size
-                    var elWidth = parseInt(frameEL.getAttribute('width'));
-                    elWidth = isNaN(elWidth) ? 'auto' : elWidth;
+                    var elWidth = EditorUI.DockUtils.getFrameSize( frameEL, 'width');
                     newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelComputedWidth;
 
-                    var elHeight = parseInt(frameEL.getAttribute('height'));
-                    elHeight = isNaN(elHeight) ? 'auto' : elHeight;
+                    var elHeight = EditorUI.DockUtils.getFrameSize( frameEL, 'height');
                     newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelComputedHeight;
 
                     // if parent is row, the height will be ignore
@@ -502,12 +510,10 @@ EditorUI.DockUtils = (function () {
         newPanel['max-height'] = panelMaxHeight;
 
         // NOTE: here must use frameEL's width, height attribute to determine computed size
-        var elWidth = parseInt(frameEL.getAttribute('width'));
-        elWidth = isNaN(elWidth) ? 'auto' : elWidth;
+        var elWidth = EditorUI.DockUtils.getFrameSize( frameEL, 'width');
         newPanel.computedWidth = elWidth === 'auto' ? 'auto' : panelComputedWidth;
 
-        var elHeight = parseInt(frameEL.getAttribute('height'));
-        elHeight = isNaN(elHeight) ? 'auto' : elHeight;
+        var elHeight = EditorUI.DockUtils.getFrameSize( frameEL, 'height');
         newPanel.computedHeight = elHeight === 'auto' ? 'auto' : panelComputedHeight;
 
         // if parent is row, the height will be ignore
