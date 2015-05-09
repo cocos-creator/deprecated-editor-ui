@@ -192,7 +192,7 @@ gulp.task('replace-scheme', function() {
         .pipe(gulp.dest('bin'));
 });
 
-gulp.task('run-standalone', function() {
+gulp.task('run-test', function() {
     var exec = require('child_process').exec;
     var proc = exec('node test/server.js');
     proc.stdout.on('data', function(data) {
@@ -215,4 +215,6 @@ gulp.task('run-standalone', function() {
 gulp.task('dev', [ 'cp-img', 'build-html-dev'] );
 gulp.task('polyfill', [ 'cp-img', 'build-html-polyfill'] );
 gulp.task('default', [ 'cp-img', 'build-html'] );
-gulp.task('standalone', gulpSequence('clean', 'install-core', 'build-core', 'cp-core-local', 'dev', 'replace-scheme', 'run-standalone') );
+gulp.task('build', gulpSequence('clean', 'dev', 'replace-scheme'));
+gulp.task('run', gulpSequence('build', 'run-test'));
+gulp.task('standalone', gulpSequence('clean', 'install-core', 'build-core', 'cp-core-local', 'dev', 'replace-scheme', 'run-test') );
