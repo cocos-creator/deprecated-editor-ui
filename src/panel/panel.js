@@ -83,11 +83,11 @@ Polymer(EditorUI.mixin({
     },
 
     _finalizeSizeRecursively: function () {
-        this._applyViewSize();
+        this._applyFrameSize();
     },
 
     _finalizeMinMaxRecursively: function () {
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
     },
 
     _finalizeStyleRecursively: function () {
@@ -97,7 +97,7 @@ Polymer(EditorUI.mixin({
     _reflowRecursively: function () {
     },
 
-    _applyViewSize: function () {
+    _applyFrameSize: function () {
         var autoWidth = false, autoHeight = false;
 
         // reset width, height
@@ -141,7 +141,7 @@ Polymer(EditorUI.mixin({
         this.curHeight = this.computedHeight;
     },
 
-    _applyViewMinMax: function () {
+    _applyFrameMinMax: function () {
         var infWidth = false, infHeight = false;
 
         for ( var i = 0; i < this.children.length; ++i ) {
@@ -298,7 +298,7 @@ Polymer(EditorUI.mixin({
         }
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
 
         return EditorUI.index(tabEL);
@@ -318,7 +318,7 @@ Polymer(EditorUI.mixin({
         this.appendChild(frameEL);
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
 
         //
@@ -336,7 +336,7 @@ Polymer(EditorUI.mixin({
         }
 
         //
-        this._applyViewMinMax();
+        this._applyFrameMinMax();
         this._applyStyle();
     },
 

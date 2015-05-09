@@ -1,4 +1,6 @@
 EditorUI.dockable = (function () {
+    var _resizerSpace = 3; // 3 is resizer size
+
     var dockable = {
         'ui-dockable': true,
 
@@ -23,17 +25,24 @@ EditorUI.dockable = (function () {
             var parentEL = this.parentElement;
             var elements = [];
             var newDock, newResizer, nextEL;
+            var newWidth, newHeight;
 
             if ( parentEL['ui-dockable'] ) {
                 // check if need to create new Dock element
                 if ( position === 'left' || position === 'right' ) {
                     if ( !parentEL.row ) {
                         needNewDock = true;
+
+                        newWidth = Math.max( 0, this.curWidth-element.curWidth-_resizerSpace );
+                        newHeight = this.curHeight;
                     }
                 }
                 else {
                     if ( parentEL.row ) {
                         needNewDock = true;
+
+                        newWidth = this.curWidth;
+                        newHeight = Math.max( 0, this.curHeight-element.curHeight-_resizerSpace );
                     }
                 }
 
@@ -98,19 +107,31 @@ EditorUI.dockable = (function () {
 
                 // reset old panel's computed width, height
                 this.style.flex = '';
-                if ( this._applyViewSize )
-                    this._applyViewSize();
+                if ( this._applyFrameSize )
+                    this._applyFrameSize();
+
+                if ( this.computedWidth !== 'auto' )
+                    this.curWidth = newWidth;
+
+                if ( this.computedHeight !== 'auto' )
+                    this.curHeight = newHeight;
             }
             // if this is root panel
             else {
                 if ( position === 'left' || position === 'right' ) {
                     if ( !this.row ) {
                         needNewDock = true;
+
+                        newWidth = Math.max( 0, this.curWidth-element.curWidth-_resizerSpace );
+                        newHeight = this.curHeight;
                     }
                 }
                 else {
                     if ( this.row ) {
                         needNewDock = true;
+
+                        newWidth = this.curWidth;
+                        newHeight = Math.max( 0, this.curHeight-element.curHeight-_resizerSpace );
                     }
                 }
 
@@ -140,8 +161,14 @@ EditorUI.dockable = (function () {
 
                     // reset old panel's computed width, height
                     this.style.flex = '';
-                    if ( this._applyViewSize )
-                        this._applyViewSize();
+                    if ( this._applyFrameSize )
+                        this._applyFrameSize();
+
+                    if ( this.computedWidth !== 'auto' )
+                        this.curWidth = newWidth;
+
+                    if ( this.computedHeight !== 'auto' )
+                        this.curHeight = newHeight;
 
                     //
                     if ( position === 'left' || position === 'top' ) {

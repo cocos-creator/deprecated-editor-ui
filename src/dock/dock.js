@@ -93,6 +93,10 @@ Polymer(EditorUI.mixin({
     _finalizeStyleRecursively: function () {
         var elements = [];
 
+        // NOTE: finalizeStyle is breadth first calculation, because we need to make sure
+        //       parent style applied so that the children would not calculate wrong.
+        this.finalizeStyle();
+
         //
         for ( var i = 0; i < this.children.length; i += 2 ) {
             var el = this.children[i];
@@ -102,7 +106,6 @@ Polymer(EditorUI.mixin({
         }
 
         //
-        this.finalizeStyle();
         this.reflow();
     },
 
@@ -146,13 +149,14 @@ Polymer(EditorUI.mixin({
                     el.style.flex = "1 1 auto";
                 }
                 else {
-                    // if this is last el and we don't have auto-layout elements, give rest size to last el
-                    if ( i === (this.children.length-1) && !hasAutoLayout ) {
-                        el.style.flex = "1 1 auto";
-                    }
-                    else {
-                        el.style.flex = "0 0 " + size + "px";
-                    }
+                    // // if this is last el and we don't have auto-layout elements, give rest size to last el
+                    // if ( i === (this.children.length-1) && !hasAutoLayout ) {
+                    //     el.style.flex = "1 1 auto";
+                    // }
+                    // else {
+                    //     el.style.flex = "0 0 " + size + "px";
+                    // }
+                    el.style.flex = "0 0 " + size + "px";
                 }
             }
         }
