@@ -1,5 +1,5 @@
 Polymer({
-    viewEL: null,
+    frameEL: null,
 
     publish: {
         warn: { value: false, reflect: true, },

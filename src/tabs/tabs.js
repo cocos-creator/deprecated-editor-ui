@@ -15,10 +15,10 @@ Polymer(EditorUI.mixin({
         }
     },
 
-    findTab: function ( viewEL ) {
+    findTab: function ( frameEL ) {
         for ( var i = 0; i < this.children.length; ++i ) {
             var tabEL = this.children[i];
-            if ( tabEL.viewEL === viewEL )
+            if ( tabEL.frameEL === frameEL )
                 return tabEL;
         }
 
@@ -99,7 +99,7 @@ Polymer(EditorUI.mixin({
                 this.activeTab = tabEL;
                 this.activeTab.classList.add('active');
 
-                var panelID = tabEL.viewEL.getAttribute('id');
+                var panelID = tabEL.frameEL.getAttribute('id');
                 var panelInfo = Editor.Panel.getPanelInfo(panelID);
                 if ( panelInfo ) {
                     this.$.popup.classList.toggle('hide', !panelInfo.popable);
@@ -186,7 +186,7 @@ Polymer(EditorUI.mixin({
 
     _onPopup: function ( event ) {
         if ( this.activeTab ) {
-            var panelID = this.activeTab.viewEL.getAttribute('id','');
+            var panelID = this.activeTab.frameEL.getAttribute('id','');
             Editor.Panel.popup(panelID);
         }
     },
@@ -195,7 +195,7 @@ Polymer(EditorUI.mixin({
         var rect = this.$.menu.getBoundingClientRect();
         var panelID = '';
         if ( this.activeTab ) {
-            panelID = this.activeTab.viewEL.getAttribute('id','');
+            panelID = this.activeTab.frameEL.getAttribute('id','');
         }
 
         var panelInfo = Editor.Panel.getPanelInfo(panelID);

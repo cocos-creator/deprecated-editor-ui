@@ -123,8 +123,9 @@ Polymer({
         // var totalSize = -1;
 
         // get parent size
-        if ( parentEL.$.content ) {
-            rect = parentEL.$.content.getBoundingClientRect();
+        var frameWrapper = parentEL.$['frame-wrapper'];
+        if ( frameWrapper ) {
+            rect = frameWrapper.getBoundingClientRect();
         }
         else {
             rect = parentEL.getBoundingClientRect();

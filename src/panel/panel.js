@@ -7,7 +7,7 @@ Polymer(EditorUI.mixin({
     },
 
     ready: function () {
-        this._initFocusable(null); // NOTE: panel's focus element is variable (a.k.a viewEL)
+        this._initFocusable(null); // NOTE: panel's focus element is variable (a.k.a frameEL)
         this._initResizable();
         this._initTabs();
 
@@ -44,13 +44,13 @@ Polymer(EditorUI.mixin({
 
     focus: function () {
         if ( this.activeTab ) {
-            this.activeTab.viewEL.focus();
+            this.activeTab.frameEL.focus();
         }
     },
 
     blur: function () {
         if ( this.activeTab ) {
-            this.activeTab.viewEL.blur();
+            this.activeTab.frameEL.blur();
         }
     },
 
@@ -69,7 +69,7 @@ Polymer(EditorUI.mixin({
             tabEL.setAttribute('draggable', 'true');
 
             el.style.display = 'none';
-            tabEL.viewEL = el;
+            tabEL.frameEL = el;
             tabEL.setIcon( el.icon );
         }
 
@@ -243,14 +243,14 @@ Polymer(EditorUI.mixin({
         return this.$.tabs.children.length;
     },
 
-    warn: function ( idxOrViewEL ) {
+    warn: function ( idxOrFrameEL ) {
         var tabs = this.$.tabs;
-        if ( typeof idxOrViewEL === 'number' ) {
-            tabs.warn(idxOrViewEL);
+        if ( typeof idxOrFrameEL === 'number' ) {
+            tabs.warn(idxOrFrameEL);
         }
         else {
             for ( var i = 0; i < this.children.length; ++i ) {
-                if ( idxOrViewEL === this.children[i] ) {
+                if ( idxOrFrameEL === this.children[i] ) {
                     tabs.warn(i);
                     break;
                 }
@@ -258,14 +258,14 @@ Polymer(EditorUI.mixin({
         }
     },
 
-    select: function ( idxOrViewEL ) {
+    select: function ( idxOrFrameEL ) {
         var tabs = this.$.tabs;
-        if ( typeof idxOrViewEL === 'number' ) {
-            tabs.select(idxOrViewEL);
+        if ( typeof idxOrFrameEL === 'number' ) {
+            tabs.select(idxOrFrameEL);
         }
         else {
             for ( var i = 0; i < this.children.length; ++i ) {
-                if ( idxOrViewEL === this.children[i] ) {
+                if ( idxOrFrameEL === this.children[i] ) {
                     tabs.select(i);
                     break;
                 }
@@ -273,26 +273,26 @@ Polymer(EditorUI.mixin({
         }
     },
 
-    insert: function ( tabEL, viewEL, insertBeforeTabEL ) {
+    insert: function ( tabEL, frameEL, insertBeforeTabEL ) {
         var tabs = this.$.tabs;
 
-        var name = viewEL.getAttribute('name');
+        var name = frameEL.getAttribute('name');
         tabs.insertTab(tabEL, insertBeforeTabEL);
         tabEL.setAttribute('draggable', 'true');
 
-        // NOTE: if we just move tabs, we must not hide viewEL
+        // NOTE: if we just move tabs, we must not hide frameEL
         if ( tabEL.parentElement !== tabs ) {
-            viewEL.style.display = 'none';
+            frameEL.style.display = 'none';
         }
-        tabEL.viewEL = viewEL;
-        tabEL.setIcon( viewEL.icon ); // TEMP HACK
+        tabEL.frameEL = frameEL;
+        tabEL.setIcon( frameEL.icon ); // TEMP HACK
 
         //
         if ( insertBeforeTabEL ) {
-            this.insertBefore(viewEL, insertBeforeTabEL.viewEL);
+            this.insertBefore(frameEL, insertBeforeTabEL.frameEL);
         }
         else {
-            this.appendChild(viewEL);
+            this.appendChild(frameEL);
         }
 
         //
@@ -302,18 +302,18 @@ Polymer(EditorUI.mixin({
         return EditorUI.index(tabEL);
     },
 
-    add: function ( viewEL ) {
+    add: function ( frameEL ) {
         var tabs = this.$.tabs;
 
-        var name = viewEL.getAttribute('name');
+        var name = frameEL.getAttribute('name');
         var tabEL = tabs.addTab(name);
         tabEL.setAttribute('draggable', 'true');
 
-        viewEL.style.display = 'none';
-        tabEL.viewEL = viewEL;
-        tabEL.setIcon( viewEL.icon ); // TEMP HACK
+        frameEL.style.display = 'none';
+        tabEL.frameEL = frameEL;
+        tabEL.setIcon( frameEL.icon ); // TEMP HACK
 
-        this.appendChild(viewEL);
+        this.appendChild(frameEL);
 
         //
         this._applyViewMinMax();
@@ -328,9 +328,9 @@ Polymer(EditorUI.mixin({
 
         //
         tabs.removeTab(tabEL);
-        if ( tabEL.viewEL ) {
-            tabEL.viewEL.remove();
-            tabEL.viewEL = null;
+        if ( tabEL.frameEL ) {
+            tabEL.frameEL.remove();
+            tabEL.frameEL = null;
         }
 
         //
@@ -359,12 +359,12 @@ Polymer(EditorUI.mixin({
 
         var detail = event.detail;
         if ( detail.old !== null ) {
-            detail.old.viewEL.style.display = 'none';
-            detail.old.viewEL.dispatchEvent( new CustomEvent('panel-hide') );
+            detail.old.frameEL.style.display = 'none';
+            detail.old.frameEL.dispatchEvent( new CustomEvent('panel-hide') );
         }
         if ( detail.new !== null ) {
-            detail.new.viewEL.style.display = '';
-            detail.new.viewEL.dispatchEvent( new CustomEvent('panel-show') );
+            detail.new.frameEL.style.display = '';
+            detail.new.frameEL.dispatchEvent( new CustomEvent('panel-show') );
         }
 
         Editor.saveLayout();
