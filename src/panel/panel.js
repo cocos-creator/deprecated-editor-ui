@@ -297,7 +297,9 @@ Polymer(EditorUI.mixin({
 
         //
         if ( insertBeforeTabEL ) {
-            this.insertBefore(frameEL, insertBeforeTabEL.frameEL);
+            if ( frameEL !== insertBeforeTabEL.frameEL ) {
+                this.insertBefore(frameEL, insertBeforeTabEL.frameEL);
+            }
         }
         else {
             this.appendChild(frameEL);
