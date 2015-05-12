@@ -243,7 +243,7 @@ EditorUI.dockable = (function () {
         },
 
         collapse: function () {
-            if ( this.noCollapse )
+            if ( this['no-collapse'] )
                 return false;
 
             var parentEL = this.parentNode;

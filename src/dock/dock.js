@@ -13,7 +13,7 @@ Polymer(EditorUI.mixin({
         // this will make sure all dock children is ready
         window.requestAnimationFrame( function () {
             if ( !EditorUI.DockUtils.root ) {
-                var isRootDock = this.noCollapse && !this.parentElement['ui-dockable'];
+                var isRootDock = this['no-collapse'] && !this.parentElement['ui-dockable'];
                 if ( isRootDock ) {
                     EditorUI.DockUtils.root = this;
                     EditorUI.DockUtils.reset();

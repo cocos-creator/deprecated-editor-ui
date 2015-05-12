@@ -12,7 +12,6 @@ EditorUI.DockUtils = (function () {
         var Ipc = require('ipc');
 
         Ipc.on( 'panel:dragstart', function ( info ) {
-            console.log('dragstart');
             _draggingInfo = info;
         });
         Ipc.on( 'panel:dragend', function () {
@@ -174,7 +173,8 @@ EditorUI.DockUtils = (function () {
 
                 requestAnimationFrame ( function () {
                     var targetPanelEL = target.panelEL;
-                    var newTabEL = new FireTab(frameEL.getAttribute('name'));
+                    var newTabEL = new FireTab();
+                    newTabEL.innerHTML = frameEL.getAttribute('name');
                     var idx = targetPanelEL.insert( newTabEL, frameEL, insertBeforeTabEL );
                     targetPanelEL.select(idx);
 
