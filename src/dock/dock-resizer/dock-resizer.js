@@ -140,7 +140,7 @@ Polymer({
             }
 
             rect = el.getBoundingClientRect();
-            sizeList.push( Math.floor(this.vertical ? rect.width : rect.height) );
+            sizeList.push( Math.round(this.vertical ? rect.width : rect.height) );
         }
 
         //
@@ -196,8 +196,8 @@ Polymer({
         var snapshot = this._snapshot();
         var lastDir = 0;
         var rect = this.getBoundingClientRect();
-        var centerx = Math.floor(rect.left + rect.width/2);
-        var centery = Math.floor(rect.top + rect.height/2);
+        var centerx = Math.round(rect.left + rect.width/2);
+        var centery = Math.round(rect.top + rect.height/2);
 
         var parentEL = this.parentElement;
         for ( var i = 0; i < parentEL.children.length; ++i ) {
@@ -226,8 +226,8 @@ Polymer({
             //
             if ( offset !== 0 ) {
                 rect = this.getBoundingClientRect();
-                var curx = Math.floor(rect.left + rect.width/2);
-                var cury = Math.floor(rect.top + rect.height/2);
+                var curx = Math.round(rect.left + rect.width/2);
+                var cury = Math.round(rect.top + rect.height/2);
                 var delta;
                 if ( this.vertical ) {
                     delta = event.clientX - curx;
