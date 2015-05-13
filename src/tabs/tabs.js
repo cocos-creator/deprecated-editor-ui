@@ -138,7 +138,8 @@ Polymer(EditorUI.mixin({
     _onTabClick: function ( event ) {
         event.stopPropagation();
         this.select(event.target);
-        this.panelEL.focus();
+        if ( this.panelEL )
+            this.panelEL.focus();
     },
 
     _onDropAreaEnter: function ( event ) {
