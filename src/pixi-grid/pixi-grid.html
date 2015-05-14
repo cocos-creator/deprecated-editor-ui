@@ -1,0 +1,30 @@
+<polymer-element name="fire-ui-pixi-grid">
+    <template>
+        <link rel="stylesheet" href="pixi-grid.css">
+
+        <div id="view" fit>
+            <canvas id="canvas"></canvas>
+            <div id="hlabels" class="labels top"></div>
+            <div id="vlabels" class="labels"></div>
+            <content></content>
+            <!-- <template if="{{showDebugInfo}}">                                    -->
+            <!--     <div class="debug-info">                                         -->
+            <!--         <div>X Scale: <span>{{debugInfo.xAxisScale}}</span></div>    -->
+            <!--         <div>X Offset: <span>{{debugInfo.xAxisOffset}}</span></div>  -->
+            <!--         <div>X Min Level: <span>{{debugInfo.xMinLevel}}</span></div> -->
+            <!--         <div>X Max Level: <span>{{debugInfo.xMaxLevel}}</span></div> -->
+            <!--         <br/>                                                        -->
+            <!--         <div>Y Scale: <span>{{debugInfo.yAxisScale}}</span></div>    -->
+            <!--         <div>Y Offset: <span>{{debugInfo.yAxisOffset}}</span></div>  -->
+            <!--         <div>Y Min Level: <span>{{debugInfo.yMinLevel}}</span></div> -->
+            <!--         <div>Y Max Level: <span>{{debugInfo.yMaxLevel}}</span></div> -->
+            <!--     </div>                                                           -->
+            <!-- </template>                                                          -->
+        </div>
+    </template>
+
+    <script type="text/javascript" src="fire://ext/pixi/bin/pixi.min.js"></script>
+    <script type="text/javascript" src="fire://ext/numeral/min/numeral.min.js"></script>
+    <script type="text/javascript" src="linear-ticks.js"></script>
+    <script type="text/javascript" src="pixi-grid.js"></script>
+</polymer-element>
