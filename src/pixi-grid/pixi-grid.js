@@ -305,6 +305,16 @@ Polymer({
         this.pan( 0, pixelY - newScreenY );
     },
 
+    xAxisSync: function ( x, scaleX ) {
+        this.xAxisOffset = x;
+        this.xAxisScale = scaleX;
+    },
+
+    yAxisSync: function ( y, scaleY ) {
+        this.yAxisOffset = y;
+        this.yAxisScale = scaleY;
+    },
+
     resize: function ( w, h ) {
         if ( !w || !h ) {
             var rect = this.$.view.getBoundingClientRect();
