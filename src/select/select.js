@@ -88,8 +88,10 @@ Polymer(EditorUI.mixin({
     },
 
     updateValueName: function () {
-        if ( this.value == -1 )
+        if ( this.value === -1 ) {
+            this.valueName = '';
             return;
+        }
 
         for ( var i = 0; i < this.options.length; ++i ) {
             var entry = this.options[i];
