@@ -102,9 +102,9 @@ Polymer({
 
             this.hsv.s = offsetX;
             this.hsv.v = 1.0-offsetY;
-            this._updateColor();
             var h = Math.round( this.hsv.h * 100.0 )/100.0;
             this.value.fromHSV( h, this.hsv.s, this.hsv.v );
+            this._updateColor();
             event.stopPropagation();
         };
         updateMouseMove.call(this,event);
