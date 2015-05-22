@@ -151,7 +151,7 @@ var EditorUI = (function () {
 
     //
     var _hitGhost = null;
-    EditorUI.addHitGhost = function ( cursor, zindex, onhit ) {
+    EditorUI.addHitGhost = function ( cursor, zindex, onhit, blackMask ) {
         // add drag-ghost
         if ( _hitGhost === null ) {
             _hitGhost = document.createElement('div');
@@ -162,7 +162,12 @@ var EditorUI = (function () {
             _hitGhost.style.right = '0';
             _hitGhost.style.bottom = '0';
             _hitGhost.style.left = '0';
-            // _hitGhost.style.background = 'rgba(0,0,0,0.2)';
+            if ( blackMask ) {
+                _hitGhost.style.background = 'rgba(0,0,0,0.5)';
+            }
+            else {
+                _hitGhost.style.background = 'none';
+            }
             _hitGhost.oncontextmenu = function() { return false; };
         }
 
