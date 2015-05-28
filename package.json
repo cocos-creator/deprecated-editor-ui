@@ -24,7 +24,7 @@
     "gulp-stylus": "2.0.0",
     "gulp-uglifyjs": "",
     "gulp-util": "",
-    "gulp-vulcanize": "5.0.0",
+    "gulp-vulcanize": "fireball-x/gulp-vulcanize",
     "jshint-stylish": ""
   }
 }
