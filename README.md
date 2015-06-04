@@ -1,3 +1,5 @@
+**This repo is deprecated, we are upgrate the ui to [ui-kit](https://github.com/fireball-packages/ui-kit)**
+
 # Intro
 
 This is the custom UI elements library built with [Polymer](https://www.polymer-project.org) for [Fireball Game Editor](https://github.com/fireball-x/fireball).
