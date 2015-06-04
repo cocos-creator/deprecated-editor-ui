@@ -1,4 +1,4 @@
-**This repo is deprecated, we are upgrate the ui to [ui-kit](https://github.com/fireball-packages/ui-kit)**
+**This repo is deprecated, we've moved the editor-ui to [ui-kit](https://github.com/fireball-packages/ui-kit)**
 
 # Intro
 
